@@ -13,7 +13,7 @@ const robotoMono = Roboto_Mono({
 })
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://m2solutions.ai"),
+  metadataBase: new URL("https://m2solutions.ai"),
   title: "AI Solutions — M2 Решения | Голосовые AI-ассистенты для бизнеса",
   description:
     "Голосовые AI-ассистенты, которые продают и обслуживают клиентов 24/7. Автоматизируйте весь путь клиента от заявки до счёта.",
