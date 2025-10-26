@@ -1,1 +1,37 @@
+name: Deploy to Server
 
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install SSH key
+      uses: webfactory/ssh-agent@v0.7.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Test SSH connection
+      run: |
+        ssh -v -o StrictHostKeyChecking=no \
+        ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+        "echo 'Success!'; whoami; pwd"
+    
+    - name: Connect, deploy, build and start!
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          set -e
+          cd /home
+          rm -rf /home/v0-ai-solutions-website-l6
+
+          git clone git@github.com:Alan573660/v0-ai-solutions-website-l6.git
+
+          # Docker команды
+          docker compose down || true
+          docker compose -f docker-compose.prod.yml up --build -d
+        EOF
