@@ -15,25 +15,28 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
 
-  const getLocaleUrl = (newLocale: Locale): string => {
-    console.log("[v0] Current pathname:", pathname)
-    console.log("[v0] Current locale:", currentLocale)
-    console.log("[v0] New locale:", newLocale)
+  const handleLocaleChange = (newLocale: Locale) => {
+    if (newLocale === currentLocale) {
+      setIsOpen(false)
+      return
+    }
 
     // Remove current locale from pathname
-    const pathWithoutLocale = pathname.replace(`/${currentLocale}`, "") || "/"
+    const segments = pathname.split("/").filter(Boolean)
+    const pathWithoutLocale = segments.slice(1).join("/")
 
-    // Construct new URL with new locale
-    const newPath = `/${newLocale}${pathWithoutLocale === "/" ? "" : pathWithoutLocale}`
+    // Build new URL with new locale
+    const newPath = `/${newLocale}${pathWithoutLocale ? `/${pathWithoutLocale}` : ""}`
 
-    console.log("[v0] New path:", newPath)
-    return newPath
-  }
+    console.log("[v0] Switching locale:", {
+      from: currentLocale,
+      to: newLocale,
+      currentPath: pathname,
+      newPath: newPath,
+    })
 
-  const handleLocaleChange = (newLocale: Locale) => {
-    const newUrl = getLocaleUrl(newLocale)
-    console.log("[v0] Navigating to:", newUrl)
-    window.location.href = newUrl
+    // Use window.location.href for hard navigation (works reliably on production)
+    window.location.href = newPath
   }
 
   return (
@@ -49,26 +52,17 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[160px]">
-        {locales.map((locale) => {
-          const isCurrentLocale = locale === currentLocale
-
-          return (
-            <DropdownMenuItem
-              key={locale}
-              className={`gap-2 cursor-pointer ${isCurrentLocale ? "bg-accent" : ""}`}
-              onClick={() => {
-                if (!isCurrentLocale) {
-                  handleLocaleChange(locale)
-                }
-                setIsOpen(false)
-              }}
-            >
-              <span>{localeFlags[locale]}</span>
-              <span>{localeNames[locale]}</span>
-              {isCurrentLocale && <span className="ml-auto text-xs">✓</span>}
-            </DropdownMenuItem>
-          )
-        })}
+        {locales.map((locale) => (
+          <DropdownMenuItem
+            key={locale}
+            onClick={() => handleLocaleChange(locale)}
+            className={`gap-2 cursor-pointer ${locale === currentLocale ? "bg-accent" : ""}`}
+          >
+            <span>{localeFlags[locale]}</span>
+            <span>{localeNames[locale]}</span>
+            {locale === currentLocale && <span className="ml-auto text-xs">✓</span>}
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   )
