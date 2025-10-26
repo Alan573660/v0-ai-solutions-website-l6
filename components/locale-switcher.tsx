@@ -16,9 +16,24 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const getLocaleUrl = (newLocale: Locale): string => {
-    const segments = pathname.split("/").filter(Boolean)
-    const pathWithoutLocale = segments.slice(1).join("/")
-    return `/${newLocale}${pathWithoutLocale ? `/${pathWithoutLocale}` : ""}`
+    console.log("[v0] Current pathname:", pathname)
+    console.log("[v0] Current locale:", currentLocale)
+    console.log("[v0] New locale:", newLocale)
+
+    // Remove current locale from pathname
+    const pathWithoutLocale = pathname.replace(`/${currentLocale}`, "") || "/"
+
+    // Construct new URL with new locale
+    const newPath = `/${newLocale}${pathWithoutLocale === "/" ? "" : pathWithoutLocale}`
+
+    console.log("[v0] New path:", newPath)
+    return newPath
+  }
+
+  const handleLocaleChange = (newLocale: Locale) => {
+    const newUrl = getLocaleUrl(newLocale)
+    console.log("[v0] Navigating to:", newUrl)
+    window.location.href = newUrl
   }
 
   return (
@@ -35,20 +50,22 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[160px]">
         {locales.map((locale) => {
-          const localeUrl = getLocaleUrl(locale)
           const isCurrentLocale = locale === currentLocale
 
           return (
             <DropdownMenuItem
               key={locale}
-              asChild
               className={`gap-2 cursor-pointer ${isCurrentLocale ? "bg-accent" : ""}`}
+              onClick={() => {
+                if (!isCurrentLocale) {
+                  handleLocaleChange(locale)
+                }
+                setIsOpen(false)
+              }}
             >
-              <a href={localeUrl} onClick={() => setIsOpen(false)}>
-                <span>{localeFlags[locale]}</span>
-                <span>{localeNames[locale]}</span>
-                {isCurrentLocale && <span className="ml-auto text-xs">✓</span>}
-              </a>
+              <span>{localeFlags[locale]}</span>
+              <span>{localeNames[locale]}</span>
+              {isCurrentLocale && <span className="ml-auto text-xs">✓</span>}
             </DropdownMenuItem>
           )
         })}
