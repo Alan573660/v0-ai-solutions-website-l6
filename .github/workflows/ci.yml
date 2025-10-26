@@ -33,6 +33,98 @@ jobs:
 
           cd v0-ai-solutions-website-l6
 
+          touch .env
+          bash -lc 'cat > .env << "ENVEOF"
+            # =========================
+            # Base Configuration
+            # =========================
+            NEXT_PUBLIC_BASE_URL=https://m2solutions.ai
+            NEXT_PUBLIC_SITE_URL=https://m2solutions.ai
+            
+            # =========================
+            # API Keys
+            # =========================
+            API_KEY=
+            HUBSPOT_API_KEY=
+            
+            # =========================
+            # Analytics
+            # =========================
+            NEXT_PUBLIC_GA_ID=
+            NEXT_PUBLIC_YANDEX_METRICA_ID=
+            
+            # =========================
+            # Redis (LOCAL, via docker-compose)
+            # Не переопределяй сюда неправильные URL.
+            # В compose уже стоит дефолт: redis://redis:6379
+            # Если хочешь задать явно — раскомментируй строку ниже.
+            # REDIS_URL=redis://redis:6379
+            
+            # Если нужно полностью вырубить Redis на время отладки:
+            # DISABLE_REDIS=1
+            # SILENCE_REDIS_ERRORS=1
+            
+            # =========================
+            # Upstash KV / Redis (REST) — ИСПОЛЬЗУЙ ТОЛЬКО ЕСЛИ НЕ ИСПОЛЬЗУЕШЬ ЛОКАЛЬНЫЙ REDIS
+            # Не смешивай с REDIS_URL. Для @upstash/redis нужны эти две переменные.
+            # UPSTASH_REDIS_REST_URL=
+            # UPSTASH_REDIS_REST_TOKEN=
+            #
+            # Старые KV_* оставь пустыми или удали.
+            KV_URL=
+            KV_REST_API_URL=
+            KV_REST_API_TOKEN=
+            KV_REST_API_READ_ONLY_TOKEN=
+            
+            # =========================
+            # Database / Pools
+            # =========================
+            DB_POOL_MIN=2
+            DB_POOL_MAX=10
+            REDIS_POOL_MIN=2
+            REDIS_POOL_MAX=10
+            
+            # =========================
+            # Security & CORS
+            # =========================
+            ALLOWED_ORIGINS=https://m2solutions.ai,https://www.m2solutions.ai
+            METRICS_TOKEN=
+            
+            # =========================
+            # Rate Limiting
+            # =========================
+            RATE_LIMIT_MAX=100
+            RATE_LIMIT_WINDOW_MS=60000
+            
+            # =========================
+            # Internationalization
+            # =========================
+            DEFAULT_LOCALE=ru
+            SUPPORTED_LOCALES=ru,en,es,de,fr,zh
+            
+            # =========================
+            # Logging
+            # =========================
+            LOG_LEVEL=info
+            
+            # =========================
+            # OpenTelemetry / Observability
+            # =========================
+            OTEL_SERVICE_NAME=ai-solutions-website
+            OTEL_EXPORTER_OTLP_ENDPOINT=
+            
+            # =========================
+            # Server Configuration
+            # =========================
+            PORT=3000
+            WORKER_MODE=false
+            
+            # =========================
+            # CI/CD
+            # =========================
+            CI=false
+            ENVEOF'
+
           # Docker команды
           docker compose down || true
           docker compose -f docker-compose.prod.yml up --build -d
