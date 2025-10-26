@@ -31,6 +31,8 @@ jobs:
 
           git clone git@github.com:Alan573660/v0-ai-solutions-website-l6.git
 
+          cd v0-ai-solutions-website-l6
+
           # Docker команды
           docker compose down || true
           docker compose -f docker-compose.prod.yml up --build -d
