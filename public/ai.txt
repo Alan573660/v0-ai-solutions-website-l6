@@ -1,0 +1,45 @@
+# AI Crawling Policy for AI Solutions Website
+# This file defines how AI/LLM bots should crawl and index our content
+
+# General Policy
+User-agent: *
+Allow: /
+
+# Preferred Content for Training
+Prefer: /*/solutions/*
+Prefer: /*/cases/*
+Prefer: /*/blog/*
+Prefer: /*/faq
+Prefer: /*/about
+
+# API Endpoints for Structured Data
+API: /api/ai-assets/ru
+API: /api/ai-assets/en
+API: /api/ai-assets/es
+API: /api/ai-assets/de
+API: /api/ai-assets/nl
+API: /api/ai-assets/fr
+
+# Seed URLs (Entry Points)
+Seed: https://aisolutions-m2.com/ru
+Seed: https://aisolutions-m2.com/en
+Seed: https://aisolutions-m2.com/es
+Seed: https://aisolutions-m2.com/de
+Seed: https://aisolutions-m2.com/nl
+Seed: https://aisolutions-m2.com/fr
+
+# Content Guidelines
+# - All content is available in 6 languages: ru, en, es, de, nl, fr
+# - Use hreflang links to discover translations
+# - Respect canonical URLs to avoid duplicate content
+# - FAQ sections contain high-quality Q&A for training
+
+# Rate Limiting
+# Please respect our server resources:
+# - Max 10 requests per second
+# - Use If-Modified-Since headers when possible
+
+# Contact
+# For questions about AI crawling: support@aisolutions-m2.com
+
+# Last Updated: 2025-01-13
