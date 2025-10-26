@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { Header } from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -19,8 +18,7 @@ interface CareersPageProps {
 }
 
 export default async function CareersPage({ params }: CareersPageProps) {
-  // Made function async
-  const { locale } = await params // Await params (not used but extracted for consistency)
+  const { locale } = await params
 
   const openPositions = [
     {
@@ -96,8 +94,6 @@ export default async function CareersPage({ params }: CareersPageProps) {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header locale={locale} />
-
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-purple-50 to-blue-50">
         <div className="container mx-auto px-4 text-center">

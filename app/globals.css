@@ -139,7 +139,7 @@ html {
   }
 }
 
-/* Adding missing animation utilities for UI components */
+/* Animation keyframes */
 @keyframes slide-in-from-top {
   from {
     transform: translateY(-100%);
@@ -269,137 +269,112 @@ html {
   }
 }
 
-@layer utilities {
-  /* Animation utilities */
-  .animate-in {
-    animation-duration: 150ms;
-    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    animation-fill-mode: both;
-  }
+/* Adding animation utilities as regular CSS classes for shadcn components */
+.animate-in {
+  animation-duration: 150ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+}
 
-  .animate-out {
-    animation-duration: 150ms;
-    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    animation-fill-mode: both;
-  }
+.animate-out {
+  animation-duration: 150ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+}
 
-  .fade-in-0 {
-    animation-name: fade-in;
-    --tw-enter-opacity: 0;
-  }
+.fade-in-0 {
+  animation-name: fade-in;
+}
 
-  .fade-out-0 {
-    animation-name: fade-out;
-    --tw-exit-opacity: 0;
-  }
+.fade-out-0 {
+  animation-name: fade-out;
+}
 
-  .fade-out-80 {
-    animation-name: fade-out;
-    --tw-exit-opacity: 0.8;
-  }
+.fade-out-80 {
+  animation-name: fade-out;
+  opacity: 0.8;
+}
 
-  .zoom-in-95 {
-    animation-name: zoom-in;
-    --tw-enter-scale: 0.95;
-  }
+.zoom-in-95 {
+  animation-name: zoom-in;
+}
 
-  .zoom-out-95 {
-    animation-name: zoom-out;
-    --tw-exit-scale: 0.95;
-  }
+.zoom-out-95 {
+  animation-name: zoom-out;
+}
 
-  .slide-in-from-top-2 {
-    animation-name: slide-in-from-top;
-    --tw-enter-translate-y: -0.5rem;
-  }
+.slide-in-from-top-2 {
+  animation-name: slide-in-from-top;
+}
 
-  .slide-in-from-bottom-2 {
-    animation-name: slide-in-from-bottom;
-    --tw-enter-translate-y: 0.5rem;
-  }
+.slide-in-from-bottom-2 {
+  animation-name: slide-in-from-bottom;
+}
 
-  .slide-in-from-left-2 {
-    animation-name: slide-in-from-left;
-    --tw-enter-translate-x: -0.5rem;
-  }
+.slide-in-from-left-2 {
+  animation-name: slide-in-from-left;
+}
 
-  .slide-in-from-right-2 {
-    animation-name: slide-in-from-right;
-    --tw-enter-translate-x: 0.5rem;
-  }
+.slide-in-from-right-2 {
+  animation-name: slide-in-from-right;
+}
 
-  .slide-in-from-top-full {
-    animation-name: slide-in-from-top;
-    --tw-enter-translate-y: -100%;
-  }
+.slide-in-from-top-full {
+  animation-name: slide-in-from-top;
+}
 
-  .slide-in-from-bottom-full {
-    animation-name: slide-in-from-bottom;
-    --tw-enter-translate-y: 100%;
-  }
+.slide-in-from-bottom-full {
+  animation-name: slide-in-from-bottom;
+}
 
-  .slide-out-to-top-full {
-    animation-name: slide-out-to-top;
-    --tw-exit-translate-y: -100%;
-  }
+.slide-in-from-left {
+  animation-name: slide-in-from-left;
+}
 
-  .slide-out-to-bottom {
-    animation-name: slide-out-to-bottom;
-    --tw-exit-translate-y: 100%;
-  }
+.slide-in-from-right {
+  animation-name: slide-in-from-right;
+}
 
-  .slide-out-to-right-full {
-    animation-name: slide-out-to-right;
-    --tw-exit-translate-x: 100%;
-  }
+.slide-out-to-top-full {
+  animation-name: slide-out-to-top;
+}
 
-  /* Purple color utilities */
-  .text-purple-50 {
-    color: #faf5ff;
-  }
-  .text-purple-100 {
-    color: #f3e8ff;
-  }
-  .text-purple-200 {
-    color: #e9d5ff;
-  }
-  .text-purple-300 {
-    color: #d8b4fe;
-  }
-  .text-purple-600 {
-    color: #9333ea;
-  }
-  .text-purple-700 {
-    color: #7e22ce;
-  }
-  .text-purple-800 {
-    color: #6b21a8;
-  }
-  .text-purple-900 {
-    color: #581c87;
-  }
-  .bg-purple-50 {
-    background-color: #faf5ff;
-  }
-  .bg-purple-100 {
-    background-color: #f3e8ff;
-  }
-  .bg-purple-600 {
-    background-color: #9333ea;
-  }
-  .bg-purple-700 {
-    background-color: #7e22ce;
-  }
-  .border-purple-200 {
-    border-color: #e9d5ff;
-  }
-  .hover\:bg-purple-50:hover {
-    background-color: #faf5ff;
-  }
-  .hover\:bg-purple-700:hover {
-    background-color: #7e22ce;
-  }
-  .hover\:text-purple-700:hover {
-    color: #7e22ce;
-  }
+.slide-out-to-bottom {
+  animation-name: slide-out-to-bottom;
+}
+
+.slide-out-to-left {
+  animation-name: slide-out-to-left;
+}
+
+.slide-out-to-right-full {
+  animation-name: slide-out-to-right;
+}
+
+.slide-out-to-left-52 {
+  animation-name: slide-out-to-left;
+}
+
+.slide-out-to-right-52 {
+  animation-name: slide-out-to-right;
+}
+
+.slide-in-from-left-52 {
+  animation-name: slide-in-from-left;
+}
+
+.slide-in-from-right-52 {
+  animation-name: slide-in-from-right;
+}
+
+.fade-in {
+  animation-name: fade-in;
+}
+
+.fade-out {
+  animation-name: fade-out;
+}
+
+.zoom-in-90 {
+  animation-name: zoom-in;
 }
