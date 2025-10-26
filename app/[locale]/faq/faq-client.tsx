@@ -1,7 +1,7 @@
 "use client"
 
 import type { Locale } from "@/lib/i18n/translations"
-import type { FAQItem } from "@/lib/types/faq"
+import type { FAQItem } from "@/lib/api/faq-data"
 import { useState } from "react"
 
 interface FAQClientProps {
