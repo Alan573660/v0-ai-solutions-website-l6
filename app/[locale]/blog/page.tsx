@@ -352,9 +352,6 @@ export default async function BlogPage({ params }: BlogPageProps) {
                       src={post.image || "/placeholder.svg"}
                       alt={post.title}
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        e.currentTarget.src = "/placeholder.svg?height=400&width=800"
-                      }}
                     />
                     <div className="absolute top-4 left-4">
                       <Badge variant="secondary" className="bg-purple-100 text-purple-800 border-purple-200">
@@ -416,9 +413,6 @@ export default async function BlogPage({ params }: BlogPageProps) {
                     src={post.image || "/placeholder.svg"}
                     alt={post.title}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    onError={(e) => {
-                      e.currentTarget.src = "/placeholder.svg?height=400&width=800"
-                    }}
                   />
                   <div className="absolute top-4 left-4">
                     <Badge variant="secondary" className="bg-purple-100 text-purple-800 border-purple-200">

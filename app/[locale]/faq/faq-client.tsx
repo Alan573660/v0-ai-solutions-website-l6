@@ -9,7 +9,7 @@ interface FAQClientProps {
   faqItems: FAQItem[]
 }
 
-export default function FAQClient({ locale, faqItems }: FAQClientProps) {
+export default function FAQClient({ locale: _locale, faqItems }: FAQClientProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const toggleAccordion = (index: number) => {

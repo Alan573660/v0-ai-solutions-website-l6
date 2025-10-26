@@ -23,7 +23,6 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['@formatjs/intl-localematcher'],
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
-    optimizeCss: true,
   },
   compress: true,
   poweredByHeader: false,

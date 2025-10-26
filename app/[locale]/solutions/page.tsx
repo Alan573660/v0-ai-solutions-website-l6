@@ -11,11 +11,11 @@ import { useTranslations } from "@/lib/i18n/translations"
 import { useCTA } from "@/components/modals/cta-provider"
 
 interface SolutionsPageProps {
-  params: Promise<{ locale: Locale }> // Made params async
+  params: { locale: Locale } // Made params synchronous - Client Components can't be async
 }
 
-export default async function SolutionsPage({ params }: SolutionsPageProps) {
-  const { locale } = await params
+export default function SolutionsPage({ params }: SolutionsPageProps) {
+  const { locale } = params // No await needed - params is synchronous in client components
   const { t } = useTranslations(locale)
   const { openModal } = useCTA()
 
