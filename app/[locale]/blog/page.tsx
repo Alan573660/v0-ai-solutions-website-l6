@@ -121,7 +121,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
       date: "2025-01-26",
       readTime: "12 мин чтения",
       category: "Технологии",
-      image: "/ai-chatbot-customer-service-automation-2025.jpg",
+      image: "/ai-chatbot-customer-service-automation.jpg",
       featured: true,
       seoTitle: "AI-чатботы для клиентского сервиса 2025 | Полное руководство",
       seoDescription:
@@ -136,7 +136,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
       date: "2025-01-25",
       readTime: "10 мин чтения",
       category: "Продажи",
-      image: "/voice-ai-real-estate-automation-sales.jpg",
+      image: "/voice-ai-real-estate-property-sales.jpg",
       featured: false,
       seoTitle: "Голосовой AI в недвижимости: Автоматизация продаж | AI Solutions",
       seoDescription:
@@ -151,7 +151,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
       date: "2025-01-24",
       readTime: "11 мин чтения",
       category: "Продажи",
-      image: "/ai-crm-sales-automation-analytics.jpg",
+      image: "/ai-powered-crm-sales-automation-analytics.jpg",
       featured: false,
       seoTitle: "AI-powered CRM: Автоматизация продаж нового поколения | AI Solutions",
       seoDescription:
