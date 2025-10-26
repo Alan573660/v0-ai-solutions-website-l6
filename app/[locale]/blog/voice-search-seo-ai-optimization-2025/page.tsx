@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { Header } from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -819,8 +818,6 @@ export default function VoiceSearchSEO2025Page({ params }: { params: { locale: L
         wordCount={5800}
       />
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50">
-        <Header locale={params.locale} />
-
         {/* Hero Section */}
         <section className="pt-32 pb-16 px-4">
           <div className="max-w-5xl mx-auto">

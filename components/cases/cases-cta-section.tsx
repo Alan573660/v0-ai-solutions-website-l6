@@ -9,7 +9,7 @@ export function CasesCTASection() {
   return (
     <section className="py-24 bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20"></div>
-      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] opacity-10"></div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <h2 className="text-4xl lg:text-5xl font-bold text-white text-balance">

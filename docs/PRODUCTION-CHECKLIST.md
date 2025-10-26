@@ -365,6 +365,6 @@ For deployment issues, contact the DevOps team or refer to:
 - `docs/VERIFICATION-CHECKLIST.md` - API verification steps
 \`\`\`
 
-```plaintext file="logs/.gitkeep"
+\`\`\`plaintext file="logs/.gitkeep"
 # This file ensures the logs directory is tracked by git
 # PM2 will write log files here

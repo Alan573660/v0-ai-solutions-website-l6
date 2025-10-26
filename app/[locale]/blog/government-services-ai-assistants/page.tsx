@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, Calendar, Clock, User, Shield, Zap, Globe, CheckCircle } from "lucide-react"
 import Link from "next/link"
 import type { Locale } from "@/lib/i18n/config"
-import { Header } from "@/components/header"
 import type { Metadata } from "next"
 
 interface BlogPostPageProps {
@@ -29,8 +28,6 @@ export default function GovernmentServicesAIPage({ params }: BlogPostPageProps) 
 
   return (
     <div className="min-h-screen bg-background">
-      <Header locale={locale} />
-
       <article className="py-12">
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Back Button */}

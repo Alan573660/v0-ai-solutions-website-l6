@@ -1,7 +1,5 @@
 "use client"
 
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -181,7 +179,8 @@ export function VoiceSalesManagerClientPage({ params }: VoiceSalesManagerPagePro
 
   return (
     <div className="min-h-screen bg-background">
-      <Header locale={locale} />
+      {/* Header and Footer components are removed as they're already in layout.tsx */}
+      {/* <Header locale={locale} /> */}
 
       <main>
         <section className="relative py-16 sm:py-20 md:py-24 px-4 overflow-hidden">
@@ -664,7 +663,8 @@ export function VoiceSalesManagerClientPage({ params }: VoiceSalesManagerPagePro
         </section>
       </main>
 
-      <Footer locale={locale} />
+      {/* Footer component is removed as it's already in layout.tsx */}
+      {/* <Footer locale={locale} /> */}
     </div>
   )
 }

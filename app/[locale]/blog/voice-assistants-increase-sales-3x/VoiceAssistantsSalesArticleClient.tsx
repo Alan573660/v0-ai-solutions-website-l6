@@ -16,7 +16,6 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import type { Locale } from "@/lib/i18n/config"
-import { Header } from "@/components/header"
 import { useCTA } from "@/components/modals/cta-provider"
 
 interface ArticlePageProps {
@@ -29,8 +28,6 @@ export default function VoiceAssistantsSalesArticleClient({ params }: ArticlePag
 
   return (
     <div className="min-h-screen bg-background">
-      <Header locale={locale} />
-
       <article className="py-12">
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Breadcrumb */}
