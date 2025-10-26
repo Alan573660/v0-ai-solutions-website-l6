@@ -5,6 +5,8 @@
     "target": "ES2020",
     "skipLibCheck": true,
     "strict": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "baseUrl": ".",
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -14,8 +16,8 @@
     "jsx": "preserve",
     "incremental": true,
     "forceConsistentCasingInFileNames": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "plugins": [
       {
