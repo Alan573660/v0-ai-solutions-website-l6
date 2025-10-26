@@ -29,7 +29,7 @@ export default function PricingCalculatorPage({ params }: PricingCalculatorPageP
     languages: ["ru"],
     monthlyMinutes: [1000],
     concurrentLines: [5],
-    integrations: [],
+    integrations: [] as string[],
     sla: "standard",
     deployment: "cloud",
     support: "business",
