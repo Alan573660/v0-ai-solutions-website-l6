@@ -45,8 +45,7 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm" className="gap-1.5 px-2">
-          <span className="text-xl leading-none">{localeFlags[currentLocale]}</span>
-          <span className="hidden md:inline text-sm font-medium">{currentLocale.toUpperCase()}</span>
+          <span className="text-2xl leading-none">{localeFlags[currentLocale]}</span>
           <ChevronDown className="h-3 w-3 opacity-50" aria-hidden="true" />
         </Button>
       </DropdownMenuTrigger>
