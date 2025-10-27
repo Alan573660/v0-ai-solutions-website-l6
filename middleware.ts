@@ -4,6 +4,10 @@ import { defaultLocale, locales } from "@/lib/i18n/config"
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
+  if (pathname.match(/\.(jpg|jpeg|png|gif|svg|webp|ico|css|js|woff|woff2|ttf|eot)$/i)) {
+    return NextResponse.next()
+  }
+
   // Check if pathname is missing locale
   const pathnameHasLocale = locales.some((locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`)
 
@@ -25,8 +29,7 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
-     * - files with extensions (e.g. .svg, .png, .jpg, .css, .js)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\..*$).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
   ],
 }
