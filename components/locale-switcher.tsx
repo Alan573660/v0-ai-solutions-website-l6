@@ -1,64 +1,50 @@
 "use client"
 
 import { useState } from "react"
-import { usePathname } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, Globe } from "lucide-react"
 import { locales, localeNames, localeFlags, type Locale } from "@/lib/i18n/config"
+import { addLocaleToPathname, removeLocaleFromPathname } from "@/lib/i18n/utils"
 
 interface LocaleSwitcherProps {
   currentLocale: Locale
 }
 
 export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
+  const router = useRouter()
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
 
   const handleLocaleChange = (newLocale: Locale) => {
-    if (newLocale === currentLocale) {
-      setIsOpen(false)
-      return
-    }
-
-    const segments = pathname.split("/").filter(Boolean)
-
-    // Remove the first segment if it's a locale
-    const pathWithoutLocale = locales.includes(segments[0] as Locale) ? segments.slice(1).join("/") : segments.join("/")
-
-    // Build new URL with new locale
-    const newPath = `/${newLocale}${pathWithoutLocale ? `/${pathWithoutLocale}` : ""}`
-
-    console.log("[v0] Switching locale:", {
-      from: currentLocale,
-      to: newLocale,
-      currentPath: pathname,
-      pathWithoutLocale,
-      newPath,
-    })
-
-    // Use window.location.href for hard navigation (works reliably on production)
-    window.location.href = newPath
+    const cleanPath = removeLocaleFromPathname(pathname)
+    const newPath = addLocaleToPathname(cleanPath, newLocale)
+    router.push(newPath)
+    setIsOpen(false)
   }
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="gap-1.5 px-2">
-          <span className="text-2xl leading-none">{localeFlags[currentLocale]}</span>
-          <ChevronDown className="h-3 w-3 opacity-50" aria-hidden="true" />
+        <Button variant="ghost" size="sm" className="gap-2">
+          <Globe className="h-4 w-4" />
+          <span className="hidden sm:inline">
+            {localeFlags[currentLocale]} {localeNames[currentLocale]}
+          </span>
+          <span className="sm:hidden">{localeFlags[currentLocale]}</span>
+          <ChevronDown className="h-3 w-3" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[180px]">
+      <DropdownMenuContent align="end" className="min-w-[160px]">
         {locales.map((locale) => (
           <DropdownMenuItem
             key={locale}
             onClick={() => handleLocaleChange(locale)}
-            className={`gap-3 cursor-pointer ${locale === currentLocale ? "bg-accent" : ""}`}
+            className={`gap-2 ${locale === currentLocale ? "bg-accent" : ""}`}
           >
-            <span className="text-xl">{localeFlags[locale]}</span>
-            <span className="flex-1">{localeNames[locale]}</span>
-            {locale === currentLocale && <span className="text-primary">✓</span>}
+            <span>{localeFlags[locale]}</span>
+            <span>{localeNames[locale]}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Header } from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -105,6 +106,8 @@ export default function SupportPage({ params }: SupportPageProps) {
 
   return (
     <div className="min-h-screen bg-background">
+      <Header locale={params.locale} />
+
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-purple-50 to-blue-50">
         <div className="container mx-auto px-4 text-center">
