@@ -8,6 +8,7 @@ import { notFound } from "next/navigation"
 import { CTAProvider } from "@/components/modals/cta-provider"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { ScrollToTop } from "@/components/scroll-to-top"
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -47,6 +48,7 @@ export default async function LocaleLayout({
               <Footer locale={locale} />
             </div>
             <Toaster />
+            <ScrollToTop />
           </CTAProvider>
         </ThemeProvider>
       </body>
