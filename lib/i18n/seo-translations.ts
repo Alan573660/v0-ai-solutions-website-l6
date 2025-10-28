@@ -12,6 +12,7 @@ export type SEOPageType =
   | "solutions-custom"
   | "solutions-voice-sales"
   | "solutions-hotel-concierge"
+  | "solutions-smart-home"
   | "platform"
   | "platform-architecture"
   | "platform-demo"
@@ -133,6 +134,16 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
       ogTitle: "AI-консьерж для отелей — Автоматизация обслуживания гостей",
       ogDescription:
         "Автоматизируйте обслуживание гостей с AI-консьержем: бронирование, запросы, услуги. -60% время обслуживания, работа 24/7 на всех языках.",
+    },
+    "solutions-smart-home": {
+      title: "Умный дом на базе ИИ — Проектирование и автоматизация с искусственным интеллектом | AI Solutions M2",
+      description:
+        "Индивидуальные решения для умного дома с интеграцией AI (OpenAI, Grok, Gemini, DeepSeek). Мобильное приложение, голосовое управление, автополив, климат-контроль, освещение. Проекты в Барселоне, Моравире, Альтеа. Работаем с застройщиками в Испании.",
+      keywords:
+        "умный дом, smart home, умный дом на базе ИИ, AI умный дом, автоматизация дома, умный дом под ключ, проектирование умного дома, умный дом Испания, умный дом Барселона, умный дом Моравира, умный дом Альтеа, голосовое управление домом, мобильное приложение умный дом, автополив умный дом, климат контроль, умное освещение, система безопасности дома, видеонаблюдение AI, OpenAI умный дом, Grok интеграция, Google Gemini дом, DeepSeek автоматизация, индивидуальные решения умный дом, застройщики Испания, премиум умный дом, luxury smart home",
+      ogTitle: "Умный дом на базе ИИ — Индивидуальные решения | AI Solutions M2",
+      ogDescription:
+        "Проектирование и автоматизация умного дома с AI. Мобильное приложение, голосовое управление, полная автоматизация. Проекты в Испании.",
     },
     platform: {
       title: "AI-платформа M2 — Архитектура, демо и калькулятор стоимости голосовых ассистентов",
@@ -305,6 +316,16 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
       ogDescription:
         "Automate guest services with an AI concierge: bookings, requests, services. -60% service time, 24/7 operation in all languages.",
     },
+    "solutions-smart-home": {
+      title: "AI-Powered Smart Home — Design and Automation with Artificial Intelligence | AI Solutions M2",
+      description:
+        "Custom smart home solutions with AI integration (OpenAI, Grok, Gemini, DeepSeek). Mobile app, voice control, auto-irrigation, climate control, lighting. Projects in Barcelona, Moraira, Altea. Working with developers in Spain.",
+      keywords:
+        "smart home, AI smart home, home automation, turnkey smart home, smart home design, smart home Spain, smart home Barcelona, smart home Moraira, smart home Altea, voice home control, smart home mobile app, auto irrigation, climate control, smart lighting, home security system, AI video surveillance, OpenAI smart home, Grok integration, Google Gemini home, DeepSeek automation, custom smart home solutions, Spain developers, premium smart home, luxury smart home",
+      ogTitle: "AI-Powered Smart Home — Custom Solutions | AI Solutions M2",
+      ogDescription:
+        "Smart home design and automation with AI. Mobile app, voice control, full automation. Projects in Spain.",
+    },
     platform: {
       title: "AI Platform M2 — Architecture, Demo, and Voice Assistant Cost Calculator",
       description:
@@ -384,12 +405,12 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
     about: {
       title: "Acerca de AI Solutions M2 — Equipo Internacional de Expertos en Inteligencia Artificial",
       description:
-        "Conoce el equipo de AI Solutions M2 — expertos internacionales de Rusia, CEI, Ucrania e India. Nuestra misión, valores y oficinas en Madrid, Moscú y Astaná.",
+        "Conoce el equipo de AI Solutions M2 — expertos internacionales de Rusia, CEI, Украине e India. Nuestra misión, valores y oficinas en Madrid, Moscú y Astaná.",
       keywords:
         "equipo AI Solutions, expertos inteligencia artificial, empresa IT internacional, desarrollo IA, especialistas machine learning, oficinas Rusia España Kazajistán",
       ogTitle: "Acerca de AI Solutions M2 — Expertos en IA",
       ogDescription:
-        "Equipo internacional de expertos en inteligencia artificial con oficinas en Madrid, Moscú y Astaná.",
+        "Equipo internacional de expertos en inteligencia artificial con oficinas en Madrid, Moscú y Astana.",
     },
     blog: {
       title: "Blog AI Solutions M2 — Artículos Expertos sobre Implementación de Inteligencia Artificial en Negocios",
@@ -418,7 +439,7 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
       keywords:
         "contactos AI Solutions, consultoría inteligencia artificial, implementación asistentes IA, oficinas Madrid Moscú Astaná, expertos IA contacto",
       ogTitle: "Contacto AI Solutions M2",
-      ogDescription: "Conéctate con expertos en IA para consultoría y demo. Oficinas en Madrid, Moscú y Astaná.",
+      ogDescription: "Conéctate con expertos en IA para consultoría y demo. Oficinas en Madrid, Moscú y Astana.",
     },
     solutions: {
       title: "Soluciones IA para Negocios — Asistentes de Voz para Ventas, Hoteles y Automatización",
@@ -476,6 +497,16 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
       ogTitle: "Conserje IA para Hoteles — Automatización de Servicios para Huéspedes",
       ogDescription:
         "Automatiza servicios para huéspedes con un conserje IA: reservas, solicitudes, servicios. -60% tiempo de servicio, operación 24/7 en todos los idiomas.",
+    },
+    "solutions-smart-home": {
+      title: "Casa Inteligente con IA — Diseño y Automatización con Inteligencia Artificial | AI Solutions M2",
+      description:
+        "Soluciones personalizadas de casa inteligente con integración de IA (OpenAI, Grok, Gemini, DeepSeek). App móvil, control por voz, riego automático, climatización, iluminación. Proyectos en Barcelona, Moraira, Altea. Trabajamos con promotores en España.",
+      keywords:
+        "casa inteligente, smart home, casa inteligente IA, automatización hogar, casa inteligente llave en mano, diseño casa inteligente, casa inteligente España, casa inteligente Barcelona, casa inteligente Moraira, casa inteligente Altea, control por voz hogar, app móvil casa inteligente, riego automático, control climático, iluminación inteligente, sistema seguridad hogar, videovigilancia IA, OpenAI casa inteligente, integración Grok, Google Gemini hogar, automatización DeepSeek, soluciones personalizadas casa inteligente, promotores España, casa inteligente premium, luxury smart home",
+      ogTitle: "Casa Inteligente con IA — Soluciones Personalizadas | AI Solutions M2",
+      ogDescription:
+        "Diseño y automatización de casa inteligente con IA. App móvil, control por voz, automatización completa. Proyectos en España.",
     },
     platform: {
       title: "Plataforma IA M2 — Arquitectura, Demo y Calculadora de Costos de Asistentes de Voz",
@@ -649,6 +680,16 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
       ogDescription:
         "Automatisieren Sie den Gästeservice mit einem KI-Concierge: Buchungen, Anfragen, Services. -60% Servicezeit, 24/7-Betrieb in allen Sprachen.",
     },
+    "solutions-smart-home": {
+      title: "KI-gesteuertes Smart Home — Design und Automatisierung mit Künstlicher Intelligenz | AI Solutions M2",
+      description:
+        "Individuelle Smart-Home-Lösungen mit KI-Integration (OpenAI, Grok, Gemini, DeepSeek). Mobile App, Sprachsteuerung, automatische Bewässerung, Klimakontrolle, Beleuchtung. Projekte in Barcelona, Moraira, Altea. Arbeiten mit Entwicklern in Spanien.",
+      keywords:
+        "Smart Home, KI Smart Home, Hausautomatisierung, schlüsselfertiges Smart Home, Smart Home Design, Smart Home Spanien, Smart Home Barcelona, Smart Home Moraira, Smart Home Altea, Sprachsteuerung Haus, Smart Home Mobile App, automatische Bewässerung, Klimakontrolle, intelligente Beleuchtung, Haussicherheitssystem, KI-Videoüberwachung, OpenAI Smart Home, Grok-Integration, Google Gemini Haus, DeepSeek-Automatisierung, individuelle Smart-Home-Lösungen, Entwickler Spanien, Premium Smart Home, Luxus Smart Home",
+      ogTitle: "KI-gesteuertes Smart Home — Individuelle Lösungen | AI Solutions M2",
+      ogDescription:
+        "Smart-Home-Design und -Automatisierung mit KI. Mobile App, Sprachsteuerung, vollständige Automatisierung. Projekte in Spanien.",
+    },
     platform: {
       title: "KI-Plattform M2 — Architektur, Demo und Kostenrechner für Sprach-Assistenten",
       description:
@@ -820,6 +861,16 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
       ogTitle: "AI Concierge voor Hotels — Gastenservice Automatisering",
       ogDescription:
         "Automatiseer gastenservices met een AI concierge: boekingen, verzoeken, services. -60% servicetijd, 24/7 werking in alle talen.",
+    },
+    "solutions-smart-home": {
+      title: "AI-aangedreven Smart Home — Ontwerp en Automatisering met Kunstmatige Intelligentie | AI Solutions M2",
+      description:
+        "Op maat gemaakte smart home-oplossingen met AI-integratie (OpenAI, Grok, Gemini, DeepSeek). Mobiele app, spraakbesturing, automatische irrigatie, klimaatbeheersing, verlichting. Projecten in Barcelona, Moraira, Altea. Werken met ontwikkelaars in Spanje.",
+      keywords:
+        "smart home, AI smart home, huisautomatisering, kant-en-klaar smart home, smart home ontwerp, smart home Spanje, smart home Barcelona, smart home Moraira, smart home Altea, spraakbesturing huis, smart home mobiele app, automatische irrigatie, klimaatbeheersing, slimme verlichting, beveiligingssysteem huis, AI-videobewaking, OpenAI smart home, Grok-integratie, Google Gemini huis, DeepSeek-automatisering, op maat gemaakte smart home-oplossingen, ontwikkelaars Spanje, premium smart home, luxe smart home",
+      ogTitle: "AI-aangedreven Smart Home — Op Maat Gemaakte Oplossingen | AI Solutions M2",
+      ogDescription:
+        "Smart home-ontwerp en -automatisering met AI. Mobiele app, spraakbesturing, volledige automatisering. Projecten in Spanje.",
     },
     platform: {
       title: "AI-Platform M2 — Architectuur, Demo en Kostencalculator voor Spraak-Assistenten",
@@ -994,6 +1045,17 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
       ogTitle: "Concierge IA pour Hôtels — Automatisation des Services Hôtes",
       ogDescription:
         "Automatisez les services clients avec un concierge IA : réservations, demandes, services. -60% temps de service, opération 24/7 dans toutes les langues.",
+    },
+    "solutions-smart-home": {
+      title:
+        "Maison Intelligente avec IA — Conception et Automatisation avec Intelligence Artificielle | AI Solutions M2",
+      description:
+        "Solutions de maison intelligente personnalisées avec intégration IA (OpenAI, Grok, Gemini, DeepSeek). Application mobile, contrôle vocal, irrigation automatique, climatisation, éclairage. Projets à Barcelone, Moraira, Altea. Travaillons avec des promoteurs en Espagne.",
+      keywords:
+        "maison intelligente, smart home, maison intelligente IA, automatisation maison, maison intelligente clé en main, conception maison intelligente, maison intelligente Espagne, maison intelligente Barcelone, maison intelligente Moraira, maison intelligente Altea, contrôle vocal maison, application mobile maison intelligente, irrigation automatique, contrôle climatique, éclairage intelligent, système sécurité maison, vidéosurveillance IA, OpenAI maison intelligente, intégration Grok, Google Gemini maison, automatisation DeepSeek, solutions personnalisées maison intelligente, promoteurs Espagne, maison intelligente premium, luxury smart home",
+      ogTitle: "Maison Intelligente avec IA — Solutions Personnalisées | AI Solutions M2",
+      ogDescription:
+        "Conception et automatisation de maison intelligente avec IA. Application mobile, contrôle vocal, automatisation complète. Projets en Espagne.",
     },
     platform: {
       title: "Plateforme IA M2 — Architecture, Démo et Calculateur de Coûts pour Assistants Vocaux",

@@ -72,6 +72,7 @@ export type TranslationKey =
   | "solutions.smb"
   | "solutions.enterprise"
   | "solutions.custom"
+  | "solutions.smartHome"
   // Platform
   | "platform.architecture"
   | "platform.demo"
@@ -197,6 +198,12 @@ export type TranslationKey =
   | "solutions.custom.description"
   | "solutions.custom.cta1"
   | "solutions.custom.cta2"
+  | "solutions.smartHome.title"
+  | "solutions.smartHome.description"
+  | "solutions.smartHome.feature1"
+  | "solutions.smartHome.feature2"
+  | "solutions.smartHome.feature3"
+  | "solutions.smartHome.feature4"
   | "solutions.learnMore"
   // Demo section
   | "demo.title"
@@ -577,6 +584,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.smb": "Для малого и среднего бизнеса",
     "solutions.enterprise": "Enterprise / Госсектор / Банки",
     "solutions.custom": "Индивидуальные разработки",
+    "solutions.smartHome": "Умный дом на базе ИИ",
     // Platform
     "platform.architecture": "Архитектура",
     "platform.demo": "Демонстрация",
@@ -717,6 +725,13 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
       "Нужно уникальное решение? Мы создаём AI-ассистентов под любые бизнес-процессы с интеграцией в ваши системы и соблюдением всех требований безопасности.",
     "solutions.custom.cta1": "Обсудить проект",
     "solutions.custom.cta2": "Получить консультацию",
+    "solutions.smartHome.title": "Умный дом на базе ИИ",
+    "solutions.smartHome.description":
+      "Комплексные решения для автоматизации дома с управлением через голосовых ассистентов и мобильное приложение.",
+    "solutions.smartHome.feature1": "Голосовое управление",
+    "solutions.smartHome.feature2": "Автополив и освещение",
+    "solutions.smartHome.feature3": "Мобильное приложение",
+    "solutions.smartHome.feature4": "Индивидуальные решения",
     "solutions.learnMore": "Подробнее о решении",
 
     "demo.title": "Попробуйте AI-ассистента прямо сейчас",
@@ -1129,6 +1144,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.smb": "Small & Medium Business",
     "solutions.enterprise": "Enterprise / Government / Banks",
     "solutions.custom": "Custom Development",
+    "solutions.smartHome": "AI-Powered Smart Home",
     // Platform
     "platform.architecture": "Architecture",
     "platform.demo": "Demo",
@@ -1264,10 +1280,17 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.enterprise.feature4": "Custom integrations",
     "solutions.custom.title": "Custom Development",
     "solutions.custom.description":
-      "Need a unique solution? We create AI assistants for any business processes with integration into your systems and compliance with all security requirements.",
+      "Need a unique solution? We create AI assistants for any business process with integration into your systems and compliance with all security requirements.",
     "solutions.custom.cta1": "Discuss project",
     "solutions.custom.cta2": "Get consultation",
-    "solutions.learnMore": "Learn more about solution",
+    "solutions.smartHome.title": "AI-Powered Smart Home",
+    "solutions.smartHome.description":
+      "Comprehensive home automation solutions with voice assistant control and mobile app integration.",
+    "solutions.smartHome.feature1": "Voice Control",
+    "solutions.smartHome.feature2": "Auto-watering & Lighting",
+    "solutions.smartHome.feature3": "Mobile App",
+    "solutions.smartHome.feature4": "Custom Solutions",
+    "solutions.learnMore": "Learn more about the solution",
 
     "demo.title": "Try AI Assistant right now",
     "demo.description": "Talk to our demo assistant or call the test number",
@@ -1610,6 +1633,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.smb": "Pequeñas y medianas empresas",
     "solutions.enterprise": "Enterprise / Gobierno / Bancos",
     "solutions.custom": "Desarrollo personalizado",
+    "solutions.smartHome": "Casa Inteligente con IA",
     // Platform
     "platform.architecture": "Arquitectura",
     "platform.demo": "Demo",
@@ -1753,6 +1777,13 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
       "¿Necesita una solución única? Creamos asistentes de IA para cualquier proceso de negocio con integración en sus sistemas y cumplimiento de todos los requisitos de seguridad.",
     "solutions.custom.cta1": "Discutir proyecto",
     "solutions.custom.cta2": "Obtener consulta",
+    "solutions.smartHome.title": "Casa Inteligente con IA",
+    "solutions.smartHome.description":
+      "Soluciones integrales de automatización del hogar con control por asistente de voz e integración de aplicaciones móviles.",
+    "solutions.smartHome.feature1": "Control por Voz",
+    "solutions.smartHome.feature2": "Riego y Iluminación Automáticos",
+    "solutions.smartHome.feature3": "Aplicación Móvil",
+    "solutions.smartHome.feature4": "Soluciones Personalizadas",
     "solutions.learnMore": "Más información sobre la solución",
 
     "demo.title": "Pruebe el asistente IA ahora mismo",
@@ -2102,6 +2133,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.smb": "Kleine und mittlere Unternehmen",
     "solutions.enterprise": "Enterprise / Regierung / Banken",
     "solutions.custom": "Individuelle Entwicklung",
+    "solutions.smartHome": "KI-gesteuertes Smart Home",
     // Platform
     "platform.architecture": "Architektur",
     "platform.demo": "Demo",
@@ -2243,9 +2275,16 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.enterprise.feature4": "Benutzerdefinierte Integrationen",
     "solutions.custom.title": "Individuelle Entwicklung",
     "solutions.custom.description":
-      "Benötigen Sie eine einzigartige Lösung? Wir erstellen KI-Assistenten für beliebige Geschäftsprozesse mit Integration in Ihre Systeme und Einhaltung aller Sicherheitsanforderungen.",
+      "Benötigen Sie eine einzigartige Lösung? Wir erstellen KI-Assistenten für jeden Geschäftsprozess mit Integration in Ihre Systeme und Einhaltung aller Sicherheitsanforderungen.",
     "solutions.custom.cta1": "Projekt besprechen",
     "solutions.custom.cta2": "Beratung erhalten",
+    "solutions.smartHome.title": "KI-gesteuertes Smart Home",
+    "solutions.smartHome.description":
+      "Umfassende Hausautomationslösungen mit Sprachassistentensteuerung und mobiler App-Integration.",
+    "solutions.smartHome.feature1": "Sprachsteuerung",
+    "solutions.smartHome.feature2": "Auto-Bewässerung & Beleuchtung",
+    "solutions.smartHome.feature3": "Mobile App",
+    "solutions.smartHome.feature4": "Individuelle Lösungen",
     "solutions.learnMore": "Mehr über die Lösung erfahren",
 
     "demo.title": "Testen Sie den KI-Assistenten jetzt",
@@ -2595,6 +2634,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.smb": "Kleine en middelgrote bedrijven",
     "solutions.enterprise": "Enterprise / Overheid / Banken",
     "solutions.custom": "Maatwerk ontwikkeling",
+    "solutions.smartHome": "AI-aangedreven Smart Home",
     // Platform
     "platform.architecture": "Architectuur",
     "platform.demo": "Demo",
@@ -2733,9 +2773,16 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.enterprise.feature4": "Aangepaste integraties",
     "solutions.custom.title": "Maatwerk Ontwikkeling",
     "solutions.custom.description":
-      "Heeft u een unieke oplossing nodig? Wij creëren AI-assistenten voor elke bedrijfsproces met integratie in uw systemen en naleving van alle beveiligingseisen.",
+      "Heeft u een unieke oplossing nodig? Wij creëren AI-assistenten voor elk bedrijfsproces met integratie in uw systemen en naleving van alle beveiligingseisen.",
     "solutions.custom.cta1": "Project bespreken",
     "solutions.custom.cta2": "Consultatie ontvangen",
+    "solutions.smartHome.title": "AI-aangedreven Smart Home",
+    "solutions.smartHome.description":
+      "Uitgebreide huisautomatiseringsoplossingen met spraakassistentbesturing en mobiele app-integratie.",
+    "solutions.smartHome.feature1": "Spraakbesturing",
+    "solutions.smartHome.feature2": "Auto-irrigatie & Verlichting",
+    "solutions.smartHome.feature3": "Mobiele App",
+    "solutions.smartHome.feature4": "Aangepaste Oplossingen",
     "solutions.learnMore": "Meer informatie over de oplossing",
 
     "demo.title": "Probeer de AI-assistent nu meteen",
@@ -3085,6 +3132,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.smb": "Petites et moyennes entreprises",
     "solutions.enterprise": "Enterprise / Gouvernement / Banques",
     "solutions.custom": "Développement sur mesure",
+    "solutions.smartHome": "Maison Intelligente avec IA",
     // Platform
     "platform.architecture": "Architecture",
     "platform.demo": "Démo",
@@ -3228,9 +3276,16 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.enterprise.feature4": "Intégrations personnalisées",
     "solutions.custom.title": "Développement Personnalisé",
     "solutions.custom.description":
-      "Besoin d'une solution unique ? Nous créons des assistants IA pour tous les processus métier avec intégration dans vos systèmes et respect de toutes les exigences de sécurité.",
+      "Besoin d'une solution unique ? Nous créons des assistants IA pour tout processus métier avec intégration dans vos systèmes et conformité à toutes les exigences de sécurité.",
     "solutions.custom.cta1": "Discuter du projet",
     "solutions.custom.cta2": "Obtenir une consultation",
+    "solutions.smartHome.title": "Maison Intelligente avec IA",
+    "solutions.smartHome.description":
+      "Solutions complètes de domotique avec contrôle par assistant vocal et intégration d'application mobile.",
+    "solutions.smartHome.feature1": "Contrôle Vocal",
+    "solutions.smartHome.feature2": "Arrosage et Éclairage Automatiques",
+    "solutions.smartHome.feature3": "Application Mobile",
+    "solutions.smartHome.feature4": "Solutions Personnalisées",
     "solutions.learnMore": "En savoir plus sur la solution",
 
     "demo.title": "Essayez l'assistant IA dès maintenant",

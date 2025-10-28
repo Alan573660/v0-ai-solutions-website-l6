@@ -60,6 +60,14 @@ export default function SolutionsPage({ params }: SolutionsPageProps) {
       metrics: ["Любая сложность", "RAG + LLM", "Полный цикл"],
       color: "bg-red-500",
     },
+    {
+      title: t("solutions.smartHome"),
+      description: "Умный дом с AI: голосовое управление, автоматизация и мобильное приложение",
+      icon: Building2,
+      href: `/${locale}/solutions/smart-home`,
+      metrics: ["Голосовое управление", "Автополив", "Мобильное приложение"],
+      color: "bg-indigo-500",
+    },
   ]
 
   const implementationSteps = [

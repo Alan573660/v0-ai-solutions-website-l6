@@ -1,27 +1,24 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter, usePathname } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { ChevronDown, Globe } from "lucide-react"
 import { locales, localeNames, localeFlags, type Locale } from "@/lib/i18n/config"
-import { addLocaleToPathname, removeLocaleFromPathname } from "@/lib/i18n/utils"
 
 interface LocaleSwitcherProps {
   currentLocale: Locale
 }
 
 export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
-  const router = useRouter()
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleLocaleChange = (newLocale: Locale) => {
-    const cleanPath = removeLocaleFromPathname(pathname)
-    const newPath = addLocaleToPathname(cleanPath, newLocale)
-    router.push(newPath)
-    setIsOpen(false)
+  const getLocaleUrl = (newLocale: Locale): string => {
+    const segments = pathname.split("/").filter(Boolean)
+    const pathWithoutLocale = segments.slice(1).join("/")
+    return `/${newLocale}${pathWithoutLocale ? `/${pathWithoutLocale}` : ""}`
   }
 
   return (
@@ -33,20 +30,28 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
             {localeFlags[currentLocale]} {localeNames[currentLocale]}
           </span>
           <span className="sm:hidden">{localeFlags[currentLocale]}</span>
-          <ChevronDown className="h-3 w-3" />
+          <ChevronDown className="h-3 w-3" aria-hidden="true" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[160px]">
-        {locales.map((locale) => (
-          <DropdownMenuItem
-            key={locale}
-            onClick={() => handleLocaleChange(locale)}
-            className={`gap-2 ${locale === currentLocale ? "bg-accent" : ""}`}
-          >
-            <span>{localeFlags[locale]}</span>
-            <span>{localeNames[locale]}</span>
-          </DropdownMenuItem>
-        ))}
+        {locales.map((locale) => {
+          const localeUrl = getLocaleUrl(locale)
+          const isCurrentLocale = locale === currentLocale
+
+          return (
+            <DropdownMenuItem
+              key={locale}
+              asChild
+              className={`gap-2 cursor-pointer ${isCurrentLocale ? "bg-accent" : ""}`}
+            >
+              <a href={localeUrl} onClick={() => setIsOpen(false)}>
+                <span>{localeFlags[locale]}</span>
+                <span>{localeNames[locale]}</span>
+                {isCurrentLocale && <span className="ml-auto text-xs">✓</span>}
+              </a>
+            </DropdownMenuItem>
+          )
+        })}
       </DropdownMenuContent>
     </DropdownMenu>
   )

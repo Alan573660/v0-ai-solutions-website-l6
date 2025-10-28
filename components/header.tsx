@@ -54,6 +54,7 @@ export function Header({ locale }: HeaderProps) {
     { name: t("solutions.smb"), href: `/${locale}/solutions/smb` },
     { name: t("solutions.enterprise"), href: `/${locale}/solutions/enterprise` },
     { name: t("solutions.custom"), href: `/${locale}/solutions/custom` },
+    { name: t("solutions.smartHome"), href: `/${locale}/solutions/smart-home` },
   ]
 
   const platform = [
