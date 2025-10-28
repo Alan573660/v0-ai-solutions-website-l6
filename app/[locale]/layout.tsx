@@ -1,5 +1,4 @@
 import type React from "react"
-import { Inter, Roboto_Mono } from "next/font/google"
 import "../globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
@@ -9,16 +8,6 @@ import { CTAProvider } from "@/components/modals/cta-provider"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ScrollToTop } from "@/components/scroll-to-top"
-
-const inter = Inter({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-inter",
-})
-
-const robotoMono = Roboto_Mono({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-roboto-mono",
-})
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -38,7 +27,7 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale} className={`${inter.variable} ${robotoMono.variable}`} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body className="font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <CTAProvider>

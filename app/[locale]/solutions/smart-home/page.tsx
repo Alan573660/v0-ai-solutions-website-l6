@@ -135,7 +135,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
       image: "/modern-residential-building-entrance-with-smart-co.jpg",
       contactOptions: [
         { icon: "phone", text: "Позвоните нам", action: "tel:+34600000000" },
-        { icon: "email", text: "Напишите на почту", action: "mailto:info@aisolutions.com" },
+        { icon: "email", text: "Напишите на почту", action: "mailto:info@m2solutions.ai" },
         { icon: "chat", text: "Онлайн-консультация", action: "consultation" },
       ],
     },
@@ -183,7 +183,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
       image: "/modern-apartment-building-management-system.jpg",
       contactOptions: [
         { icon: "phone", text: "Позвоните нам", action: "tel:+34600000000" },
-        { icon: "email", text: "Напишите на почту", action: "mailto:info@aisolutions.com" },
+        { icon: "email", text: "Напишите на почту", action: "mailto:info@m2solutions.ai" },
         { icon: "chat", text: "Онлайн-консультация", action: "consultation" },
       ],
     },
@@ -676,7 +676,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                       variant="outline"
                       className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
                       onClick={() => {
-                        window.location.href = "mailto:info@aisolutions.com"
+                        window.location.href = "mailto:info@m2solutions.ai"
                       }}
                     >
                       <Mail className="w-4 h-4 mr-2" />
@@ -692,7 +692,6 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Онлайн-консультация
                     </Button>
-                    {/* </CHANGE> */}
                   </div>
                 </CardContent>
               </Card>
@@ -834,7 +833,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                       variant="outline"
                       className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
                       onClick={() => {
-                        window.location.href = "mailto:info@aisolutions.com"
+                        window.location.href = "mailto:info@m2solutions.ai"
                       }}
                     >
                       <Mail className="w-4 h-4 mr-2" />
@@ -850,7 +849,6 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Онлайн-консультация
                     </Button>
-                    {/* </CHANGE> */}
                   </div>
                 </CardContent>
               </Card>

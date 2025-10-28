@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: HotelConciergePageProps): Pro
       description,
       type: "website",
       locale: locale === "ru" ? "ru_RU" : "en_US",
-      url: `https://aisolutions.com/${locale}/solutions/hotel-concierge`,
+      url: `https://m2solutions.ai/${locale}/solutions/hotel-concierge`,
       siteName: "AI Solutions",
     },
     twitter: {
@@ -46,10 +46,10 @@ export async function generateMetadata({ params }: HotelConciergePageProps): Pro
       description,
     },
     alternates: {
-      canonical: `https://aisolutions.com/${locale}/solutions/hotel-concierge`,
+      canonical: `https://m2solutions.ai/${locale}/solutions/hotel-concierge`,
       languages: {
-        ru: "https://aisolutions.com/ru/solutions/hotel-concierge",
-        en: "https://aisolutions.com/en/solutions/hotel-concierge",
+        ru: "https://m2solutions.ai/ru/solutions/hotel-concierge",
+        en: "https://m2solutions.ai/en/solutions/hotel-concierge",
       },
     },
     robots: {

@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: VoiceSalesManagerPageProps): 
       description,
       type: "website",
       locale: ogLocale,
-      url: `https://aisolutions.com/${locale}/solutions/voice-sales-manager`,
+      url: `https://m2solutions.ai/${locale}/solutions/voice-sales-manager`,
       siteName: "AI Solutions",
     },
     twitter: {
@@ -68,14 +68,14 @@ export async function generateMetadata({ params }: VoiceSalesManagerPageProps): 
       description,
     },
     alternates: {
-      canonical: `https://aisolutions.com/${locale}/solutions/voice-sales-manager`,
+      canonical: `https://m2solutions.ai/${locale}/solutions/voice-sales-manager`,
       languages: {
-        ru: "https://aisolutions.com/ru/solutions/voice-sales-manager",
-        en: "https://aisolutions.com/en/solutions/voice-sales-manager",
-        es: "https://aisolutions.com/es/solutions/voice-sales-manager",
-        de: "https://aisolutions.com/de/solutions/voice-sales-manager",
-        nl: "https://aisolutions.com/nl/solutions/voice-sales-manager",
-        fr: "https://aisolutions.com/fr/solutions/voice-sales-manager",
+        ru: "https://m2solutions.ai/ru/solutions/voice-sales-manager",
+        en: "https://m2solutions.ai/en/solutions/voice-sales-manager",
+        es: "https://m2solutions.ai/es/solutions/voice-sales-manager",
+        de: "https://m2solutions.ai/de/solutions/voice-sales-manager",
+        nl: "https://m2solutions.ai/nl/solutions/voice-sales-manager",
+        fr: "https://m2solutions.ai/fr/solutions/voice-sales-manager",
       },
     },
     robots: {

@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
       description,
       type: "website",
       locale: locale === "ru" ? "ru_RU" : "en_US",
-      url: `https://aisolutions.com/${locale}`,
+      url: `https://m2solutions.ai/${locale}`,
       siteName: "AI Solutions",
       images: [
         {
@@ -62,10 +62,10 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
       images: ["/og-image.jpg"],
     },
     alternates: {
-      canonical: `https://aisolutions.com/${locale}`,
+      canonical: `https://m2solutions.ai/${locale}`,
       languages: {
-        ru: "https://aisolutions.com/ru",
-        en: "https://aisolutions.com/en",
+        ru: "https://m2solutions.ai/ru",
+        en: "https://m2solutions.ai/en",
       },
     },
     robots: {
