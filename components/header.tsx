@@ -18,6 +18,7 @@ export function Header({ locale }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { t } = useTranslations(locale)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
+  const localeSwitcherRef = useRef<HTMLDivElement>(null)
   const { openModal } = useCTA()
 
   useEffect(() => {
@@ -28,7 +29,12 @@ export function Header({ locale }: HeaderProps) {
     }
 
     const handleClickOutside = (e: MouseEvent) => {
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target as Node)) {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(e.target as Node) &&
+        localeSwitcherRef.current &&
+        !localeSwitcherRef.current.contains(e.target as Node)
+      ) {
         setIsMenuOpen(false)
       }
     }
@@ -36,7 +42,9 @@ export function Header({ locale }: HeaderProps) {
     if (isMenuOpen) {
       document.addEventListener("keydown", handleEscape)
       document.addEventListener("mousedown", handleClickOutside)
-      document.body.style.overflow = "hidden"
+      if (window.innerWidth < 768) {
+        document.body.style.overflow = "hidden"
+      }
     } else {
       document.body.style.overflow = "unset"
     }
@@ -79,6 +87,7 @@ export function Header({ locale }: HeaderProps) {
               </span>
             </div>
             <span className="font-bold text-base sm:text-lg lg:text-xl truncate">AI Solutions</span>
+            <span className="text-xs text-muted-foreground font-mono ml-1">v1.0</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -163,7 +172,9 @@ export function Header({ locale }: HeaderProps) {
 
           {/* Mobile menu button */}
           <div className="flex items-center gap-2 md:hidden">
-            <LocaleSwitcher currentLocale={locale} />
+            <div ref={localeSwitcherRef}>
+              <LocaleSwitcher currentLocale={locale} />
+            </div>
             <Button
               variant="ghost"
               size="sm"

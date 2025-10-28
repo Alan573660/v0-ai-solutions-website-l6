@@ -22,7 +22,7 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
   }
 
   return (
-    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen} modal={false}>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm" className="gap-2">
           <Globe className="h-4 w-4" />
@@ -33,7 +33,7 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
           <ChevronDown className="h-3 w-3" aria-hidden="true" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[160px]">
+      <DropdownMenuContent align="end" className="min-w-[160px] z-[100]">
         {locales.map((locale) => {
           const localeUrl = getLocaleUrl(locale)
           const isCurrentLocale = locale === currentLocale
