@@ -27,6 +27,34 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
       keywords:
         "casa inteligente, pedir casa inteligente, casa inteligente llave en mano, integración casa inteligente, empresas casa inteligente, automatización edificios, videoporteros AI, sistema despacho, control acceso, soluciones vivienda, soluciones negocios, soluciones promotores",
     },
+    de: {
+      title: "Smart Home Schlüsselfertig | Smart Home Bestellen | AI Solutions",
+      description:
+        "AI Solutions — intelligente Systeme für Häuser, Wohnungsverwaltung und Bauträger. Gebäudeautomation, KI-Video-Türsprechanlagen, Leitstelle und Energiemanagement. Wir arbeiten in Russland, Kasachstan, Spanien.",
+      keywords:
+        "smart home, smart home bestellen, smart home schlüsselfertig, smart home integration, smart home unternehmen, gebäudeautomation, KI videosprechanlage, leitstellensystem, zutrittskontrolle, wohnungslösungen, geschäftslösungen, bauträgerlösungen",
+    },
+    nl: {
+      title: "Slim Huis Turnkey | Slim Huis Bestellen | AI Solutions",
+      description:
+        "AI Solutions — slimme systemen voor woningen, woningbeheer en ontwikkelaars. Gebouwautomatisering, AI video-intercoms, dispatching en energiebeheer. Wij werken in Rusland, Kazachstan, Spanje.",
+      keywords:
+        "slim huis, slim huis bestellen, slim huis turnkey, slim huis integratie, slim huis bedrijven, gebouwautomatisering, AI video-intercom, dispatchingsysteem, toegangscontrole, woningoplossingen, bedrijfsoplossingen, ontwikkelaarsoplossingen",
+    },
+    fr: {
+      title: "Maison Intelligente Clé en Main | Commander Maison Intelligente | AI Solutions",
+      description:
+        "AI Solutions — systèmes intelligents pour maisons, gestion immobilière et promoteurs. Automatisation des bâtiments, interphones vidéo IA, dispatching et gestion énergétique. Nous travaillons en Russie, Kazakhstan, Espagne.",
+      keywords:
+        "maison intelligente, commander maison intelligente, maison intelligente clé en main, intégration maison intelligente, entreprises maison intelligente, automatisation bâtiments, interphones vidéo IA, système dispatching, contrôle accès, solutions logement, solutions entreprise, solutions promoteurs",
+    },
+    it: {
+      title: "Casa Intelligente Chiavi in Mano | Ordinare Casa Intelligente | AI Solutions",
+      description:
+        "AI Solutions — sistemi intelligenti per case, gestione immobiliare e sviluppatori. Automazione edifici, videocitofoni AI, dispatching e gestione energetica. Lavoriamo in Russia, Kazakistan, Spagna.",
+      keywords:
+        "casa intelligente, ordinare casa intelligente, casa intelligente chiavi in mano, integrazione casa intelligente, aziende casa intelligente, automazione edifici, videocitofoni AI, sistema dispatching, controllo accessi, soluzioni abitazione, soluzioni aziendali, soluzioni sviluppatori",
+    },
   }
 
   const data = seoData[locale] || seoData.en
@@ -68,6 +96,10 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
         "ru-RU": "https://m2solutions.ai/ru/solutions/smart-home",
         "en-US": "https://m2solutions.ai/en/solutions/smart-home",
         "es-ES": "https://m2solutions.ai/es/solutions/smart-home",
+        "de-DE": "https://m2solutions.ai/de/solutions/smart-home",
+        "nl-NL": "https://m2solutions.ai/nl/solutions/smart-home",
+        "fr-FR": "https://m2solutions.ai/fr/solutions/smart-home",
+        "it-IT": "https://m2solutions.ai/it/solutions/smart-home",
         "x-default": "https://m2solutions.ai/",
       },
     },

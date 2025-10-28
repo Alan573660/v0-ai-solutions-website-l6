@@ -41,12 +41,13 @@ const nextConfig = {
       { protocol: 'https', hostname: 'images.unsplash.com' },
     ],
     formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60,
   },
 
   experimental: {
     serverComponentsExternalPackages: ['@formatjs/intl-localematcher'],
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
-    // optimizeCss: true,
+    optimizeCss: true,
   },
 
   compress: true,
