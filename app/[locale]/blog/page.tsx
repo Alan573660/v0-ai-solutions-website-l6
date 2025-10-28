@@ -105,11 +105,27 @@ const translations = {
     noSpam: "Pas de spam. Désabonnez-vous à tout moment.",
     allCategory: "Tous",
   },
+  it: {
+    title: "Blog di AI Solutions",
+    subtitle: "Approfondimenti, tendenze e best practice per implementare l'IA vocale nella tua azienda",
+    searchPlaceholder: "Cerca articoli...",
+    featuredTitle: "Articoli in Evidenza",
+    allPostsTitle: "Tutti gli Articoli",
+    readArticle: "Leggi l'Articolo",
+    readMore: "Leggi di Più",
+    newsletterTitle: "Rimani Aggiornato",
+    newsletterSubtitle:
+      "Ricevi gli ultimi approfondimenti sull'IA vocale e l'automazione aziendale direttamente nella tua casella di posta",
+    emailPlaceholder: "Inserisci la tua email",
+    subscribe: "Iscriviti",
+    noSpam: "Niente spam. Annulla l'iscrizione in qualsiasi momento.",
+    allCategory: "Tutti",
+  },
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
   const { locale } = await params
-  const t = translations[locale]
+  const t = translations[locale] || translations.en
 
   const posts = [
     {
