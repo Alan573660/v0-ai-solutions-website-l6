@@ -62,75 +62,75 @@ jobs:
 
           echo "[4/7] Create .env"
           cat > .env << 'EOENV'
-# =========================
-# Base Configuration
-# =========================
-NEXT_PUBLIC_BASE_URL=https://m2solutions.ai
-NEXT_PUBLIC_SITE_URL=https://m2solutions.ai
-
-# =========================
-# API Keys
-# =========================
-API_KEY=
-HUBSPOT_API_KEY=
-
-# =========================
-# Analytics
-# =========================
-NEXT_PUBLIC_GA_ID=
-NEXT_PUBLIC_YANDEX_METRICA_ID=
-
-# =========================
-# Redis (LOCAL, via docker-compose)
-# REDIS_URL=redis://redis:6379
-
-# =========================
-# Upstash KV / Redis (REST)
-KV_URL=
-KV_REST_API_URL=
-KV_REST_API_TOKEN=
-KV_REST_API_READ_ONLY_TOKEN=
-
-# =========================
-# Database / Pools
-DB_POOL_MIN=2
-DB_POOL_MAX=10
-REDIS_POOL_MIN=2
-REDIS_POOL_MAX=10
-
-# =========================
-# Security & CORS
-ALLOWED_ORIGINS=https://m2solutions.ai,https://www.m2solutions.ai
-METRICS_TOKEN=
-
-# =========================
-# Rate Limiting
-RATE_LIMIT_MAX=100
-RATE_LIMIT_WINDOW_MS=60000
-
-# =========================
-# Internationalization
-DEFAULT_LOCALE=ru
-SUPPORTED_LOCALES=ru,en,es,de,fr,zh
-
-# =========================
-# Logging
-LOG_LEVEL=info
-
-# =========================
-# OpenTelemetry / Observability
-OTEL_SERVICE_NAME=ai-solutions-website
-OTEL_EXPORTER_OTLP_ENDPOINT=
-
-# =========================
-# Server Configuration
-PORT=3000
-WORKER_MODE=false
-
-# =========================
-# CI/CD
-CI=false
-EOENV
+          # =========================
+          # Base Configuration
+          # =========================
+          NEXT_PUBLIC_BASE_URL=https://m2solutions.ai
+          NEXT_PUBLIC_SITE_URL=https://m2solutions.ai
+          
+          # =========================
+          # API Keys
+          # =========================
+          API_KEY=
+          HUBSPOT_API_KEY=
+          
+          # =========================
+          # Analytics
+          # =========================
+          NEXT_PUBLIC_GA_ID=
+          NEXT_PUBLIC_YANDEX_METRICA_ID=
+          
+          # =========================
+          # Redis (LOCAL, via docker-compose)
+          # REDIS_URL=redis://redis:6379
+          
+          # =========================
+          # Upstash KV / Redis (REST)
+          KV_URL=
+          KV_REST_API_URL=
+          KV_REST_API_TOKEN=
+          KV_REST_API_READ_ONLY_TOKEN=
+          
+          # =========================
+          # Database / Pools
+          DB_POOL_MIN=2
+          DB_POOL_MAX=10
+          REDIS_POOL_MIN=2
+          REDIS_POOL_MAX=10
+          
+          # =========================
+          # Security & CORS
+          ALLOWED_ORIGINS=https://m2solutions.ai,https://www.m2solutions.ai
+          METRICS_TOKEN=
+          
+          # =========================
+          # Rate Limiting
+          RATE_LIMIT_MAX=100
+          RATE_LIMIT_WINDOW_MS=60000
+          
+          # =========================
+          # Internationalization
+          DEFAULT_LOCALE=ru
+          SUPPORTED_LOCALES=ru,en,es,de,fr,zh
+          
+          # =========================
+          # Logging
+          LOG_LEVEL=info
+          
+          # =========================
+          # OpenTelemetry / Observability
+          OTEL_SERVICE_NAME=ai-solutions-website
+          OTEL_EXPORTER_OTLP_ENDPOINT=
+          
+          # =========================
+          # Server Configuration
+          PORT=3000
+          WORKER_MODE=false
+          
+          # =========================
+          # CI/CD
+          CI=false
+          EOENV
 
           echo "[5/7] Pre-pull base images with retry (helps with flaky DNS)"
           for i in 1 2 3; do
