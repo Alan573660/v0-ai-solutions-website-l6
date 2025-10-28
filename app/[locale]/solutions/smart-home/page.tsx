@@ -38,6 +38,9 @@ import {
   ClipboardCheck,
   Settings,
   BarChart3,
+  Mail,
+  MessageCircle,
+  Phone,
 } from "lucide-react"
 import Image from "next/image"
 import type { Locale } from "@/lib/i18n/config"
@@ -662,25 +665,34 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                   <div className="space-y-2">
                     <Button
                       className="w-full bg-white text-blue-600 hover:bg-white/90 h-11 font-semibold shadow-lg text-sm"
-                      onClick={() => (window.location.href = "tel:+34600000000")}
+                      onClick={() => {
+                        window.location.href = "tel:+34600000000"
+                      }}
                     >
-                      <Smartphone className="w-4 h-4 mr-2" />
+                      <Phone className="w-4 h-4 mr-2" />
                       Позвонить нам
                     </Button>
                     <Button
                       variant="outline"
                       className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
-                      onClick={() => (window.location.href = "mailto:info@aisolutions.com")}
+                      onClick={() => {
+                        window.location.href = "mailto:info@aisolutions.com"
+                      }}
                     >
-                      ✉️ Написать на почту
+                      <Mail className="w-4 h-4 mr-2" />
+                      Написать на почту
                     </Button>
                     <Button
                       variant="outline"
                       className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
-                      onClick={() => openModal("consultation")}
+                      onClick={() => {
+                        openModal("consultation")
+                      }}
                     >
-                      💬 Онлайн-консультация
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      Онлайн-консультация
                     </Button>
+                    {/* </CHANGE> */}
                   </div>
                 </CardContent>
               </Card>
@@ -811,25 +823,34 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                   <div className="space-y-2">
                     <Button
                       className="w-full bg-white text-green-600 hover:bg-white/90 h-11 font-semibold shadow-lg text-sm"
-                      onClick={() => (window.location.href = "tel:+34600000000")}
+                      onClick={() => {
+                        window.location.href = "tel:+34600000000"
+                      }}
                     >
-                      <Smartphone className="w-4 h-4 mr-2" />
+                      <Phone className="w-4 h-4 mr-2" />
                       Позвонить нам
                     </Button>
                     <Button
                       variant="outline"
                       className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
-                      onClick={() => (window.location.href = "mailto:info@aisolutions.com")}
+                      onClick={() => {
+                        window.location.href = "mailto:info@aisolutions.com"
+                      }}
                     >
-                      ✉️ Написать на почту
+                      <Mail className="w-4 h-4 mr-2" />
+                      Написать на почту
                     </Button>
                     <Button
                       variant="outline"
                       className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
-                      onClick={() => openModal("consultation")}
+                      onClick={() => {
+                        openModal("consultation")
+                      }}
                     >
-                      💬 Онлайн-консультация
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      Онлайн-консультация
                     </Button>
+                    {/* </CHANGE> */}
                   </div>
                 </CardContent>
               </Card>
@@ -837,7 +858,6 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
           </div>
         </div>
       </section>
-      {/* </CHANGE> */}
 
       <section className="py-20 px-4 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -869,7 +889,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                   className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-2 hover:border-primary/30"
                 >
                   <CardHeader>
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                       <Icon className="h-7 w-7 text-primary" />
                     </div>
                     <CardTitle className="text-xl mb-3">{feature.title}</CardTitle>
