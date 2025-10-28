@@ -1,7 +1,11 @@
 "use client"
 
 import { createContext, useContext, useState, type ReactNode } from "react"
-import CTAModal from "./cta-modal"
+import dynamic from "next/dynamic"
+
+const CTAModal = dynamic(() => import("./cta-modal"), {
+  ssr: false, // Модальное окно не нужно для SSR
+})
 
 type CTAType = "trial" | "demo" | "call" | "consultation"
 
@@ -34,7 +38,7 @@ export function CTAProvider({ children }: { children: ReactNode }) {
   return (
     <CTAContext.Provider value={{ openModal, openConsultation, openDemo, openTrial, openCall }}>
       {children}
-      <CTAModal isOpen={isOpen} onClose={() => setIsOpen(false)} type={modalType} title={modalTitle} />
+      {isOpen && <CTAModal isOpen={isOpen} onClose={() => setIsOpen(false)} type={modalType} title={modalTitle} />}
     </CTAContext.Provider>
   )
 }

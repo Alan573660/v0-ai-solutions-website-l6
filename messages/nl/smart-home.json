@@ -1,0 +1,253 @@
+{
+  "hero": {
+    "title": "Slimme Oplossingen voor Uw Huis",
+    "subtitle": "Uitgebreide oplossingen voor projectontwikkelaars, bouwbedrijven, VvE's en beheermaatschappijen. Verhoog de vastgoedwaarde en verlaag de operationele kosten",
+    "cta": "Consultatie Aanvragen",
+    "ctaSecondary": "Demo Bekijken"
+  },
+  "tabs": {
+    "business": "Zakelijk",
+    "housing": "Gemeenschappen",
+    "developers": "Ontwikkelaars"
+  },
+  "business": {
+    "title": "Oplossingen voor Projectontwikkelaars en Bouwbedrijven",
+    "description": "Uitgebreide automatisering van nieuwbouw, wooncomplexen en commercieel vastgoed",
+    "image": "/images/smart-building.jpg",
+    "stats": {
+      "increase": {
+        "value": "+15-25%",
+        "label": "Waardestijging van vastgoed met slimme technologieën"
+      },
+      "payback": {
+        "value": "12-18 maanden",
+        "label": "Terugverdientijd van investering"
+      }
+    },
+    "benefits": {
+      "title": "Concrete Voorstellen:",
+      "items": [
+        {
+          "icon": "TrendingUp",
+          "title": "Waardestijging vastgoed",
+          "description": "Appartementen met slimme technologieën worden 15-25% duurder verkocht"
+        },
+        {
+          "icon": "Star",
+          "title": "Concurrentievoordeel",
+          "description": "Onderscheid u van de concurrentie met innovatieve oplossingen"
+        },
+        {
+          "icon": "Zap",
+          "title": "Snelle bezetting",
+          "description": "Investeringen verdienen zich terug via de premiumprijs van appartementen"
+        },
+        {
+          "icon": "Building",
+          "title": "Kant-en-klare oplossingen",
+          "description": "Complete projecten voor snelle implementatie in nieuwbouw"
+        }
+      ]
+    },
+    "services": {
+      "title": "Volledige servicelijst:",
+      "items": [
+        "Slimme ingangen met AI-conciërge 24/7",
+        "Interactieve video-intercom met AI",
+        "Beheersysteem voor gemeenschappelijke ruimtes",
+        "Mobiele app voor bewoners",
+        "Biometrische gezichtsherkenning van bewoners",
+        "Videobewaking met objectdetectie",
+        "Integratie met gebouwsystemen",
+        "+ 4 meer services"
+      ]
+    },
+    "contact": {
+      "title": "Neem contact met ons op voor een consultatie:",
+      "phone": "Bel ons",
+      "email": "E-mail schrijven",
+      "chat": "Online consultatie"
+    }
+  },
+  "housing": {
+    "title": "Oplossingen voor VvE's en Beheermaatschappijen",
+    "description": "Verlaag de operationele kosten en verbeter de servicekwaliteit voor bewoners",
+    "image": "/images/smart-community.jpg",
+    "stats": {
+      "reduction": {
+        "value": "-30-40%",
+        "label": "Verlaging van elektriciteits- en onderhoudskosten"
+      },
+      "satisfaction": {
+        "value": "+45%",
+        "label": "Toename van bewonerssatisfactie"
+      }
+    },
+    "benefits": {
+      "title": "Concrete Voorstellen:",
+      "items": [
+        {
+          "icon": "DollarSign",
+          "title": "Kostenverlaging",
+          "description": "Bespaar 30-40% op elektriciteit en onderhoud"
+        },
+        {
+          "icon": "Shield",
+          "title": "Verhoogde veiligheid",
+          "description": "24/7 videobewaking met AI-analyse"
+        },
+        {
+          "icon": "Users",
+          "title": "Gemak voor bewoners",
+          "description": "Mobiele app voor alle verzoeken en betalingen"
+        },
+        {
+          "icon": "BarChart",
+          "title": "Transparant beheer",
+          "description": "Real-time rapporten en analyses"
+        }
+      ]
+    },
+    "services": {
+      "title": "Volledige servicelijst:",
+      "items": [
+        "AI-conciërge bij de ingang",
+        "Slimme biometrische sloten",
+        "Geautomatiseerde toegangscontrole",
+        "360° videobewakingssysteem",
+        "Mobiele app voor bewoners",
+        "Integratie met boekhoudsystemen",
+        "Analyse van resourceverbruik",
+        "+ 5 meer services"
+      ]
+    },
+    "contact": {
+      "title": "Neem contact met ons op voor een consultatie:",
+      "phone": "Bel ons",
+      "email": "E-mail schrijven",
+      "chat": "Online consultatie"
+    }
+  },
+  "developers": {
+    "title": "Oplossingen voor Vastgoedontwikkelaars",
+    "description": "Verhoog de aantrekkelijkheid van uw projecten met moderne slimme technologieën",
+    "image": "/images/smart-development.jpg",
+    "stats": {
+      "premium": {
+        "value": "+20-30%",
+        "label": "Premium voor appartementen met slimme technologieën"
+      },
+      "speed": {
+        "value": "2x sneller",
+        "label": "Verkoopsnelheid van premium appartementen"
+      }
+    },
+    "benefits": {
+      "title": "Concrete Voorstellen:",
+      "items": [
+        {
+          "icon": "Home",
+          "title": "Premium appartementen",
+          "description": "Slimme technologieën als standaard in premium projecten"
+        },
+        {
+          "icon": "TrendingUp",
+          "title": "Margeverhoging",
+          "description": "20-30% premium voor appartementen met slimme systemen"
+        },
+        {
+          "icon": "Award",
+          "title": "Marketingvoordeel",
+          "description": "Unieke positionering op de vastgoedmarkt"
+        },
+        {
+          "icon": "Smartphone",
+          "title": "Digitale showroom",
+          "description": "Technologiedemonstratie in de verkoopruimte"
+        }
+      ]
+    },
+    "services": {
+      "title": "Volledige servicelijst:",
+      "items": [
+        "Smart home concept voor het project",
+        "Interactieve showroom met demonstratie",
+        "Smart appartement pakketten",
+        "Branded mobiele app",
+        "Integratie met bouwsystemen",
+        "Technische ondersteuning voor kopers",
+        "Marketingmateriaal",
+        "+ 3 meer services"
+      ]
+    },
+    "contact": {
+      "title": "Neem contact met ons op voor een consultatie:",
+      "phone": "Bel ons",
+      "email": "E-mail schrijven",
+      "chat": "Online consultatie"
+    }
+  },
+  "features": {
+    "title": "Unieke functies die u onderscheiden op de markt",
+    "items": [
+      {
+        "title": "AI-conciërge bij de ingang",
+        "description": "Virtuele conciërge met gezichtsherkenning, spraakbesturing en automatische gastregistratie. Werkt 24/7 zonder vrije dagen.",
+        "benefits": ["Bewonersherkenning", "Gastregistratie", "Video-oproepen", "Toegangsbeheer"]
+      },
+      {
+        "title": "Slimme biometrische sloten",
+        "description": "Sloten met vingerafdruk, gezichtsherkenning, PIN-code en mobiele sleutel. Tijdelijke toegang voor gasten en diensten.",
+        "benefits": ["5 manieren om te openen", "Toegangsgeschiedenis", "Tijdelijke codes", "Beheer op afstand"]
+      },
+      {
+        "title": "Gezichts- en objectherkenning",
+        "description": "AI-camera's herkennen gezinsleden, huisdieren, pakketten en vreemden. Slimme meldingen alleen over belangrijke gebeurtenissen.",
+        "benefits": ["Gezichtsherkenning", "Objectdetectie", "Slimme meldingen", "Cloud-opslag"]
+      }
+    ]
+  },
+  "additionalFeatures": {
+    "title": "Extra systeemmogelijkheden",
+    "items": [
+      {
+        "title": "Slimme video-intercom",
+        "description": "Beantwoord gasten van overal ter wereld via de mobiele app. Video-opname van alle bezoeken."
+      },
+      {
+        "title": "360° videobewaking",
+        "description": "Volledige terreinbedekking met AI-analyse. Automatische detectie van verdachte situaties."
+      },
+      {
+        "title": "Eco-smart home",
+        "description": "Zonnepanelen, energieopslag en slim verbruiksbeheer. Bespaar tot 60% op elektriciteit."
+      }
+    ]
+  },
+  "projects": {
+    "title": "Gerealiseerde projecten",
+    "subtitle": "Meer dan 750 geïmplementeerde projecten in Rusland, Kazachstan en Spanje",
+    "items": [
+      {
+        "title": "Premium appartementen",
+        "location": "Moskou, Rusland",
+        "description": "Wooncomplex met volledig smart home systeem"
+      },
+      {
+        "title": "Kantoorcomplex",
+        "location": "Almaty, Kazachstan",
+        "description": "Slim gebouwbeheersysteem"
+      },
+      {
+        "title": "Luxe villa",
+        "location": "Moraira, Spanje",
+        "description": "Smart home met zonne-energie integratie"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Klaar om te beginnen?",
+    "description": "Vraag een gratis consultatie aan en ontvang een kostenberekening voor uw project",
+    "button": "Consultatie Aanvragen"
+  }
+}

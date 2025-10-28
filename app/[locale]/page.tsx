@@ -3,9 +3,7 @@ import { TrustedCompanies } from "@/components/trusted-companies"
 import { HowItWorksSection } from "@/components/how-it-works-section"
 import { BenefitsSection } from "@/components/benefits-section"
 import { SolutionsSection } from "@/components/solutions-section"
-import { DemoSection } from "@/components/demo-section"
-import { TestimonialsSection } from "@/components/testimonials-section"
-import { CTASection } from "@/components/cta-section"
+import dynamic from "next/dynamic"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 
@@ -85,6 +83,21 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
     },
   }
 }
+
+const DemoSection = dynamic(() => import("@/components/demo-section").then((mod) => ({ default: mod.DemoSection })), {
+  loading: () => <div className="min-h-[400px]" />,
+})
+
+const TestimonialsSection = dynamic(
+  () => import("@/components/testimonials-section").then((mod) => ({ default: mod.TestimonialsSection })),
+  {
+    loading: () => <div className="min-h-[400px]" />,
+  },
+)
+
+const CTASection = dynamic(() => import("@/components/cta-section").then((mod) => ({ default: mod.CTASection })), {
+  loading: () => <div className="min-h-[200px]" />,
+})
 
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params

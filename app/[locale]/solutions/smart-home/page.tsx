@@ -9,8 +9,6 @@ import { Textarea } from "@/components/ui/textarea"
 import {
   Smartphone,
   Lightbulb,
-  Droplets,
-  Wind,
   Lock,
   Camera,
   Thermometer,
@@ -43,7 +41,6 @@ import {
 } from "lucide-react"
 import Image from "next/image"
 import type { Locale } from "@/lib/i18n/config"
-import { useTranslations } from "@/lib/i18n/translations"
 import { useCTA } from "@/components/modals/cta-provider"
 import { useState } from "react"
 
@@ -53,7 +50,6 @@ interface SmartHomePageProps {
 
 export default function SmartHomePage({ params }: SmartHomePageProps) {
   const { locale } = params
-  const { t } = useTranslations(locale)
   const { openModal } = useCTA()
   const [activeTab, setActiveTab] = useState<"business" | "housing" | "developers">("business")
 
@@ -68,188 +64,26 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
     {
       name: "OpenAI",
       logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/images-J88jPMtpAF8jNmVWrSYSqD0WcBKOS2.png",
-      description: "GPT-4 для интеллектуального управления домом и обработки естественного языка",
+      description: "Интеграция с GPT-4 для голосового управления и автоматизации",
       color: "from-emerald-500/20 to-teal-500/20",
     },
     {
       name: "Grok",
       logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Grok-feb-2025-logo.svg-bkaFRprDKsrNGPEqjdRJGYpMxJB92D.png",
-      description: "xAI для продвинутой автоматизации и реального времени анализа данных",
+      description: "Продвинутый AI-ассистент для умного дома от xAI",
       color: "from-gray-500/20 to-slate-500/20",
     },
     {
       name: "Google Gemini",
       logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/gemini_aurora_thumbnail_4g_e74822ff0ca4259beb718-gQIsnKKX0rfFF2x2B3Jq1S8SXRa1EA.png",
-      description: "Мультимодальный AI для визуального распознавания и контекстного понимания",
+      description: "Мультимодальный AI для комплексного управления системами",
       color: "from-blue-500/20 to-purple-500/20",
     },
     {
       name: "DeepSeek",
       logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DeepSeek-avX9rpbCLPtcJa2228WfsXa8y6PE4I.png",
-      description: "Глубокое обучение для предиктивной оптимизации энергопотребления",
+      description: "Глубокое обучение для предиктивной автоматизации",
       color: "from-indigo-500/20 to-blue-500/20",
-    },
-  ]
-
-  const businessServices = [
-    {
-      icon: Building,
-      title: "Решения для застройщиков и строителей",
-      description: "Комплексная автоматизация новостроек, жилых комплексов и коммерческой недвижимости",
-      features: [
-        "Умные подъезды с AI-консьержем 24/7",
-        "Биометрическое распознавание лиц жильцов",
-        "Интерактивные видеодомофоны с AI",
-        "Автоматические ворота и шлагбаумы",
-        "Система управления общими зонами",
-        "Видеонаблюдение с детекцией объектов",
-        "Мобильное приложение для жильцов",
-        "Интеграция с инженерными системами",
-        "Умное освещение подъездов и территории",
-        "Автоматизация лифтов и паркинга",
-        "Система контроля доступа для персонала",
-        "Интеграция с УК для оплаты услуг",
-      ],
-      additionalOffers: [
-        {
-          title: "Увеличение стоимости недвижимости",
-          description: "Квартиры с умными технологиями продаются на 15-25% дороже",
-          icon: TrendingUp,
-        },
-        {
-          title: "Конкурентное преимущество",
-          description: "Выделитесь среди конкурентов инновационными решениями",
-          icon: Star,
-        },
-        {
-          title: "Быстрая окупаемость",
-          description: "Инвестиции окупаются за счет премиальной цены квартир",
-          icon: Zap,
-        },
-        {
-          title: "Готовые решения",
-          description: "Типовые проекты для быстрого внедрения в новостройки",
-          icon: Building2,
-        },
-      ],
-      color: "from-blue-500 to-cyan-500",
-      image: "/modern-residential-building-entrance-with-smart-co.jpg",
-      contactOptions: [
-        { icon: "phone", text: "Позвоните нам", action: "tel:+34600000000" },
-        { icon: "email", text: "Напишите на почту", action: "mailto:info@m2solutions.ai" },
-        { icon: "chat", text: "Онлайн-консультация", action: "consultation" },
-      ],
-    },
-    {
-      icon: Wrench,
-      title: "Решения для ЖКХ и управляющих компаний",
-      description: "Автоматизация управления многоквартирными домами и снижение эксплуатационных расходов",
-      features: [
-        "Централизованное управление всеми домами",
-        "Автоматический учет ресурсов (вода, газ, электричество)",
-        "Система диспетчеризации и мониторинга",
-        "Умное управление освещением подъездов",
-        "Контроль доступа и видеонаблюдение",
-        "Автоматизация лифтового хозяйства",
-        "Система приема заявок от жильцов",
-        "Интеграция с платежными системами",
-        "Мониторинг инженерных систем 24/7",
-        "Предиктивное обслуживание оборудования",
-        "Отчетность и аналитика в реальном времени",
-        "Мобильное приложение для сотрудников",
-      ],
-      additionalOffers: [
-        {
-          title: "Снижение расходов на 30-40%",
-          description: "Экономия на электроэнергии, воде и обслуживании оборудования",
-          icon: TrendingUp,
-        },
-        {
-          title: "Автоматизация процессов",
-          description: "Сокращение ручного труда и повышение эффективности",
-          icon: Settings,
-        },
-        {
-          title: "Прозрачная отчетность",
-          description: "Полный контроль расходов и доходов в реальном времени",
-          icon: BarChart3,
-        },
-        {
-          title: "Повышение качества услуг",
-          description: "Быстрое реагирование на заявки и проблемы жильцов",
-          icon: ClipboardCheck,
-        },
-      ],
-      color: "from-green-500 to-emerald-500",
-      image: "/modern-apartment-building-management-system.jpg",
-      contactOptions: [
-        { icon: "phone", text: "Позвоните нам", action: "tel:+34600000000" },
-        { icon: "email", text: "Напишите на почту", action: "mailto:info@m2solutions.ai" },
-        { icon: "chat", text: "Онлайн-консультация", action: "consultation" },
-      ],
-    },
-  ]
-
-  const innovativeFeatures = [
-    {
-      icon: UserCheck,
-      title: "AI-консьерж в подъезде",
-      description:
-        "Виртуальный консьерж с распознаванием лиц, голосовым управлением и автоматической регистрацией гостей. Работает 24/7 без выходных.",
-      benefits: ["Распознавание жильцов", "Регистрация гостей", "Видеозвонки", "Управление доступом"],
-      color: "bg-gradient-to-br from-blue-500/10 to-cyan-500/10",
-      borderColor: "border-blue-500/30",
-      image: "/ai-concierge-touchscreen-in-modern-building-entran.jpg",
-    },
-    {
-      icon: Fingerprint,
-      title: "Биометрические умные замки",
-      description:
-        "Замки с отпечатком пальца, распознаванием лица, PIN-кодом и мобильным ключом. Временный доступ для гостей и сервисных служб.",
-      benefits: ["5 способов открытия", "История доступа", "Временные коды", "Удаленное управление"],
-      color: "bg-gradient-to-br from-purple-500/10 to-pink-500/10",
-      borderColor: "border-purple-500/30",
-      image: "/smart-biometric-door-lock-with-fingerprint-scanner.jpg",
-    },
-    {
-      icon: Camera,
-      title: "Распознавание лиц и объектов",
-      description:
-        "AI-камеры распознают членов семьи, домашних животных, посылки и незнакомцев. Умные уведомления только о важных событиях.",
-      benefits: ["Распознавание лиц", "Детекция объектов", "Умные уведомления", "Облачное хранение"],
-      color: "bg-gradient-to-br from-green-500/10 to-emerald-500/10",
-      borderColor: "border-green-500/30",
-      image: "/ai-security-camera-with-facial-recognition-technol.jpg",
-    },
-    {
-      icon: Video,
-      title: "Интерактивный видеодомофон",
-      description:
-        "Видеодомофон с AI-ассистентом, который может общаться с гостями, принимать посылки и открывать дверь по вашей команде из любой точки мира.",
-      benefits: ["AI-ассистент", "Видеозвонки", "Удаленное открытие", "Запись визитов"],
-      color: "bg-gradient-to-br from-orange-500/10 to-red-500/10",
-      borderColor: "border-orange-500/30",
-      image: "/smart-video-intercom-with-touchscreen-display.jpg",
-    },
-    {
-      icon: Eye,
-      title: "Видеонаблюдение 360°",
-      description:
-        "Система видеонаблюдения с панорамными камерами, ночным видением и детекцией движения. Запись в облако и на локальный сервер.",
-      benefits: ["Панорамные камеры", "Ночное видение", "Детекция движения", "Облачное хранение"],
-      color: "bg-gradient-to-br from-indigo-500/10 to-purple-500/10",
-      borderColor: "border-indigo-500/30",
-      image: "/360-degree-security-camera-surveillance-system.jpg",
-    },
-    {
-      icon: Leaf,
-      title: "Экологичный умный дом",
-      description:
-        "Интеграция с солнечными панелями, системой рекуперации воды и умным управлением энергией для минимального углеродного следа.",
-      benefits: ["Солнечные панели", "Рекуперация воды", "Энергомониторинг", "CO₂ отчеты"],
-      color: "bg-gradient-to-br from-lime-500/10 to-green-500/10",
-      borderColor: "border-lime-500/30",
-      image: "/eco-friendly-smart-home-with-solar-panels.jpg",
     },
   ]
 
@@ -257,205 +91,253 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
     {
       icon: Smartphone,
       title: "Мобильное приложение",
-      description:
-        "Полный контроль всех систем дома с вашего смартфона из любой точки мира. iOS и Android приложения с интуитивным интерфейсом.",
-      details: ["Удаленный доступ 24/7", "Push-уведомления", "Мультиязычный интерфейс", "Офлайн режим"],
-    },
-    {
-      icon: Speaker,
-      title: "Голосовое управление AI",
-      description: "Управляйте домом естественными голосовыми командами через интеграцию с передовыми AI-ассистентами.",
-      details: ["Поддержка 50+ языков", "Контекстное понимание", "Персонализация команд", "Голосовая биометрия"],
+      description: "Управляйте домом из любой точки мира",
+      details: [
+        "iOS и Android приложения",
+        "Удаленный доступ 24/7",
+        "Push-уведомления о событиях",
+        "Интуитивный интерфейс",
+      ],
     },
     {
       icon: Lightbulb,
-      title: "Интеллектуальное освещение",
-      description:
-        "AI автоматически настраивает освещение под время суток, погоду и ваше настроение. Экономия до 60% электроэнергии.",
-      details: ["Циркадные ритмы", "Сцены освещения", "Датчики присутствия", "RGB + теплый/холодный"],
+      title: "Умное освещение",
+      description: "Автоматическое управление светом",
+      details: ["Сценарии освещения", "Датчики движения", "Регулировка яркости", "Цветовые температуры"],
     },
     {
       icon: Thermometer,
-      title: "Умный климат-контроль",
-      description:
-        "Индивидуальная температура в каждой комнате с предиктивным обучением ваших предпочтений. Экономия до 40% на отоплении.",
-      details: ["Зональный контроль", "Погодный прогноз", "Геолокация", "Энергомониторинг"],
-    },
-    {
-      icon: Droplets,
-      title: "Автоматический полив",
-      description:
-        "Интеллектуальная система полива анализирует погоду, влажность почвы и потребности растений для оптимального ухода.",
-      details: ["Датчики влажности", "Метеостанция", "График полива", "Экономия воды до 50%"],
-    },
-    {
-      icon: Wind,
-      title: "Автоматизация штор",
-      description: "Шторы и жалюзи открываются/закрываются по расписанию, уровню освещенности или голосовой команде.",
-      details: ["Солнечные датчики", "Тихие моторы", "Групповое управление", "Сценарии"],
+      title: "Климат-контроль",
+      description: "Поддержание комфортной температуры",
+      details: ["Умные термостаты", "Зональное управление", "Экономия энергии до 30%", "Адаптивные алгоритмы"],
     },
     {
       icon: Lock,
-      title: "Система безопасности",
-      description: "Умные замки с биометрией, контроль доступа, история входов. Интеграция с охранной сигнализацией.",
-      details: ["Отпечаток пальца", "PIN-коды", "Мобильный ключ", "Временный доступ"],
+      title: "Безопасность",
+      description: "Комплексная защита вашего дома",
+      details: ["Видеонаблюдение 24/7", "Умные замки", "Датчики проникновения", "Тревожная кнопка"],
     },
     {
-      icon: Camera,
-      title: "AI видеонаблюдение",
-      description:
-        "Камеры с распознаванием лиц, детекцией движения и умными уведомлениями. Запись в облако и локально.",
-      details: ["Распознавание лиц", "Детекция объектов", "Ночное видение", "Облачное хранение"],
+      icon: Speaker,
+      title: "Голосовое управление",
+      description: "Управление голосом на русском языке",
+      details: ["Интеграция с Алисой", "Собственный AI-ассистент", "Распознавание команд", "Мультиязычность"],
     },
     {
       icon: Wifi,
       title: "Единая экосистема",
-      description:
-        "Все устройства работают в единой защищенной сети с централизованным управлением и автоматизацией сценариев.",
-      details: ["Zigbee, Z-Wave, WiFi", "Локальное управление", "Резервное копирование", "API интеграции"],
+      description: "Все устройства в одной сети",
+      details: ["Протокол Z-Wave/Zigbee", "Wi-Fi и Bluetooth", "Облачная синхронизация", "Локальное управление"],
+    },
+  ]
+
+  const innovativeFeatures = [
+    {
+      icon: UserCheck,
+      title: "AI-Консьерж",
+      description: "Персональный помощник для управления домом",
+      benefits: [
+        "Анализ привычек жильцов",
+        "Предиктивная автоматизация",
+        "Голосовое управление",
+        "Интеграция со всеми системами",
+      ],
+      color: "bg-gradient-to-br from-blue-500/10 to-cyan-500/10",
+      borderColor: "border-blue-500/30",
+      image: "/ai-concierge-touchscreen-in-modern-building-entran.jpg",
+    },
+    {
+      icon: Fingerprint,
+      title: "Биометрические замки",
+      description: "Безопасный доступ с помощью отпечатка пальца",
+      benefits: ["Высокая степень защиты", "Быстрый доступ", "Отсутствие ключей", "Журнал событий"],
+      color: "bg-gradient-to-br from-purple-500/10 to-pink-500/10",
+      borderColor: "border-purple-500/30",
+      image: "/smart-biometric-door-lock-with-fingerprint-scanner.jpg",
+    },
+    {
+      icon: Camera,
+      title: "Распознавание лиц",
+      description: "Система видеонаблюдения с функцией распознавания",
+      benefits: [
+        "Идентификация гостей",
+        "Контроль доступа",
+        "Уведомления в реальном времени",
+        "Интеграция с системой безопасности",
+      ],
+      color: "bg-gradient-to-br from-green-500/10 to-emerald-500/10",
+      borderColor: "border-green-500/30",
+      image: "/ai-security-camera-with-facial-recognition-technol.jpg",
+    },
+    {
+      icon: Video,
+      title: "Видеодомофон",
+      description: "Общение с посетителями из любой точки мира",
+      benefits: ["HD-камера", "Двусторонний аудиосвязь", "Запись видео", "Интеграция с мобильным приложением"],
+      color: "bg-gradient-to-br from-orange-500/10 to-red-500/10",
+      borderColor: "border-orange-500/30",
+      image: "/smart-video-intercom-with-touchscreen-display.jpg",
+    },
+    {
+      icon: Eye,
+      title: "360° Видеонаблюдение",
+      description: "Полный обзор территории вашего дома",
+      benefits: ["Панорамный обзор", "Ночное видение", "Датчик движения", "Удаленный просмотр"],
+      color: "bg-gradient-to-br from-indigo-500/10 to-purple-500/10",
+      borderColor: "border-indigo-500/30",
+      image: "/360-degree-security-camera-surveillance-system.jpg",
+    },
+    {
+      icon: Leaf,
+      title: "Эко-дом",
+      description: "Энергоэффективные решения для вашего дома",
+      benefits: ["Управление энергопотреблением", "Солнечные панели", "Системы рекуперации", "Снижение расходов"],
+      color: "bg-gradient-to-br from-lime-500/10 to-green-500/10",
+      borderColor: "border-lime-500/30",
+      image: "/eco-friendly-smart-home-with-solar-panels.jpg",
     },
   ]
 
   const caseStudies = [
     {
-      location: "Барселона, Испания",
-      project: "Вилла на побережье Средиземного моря",
+      location: "Барселона",
+      project: "Роскошная вилла",
       area: "450 м²",
       features: [
-        "Полная автоматизация всех систем",
-        "Голосовое управление на 4 языках",
-        "Интеграция с бассейном и SPA",
-        "Система безопасности премиум-класса",
+        "Полная автоматизация освещения",
+        "Климат-контроль с зональным управлением",
+        "Система безопасности с видеонаблюдением",
+        "Мультимедиа система",
       ],
       image: "/luxury-villa-barcelona-mediterranean-coast-modern-.jpg",
-      testimonial: "Дом стал действительно умным. Все работает безупречно!",
-      client: "Семья Родригес",
+      testimonial: "Прекрасное решение, дом стал намного комфортнее и безопаснее.",
+      client: "Марк В.",
     },
     {
-      location: "Мурайра, Испания",
-      project: "Апартаменты премиум-класса с видом на море",
-      area: "180 м²",
+      location: "Морайра",
+      project: "Современный апартамент",
+      area: "120 м²",
       features: [
-        "Климат-контроль с зональным управлением",
-        "Умное освещение 120+ точек",
-        "Система безопасности с AI-камерами",
-        "Интеграция с домофоном",
+        "Управление шторами",
+        "Дистанционное управление доступом",
+        "Интеграция с умным домом",
+        "Энергосбережение",
       ],
       image: "/modern-luxury-apartment-interior-moraira-spain.jpg",
-      testimonial: "Управление с телефона - это невероятно удобно!",
-      client: "Мария Гонсалес",
+      testimonial: "Очень довольны качеством услуг и результатом.",
+      client: "Анна К.",
     },
     {
-      location: "Марбелья, Испания",
-      project: "Бутик-отель на 25 номеров",
-      area: "1,200 м²",
+      location: "Марбелья",
+      project: "Элитный бутик-отель",
+      area: "2500 м²",
       features: [
-        "Индивидуальное управление в каждом номере",
-        "Центральная система мониторинга",
-        "Автоматизация общих зон и ресепшена",
+        "Централизованное управление",
+        "Система управления доступом для персонала",
+        "Автоматизация освещения и климата",
         "Интеграция с системой бронирования",
-        "Умное освещение и климат-контроль",
-        "Система безопасности и видеонаблюдения",
+        "Энергоэффективность",
+        "Круглосуточный мониторинг",
       ],
       image: "/luxury-boutique-hotel-marbella-spain-modern-interi.jpg",
-      testimonial: "Гости в восторге от технологий. Рейтинг на Booking.com вырос до 9.4/10.",
-      client: "Отель 'Casa del Mar'",
+      testimonial: "Профессиональный подход и высокое качество исполнения.",
+      client: "Отель Marbella",
     },
     {
-      location: "Москва, Россия",
-      project: "ЖК 'Новая Москва' - 120 квартир",
-      area: "15,000 м²",
+      location: "Москва",
+      project: "Жилой комплекс",
+      area: "15000 м²",
       features: [
-        "AI-консьерж в каждом подъезде",
-        "Биометрические замки на входах",
-        "Система видеонаблюдения с распознаванием лиц",
-        "Мобильное приложение для жильцов",
-        "Умное управление общими зонами",
-        "Интеграция с домофонами",
+        "Управление освещением в общественных зонах",
+        "Система контроля доступа",
+        "Видеонаблюдение",
+        "Автоматизация инженерных систем",
+        "Энергоэффективные решения",
+        "Мобильное приложение для жителей",
       ],
       image: "/modern-residential-complex-moscow-russia-smart-bui.jpg",
-      testimonial: "Наш ЖК стал самым технологичным в районе. Квартиры продаются на 20% дороже конкурентов.",
-      client: "ГК 'СтройИнвест'",
+      testimonial: "Лучшее решение для современного жилого комплекса.",
+      client: "Девелопер Москва",
     },
     {
-      location: "Алматы, Казахстан",
-      project: "Бизнес-отель 'Алатау' - 45 номеров",
-      area: "2,800 м²",
+      location: "Алматы",
+      project: "Деловой центр",
+      area: "8000 м²",
       features: [
-        "Умные номера с голосовым управлением",
-        "Система контроля доступа с биометрией",
-        "Автоматизация конференц-залов",
-        "Умное освещение и климат-контроль",
-        "Видеонаблюдение с AI-аналитикой",
-        "Интеграция с системой управления отелем",
+        "Интеллектуальное управление зданием",
+        "Система контроля доступа",
+        "Автоматизация климата и освещения",
+        "Энергосбережение",
+        "Мониторинг безопасности",
+        "Интеграция с офисными системами",
       ],
       image: "/modern-business-hotel-almaty-kazakhstan-lobby.jpg",
-      testimonial: "Автоматизация позволила сократить эксплуатационные расходы на 30%. Окупилось за 2.5 года.",
-      client: "Отель 'Алатау'",
+      testimonial: "Высокий уровень автоматизации и управления.",
+      client: "Бизнес Центр Алматы",
     },
     {
-      location: "Санкт-Петербург, Россия",
-      project: "ЖК 'Северная Венеция' - 180 квартир",
-      area: "22,000 м²",
+      location: "Санкт-Петербург",
+      project: "Жилой комплекс",
+      area: "10000 м²",
       features: [
-        "Умные подъезды с видеодомофонами",
-        "Распознавание жильцов и гостей",
-        "Автоматические ворота и шлагбаумы",
-        "Система управления паркингом",
-        "Мобильное приложение для жильцов",
-        "Интеграция с УК для оплаты услуг",
+        "Умный дом для каждой квартиры",
+        "Централизованное управление",
+        "Система безопасности",
+        "Автоматизация освещения и климата",
+        "Энергоэффективность",
+        "Интеграция с городской инфраструктурой",
       ],
       image: "/modern-residential-complex-saint-petersburg-russia.jpg",
-      testimonial: "Жильцы в восторге от технологий. Рейтинг ЖК на Яндекс.Недвижимости - 4.9/5.",
-      client: "ГК 'Северный Город'",
+      testimonial: "Инновационное решение для комфортной жизни.",
+      client: "Девелопер Санкт-Петербург",
     },
     {
-      location: "Астана, Казахстан",
-      project: "Элитный жилой комплекс - 150 квартир",
-      area: "18,000 м²",
+      location: "Астана",
+      project: "Жилой комплекс",
+      area: "12000 м²",
       features: [
-        "AI-консьерж с голосовым управлением",
-        "Биометрические замки премиум-класса",
-        "Панорамное видеонаблюдение 360°",
-        "Умное освещение территории",
-        "Система контроля микроклимата",
-        "Интеграция с фитнес-центром и SPA",
+        "Интеллектуальное управление зданием",
+        "Система контроля доступа",
+        "Автоматизация освещения и климата",
+        "Энергоэффективность",
+        "Мониторинг безопасности",
+        "Управление парковкой",
       ],
       image: "/luxury-residential-complex-astana-kazakhstan-moder.jpg",
-      testimonial: "Первый в Казахстане ЖК с полной AI-автоматизацией. Все квартиры проданы за 6 месяцев.",
-      client: "Компания 'Capital Development'",
+      testimonial: "Современный подход к строительству и управлению.",
+      client: "Девелопер Астана",
     },
     {
-      location: "Валенсия, Испания",
-      project: "Спа-отель на побережье - 35 номеров",
-      area: "1,800 м²",
+      location: "Валенсия",
+      project: "Спа-отель",
+      area: "3000 м²",
       features: [
-        "Умные номера с персонализацией",
-        "Автоматизация SPA-зоны и бассейна",
-        "Система управления освещением и музыкой",
-        "Климат-контроль с учетом погоды",
-        "Интеграция с системой бронирования",
-        "Мобильное приложение для гостей",
+        "Управление номером (освещение, климат, шторы)",
+        "Система контроля доступа для гостей",
+        "Интеграция с системой управления отелем",
+        "Энергоэффективность",
+        "Управление мультимедиа",
+        "Безопасность",
       ],
       image: "/luxury-spa-hotel-valencia-spain-mediterranean-coas.jpg",
-      testimonial: "Гости отмечают высокий уровень комфорта. Средний чек вырос на 25%.",
-      client: "Отель 'Mediterranean Wellness'",
+      testimonial: "Прекрасное сочетание технологий и комфорта.",
+      client: "Спа-отель Валенсия",
     },
     {
-      location: "Москва, Россия",
-      project: "Банк 'Финансовый Альянс' - Головной офис",
-      area: "5,000 м²",
+      location: "Москва",
+      project: "Банк",
+      area: "5000 м²",
       features: [
-        "Интеллектуальная система безопасности",
-        "Биометрический контроль доступа",
-        "Автоматизация климата и освещения",
-        "Система управления конференц-залами",
-        "Интеграция с банковскими системами",
-        "Мониторинг энергопотребления",
+        "Система контроля доступа",
+        "Видеонаблюдение",
+        "Автоматизация освещения и климата",
+        "Энергоэффективность",
+        "Мониторинг безопасности",
+        "Интеграция с системами управления зданием",
       ],
       image: "/modern-bank-building-interior.jpg",
-      testimonial: "Проект находится в стадии разработки. Запуск запланирован на Q2 2025.",
-      client: "Банк 'Финансовый Альянс'",
+      testimonial: "Надежное и эффективное решение для бизнес-объекта.",
+      client: "Банк Москва",
       inDevelopment: true,
     },
   ]
@@ -467,106 +349,66 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            serviceType: "Smart Home Automation",
-            provider: {
-              "@type": "Organization",
-              name: "AI Solutions",
-              url: "https://m2solutions.ai",
-              logo: "https://m2solutions.ai/logo.png",
-              sameAs: [
-                "https://www.linkedin.com/company/aisolutions",
-                "https://www.instagram.com/aisolutions",
-                "https://t.me/aisolutions",
-              ],
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Moscow",
-                addressCountry: "RU",
-              },
-              contactPoint: {
-                "@type": "ContactPoint",
-                telephone: "+7-930-065-6580",
-                contactType: "sales",
-              },
-            },
-            areaServed: ["Europe", "Russia", "Spain", "UAE"],
-            description:
-              "Умный дом, автоматизация зданий, видеодомофоны, мониторинг и управление инфраструктурой с AI.",
-            offers: {
-              "@type": "Offer",
-              availability: "https://schema.org/InStock",
-              priceCurrency: "EUR",
-            },
-          }),
-        }}
-      />
-
+    <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted/20">
       {/* Hero Section - Enhanced with gradient overlay and modern design */}
-      <section className="relative py-20 sm:py-32 px-4 overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0B1220] via-[#1a2744] to-[#0B1220]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(110,231,245,0.1),transparent_50%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(124,244,198,0.1),transparent_50%)]" />
-        </div>
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5 pt-20 pb-32">
+        <div className="absolute inset-0 bg-grid-white/5 [mask-image:radial-gradient(white,transparent_85%)]" />
 
-        <div className="container mx-auto max-w-7xl relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <Badge
-              variant="secondary"
-              className="mb-6 text-sm px-4 py-2 bg-white/10 backdrop-blur-sm text-white border-white/20"
-            >
-              <Sparkles className="w-4 h-4 mr-2" />
-              {locale === "ru" && "Интеллектуальные решения для современного дома"}
-              {locale === "en" && "Intelligent Solutions for Modern Homes"}
-              {locale === "es" && "Soluciones Inteligentes para Hogares Modernos"}
-            </Badge>
+        <div className="container relative mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <Badge className="w-fit" variant="secondary">
+                <Sparkles className="w-3 h-3 mr-1" />
+                Умный дом с AI
+              </Badge>
 
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance leading-tight text-white drop-shadow-2xl">
-              {locale === "ru" && "Умные решения для домов, бизнес-центров и жилых комплексов"}
-              {locale === "en" && "Smart Solutions for Homes, Business Centers and Residential Complexes"}
-              {locale === "es" && "Soluciones Inteligentes para Hogares, Centros de Negocios y Complejos Residenciales"}
-            </h1>
+              <h1 className="text-5xl md:text-6xl font-bold leading-tight">Умный дом нового поколения</h1>
 
-            <p className="text-xl md:text-2xl text-white/90 mb-10 text-pretty max-w-3xl mx-auto leading-relaxed">
-              {locale === "ru" &&
-                "Комплексная автоматизация зданий с искусственным интеллектом. Безопасность, комфорт и экономия под вашим контролем."}
-              {locale === "en" &&
-                "Comprehensive building automation with artificial intelligence. Security, comfort and savings under your control."}
-              {locale === "es" &&
-                "Automatización integral de edificios con inteligencia artificial. Seguridad, confort y ahorro bajo su control."}
-            </p>
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                Комплексные решения автоматизации для бизнеса, ЖКХ и застройщиков. Интеграция с ведущими AI-платформами
+                для максимального комфорта и безопасности.
+              </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="text-lg h-14 px-8 bg-gradient-to-r from-[#6EE7F5] to-[#7CF4C6] text-[#0B1220] hover:opacity-90 shadow-2xl font-bold"
-                onClick={() => openModal("consultation")}
-              >
-                {locale === "ru" && "Получить консультацию"}
-                {locale === "en" && "Get Consultation"}
-                {locale === "es" && "Obtener Consulta"}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-lg h-14 px-8 bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white/20"
-                onClick={() => {
-                  const projectsSection = document.querySelector('[data-section="projects"]')
-                  projectsSection?.scrollIntoView({ behavior: "smooth" })
-                }}
-              >
-                {locale === "ru" && "Смотреть кейсы"}
-                {locale === "en" && "View Cases"}
-                {locale === "es" && "Ver Casos"}
-              </Button>
+              <div className="flex flex-wrap gap-4">
+                <Button size="lg" onClick={() => openModal("consultation")}>
+                  Получить консультацию
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <a href="mailto:info@m2solutions.ai">
+                    <Mail className="mr-2 h-4 w-4" />
+                    Написать на почту
+                  </a>
+                </Button>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-6 pt-8 border-t">
+                <div>
+                  <div className="text-3xl font-bold text-primary">500+</div>
+                  <div className="text-sm text-muted-foreground">Реализованных проектов</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-primary">98%</div>
+                  <div className="text-sm text-muted-foreground">Довольных клиентов</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-primary">24/7</div>
+                  <div className="text-sm text-muted-foreground">Техподдержка</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/modern-smart-home-interior-with-automation.jpg"
+                  alt="Умный дом"
+                  width={800}
+                  height={600}
+                  className="w-full h-auto"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -576,14 +418,10 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              {locale === "ru" && "Решения для вашего бизнеса"}
-              {locale === "en" && "Solutions for Your Business"}
-              {locale === "es" && "Soluciones para Su Negocio"}
+              Решения для бизнеса
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              {locale === "ru" && "Выберите ваш сегмент и узнайте, как мы можем помочь"}
-              {locale === "en" && "Choose your segment and learn how we can help"}
-              {locale === "es" && "Elija su segmento y descubra cómo podemos ayudar"}
+              Автоматизация зданий, управление инфраструктурой и повышение эффективности
             </p>
           </div>
 
@@ -600,15 +438,9 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
               <Building2
                 className={`h-8 w-8 mx-auto mb-3 ${activeTab === "business" ? "text-white" : "text-blue-600"}`}
               />
-              <h3 className="text-xl font-bold mb-2">
-                {locale === "ru" && "Бизнес"}
-                {locale === "en" && "Business"}
-                {locale === "es" && "Negocios"}
-              </h3>
+              <h3 className="text-xl font-bold mb-2">Бизнес</h3>
               <p className={`text-sm ${activeTab === "business" ? "text-white/90" : "text-muted-foreground"}`}>
-                {locale === "ru" && "Автоматизация зданий"}
-                {locale === "en" && "Building Automation"}
-                {locale === "es" && "Automatización de Edificios"}
+                Оптимизация офисов и коммерческих пространств
               </p>
             </button>
 
@@ -623,15 +455,9 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
               <Wrench
                 className={`h-8 w-8 mx-auto mb-3 ${activeTab === "housing" ? "text-white" : "text-purple-600"}`}
               />
-              <h3 className="text-xl font-bold mb-2">
-                {locale === "ru" && "ЖКХ / УК"}
-                {locale === "en" && "Housing / Management"}
-                {locale === "es" && "Vivienda / Gestión"}
-              </h3>
+              <h3 className="text-xl font-bold mb-2">ЖКХ</h3>
               <p className={`text-sm ${activeTab === "housing" ? "text-white/90" : "text-muted-foreground"}`}>
-                {locale === "ru" && "Цифровизация обслуживания"}
-                {locale === "en" && "Service Digitalization"}
-                {locale === "es" && "Digitalización de Servicios"}
+                Управление многоквартирными домами
               </p>
             </button>
 
@@ -646,505 +472,518 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
               <Building
                 className={`h-8 w-8 mx-auto mb-3 ${activeTab === "developers" ? "text-white" : "text-green-600"}`}
               />
-              <h3 className="text-xl font-bold mb-2">
-                {locale === "ru" && "Застройщики"}
-                {locale === "en" && "Developers"}
-                {locale === "es" && "Promotores"}
-              </h3>
+              <h3 className="text-xl font-bold mb-2">Застройщики</h3>
               <p className={`text-sm ${activeTab === "developers" ? "text-white/90" : "text-muted-foreground"}`}>
-                {locale === "ru" && "Умный дом как преимущество"}
-                {locale === "en" && "Smart Home as Advantage"}
-                {locale === "es" && "Casa Inteligente como Ventaja"}
+                Интеграция умных систем в новостройки
               </p>
             </button>
           </div>
 
-          {/* Tab Content */}
-          <div className="mt-12">
-            {/* Business Tab Content */}
-            {activeTab === "business" && (
-              <div className="space-y-8 animate-in fade-in duration-500">
-                <div className="mb-20">
-                  <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
-                    {/* Left: Image */}
-                    <div className="relative group h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                      <Image
-                        src="/modern-residential-building-entrance-with-smart-co.jpg"
-                        alt="Modern Building"
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <Badge className="mb-3 bg-blue-600 text-white text-sm px-4 py-2">
-                          <Building2 className="w-4 h-4 mr-2" />
-                          750+ реализованных проектов
-                        </Badge>
-                      </div>
-                    </div>
-
-                    {/* Right: Content */}
-                    <div className="space-y-6">
-                      <div>
-                        <h3 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
-                          Решения для застройщиков и строителей
-                        </h3>
-                        <p className="text-lg text-muted-foreground text-pretty">
-                          Комплексная автоматизация новостроек, жилых комплексов и коммерческой недвижимости
-                        </p>
-                      </div>
-
-                      {/* Statistics - VERY PROMINENT */}
-                      <div className="grid grid-cols-2 gap-4">
-                        <Card className="relative overflow-hidden border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/50 dark:to-emerald-950/50">
-                          <CardContent className="p-6 text-center">
-                            <div className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                              +15-25%
-                            </div>
-                            <p className="text-sm font-semibold text-muted-foreground">
-                              Увеличение стоимости недвижимости с умными технологиями
-                            </p>
-                          </CardContent>
-                        </Card>
-
-                        <Card className="relative overflow-hidden border-2 border-orange-200 dark:border-orange-800 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/50 dark:to-red-950/50">
-                          <CardContent className="p-6 text-center">
-                            <TrendingUp className="h-10 w-10 mx-auto mb-2 text-orange-600" />
-                            <p className="text-lg font-bold mb-1">Быстрая окупаемость</p>
-                            <p className="text-xs text-muted-foreground">За счет премиальной цены</p>
-                          </CardContent>
-                        </Card>
-                      </div>
-
-                      {/* Key Features Grid */}
-                      <div className="grid grid-cols-2 gap-3">
-                        {[
-                          { icon: UserCheck, title: "AI-консьерж 24/7" },
-                          { icon: Fingerprint, title: "Биометрия" },
-                          { icon: Camera, title: "Видеонаблюдение" },
-                          { icon: Smartphone, title: "Мобильное приложение" },
-                        ].map((feature) => {
-                          const Icon = feature.icon
-                          return (
-                            <div
-                              key={feature.title}
-                              className="flex items-center gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm border hover:shadow-md transition-all"
-                            >
-                              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center flex-shrink-0">
-                                <Icon className="h-5 w-5 text-white" />
-                              </div>
-                              <span className="text-sm font-semibold">{feature.title}</span>
-                            </div>
-                          )
-                        })}
-                      </div>
+          {/* Tab Content - Business */}
+          {activeTab === "business" && (
+            <div className="space-y-8 animate-in fade-in duration-500">
+              <div className="mb-20">
+                <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
+                  {/* Left: Image */}
+                  <div className="relative group h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+                    <Image
+                      src="/modern-residential-building-entrance-with-smart-co.jpg"
+                      alt="Modern Building"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <Badge className="mb-3 bg-blue-600 text-white text-sm px-4 py-2">
+                        <Building2 className="w-4 h-4 mr-2" />
+                        Умный офис
+                      </Badge>
                     </div>
                   </div>
 
-                  {/* Services and CTA Row */}
-                  <div className="grid lg:grid-cols-3 gap-6">
-                    {/* Services List - Takes 2 columns */}
-                    <div className="lg:col-span-2">
-                      <Card className="border-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md shadow-xl h-full">
-                        <CardHeader>
-                          <CardTitle className="text-xl flex items-center gap-3">
-                            <Sparkles className="h-5 w-5 text-blue-600" />
-                            Полный перечень услуг
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="grid sm:grid-cols-2 gap-2">
-                            {[
-                              "Умные подъезды с AI-консьержем 24/7",
-                              "Биометрическое распознавание лиц",
-                              "Интерактивные видеодомофоны с AI",
-                              "Автоматические ворота и шлагбаумы",
-                              "Система управления общими зонами",
-                              "Видеонаблюдение с детекцией объектов",
-                              "Мобильное приложение для жильцов",
-                              "Интеграция с инженерными системами",
-                            ].map((service) => (
-                              <div
-                                key={service}
-                                className="flex items-start gap-2 p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors"
-                              >
-                                <Check className="h-4 w-4 text-blue-600 flex-shrink-0 mt-0.5" />
-                                <span className="text-sm">{service}</span>
-                              </div>
-                            ))}
+                  {/* Right: Content */}
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+                        Интеллектуальное управление бизнес-пространством
+                      </h3>
+                      <p className="text-lg text-muted-foreground text-pretty">
+                        Повысьте эффективность и комфорт вашего офиса с помощью передовых технологий автоматизации.
+                      </p>
+                    </div>
+
+                    {/* Statistics - VERY PROMINENT */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <Card className="relative overflow-hidden border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/50 dark:to-emerald-950/50">
+                        <CardContent className="p-6 text-center">
+                          <div className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                            +15-25%
                           </div>
+                          <p className="text-sm font-semibold text-muted-foreground">Снижение операционных расходов</p>
+                        </CardContent>
+                      </Card>
+
+                      <Card className="relative overflow-hidden border-2 border-orange-200 dark:border-orange-800 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/50 dark:to-red-950/50">
+                        <CardContent className="p-6 text-center">
+                          <TrendingUp className="h-10 w-10 mx-auto mb-2 text-orange-600" />
+                          <p className="text-lg font-bold mb-1">ROI</p>
+                          <p className="text-xs text-muted-foreground">Быстрая окупаемость инвестиций</p>
                         </CardContent>
                       </Card>
                     </div>
 
-                    {/* CTA Card - Takes 1 column */}
-                    <Card className="border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-600 to-purple-600 text-white shadow-2xl">
-                      <CardContent className="p-6 flex flex-col justify-between h-full">
-                        <div>
-                          <h4 className="text-xl font-bold mb-3">Свяжитесь с нами</h4>
-                          <p className="text-white/90 text-sm mb-4">Получите бесплатную консультацию</p>
-                        </div>
-                        <div className="space-y-2">
-                          <Button
-                            className="w-full bg-white text-blue-600 hover:bg-white/90 h-11 font-semibold shadow-lg text-sm"
-                            onClick={() => {
-                              window.location.href = "tel:+34600000000"
-                            }}
+                    {/* Key Features Grid */}
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { icon: UserCheck, key: "aiConcierge" },
+                        { icon: Fingerprint, key: "biometrics" },
+                        { icon: Camera, key: "surveillance" },
+                        { icon: Smartphone, key: "mobileApp" },
+                      ].map((feature) => {
+                        const Icon = feature.icon
+                        return (
+                          <div
+                            key={feature.key}
+                            className="flex items-center gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm border hover:shadow-md transition-all"
                           >
-                            <Phone className="w-4 h-4 mr-2" />
-                            Позвонить нам
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
-                            onClick={() => {
-                              window.location.href = "mailto:info@m2solutions.ai"
-                            }}
-                          >
-                            <Mail className="w-4 h-4 mr-2" />
-                            Написать на почту
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
-                            onClick={() => {
-                              openModal("consultation")
-                            }}
-                          >
-                            <MessageCircle className="w-4 h-4 mr-2" />
-                            Онлайн-консультация
-                          </Button>
+                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center flex-shrink-0">
+                              <Icon className="h-5 w-5 text-white" />
+                            </div>
+                            <span className="text-sm font-semibold">
+                              {feature.key === "aiConcierge" && "AI-Консьерж"}
+                              {feature.key === "biometrics" && "Биометрический доступ"}
+                              {feature.key === "surveillance" && "Видеонаблюдение"}
+                              {feature.key === "mobileApp" && "Мобильное управление"}
+                            </span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Services and CTA Row */}
+                <div className="grid lg:grid-cols-3 gap-6">
+                  {/* Services List - Takes 2 columns */}
+                  <div className="lg:col-span-2">
+                    <Card className="border-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md shadow-xl h-full">
+                      <CardHeader>
+                        <CardTitle className="text-xl flex items-center gap-3">
+                          <Sparkles className="h-5 w-5 text-blue-600" />
+                          Ключевые услуги
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid sm:grid-cols-2 gap-2">
+                          {[
+                            "Автоматизация освещения",
+                            "Управление климатом",
+                            "Системы безопасности",
+                            "Управление доступом",
+                            "Энергоменеджмент",
+                            "Видеоконференцсвязь",
+                            "Интеграция с ERP",
+                            "Удаленный мониторинг",
+                          ].map((service, i) => (
+                            <div
+                              key={i}
+                              className="flex items-start gap-2 p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors"
+                            >
+                              <Check className="h-4 w-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                              <span className="text-sm">{service}</span>
+                            </div>
+                          ))}
                         </div>
                       </CardContent>
                     </Card>
                   </div>
-                </div>
-              </div>
-            )}
 
-            {/* Housing Tab Content */}
-            {activeTab === "housing" && (
-              <div className="space-y-8 animate-in fade-in duration-500">
-                <div>
-                  <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
-                    {/* Left: Content */}
-                    <div className="space-y-6 order-2 lg:order-1">
+                  {/* CTA Card - Takes 1 column */}
+                  <Card className="border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-600 to-purple-600 text-white shadow-2xl">
+                    <CardContent className="p-6 flex flex-col justify-between h-full">
                       <div>
-                        <h3 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
-                          Решения для ЖКХ и управляющих компаний
-                        </h3>
-                        <p className="text-lg text-muted-foreground text-pretty">
-                          Автоматизация управления многоквартирными домами и снижение эксплуатационных расходов
+                        <h4 className="text-xl font-bold mb-3">Остались вопросы?</h4>
+                        <p className="text-white/90 text-sm mb-4">
+                          Свяжитесь с нами для получения индивидуального решения.
                         </p>
                       </div>
-
-                      {/* Statistics - VERY PROMINENT */}
-                      <div className="grid grid-cols-2 gap-4">
-                        <Card className="relative overflow-hidden border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/50 dark:to-cyan-950/50">
-                          <CardContent className="p-6 text-center">
-                            <div className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                              -30-40%
-                            </div>
-                            <p className="text-sm font-semibold text-muted-foreground">
-                              Снижение расходов на электроэнергию и обслуживание
-                            </p>
-                          </CardContent>
-                        </Card>
-
-                        <Card className="relative overflow-hidden border-2 border-purple-200 dark:border-purple-800 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/50 dark:to-pink-950/50">
-                          <CardContent className="p-6 text-center">
-                            <Settings className="h-10 w-10 mx-auto mb-2 text-purple-600" />
-                            <p className="text-lg font-bold mb-1">Автоматизация</p>
-                            <p className="text-xs text-muted-foreground">Повышение эффективности</p>
-                          </CardContent>
-                        </Card>
+                      <div className="space-y-2">
+                        <Button
+                          className="w-full bg-white text-blue-600 hover:bg-white/90 h-11 font-semibold shadow-lg text-sm"
+                          onClick={() => {
+                            window.location.href = "tel:+34600000000"
+                          }}
+                        >
+                          <Phone className="w-4 h-4 mr-2" />
+                          +34 600 000 000
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
+                          onClick={() => {
+                            window.location.href = "mailto:info@m2solutions.ai"
+                          }}
+                        >
+                          <Mail className="w-4 h-4 mr-2" />
+                          info@m2solutions.ai
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
+                          onClick={() => {
+                            openModal("consultation")
+                          }}
+                        >
+                          <MessageCircle className="w-4 h-4 mr-2" />
+                          Чат с нами
+                        </Button>
                       </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </div>
+          )}
 
-                      {/* Key Features Grid */}
-                      <div className="grid grid-cols-2 gap-3">
-                        {[
-                          { icon: BarChart3, title: "Мониторинг 24/7" },
-                          { icon: ClipboardCheck, title: "Диспетчеризация" },
-                          { icon: Settings, title: "Автоматизация" },
-                          { icon: TrendingUp, title: "Аналитика" },
-                        ].map((feature) => {
-                          const Icon = feature.icon
-                          return (
-                            <div
-                              key={feature.title}
-                              className="flex items-center gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm border hover:shadow-md transition-all"
-                            >
-                              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center flex-shrink-0">
-                                <Icon className="h-5 w-5 text-white" />
-                              </div>
-                              <span className="text-sm font-semibold">{feature.title}</span>
-                            </div>
-                          )
-                        })}
-                      </div>
+          {/* Tab Content - Housing */}
+          {activeTab === "housing" && (
+            <div className="space-y-8 animate-in fade-in duration-500">
+              <div>
+                <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
+                  {/* Left: Content */}
+                  <div className="space-y-6 order-2 lg:order-1">
+                    <div>
+                      <h3 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+                        Эффективное управление жилыми комплексами
+                      </h3>
+                      <p className="text-lg text-muted-foreground text-pretty">
+                        Обеспечьте комфорт, безопасность и экономию для жильцов и управляющих компаний.
+                      </p>
                     </div>
 
-                    {/* Right: Image */}
-                    <div className="relative group h-[500px] rounded-2xl overflow-hidden shadow-2xl order-1 lg:order-2">
-                      <Image
-                        src="/modern-apartment-building-management-system.jpg"
-                        alt="Building Management"
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <Badge className="mb-3 bg-green-600 text-white text-sm px-4 py-2">
-                          <Wrench className="w-4 h-4 mr-2" />
-                          Экономия до 40%
-                        </Badge>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Services and CTA Row */}
-                  <div className="grid lg:grid-cols-3 gap-6">
-                    {/* Services List - Takes 2 columns */}
-                    <div className="lg:col-span-2">
-                      <Card className="border-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md shadow-xl h-full">
-                        <CardHeader>
-                          <CardTitle className="text-xl flex items-center gap-3">
-                            <Sparkles className="h-5 w-5 text-green-600" />
-                            Полный перечень услуг
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="grid sm:grid-cols-2 gap-2">
-                            {[
-                              "Централизованное управление домами",
-                              "Автоматический учет ресурсов",
-                              "Система диспетчеризации",
-                              "Умное управление освещением",
-                              "Контроль доступа и видеонаблюдение",
-                              "Автоматизация лифтового хозяйства",
-                              "Система приема заявок от жильцов",
-                              "Интеграция с платежными системами",
-                            ].map((service) => (
-                              <div
-                                key={service}
-                                className="flex items-start gap-2 p-2 rounded-lg hover:bg-green-50 dark:hover:bg-green-950/30 transition-colors"
-                              >
-                                <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                                <span className="text-sm">{service}</span>
-                              </div>
-                            ))}
+                    {/* Statistics - VERY PROMINENT */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <Card className="relative overflow-hidden border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/50 dark:to-cyan-950/50">
+                        <CardContent className="p-6 text-center">
+                          <div className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                            -30-40%
                           </div>
+                          <p className="text-sm font-semibold text-muted-foreground">
+                            Снижение затрат на коммунальные услуги
+                          </p>
+                        </CardContent>
+                      </Card>
+
+                      <Card className="relative overflow-hidden border-2 border-purple-200 dark:border-purple-800 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/50 dark:to-pink-950/50">
+                        <CardContent className="p-6 text-center">
+                          <Settings className="h-10 w-10 mx-auto mb-2 text-purple-600" />
+                          <p className="text-lg font-bold mb-1">Автоматизация</p>
+                          <p className="text-xs text-muted-foreground">Управление общим имуществом</p>
                         </CardContent>
                       </Card>
                     </div>
 
-                    {/* CTA Card - Takes 1 column */}
-                    <Card className="border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-600 to-emerald-600 text-white shadow-2xl">
-                      <CardContent className="p-6 flex flex-col justify-between h-full">
-                        <div>
-                          <h4 className="text-xl font-bold mb-3">Свяжитесь с нами</h4>
-                          <p className="text-white/90 text-sm mb-4">Получите бесплатную консультацию</p>
-                        </div>
-                        <div className="space-y-2">
-                          <Button
-                            className="w-full bg-white text-green-600 hover:bg-white/90 h-11 font-semibold shadow-lg text-sm"
-                            onClick={() => {
-                              window.location.href = "tel:+34600000000"
-                            }}
+                    {/* Key Features Grid */}
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { icon: BarChart3, key: "monitoring" },
+                        { icon: ClipboardCheck, key: "dispatch" },
+                        { icon: Settings, key: "automation" },
+                        { icon: TrendingUp, key: "analytics" },
+                      ].map((feature) => {
+                        const Icon = feature.icon
+                        return (
+                          <div
+                            key={feature.key}
+                            className="flex items-center gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm border hover:shadow-md transition-all"
                           >
-                            <Phone className="w-4 h-4 mr-2" />
-                            Позвонить нам
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
-                            onClick={() => {
-                              window.location.href = "mailto:info@m2solutions.ai"
-                            }}
-                          >
-                            <Mail className="w-4 h-4 mr-2" />
-                            Написать на почту
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
-                            onClick={() => {
-                              openModal("consultation")
-                            }}
-                          >
-                            <MessageCircle className="w-4 h-4 mr-2" />
-                            Онлайн-консультация
-                          </Button>
+                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center flex-shrink-0">
+                              <Icon className="h-5 w-5 text-white" />
+                            </div>
+                            <span className="text-sm font-semibold">
+                              {feature.key === "monitoring" && "Мониторинг"}
+                              {feature.key === "dispatch" && "Диспетчеризация"}
+                              {feature.key === "automation" && "Автоматизация"}
+                              {feature.key === "analytics" && "Аналитика"}
+                            </span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Right: Image */}
+                  <div className="relative group h-[500px] rounded-2xl overflow-hidden shadow-2xl order-1 lg:order-2">
+                    <Image
+                      src="/modern-apartment-building-management-system.jpg"
+                      alt="Building Management"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <Badge className="mb-3 bg-green-600 text-white text-sm px-4 py-2">
+                        <Wrench className="w-4 h-4 mr-2" />
+                        Умный ЖКХ
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Services and CTA Row */}
+                <div className="grid lg:grid-cols-3 gap-6">
+                  {/* Services List - Takes 2 columns */}
+                  <div className="lg:col-span-2">
+                    <Card className="border-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md shadow-xl h-full">
+                      <CardHeader>
+                        <CardTitle className="text-xl flex items-center gap-3">
+                          <Sparkles className="h-5 w-5 text-green-600" />
+                          Ключевые услуги
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid sm:grid-cols-2 gap-2">
+                          {[
+                            "Контроль доступа",
+                            "Управление освещением",
+                            "Климат-контроль",
+                            "Система видеонаблюдения",
+                            "Оповещение об авариях",
+                            "Учет ресурсов",
+                            "Мониторинг парковки",
+                            "Управление парковкой",
+                          ].map((service, i) => (
+                            <div
+                              key={i}
+                              className="flex items-start gap-2 p-2 rounded-lg hover:bg-green-50 dark:hover:bg-green-950/30 transition-colors"
+                            >
+                              <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
+                              <span className="text-sm">{service}</span>
+                            </div>
+                          ))}
                         </div>
                       </CardContent>
                     </Card>
                   </div>
-                </div>
-              </div>
-            )}
 
-            {/* Developers Tab Content */}
-            {activeTab === "developers" && (
-              <div className="space-y-8 animate-in fade-in duration-500">
-                {/* Content for Developers Tab */}
-                <div className="mb-20">
-                  <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
-                    {/* Left: Image */}
-                    <div className="relative group h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                      <Image
-                        src="/modern-residential-building-entrance-with-smart-co.jpg"
-                        alt="Modern Building"
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <Badge className="mb-3 bg-green-600 text-white text-sm px-4 py-2">
-                          <Building2 className="w-4 h-4 mr-2" />
-                          750+ реализованных проектов
-                        </Badge>
-                      </div>
-                    </div>
-
-                    {/* Right: Content */}
-                    <div className="space-y-6">
+                  {/* CTA Card - Takes 1 column */}
+                  <Card className="border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-600 to-emerald-600 text-white shadow-2xl">
+                    <CardContent className="p-6 flex flex-col justify-between h-full">
                       <div>
-                        <h3 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
-                          Решения для застройщиков и строителей
-                        </h3>
-                        <p className="text-lg text-muted-foreground text-pretty">
-                          Комплексная автоматизация новостроек, жилых комплексов и коммерческой недвижимости
+                        <h4 className="text-xl font-bold mb-3">Остались вопросы?</h4>
+                        <p className="text-white/90 text-sm mb-4">
+                          Свяжитесь с нами для получения индивидуального решения.
                         </p>
                       </div>
-
-                      {/* Statistics - VERY PROMINENT */}
-                      <div className="grid grid-cols-2 gap-4">
-                        <Card className="relative overflow-hidden border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/50 dark:to-emerald-950/50">
-                          <CardContent className="p-6 text-center">
-                            <div className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                              +15-25%
-                            </div>
-                            <p className="text-sm font-semibold text-muted-foreground">
-                              Увеличение стоимости недвижимости с умными технологиями
-                            </p>
-                          </CardContent>
-                        </Card>
-
-                        <Card className="relative overflow-hidden border-2 border-orange-200 dark:border-orange-800 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/50 dark:to-red-950/50">
-                          <CardContent className="p-6 text-center">
-                            <TrendingUp className="h-10 w-10 mx-auto mb-2 text-orange-600" />
-                            <p className="text-lg font-bold mb-1">Быстрая окупаемость</p>
-                            <p className="text-xs text-muted-foreground">За счет премиальной цены</p>
-                          </CardContent>
-                        </Card>
+                      <div className="space-y-2">
+                        <Button
+                          className="w-full bg-white text-green-600 hover:bg-white/90 h-11 font-semibold shadow-lg text-sm"
+                          onClick={() => {
+                            window.location.href = "tel:+34600000000"
+                          }}
+                        >
+                          <Phone className="w-4 h-4 mr-2" />
+                          +34 600 000 000
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
+                          onClick={() => {
+                            window.location.href = "mailto:info@m2solutions.ai"
+                          }}
+                        >
+                          <Mail className="w-4 h-4 mr-2" />
+                          info@m2solutions.ai
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
+                          onClick={() => {
+                            openModal("consultation")
+                          }}
+                        >
+                          <MessageCircle className="w-4 h-4 mr-2" />
+                          Чат с нами
+                        </Button>
                       </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </div>
+          )}
 
-                      {/* Key Features Grid */}
-                      <div className="grid grid-cols-2 gap-3">
-                        {[
-                          { icon: UserCheck, title: "AI-консьерж 24/7" },
-                          { icon: Fingerprint, title: "Биометрия" },
-                          { icon: Camera, title: "Видеонаблюдение" },
-                          { icon: Smartphone, title: "Мобильное приложение" },
-                        ].map((feature) => {
-                          const Icon = feature.icon
-                          return (
-                            <div
-                              key={feature.title}
-                              className="flex items-center gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm border hover:shadow-md transition-all"
-                            >
-                              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center flex-shrink-0">
-                                <Icon className="h-5 w-5 text-white" />
-                              </div>
-                              <span className="text-sm font-semibold">{feature.title}</span>
-                            </div>
-                          )
-                        })}
-                      </div>
+          {/* Tab Content - Developers */}
+          {activeTab === "developers" && (
+            <div className="space-y-8 animate-in fade-in duration-500">
+              {/* Content for Developers Tab */}
+              <div className="mb-20">
+                <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
+                  {/* Left: Image */}
+                  <div className="relative group h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+                    <Image
+                      src="/modern-residential-building-entrance-with-smart-co.jpg"
+                      alt="Modern Building"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <Badge className="mb-3 bg-green-600 text-white text-sm px-4 py-2">
+                        <Building2 className="w-4 h-4 mr-2" />
+                        Интеграция для застройщиков
+                      </Badge>
                     </div>
                   </div>
 
-                  {/* Services and CTA Row */}
-                  <div className="grid lg:grid-cols-3 gap-6">
-                    {/* Services List - Takes 2 columns */}
-                    <div className="lg:col-span-2">
-                      <Card className="border-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md shadow-xl h-full">
-                        <CardHeader>
-                          <CardTitle className="text-xl flex items-center gap-3">
-                            <Sparkles className="h-5 w-5 text-green-600" />
-                            Полный перечень услуг
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="grid sm:grid-cols-2 gap-2">
-                            {[
-                              "Умные подъезды с AI-консьержем 24/7",
-                              "Биометрическое распознавание лиц",
-                              "Интерактивные видеодомофоны с AI",
-                              "Автоматические ворота и шлагбаумы",
-                              "Система управления общими зонами",
-                              "Видеонаблюдение с детекцией объектов",
-                              "Мобильное приложение для жильцов",
-                              "Интеграция с инженерными системами",
-                            ].map((service) => (
-                              <div
-                                key={service}
-                                className="flex items-start gap-2 p-2 rounded-lg hover:bg-green-50 dark:hover:bg-green-950/30 transition-colors"
-                              >
-                                <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                                <span className="text-sm">{service}</span>
-                              </div>
-                            ))}
+                  {/* Right: Content */}
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+                        Интеграция умных решений в новые проекты
+                      </h3>
+                      <p className="text-lg text-muted-foreground text-pretty">
+                        Предложите вашим клиентам современные технологии умного дома, повышая привлекательность ваших
+                        объектов.
+                      </p>
+                    </div>
+
+                    {/* Statistics - VERY PROMINENT */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <Card className="relative overflow-hidden border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/50 dark:to-emerald-950/50">
+                        <CardContent className="p-6 text-center">
+                          <div className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                            +15-25%
                           </div>
+                          <p className="text-sm font-semibold text-muted-foreground">
+                            Повышение стоимости недвижимости
+                          </p>
+                        </CardContent>
+                      </Card>
+
+                      <Card className="relative overflow-hidden border-2 border-orange-200 dark:border-orange-800 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/50 dark:to-red-950/50">
+                        <CardContent className="p-6 text-center">
+                          <TrendingUp className="h-10 w-10 mx-auto mb-2 text-orange-600" />
+                          <p className="text-lg font-bold mb-1">Конкурентное преимущество</p>
+                          <p className="text-xs text-muted-foreground">
+                            Выделитесь на рынке с инновационными решениями
+                          </p>
                         </CardContent>
                       </Card>
                     </div>
 
-                    {/* CTA Card - Takes 1 column */}
-                    <Card className="border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-600 to-emerald-600 text-white shadow-2xl">
-                      <CardContent className="p-6 flex flex-col justify-between h-full">
-                        <div>
-                          <h4 className="text-xl font-bold mb-3">Свяжитесь с нами</h4>
-                          <p className="text-white/90 text-sm mb-4">Получите бесплатную консультацию</p>
-                        </div>
-                        <div className="space-y-2">
-                          <Button
-                            className="w-full bg-white text-green-600 hover:bg-white/90 h-11 font-semibold shadow-lg text-sm"
-                            onClick={() => {
-                              window.location.href = "tel:+34600000000"
-                            }}
+                    {/* Key Features Grid */}
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { icon: UserCheck, key: "aiConcierge" },
+                        { icon: Fingerprint, key: "biometrics" },
+                        { icon: Camera, key: "surveillance" },
+                        { icon: Smartphone, key: "mobileApp" },
+                      ].map((feature) => {
+                        const Icon = feature.icon
+                        return (
+                          <div
+                            key={feature.key}
+                            className="flex items-center gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm border hover:shadow-md transition-all"
                           >
-                            <Phone className="w-4 h-4 mr-2" />
-                            Позвонить нам
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
-                            onClick={() => {
-                              window.location.href = "mailto:info@m2solutions.ai"
-                            }}
-                          >
-                            <Mail className="w-4 h-4 mr-2" />
-                            Написать на почту
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
-                            onClick={() => {
-                              openModal("consultation")
-                            }}
-                          >
-                            <MessageCircle className="w-4 h-4 mr-2" />
-                            Онлайн-консультация
-                          </Button>
+                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center flex-shrink-0">
+                              <Icon className="h-5 w-5 text-white" />
+                            </div>
+                            <span className="text-sm font-semibold">
+                              {feature.key === "aiConcierge" && "AI-Консьерж"}
+                              {feature.key === "biometrics" && "Биометрический доступ"}
+                              {feature.key === "surveillance" && "Видеонаблюдение"}
+                              {feature.key === "mobileApp" && "Мобильное управление"}
+                            </span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Services and CTA Row */}
+                <div className="grid lg:grid-cols-3 gap-6">
+                  {/* Services List - Takes 2 columns */}
+                  <div className="lg:col-span-2">
+                    <Card className="border-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md shadow-xl h-full">
+                      <CardHeader>
+                        <CardTitle className="text-xl flex items-center gap-3">
+                          <Sparkles className="h-5 w-5 text-green-600" />
+                          Ключевые услуги
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid sm:grid-cols-2 gap-2">
+                          {[
+                            "Разработка индивидуальных сценариев",
+                            "Интеграция с системами здания",
+                            "Подключение к Wi-Fi сетям",
+                            "Настройка облачных сервисов",
+                            "Обучение жильцов",
+                            "Гарантийное обслуживание",
+                            "Техническая поддержка",
+                            "Пост-проектная поддержка",
+                          ].map((service, i) => (
+                            <div
+                              key={i}
+                              className="flex items-start gap-2 p-2 rounded-lg hover:bg-green-50 dark:hover:bg-green-950/30 transition-colors"
+                            >
+                              <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
+                              <span className="text-sm">{service}</span>
+                            </div>
+                          ))}
                         </div>
                       </CardContent>
                     </Card>
                   </div>
+
+                  {/* CTA Card - Takes 1 column */}
+                  <Card className="border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-600 to-emerald-600 text-white shadow-2xl">
+                    <CardContent className="p-6 flex flex-col justify-between h-full">
+                      <div>
+                        <h4 className="text-xl font-bold mb-3">Остались вопросы?</h4>
+                        <p className="text-white/90 text-sm mb-4">
+                          Свяжитесь с нами для получения индивидуального решения.
+                        </p>
+                      </div>
+                      <div className="space-y-2">
+                        <Button
+                          className="w-full bg-white text-green-600 hover:bg-white/90 h-11 font-semibold shadow-lg text-sm"
+                          onClick={() => {
+                            window.location.href = "tel:+34600000000"
+                          }}
+                        >
+                          <Phone className="w-4 h-4 mr-2" />
+                          +34 600 000 000
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
+                          onClick={() => {
+                            window.location.href = "mailto:info@m2solutions.ai"
+                          }}
+                        >
+                          <Mail className="w-4 h-4 mr-2" />
+                          info@m2solutions.ai
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
+                          onClick={() => {
+                            openModal("consultation")
+                          }}
+                        >
+                          <MessageCircle className="w-4 h-4 mr-2" />
+                          Чат с нами
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -1161,12 +1000,11 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4">
               <Home className="w-3 h-3 mr-2" />
-              Возможности
+              Основные возможности
             </Badge>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6">Комплексная автоматизация вашего дома</h2>
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">Функционал умного дома</h2>
             <p className="text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              Мы автоматизируем все системы вашего дома и объединяем их в единую интеллектуальную экосистему с
-              централизованным управлением
+              Полный набор функций для создания идеального пространства, отвечающего вашим потребностям.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1204,11 +1042,11 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 border-purple-500 text-purple-600">
               <Sparkles className="w-3 h-3 mr-2" />
-              Инновации
+              Инновационные технологии
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Уникальные функции, которые выделяют вас на рынке</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Передовые решения</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Технологии будущего, доступные уже сегодня. Станьте лидером инноваций в сфере недвижимости
+              Внедряем последние достижения в области искусственного интеллекта и автоматизации
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1257,12 +1095,11 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 border-indigo-500 text-indigo-600">
               <Zap className="w-3 h-3 mr-2" />
-              Передовые технологии
+              AI-платформы
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Интеграция с ведущими AI-платформами</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Интеграция с ведущими AI</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Мы используем самые передовые технологии искусственного интеллекта для создания по-настоящему умного дома,
-              который понимает вас и адаптируется под ваш образ жизни
+              Используем лучшие AI-технологии для создания интеллектуальных систем управления домом.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -1291,7 +1128,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
           </div>
 
           <div className="mt-16 p-8 rounded-2xl bg-white dark:bg-slate-900 border-2 shadow-xl">
-            <h3 className="text-2xl font-bold mb-6 text-center">Что дает AI в умном доме</h3>
+            <h3 className="text-2xl font-bold mb-6 text-center">Что дает AI вашему дому?</h3>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="flex gap-4">
                 <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0 shadow-lg">
@@ -1300,7 +1137,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                 <div>
                   <h4 className="font-semibold mb-2 text-lg">Предиктивная автоматизация</h4>
                   <p className="text-sm text-muted-foreground">
-                    AI изучает ваши привычки и автоматически настраивает дом под ваш распорядок дня
+                    Система предугадывает ваши потребности и автоматизирует рутинные задачи.
                   </p>
                 </div>
               </div>
@@ -1311,7 +1148,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                 <div>
                   <h4 className="font-semibold mb-2 text-lg">Оптимизация энергопотребления</h4>
                   <p className="text-sm text-muted-foreground">
-                    Умное управление энергией снижает счета на 30-50% без потери комфорта
+                    AI анализирует использование энергии и предлагает способы экономии.
                   </p>
                 </div>
               </div>
@@ -1322,7 +1159,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                 <div>
                   <h4 className="font-semibold mb-2 text-lg">Проактивная безопасность</h4>
                   <p className="text-sm text-muted-foreground">
-                    AI распознает аномалии и предупреждает о потенциальных угрозах до их возникновения
+                    Система распознает потенциальные угрозы и предотвращает инциденты.
                   </p>
                 </div>
               </div>
@@ -1337,14 +1174,11 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4">
               <MapPin className="w-3 h-3 mr-2" />
-              Наши проекты
+              Кейсы
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Реализованные проекты в России, Казахстане и Испании
-            </h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Наши проекты</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Более 750 успешных проектов: от частных домов и отелей до многоэтажных жилых комплексов и коммерческой
-              недвижимости. Работаем с застройщиками и частными клиентами
+              Примеры успешной реализации проектов умного дома в различных сферах.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1411,19 +1245,18 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
             <div>
               <Badge variant="outline" className="mb-4">
                 <Star className="w-3 h-3 mr-2" />
-                Почему мы
+                Почему мы?
               </Badge>
-              <h2 className="text-4xl md:text-5xl font-bold mb-8">Почему выбирают нас</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-8">Преимущества работы с нами</h2>
               <div className="space-y-6">
                 <div className="flex gap-4 p-4 rounded-lg hover:bg-muted/50 transition-colors">
                   <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center flex-shrink-0 shadow-lg">
                     <Check className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">Индивидуальный подход</h3>
+                    <h3 className="text-xl font-semibold mb-2">Экспертиза</h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      Разрабатываем решения под ваши конкретные потребности, архитектуру дома и бюджет. Каждый проект
-                      уникален.
+                      Многолетний опыт в области автоматизации и AI.
                     </p>
                   </div>
                 </div>
@@ -1432,10 +1265,9 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                     <Sparkles className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">Передовые AI-технологии</h3>
+                    <h3 className="text-xl font-semibold mb-2">Инновации</h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      Интеграция с лучшими AI-платформами: OpenAI GPT-4, xAI Grok, Google Gemini, DeepSeek для
-                      максимальной автоматизации.
+                      Применение передовых AI-технологий для решения ваших задач.
                     </p>
                   </div>
                 </div>
@@ -1444,9 +1276,9 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                     <Building2 className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">Полный цикл работ</h3>
+                    <h3 className="text-xl font-semibold mb-2">Индивидуальный подход</h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      От проектирования и монтажа до настройки и обучения. Гарантия 3 года и техподдержка 24/7.
+                      Разработка решений, адаптированных под ваши уникальные потребности.
                     </p>
                   </div>
                 </div>
@@ -1455,10 +1287,9 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                     <Users className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">Опыт работы в 3 странах</h3>
+                    <h3 className="text-xl font-semibold mb-2">Комплексная поддержка</h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      7+ лет работы с застройщиками и частными клиентами в России, Казахстане и Испании. Более 750
-                      реализованных проектов.
+                      Сопровождение проекта на всех этапах, от проектирования до внедрения.
                     </p>
                   </div>
                 </div>
@@ -1482,9 +1313,9 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent)]" />
         <div className="container mx-auto max-w-4xl relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Получите бесплатный расчет стоимости</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Свяжитесь с нами</h2>
             <p className="text-xl opacity-90 drop-shadow">
-              Заполните форму, и наш специалист свяжется с вами в течение 24 часов для обсуждения вашего проекта
+              Оставьте заявку, и мы подберем лучшее решение для вашего дома.
             </p>
           </div>
           <Card className="bg-white text-foreground shadow-2xl border-0">
@@ -1535,11 +1366,11 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="message" className="text-sm font-medium">
-                    Расскажите о вашем проекте
+                    Ваше сообщение
                   </label>
                   <Textarea
                     id="message"
-                    placeholder="Опишите ваши требования: площадь дома, желаемые функции, примерный бюджет, сроки реализации..."
+                    placeholder="Расскажите о ваших потребностях..."
                     rows={6}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -1571,9 +1402,9 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
         <div className="container mx-auto max-w-5xl">
           <Card className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 border-2 shadow-xl">
             <CardContent className="p-12 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Готовы создать умный дом мечты?</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Готовы сделать ваш дом умнее?</h2>
               <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Свяжитесь с нами для бесплатной консультации, расчета стоимости и демонстрации возможностей умного дома
+                Свяжитесь с нами сегодня, чтобы начать проектирование вашего идеального умного дома.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
@@ -1581,7 +1412,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                   className="h-14 px-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
                   onClick={() => openModal("consultation")}
                 >
-                  Связаться с нами
+                  Заказать консультацию
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Button
@@ -1593,7 +1424,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                     projectsSection?.scrollIntoView({ behavior: "smooth" })
                   }}
                 >
-                  Посмотреть примеры работ
+                  Наши проекты
                 </Button>
               </div>
             </CardContent>
@@ -1603,11 +1434,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
 
       <section className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="text-4xl font-bold mb-12 text-center">
-            {locale === "ru" && "Часто задаваемые вопросы"}
-            {locale === "en" && "Frequently Asked Questions"}
-            {locale === "es" && "Preguntas Frecuentes"}
-          </h2>
+          <h2 className="text-4xl font-bold mb-12 text-center">Часто задаваемые вопросы</h2>
 
           <script
             type="application/ld+json"
@@ -1618,23 +1445,44 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                 mainEntity: [
                   {
                     "@type": "Question",
-                    name:
-                      locale === "ru"
-                        ? "Что такое система умного дома AI Solutions?"
-                        : locale === "en"
-                          ? "What is AI Solutions smart home system?"
-                          : "Qué es el sistema de hogar inteligente de AI Solutions?",
+                    name: "Что такое умный дом?",
                     acceptedAnswer: {
                       "@type": "Answer",
-                      text:
-                        locale === "ru"
-                          ? "AI Solutions - это комплексная система автоматизации дома с интеграцией передовых AI-технологий. Мы объединяем все системы вашего дома в единую экосистему с централизованным управлением через мобильное приложение и голосовые команды."
-                          : locale === "en"
-                            ? "AI Solutions is a comprehensive home automation system with integration of advanced AI technologies. We unite all your home systems into a single ecosystem with centralized control via mobile app and voice commands."
-                            : "AI Solutions es un sistema integral de automatización del hogar con integración de tecnologías avanzadas de IA. Unimos todos los sistemas de su hogar en un ecosistema único con control centralizado a través de una aplicación móvil y comandos de voz.",
+                      text: "Умный дом — это система автоматизации, которая позволяет управлять различными устройствами и функциями вашего дома (освещение, климат, безопасность, мультимедиа) с помощью единого интерфейса, будь то мобильное приложение, голосовой помощник или центральная панель управления.",
                     },
                   },
-                  // Add more FAQ items here
+                  {
+                    "@type": "Question",
+                    name: "Какие AI-платформы вы используете?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Мы интегрируем решения на базе OpenAI (GPT-4), Grok (xAI), Google Gemini и DeepSeek, чтобы обеспечить максимальную интеллектуальность и адаптивность ваших систем.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Можно ли интегрировать существующие устройства?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Да, мы предлагаем гибкие решения по интеграции как новых, так и существующих устройств, поддерживающих стандартные протоколы (Zigbee, Z-Wave, Wi-Fi, Bluetooth).",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Сколько времени занимает установка?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Сроки установки зависят от сложности проекта. Базовые системы могут быть установлены за несколько дней, тогда как комплексные решения могут потребовать нескольких недель. Мы всегда предоставляем детальный план проекта.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Какую гарантию вы предоставляете?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Мы предоставляем гарантию на все установленное оборудование и выполненные работы. Детали гарантии обсуждаются индивидуально для каждого проекта.",
+                    },
+                  },
                 ],
               }),
             }}
