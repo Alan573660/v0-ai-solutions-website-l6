@@ -29,7 +29,6 @@ import {
   Fingerprint,
   UserCheck,
   Leaf,
-  Briefcase,
   Building,
   Users,
   Video,
@@ -56,6 +55,8 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
   const { locale } = params
   const { t } = useTranslations(locale)
   const { openModal } = useCTA()
+  const [activeTab, setActiveTab] = useState<"business" | "housing" | "developers">("business")
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -467,392 +468,682 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            serviceType: "Smart Home Automation",
+            provider: {
+              "@type": "Organization",
+              name: "AI Solutions",
+              url: "https://m2solutions.ai",
+              logo: "https://m2solutions.ai/logo.png",
+              sameAs: [
+                "https://www.linkedin.com/company/aisolutions",
+                "https://www.instagram.com/aisolutions",
+                "https://t.me/aisolutions",
+              ],
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Moscow",
+                addressCountry: "RU",
+              },
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+7-930-065-6580",
+                contactType: "sales",
+              },
+            },
+            areaServed: ["Europe", "Russia", "Spain", "UAE"],
+            description:
+              "Умный дом, автоматизация зданий, видеодомофоны, мониторинг и управление инфраструктурой с AI.",
+            offers: {
+              "@type": "Offer",
+              availability: "https://schema.org/InStock",
+              priceCurrency: "EUR",
+            },
+          }),
+        }}
+      />
+
+      {/* Hero Section - Enhanced with gradient overlay and modern design */}
       <section className="relative py-20 sm:py-32 px-4 overflow-hidden">
         <div className="absolute inset-0">
-          <Image
-            src="/modern-residential-building-entrance-with-smart-co.jpg"
-            alt="Smart Building Entrance"
-            fill
-            className="object-cover opacity-30"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/90 via-purple-600/90 to-pink-600/90" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0B1220] via-[#1a2744] to-[#0B1220]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(110,231,245,0.1),transparent_50%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(124,244,198,0.1),transparent_50%)]" />
         </div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1),transparent)]" />
-        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:60px_60px]" />
 
         <div className="container mx-auto max-w-7xl relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <Badge
               variant="secondary"
-              className="mb-6 text-sm px-4 py-2 bg-white/20 backdrop-blur-sm text-white border-white/30"
+              className="mb-6 text-sm px-4 py-2 bg-white/10 backdrop-blur-sm text-white border-white/20"
             >
               <Sparkles className="w-4 h-4 mr-2" />
-              Умный дом на базе искусственного интеллекта
+              {locale === "ru" && "Интеллектуальные решения для современного дома"}
+              {locale === "en" && "Intelligent Solutions for Modern Homes"}
+              {locale === "es" && "Soluciones Inteligentes para Hogares Modernos"}
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance leading-tight text-white drop-shadow-lg">
-              Будущее вашего дома начинается сегодня
+
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance leading-tight text-white drop-shadow-2xl">
+              {locale === "ru" && "Умные решения для домов, бизнес-центров и жилых комплексов"}
+              {locale === "en" && "Smart Solutions for Homes, Business Centers and Residential Complexes"}
+              {locale === "es" && "Soluciones Inteligentes para Hogares, Centros de Negocios y Complejos Residenciales"}
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-10 text-pretty max-w-3xl mx-auto leading-relaxed drop-shadow">
-              Создаем индивидуальные решения для умного дома с интеграцией передовых AI-технологий. Полный контроль
-              через мобильное приложение и голосовые команды. Работаем с застройщиками, строителями и частными
-              клиентами.
+
+            <p className="text-xl md:text-2xl text-white/90 mb-10 text-pretty max-w-3xl mx-auto leading-relaxed">
+              {locale === "ru" &&
+                "Комплексная автоматизация зданий с искусственным интеллектом. Безопасность, комфорт и экономия под вашим контролем."}
+              {locale === "en" &&
+                "Comprehensive building automation with artificial intelligence. Security, comfort and savings under your control."}
+              {locale === "es" &&
+                "Automatización integral de edificios con inteligencia artificial. Seguridad, confort y ahorro bajo su control."}
             </p>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                className="text-lg h-14 px-8 bg-white text-purple-600 hover:bg-white/90 shadow-2xl hover:shadow-3xl transition-all"
+                className="text-lg h-14 px-8 bg-gradient-to-r from-[#6EE7F5] to-[#7CF4C6] text-[#0B1220] hover:opacity-90 shadow-2xl font-bold"
                 onClick={() => openModal("consultation")}
               >
-                Получить расчет стоимости
+                {locale === "ru" && "Получить консультацию"}
+                {locale === "en" && "Get Consultation"}
+                {locale === "es" && "Obtener Consulta"}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 className="text-lg h-14 px-8 bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white/20"
-                onClick={() => openModal("demo")}
+                onClick={() => {
+                  const projectsSection = document.querySelector('[data-section="projects"]')
+                  projectsSection?.scrollIntoView({ behavior: "smooth" })
+                }}
               >
-                Посмотреть демо
+                {locale === "ru" && "Смотреть кейсы"}
+                {locale === "en" && "View Cases"}
+                {locale === "es" && "Ver Casos"}
               </Button>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20 px-4 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-950 via-blue-950 dark:to-purple-950 relative overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 bg-grid-slate-200/50 dark:bg-grid-slate-800/50 bg-[size:40px_40px] opacity-30" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-cyan-500/20 to-pink-500/20 rounded-full blur-3xl" />
-
-        <div className="container mx-auto max-w-7xl relative z-10">
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 border-blue-500 text-blue-600 bg-white/50 backdrop-blur-sm">
-              <Briefcase className="w-4 h-4 mr-2" />
-              Для бизнеса
-            </Badge>
-            <h2 className="text-4xl md:text-6xl font-bold mb-4 text-balance bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Решения для бизнеса
+      <section className="py-20 px-4 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-950 dark:to-purple-950">
+        <div className="container mx-auto max-w-7xl">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              {locale === "ru" && "Решения для вашего бизнеса"}
+              {locale === "en" && "Solutions for Your Business"}
+              {locale === "es" && "Soluciones para Su Negocio"}
             </h2>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              Комплексные решения для застройщиков, строителей, ЖКХ и управляющих компаний
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              {locale === "ru" && "Выберите ваш сегмент и узнайте, как мы можем помочь"}
+              {locale === "en" && "Choose your segment and learn how we can help"}
+              {locale === "es" && "Elija su segmento y descubra cómo podemos ayudar"}
             </p>
           </div>
 
-          {/* Developers Section */}
-          <div className="mb-20">
-            <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
-              {/* Left: Image */}
-              <div className="relative group h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/modern-residential-building-entrance-with-smart-co.jpg"
-                  alt="Modern Building"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <Badge className="mb-3 bg-blue-600 text-white text-sm px-4 py-2">
-                    <Building2 className="w-4 h-4 mr-2" />
-                    750+ реализованных проектов
-                  </Badge>
-                </div>
-              </div>
+          {/* Tab Buttons */}
+          <div className="flex flex-col md:flex-row gap-4 mb-12 max-w-4xl mx-auto">
+            <button
+              onClick={() => setActiveTab("business")}
+              className={`flex-1 p-6 rounded-2xl border-2 transition-all duration-300 ${
+                activeTab === "business"
+                  ? "bg-gradient-to-br from-blue-600 to-cyan-600 text-white border-blue-600 shadow-2xl scale-105"
+                  : "bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-slate-200 dark:border-slate-800 hover:border-blue-400"
+              }`}
+            >
+              <Building2
+                className={`h-8 w-8 mx-auto mb-3 ${activeTab === "business" ? "text-white" : "text-blue-600"}`}
+              />
+              <h3 className="text-xl font-bold mb-2">
+                {locale === "ru" && "Бизнес"}
+                {locale === "en" && "Business"}
+                {locale === "es" && "Negocios"}
+              </h3>
+              <p className={`text-sm ${activeTab === "business" ? "text-white/90" : "text-muted-foreground"}`}>
+                {locale === "ru" && "Автоматизация зданий"}
+                {locale === "en" && "Building Automation"}
+                {locale === "es" && "Automatización de Edificios"}
+              </p>
+            </button>
 
-              {/* Right: Content */}
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
-                    Решения для застройщиков и строителей
-                  </h3>
-                  <p className="text-lg text-muted-foreground text-pretty">
-                    Комплексная автоматизация новостроек, жилых комплексов и коммерческой недвижимости
-                  </p>
-                </div>
+            <button
+              onClick={() => setActiveTab("housing")}
+              className={`flex-1 p-6 rounded-2xl border-2 transition-all duration-300 ${
+                activeTab === "housing"
+                  ? "bg-gradient-to-br from-purple-600 to-pink-600 text-white border-purple-600 shadow-2xl scale-105"
+                  : "bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-slate-200 dark:border-slate-800 hover:border-purple-400"
+              }`}
+            >
+              <Wrench
+                className={`h-8 w-8 mx-auto mb-3 ${activeTab === "housing" ? "text-white" : "text-purple-600"}`}
+              />
+              <h3 className="text-xl font-bold mb-2">
+                {locale === "ru" && "ЖКХ / УК"}
+                {locale === "en" && "Housing / Management"}
+                {locale === "es" && "Vivienda / Gestión"}
+              </h3>
+              <p className={`text-sm ${activeTab === "housing" ? "text-white/90" : "text-muted-foreground"}`}>
+                {locale === "ru" && "Цифровизация обслуживания"}
+                {locale === "en" && "Service Digitalization"}
+                {locale === "es" && "Digitalización de Servicios"}
+              </p>
+            </button>
 
-                {/* Statistics - VERY PROMINENT */}
-                <div className="grid grid-cols-2 gap-4">
-                  <Card className="relative overflow-hidden border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/50 dark:to-emerald-950/50">
-                    <CardContent className="p-6 text-center">
-                      <div className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                        +15-25%
-                      </div>
-                      <p className="text-sm font-semibold text-muted-foreground">
-                        Увеличение стоимости недвижимости с умными технологиями
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="relative overflow-hidden border-2 border-orange-200 dark:border-orange-800 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/50 dark:to-red-950/50">
-                    <CardContent className="p-6 text-center">
-                      <TrendingUp className="h-10 w-10 mx-auto mb-2 text-orange-600" />
-                      <p className="text-lg font-bold mb-1">Быстрая окупаемость</p>
-                      <p className="text-xs text-muted-foreground">За счет премиальной цены</p>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                {/* Key Features Grid */}
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { icon: UserCheck, title: "AI-консьерж 24/7" },
-                    { icon: Fingerprint, title: "Биометрия" },
-                    { icon: Camera, title: "Видеонаблюдение" },
-                    { icon: Smartphone, title: "Мобильное приложение" },
-                  ].map((feature) => {
-                    const Icon = feature.icon
-                    return (
-                      <div
-                        key={feature.title}
-                        className="flex items-center gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm border hover:shadow-md transition-all"
-                      >
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center flex-shrink-0">
-                          <Icon className="h-5 w-5 text-white" />
-                        </div>
-                        <span className="text-sm font-semibold">{feature.title}</span>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
-
-            {/* Services and CTA Row */}
-            <div className="grid lg:grid-cols-3 gap-6">
-              {/* Services List - Takes 2 columns */}
-              <div className="lg:col-span-2">
-                <Card className="border-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md shadow-xl h-full">
-                  <CardHeader>
-                    <CardTitle className="text-xl flex items-center gap-3">
-                      <Sparkles className="h-5 w-5 text-blue-600" />
-                      Полный перечень услуг
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid sm:grid-cols-2 gap-2">
-                      {[
-                        "Умные подъезды с AI-консьержем 24/7",
-                        "Биометрическое распознавание лиц",
-                        "Интерактивные видеодомофоны с AI",
-                        "Автоматические ворота и шлагбаумы",
-                        "Система управления общими зонами",
-                        "Видеонаблюдение с детекцией объектов",
-                        "Мобильное приложение для жильцов",
-                        "Интеграция с инженерными системами",
-                      ].map((service) => (
-                        <div
-                          key={service}
-                          className="flex items-start gap-2 p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors"
-                        >
-                          <Check className="h-4 w-4 text-blue-600 flex-shrink-0 mt-0.5" />
-                          <span className="text-sm">{service}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* CTA Card - Takes 1 column */}
-              <Card className="border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-600 to-purple-600 text-white shadow-2xl">
-                <CardContent className="p-6 flex flex-col justify-between h-full">
-                  <div>
-                    <h4 className="text-xl font-bold mb-3">Свяжитесь с нами</h4>
-                    <p className="text-white/90 text-sm mb-4">Получите бесплатную консультацию</p>
-                  </div>
-                  <div className="space-y-2">
-                    <Button
-                      className="w-full bg-white text-blue-600 hover:bg-white/90 h-11 font-semibold shadow-lg text-sm"
-                      onClick={() => {
-                        window.location.href = "tel:+34600000000"
-                      }}
-                    >
-                      <Phone className="w-4 h-4 mr-2" />
-                      Позвонить нам
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
-                      onClick={() => {
-                        window.location.href = "mailto:info@m2solutions.ai"
-                      }}
-                    >
-                      <Mail className="w-4 h-4 mr-2" />
-                      Написать на почту
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
-                      onClick={() => {
-                        openModal("consultation")
-                      }}
-                    >
-                      <MessageCircle className="w-4 h-4 mr-2" />
-                      Онлайн-консультация
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+            <button
+              onClick={() => setActiveTab("developers")}
+              className={`flex-1 p-6 rounded-2xl border-2 transition-all duration-300 ${
+                activeTab === "developers"
+                  ? "bg-gradient-to-br from-green-600 to-emerald-600 text-white border-green-600 shadow-2xl scale-105"
+                  : "bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-slate-200 dark:border-slate-800 hover:border-green-400"
+              }`}
+            >
+              <Building
+                className={`h-8 w-8 mx-auto mb-3 ${activeTab === "developers" ? "text-white" : "text-green-600"}`}
+              />
+              <h3 className="text-xl font-bold mb-2">
+                {locale === "ru" && "Застройщики"}
+                {locale === "en" && "Developers"}
+                {locale === "es" && "Promotores"}
+              </h3>
+              <p className={`text-sm ${activeTab === "developers" ? "text-white/90" : "text-muted-foreground"}`}>
+                {locale === "ru" && "Умный дом как преимущество"}
+                {locale === "en" && "Smart Home as Advantage"}
+                {locale === "es" && "Casa Inteligente como Ventaja"}
+              </p>
+            </button>
           </div>
 
-          {/* Management Section */}
-          <div>
-            <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
-              {/* Left: Content */}
-              <div className="space-y-6 order-2 lg:order-1">
-                <div>
-                  <h3 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
-                    Решения для ЖКХ и управляющих компаний
-                  </h3>
-                  <p className="text-lg text-muted-foreground text-pretty">
-                    Автоматизация управления многоквартирными домами и снижение эксплуатационных расходов
-                  </p>
-                </div>
-
-                {/* Statistics - VERY PROMINENT */}
-                <div className="grid grid-cols-2 gap-4">
-                  <Card className="relative overflow-hidden border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/50 dark:to-cyan-950/50">
-                    <CardContent className="p-6 text-center">
-                      <div className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                        -30-40%
+          {/* Tab Content */}
+          <div className="mt-12">
+            {/* Business Tab Content */}
+            {activeTab === "business" && (
+              <div className="space-y-8 animate-in fade-in duration-500">
+                <div className="mb-20">
+                  <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
+                    {/* Left: Image */}
+                    <div className="relative group h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+                      <Image
+                        src="/modern-residential-building-entrance-with-smart-co.jpg"
+                        alt="Modern Building"
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <Badge className="mb-3 bg-blue-600 text-white text-sm px-4 py-2">
+                          <Building2 className="w-4 h-4 mr-2" />
+                          750+ реализованных проектов
+                        </Badge>
                       </div>
-                      <p className="text-sm font-semibold text-muted-foreground">
-                        Снижение расходов на электроэнергию и обслуживание
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="relative overflow-hidden border-2 border-purple-200 dark:border-purple-800 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/50 dark:to-pink-950/50">
-                    <CardContent className="p-6 text-center">
-                      <Settings className="h-10 w-10 mx-auto mb-2 text-purple-600" />
-                      <p className="text-lg font-bold mb-1">Автоматизация</p>
-                      <p className="text-xs text-muted-foreground">Повышение эффективности</p>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                {/* Key Features Grid */}
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { icon: BarChart3, title: "Мониторинг 24/7" },
-                    { icon: ClipboardCheck, title: "Диспетчеризация" },
-                    { icon: Settings, title: "Автоматизация" },
-                    { icon: TrendingUp, title: "Аналитика" },
-                  ].map((feature) => {
-                    const Icon = feature.icon
-                    return (
-                      <div
-                        key={feature.title}
-                        className="flex items-center gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm border hover:shadow-md transition-all"
-                      >
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center flex-shrink-0">
-                          <Icon className="h-5 w-5 text-white" />
-                        </div>
-                        <span className="text-sm font-semibold">{feature.title}</span>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-
-              {/* Right: Image */}
-              <div className="relative group h-[500px] rounded-2xl overflow-hidden shadow-2xl order-1 lg:order-2">
-                <Image
-                  src="/modern-apartment-building-management-system.jpg"
-                  alt="Building Management"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <Badge className="mb-3 bg-green-600 text-white text-sm px-4 py-2">
-                    <Wrench className="w-4 h-4 mr-2" />
-                    Экономия до 40%
-                  </Badge>
-                </div>
-              </div>
-            </div>
-
-            {/* Services and CTA Row */}
-            <div className="grid lg:grid-cols-3 gap-6">
-              {/* Services List - Takes 2 columns */}
-              <div className="lg:col-span-2">
-                <Card className="border-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md shadow-xl h-full">
-                  <CardHeader>
-                    <CardTitle className="text-xl flex items-center gap-3">
-                      <Sparkles className="h-5 w-5 text-green-600" />
-                      Полный перечень услуг
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid sm:grid-cols-2 gap-2">
-                      {[
-                        "Централизованное управление домами",
-                        "Автоматический учет ресурсов",
-                        "Система диспетчеризации",
-                        "Умное управление освещением",
-                        "Контроль доступа и видеонаблюдение",
-                        "Автоматизация лифтового хозяйства",
-                        "Система приема заявок от жильцов",
-                        "Интеграция с платежными системами",
-                      ].map((service) => (
-                        <div
-                          key={service}
-                          className="flex items-start gap-2 p-2 rounded-lg hover:bg-green-50 dark:hover:bg-green-950/30 transition-colors"
-                        >
-                          <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                          <span className="text-sm">{service}</span>
-                        </div>
-                      ))}
                     </div>
-                  </CardContent>
-                </Card>
-              </div>
 
-              {/* CTA Card - Takes 1 column */}
-              <Card className="border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-600 to-emerald-600 text-white shadow-2xl">
-                <CardContent className="p-6 flex flex-col justify-between h-full">
-                  <div>
-                    <h4 className="text-xl font-bold mb-3">Свяжитесь с нами</h4>
-                    <p className="text-white/90 text-sm mb-4">Получите бесплатную консультацию</p>
+                    {/* Right: Content */}
+                    <div className="space-y-6">
+                      <div>
+                        <h3 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+                          Решения для застройщиков и строителей
+                        </h3>
+                        <p className="text-lg text-muted-foreground text-pretty">
+                          Комплексная автоматизация новостроек, жилых комплексов и коммерческой недвижимости
+                        </p>
+                      </div>
+
+                      {/* Statistics - VERY PROMINENT */}
+                      <div className="grid grid-cols-2 gap-4">
+                        <Card className="relative overflow-hidden border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/50 dark:to-emerald-950/50">
+                          <CardContent className="p-6 text-center">
+                            <div className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                              +15-25%
+                            </div>
+                            <p className="text-sm font-semibold text-muted-foreground">
+                              Увеличение стоимости недвижимости с умными технологиями
+                            </p>
+                          </CardContent>
+                        </Card>
+
+                        <Card className="relative overflow-hidden border-2 border-orange-200 dark:border-orange-800 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/50 dark:to-red-950/50">
+                          <CardContent className="p-6 text-center">
+                            <TrendingUp className="h-10 w-10 mx-auto mb-2 text-orange-600" />
+                            <p className="text-lg font-bold mb-1">Быстрая окупаемость</p>
+                            <p className="text-xs text-muted-foreground">За счет премиальной цены</p>
+                          </CardContent>
+                        </Card>
+                      </div>
+
+                      {/* Key Features Grid */}
+                      <div className="grid grid-cols-2 gap-3">
+                        {[
+                          { icon: UserCheck, title: "AI-консьерж 24/7" },
+                          { icon: Fingerprint, title: "Биометрия" },
+                          { icon: Camera, title: "Видеонаблюдение" },
+                          { icon: Smartphone, title: "Мобильное приложение" },
+                        ].map((feature) => {
+                          const Icon = feature.icon
+                          return (
+                            <div
+                              key={feature.title}
+                              className="flex items-center gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm border hover:shadow-md transition-all"
+                            >
+                              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center flex-shrink-0">
+                                <Icon className="h-5 w-5 text-white" />
+                              </div>
+                              <span className="text-sm font-semibold">{feature.title}</span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <Button
-                      className="w-full bg-white text-green-600 hover:bg-white/90 h-11 font-semibold shadow-lg text-sm"
-                      onClick={() => {
-                        window.location.href = "tel:+34600000000"
-                      }}
-                    >
-                      <Phone className="w-4 h-4 mr-2" />
-                      Позвонить нам
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
-                      onClick={() => {
-                        window.location.href = "mailto:info@m2solutions.ai"
-                      }}
-                    >
-                      <Mail className="w-4 h-4 mr-2" />
-                      Написать на почту
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
-                      onClick={() => {
-                        openModal("consultation")
-                      }}
-                    >
-                      <MessageCircle className="w-4 h-4 mr-2" />
-                      Онлайн-консультация
-                    </Button>
+
+                  {/* Services and CTA Row */}
+                  <div className="grid lg:grid-cols-3 gap-6">
+                    {/* Services List - Takes 2 columns */}
+                    <div className="lg:col-span-2">
+                      <Card className="border-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md shadow-xl h-full">
+                        <CardHeader>
+                          <CardTitle className="text-xl flex items-center gap-3">
+                            <Sparkles className="h-5 w-5 text-blue-600" />
+                            Полный перечень услуг
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="grid sm:grid-cols-2 gap-2">
+                            {[
+                              "Умные подъезды с AI-консьержем 24/7",
+                              "Биометрическое распознавание лиц",
+                              "Интерактивные видеодомофоны с AI",
+                              "Автоматические ворота и шлагбаумы",
+                              "Система управления общими зонами",
+                              "Видеонаблюдение с детекцией объектов",
+                              "Мобильное приложение для жильцов",
+                              "Интеграция с инженерными системами",
+                            ].map((service) => (
+                              <div
+                                key={service}
+                                className="flex items-start gap-2 p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors"
+                              >
+                                <Check className="h-4 w-4 text-blue-600 flex-shrink-0 mt-0.5" />
+                                <span className="text-sm">{service}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+
+                    {/* CTA Card - Takes 1 column */}
+                    <Card className="border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-600 to-purple-600 text-white shadow-2xl">
+                      <CardContent className="p-6 flex flex-col justify-between h-full">
+                        <div>
+                          <h4 className="text-xl font-bold mb-3">Свяжитесь с нами</h4>
+                          <p className="text-white/90 text-sm mb-4">Получите бесплатную консультацию</p>
+                        </div>
+                        <div className="space-y-2">
+                          <Button
+                            className="w-full bg-white text-blue-600 hover:bg-white/90 h-11 font-semibold shadow-lg text-sm"
+                            onClick={() => {
+                              window.location.href = "tel:+34600000000"
+                            }}
+                          >
+                            <Phone className="w-4 h-4 mr-2" />
+                            Позвонить нам
+                          </Button>
+                          <Button
+                            variant="outline"
+                            className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
+                            onClick={() => {
+                              window.location.href = "mailto:info@m2solutions.ai"
+                            }}
+                          >
+                            <Mail className="w-4 h-4 mr-2" />
+                            Написать на почту
+                          </Button>
+                          <Button
+                            variant="outline"
+                            className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
+                            onClick={() => {
+                              openModal("consultation")
+                            }}
+                          >
+                            <MessageCircle className="w-4 h-4 mr-2" />
+                            Онлайн-консультация
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
+                </div>
+              </div>
+            )}
+
+            {/* Housing Tab Content */}
+            {activeTab === "housing" && (
+              <div className="space-y-8 animate-in fade-in duration-500">
+                <div>
+                  <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
+                    {/* Left: Content */}
+                    <div className="space-y-6 order-2 lg:order-1">
+                      <div>
+                        <h3 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+                          Решения для ЖКХ и управляющих компаний
+                        </h3>
+                        <p className="text-lg text-muted-foreground text-pretty">
+                          Автоматизация управления многоквартирными домами и снижение эксплуатационных расходов
+                        </p>
+                      </div>
+
+                      {/* Statistics - VERY PROMINENT */}
+                      <div className="grid grid-cols-2 gap-4">
+                        <Card className="relative overflow-hidden border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/50 dark:to-cyan-950/50">
+                          <CardContent className="p-6 text-center">
+                            <div className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                              -30-40%
+                            </div>
+                            <p className="text-sm font-semibold text-muted-foreground">
+                              Снижение расходов на электроэнергию и обслуживание
+                            </p>
+                          </CardContent>
+                        </Card>
+
+                        <Card className="relative overflow-hidden border-2 border-purple-200 dark:border-purple-800 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/50 dark:to-pink-950/50">
+                          <CardContent className="p-6 text-center">
+                            <Settings className="h-10 w-10 mx-auto mb-2 text-purple-600" />
+                            <p className="text-lg font-bold mb-1">Автоматизация</p>
+                            <p className="text-xs text-muted-foreground">Повышение эффективности</p>
+                          </CardContent>
+                        </Card>
+                      </div>
+
+                      {/* Key Features Grid */}
+                      <div className="grid grid-cols-2 gap-3">
+                        {[
+                          { icon: BarChart3, title: "Мониторинг 24/7" },
+                          { icon: ClipboardCheck, title: "Диспетчеризация" },
+                          { icon: Settings, title: "Автоматизация" },
+                          { icon: TrendingUp, title: "Аналитика" },
+                        ].map((feature) => {
+                          const Icon = feature.icon
+                          return (
+                            <div
+                              key={feature.title}
+                              className="flex items-center gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm border hover:shadow-md transition-all"
+                            >
+                              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center flex-shrink-0">
+                                <Icon className="h-5 w-5 text-white" />
+                              </div>
+                              <span className="text-sm font-semibold">{feature.title}</span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Right: Image */}
+                    <div className="relative group h-[500px] rounded-2xl overflow-hidden shadow-2xl order-1 lg:order-2">
+                      <Image
+                        src="/modern-apartment-building-management-system.jpg"
+                        alt="Building Management"
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <Badge className="mb-3 bg-green-600 text-white text-sm px-4 py-2">
+                          <Wrench className="w-4 h-4 mr-2" />
+                          Экономия до 40%
+                        </Badge>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Services and CTA Row */}
+                  <div className="grid lg:grid-cols-3 gap-6">
+                    {/* Services List - Takes 2 columns */}
+                    <div className="lg:col-span-2">
+                      <Card className="border-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md shadow-xl h-full">
+                        <CardHeader>
+                          <CardTitle className="text-xl flex items-center gap-3">
+                            <Sparkles className="h-5 w-5 text-green-600" />
+                            Полный перечень услуг
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="grid sm:grid-cols-2 gap-2">
+                            {[
+                              "Централизованное управление домами",
+                              "Автоматический учет ресурсов",
+                              "Система диспетчеризации",
+                              "Умное управление освещением",
+                              "Контроль доступа и видеонаблюдение",
+                              "Автоматизация лифтового хозяйства",
+                              "Система приема заявок от жильцов",
+                              "Интеграция с платежными системами",
+                            ].map((service) => (
+                              <div
+                                key={service}
+                                className="flex items-start gap-2 p-2 rounded-lg hover:bg-green-50 dark:hover:bg-green-950/30 transition-colors"
+                              >
+                                <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
+                                <span className="text-sm">{service}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+
+                    {/* CTA Card - Takes 1 column */}
+                    <Card className="border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-600 to-emerald-600 text-white shadow-2xl">
+                      <CardContent className="p-6 flex flex-col justify-between h-full">
+                        <div>
+                          <h4 className="text-xl font-bold mb-3">Свяжитесь с нами</h4>
+                          <p className="text-white/90 text-sm mb-4">Получите бесплатную консультацию</p>
+                        </div>
+                        <div className="space-y-2">
+                          <Button
+                            className="w-full bg-white text-green-600 hover:bg-white/90 h-11 font-semibold shadow-lg text-sm"
+                            onClick={() => {
+                              window.location.href = "tel:+34600000000"
+                            }}
+                          >
+                            <Phone className="w-4 h-4 mr-2" />
+                            Позвонить нам
+                          </Button>
+                          <Button
+                            variant="outline"
+                            className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
+                            onClick={() => {
+                              window.location.href = "mailto:info@m2solutions.ai"
+                            }}
+                          >
+                            <Mail className="w-4 h-4 mr-2" />
+                            Написать на почту
+                          </Button>
+                          <Button
+                            variant="outline"
+                            className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
+                            onClick={() => {
+                              openModal("consultation")
+                            }}
+                          >
+                            <MessageCircle className="w-4 h-4 mr-2" />
+                            Онлайн-консультация
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Developers Tab Content */}
+            {activeTab === "developers" && (
+              <div className="space-y-8 animate-in fade-in duration-500">
+                {/* Content for Developers Tab */}
+                <div className="mb-20">
+                  <div className="grid lg:grid-cols-2 gap-8 items-start mb-8">
+                    {/* Left: Image */}
+                    <div className="relative group h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+                      <Image
+                        src="/modern-residential-building-entrance-with-smart-co.jpg"
+                        alt="Modern Building"
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <Badge className="mb-3 bg-green-600 text-white text-sm px-4 py-2">
+                          <Building2 className="w-4 h-4 mr-2" />
+                          750+ реализованных проектов
+                        </Badge>
+                      </div>
+                    </div>
+
+                    {/* Right: Content */}
+                    <div className="space-y-6">
+                      <div>
+                        <h3 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+                          Решения для застройщиков и строителей
+                        </h3>
+                        <p className="text-lg text-muted-foreground text-pretty">
+                          Комплексная автоматизация новостроек, жилых комплексов и коммерческой недвижимости
+                        </p>
+                      </div>
+
+                      {/* Statistics - VERY PROMINENT */}
+                      <div className="grid grid-cols-2 gap-4">
+                        <Card className="relative overflow-hidden border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/50 dark:to-emerald-950/50">
+                          <CardContent className="p-6 text-center">
+                            <div className="text-5xl md:text-6xl font-black mb-2 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                              +15-25%
+                            </div>
+                            <p className="text-sm font-semibold text-muted-foreground">
+                              Увеличение стоимости недвижимости с умными технологиями
+                            </p>
+                          </CardContent>
+                        </Card>
+
+                        <Card className="relative overflow-hidden border-2 border-orange-200 dark:border-orange-800 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/50 dark:to-red-950/50">
+                          <CardContent className="p-6 text-center">
+                            <TrendingUp className="h-10 w-10 mx-auto mb-2 text-orange-600" />
+                            <p className="text-lg font-bold mb-1">Быстрая окупаемость</p>
+                            <p className="text-xs text-muted-foreground">За счет премиальной цены</p>
+                          </CardContent>
+                        </Card>
+                      </div>
+
+                      {/* Key Features Grid */}
+                      <div className="grid grid-cols-2 gap-3">
+                        {[
+                          { icon: UserCheck, title: "AI-консьерж 24/7" },
+                          { icon: Fingerprint, title: "Биометрия" },
+                          { icon: Camera, title: "Видеонаблюдение" },
+                          { icon: Smartphone, title: "Мобильное приложение" },
+                        ].map((feature) => {
+                          const Icon = feature.icon
+                          return (
+                            <div
+                              key={feature.title}
+                              className="flex items-center gap-3 p-3 rounded-lg bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm border hover:shadow-md transition-all"
+                            >
+                              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center flex-shrink-0">
+                                <Icon className="h-5 w-5 text-white" />
+                              </div>
+                              <span className="text-sm font-semibold">{feature.title}</span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Services and CTA Row */}
+                  <div className="grid lg:grid-cols-3 gap-6">
+                    {/* Services List - Takes 2 columns */}
+                    <div className="lg:col-span-2">
+                      <Card className="border-2 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md shadow-xl h-full">
+                        <CardHeader>
+                          <CardTitle className="text-xl flex items-center gap-3">
+                            <Sparkles className="h-5 w-5 text-green-600" />
+                            Полный перечень услуг
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="grid sm:grid-cols-2 gap-2">
+                            {[
+                              "Умные подъезды с AI-консьержем 24/7",
+                              "Биометрическое распознавание лиц",
+                              "Интерактивные видеодомофоны с AI",
+                              "Автоматические ворота и шлагбаумы",
+                              "Система управления общими зонами",
+                              "Видеонаблюдение с детекцией объектов",
+                              "Мобильное приложение для жильцов",
+                              "Интеграция с инженерными системами",
+                            ].map((service) => (
+                              <div
+                                key={service}
+                                className="flex items-start gap-2 p-2 rounded-lg hover:bg-green-50 dark:hover:bg-green-950/30 transition-colors"
+                              >
+                                <Check className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
+                                <span className="text-sm">{service}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+
+                    {/* CTA Card - Takes 1 column */}
+                    <Card className="border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-600 to-emerald-600 text-white shadow-2xl">
+                      <CardContent className="p-6 flex flex-col justify-between h-full">
+                        <div>
+                          <h4 className="text-xl font-bold mb-3">Свяжитесь с нами</h4>
+                          <p className="text-white/90 text-sm mb-4">Получите бесплатную консультацию</p>
+                        </div>
+                        <div className="space-y-2">
+                          <Button
+                            className="w-full bg-white text-green-600 hover:bg-white/90 h-11 font-semibold shadow-lg text-sm"
+                            onClick={() => {
+                              window.location.href = "tel:+34600000000"
+                            }}
+                          >
+                            <Phone className="w-4 h-4 mr-2" />
+                            Позвонить нам
+                          </Button>
+                          <Button
+                            variant="outline"
+                            className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
+                            onClick={() => {
+                              window.location.href = "mailto:info@m2solutions.ai"
+                            }}
+                          >
+                            <Mail className="w-4 h-4 mr-2" />
+                            Написать на почту
+                          </Button>
+                          <Button
+                            variant="outline"
+                            className="w-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 h-11 font-semibold text-sm"
+                            onClick={() => {
+                              openModal("consultation")
+                            }}
+                          >
+                            <MessageCircle className="w-4 h-4 mr-2" />
+                            Онлайн-консультация
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -1307,6 +1598,50 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
               </div>
             </CardContent>
           </Card>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 bg-muted/30">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-4xl font-bold mb-12 text-center">
+            {locale === "ru" && "Часто задаваемые вопросы"}
+            {locale === "en" && "Frequently Asked Questions"}
+            {locale === "es" && "Preguntas Frecuentes"}
+          </h2>
+
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: [
+                  {
+                    "@type": "Question",
+                    name:
+                      locale === "ru"
+                        ? "Что такое система умного дома AI Solutions?"
+                        : locale === "en"
+                          ? "What is AI Solutions smart home system?"
+                          : "Qué es el sistema de hogar inteligente de AI Solutions?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text:
+                        locale === "ru"
+                          ? "AI Solutions - это комплексная система автоматизации дома с интеграцией передовых AI-технологий. Мы объединяем все системы вашего дома в единую экосистему с централизованным управлением через мобильное приложение и голосовые команды."
+                          : locale === "en"
+                            ? "AI Solutions is a comprehensive home automation system with integration of advanced AI technologies. We unite all your home systems into a single ecosystem with centralized control via mobile app and voice commands."
+                            : "AI Solutions es un sistema integral de automatización del hogar con integración de tecnologías avanzadas de IA. Unimos todos los sistemas de su hogar en un ecosistema único con control centralizado a través de una aplicación móvil y comandos de voz.",
+                    },
+                  },
+                  // Add more FAQ items here
+                ],
+              }),
+            }}
+          />
+
+          {/* FAQ Accordion UI */}
+          <div className="space-y-4">{/* FAQ items will be added here */}</div>
         </div>
       </section>
     </div>

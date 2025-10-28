@@ -7,25 +7,25 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
 
   const seoData = {
     ru: {
-      title: "Умный дом под ключ | Заказать умный дом в Испании | AI Solutions",
+      title: "Умный дом под ключ | Заказать умный дом | AI Solutions",
       description:
-        "Установка и интеграция умного дома в Испании. Работаем с застройщиками и частными клиентами. AI-консьерж, распознавание лиц, умные замки. Барселона, Моравира, Альтеа. Гарантия 3 года.",
+        "AI Solutions — умные системы для домов, ЖКХ и застройщиков. Автоматизация зданий, видеодомофоны с ИИ, диспетчеризация и управление энергопотреблением. Работаем в России, Казахстане, Испании.",
       keywords:
-        "умный дом, заказать умный дом, умный дом под ключ, интеграция умного дома, компании умный дом, умный дом Испания, умный дом Барселона, умный дом цена, установка умного дома, система умный дом, умный дом для застройщиков, AI консьерж, распознавание лиц, умные замки, автоматизация дома, голосовое управление домом",
+        "умный дом, заказать умный дом, умный дом под ключ, интеграция умного дома, компании умный дом, автоматизация зданий, видеодомофоны AI, система диспетчеризации, контроль доступа, решения для ЖКХ, решения для бизнеса, решения для застройщиков",
     },
     en: {
-      title: "Smart Home Turnkey | Order Smart Home in Spain | AI Solutions",
+      title: "Smart Home Turnkey | Order Smart Home | AI Solutions",
       description:
-        "Smart home installation and integration in Spain. We work with developers and private clients. AI concierge, face recognition, smart locks. Barcelona, Moraira, Altea. 3-year warranty.",
+        "AI Solutions — smart systems for homes, housing and developers. Building automation, AI video intercoms, dispatching and energy management. We work in Russia, Kazakhstan, Spain.",
       keywords:
-        "smart home, order smart home, smart home turnkey, smart home integration, smart home companies, smart home Spain, smart home Barcelona, smart home price, smart home installation, smart home system, smart home for developers, AI concierge, face recognition, smart locks, home automation, voice control home",
+        "smart home, order smart home, smart home turnkey, smart home integration, smart home companies, building automation, AI video intercoms, dispatching system, access control, housing solutions, business solutions, developer solutions",
     },
     es: {
-      title: "Casa Inteligente Llave en Mano | Pedir Casa Inteligente en España | AI Solutions",
+      title: "Casa Inteligente Llave en Mano | Pedir Casa Inteligente | AI Solutions",
       description:
-        "Instalación e integración de casa inteligente en España. Trabajamos con promotores y clientes privados. Conserje AI, reconocimiento facial, cerraduras inteligentes. Barcelona, Moraira, Altea. Garantía 3 años.",
+        "AI Solutions — sistemas inteligentes para hogares, viviendas y promotores. Automatización de edificios, videoporteros AI, despacho y gestión energética. Trabajamos en Rusia, Kazajstán, España.",
       keywords:
-        "casa inteligente, pedir casa inteligente, casa inteligente llave en mano, integración casa inteligente, empresas casa inteligente, casa inteligente España, casa inteligente Barcelona, precio casa inteligente, instalación casa inteligente, sistema casa inteligente, casa inteligente para promotores, conserje AI, reconocimiento facial, cerraduras inteligentes, automatización hogar, control por voz hogar",
+        "casa inteligente, pedir casa inteligente, casa inteligente llave en mano, integración casa inteligente, empresas casa inteligente, automatización edificios, videoporteros AI, sistema despacho, control acceso, soluciones vivienda, soluciones negocios, soluciones promotores",
     },
   }
 
@@ -35,14 +35,21 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
     title: data.title,
     description: data.description,
     keywords: data.keywords,
+    other: {
+      "ai-topic": "Smart Building Automation, AI Home Systems, Property Digitalization, IoT Integration",
+      "ai-context": "solutions for business, developers, and property management companies",
+      "ai-summary":
+        "AI Solutions creates intelligent buildings with real-time automation, analytics, and AI-driven management systems.",
+    },
     openGraph: {
       title: data.title,
       description: data.description,
       type: "website",
       locale: locale,
+      url: `https://m2solutions.ai/${locale}/solutions/smart-home`,
       images: [
         {
-          url: "/modern-smart-home-interior-luxury.jpg",
+          url: "https://m2solutions.ai/modern-smart-home-interior-luxury.jpg",
           width: 1200,
           height: 630,
           alt: "Smart Home Interior",
@@ -53,14 +60,15 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
       card: "summary_large_image",
       title: data.title,
       description: data.description,
-      images: ["/modern-smart-home-interior-luxury.jpg"],
+      images: ["https://m2solutions.ai/modern-smart-home-interior-luxury.jpg"],
     },
     alternates: {
-      canonical: `/${locale}/solutions/smart-home`,
+      canonical: `https://m2solutions.ai/${locale}/solutions/smart-home`,
       languages: {
-        ru: "/ru/solutions/smart-home",
-        en: "/en/solutions/smart-home",
-        es: "/es/solutions/smart-home",
+        "ru-RU": "https://m2solutions.ai/ru/solutions/smart-home",
+        "en-US": "https://m2solutions.ai/en/solutions/smart-home",
+        "es-ES": "https://m2solutions.ai/es/solutions/smart-home",
+        "x-default": "https://m2solutions.ai/",
       },
     },
   }
