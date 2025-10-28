@@ -26,24 +26,15 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
           set -e
-          # Логи sshd за последние 200 строк
-          sudo journalctl -u ssh --no-pager -n 200
-          sudo journalctl -u sshd --no-pager -n 200 2>/dev/null || true
-          sudo tail -n 200 /var/log/auth.log 2>/dev/null || true
+
+          # Безопасно почистить мусорные контейнеры, образы и сети
+          docker system prune -a -f
           
-          # Не забанил ли тебя fail2ban / crowdsec
-          sudo fail2ban-client status sshd 2>/dev/null || true
-          sudo fail2ban-client status 2>/dev/null | sed -n '1,120p' || true
-          sudo cscli decisions list -o human 2>/dev/null || true
+          # Отдельно почистить неиспользуемые тома
+          docker volume prune -f
           
-          # Файрвол
-          sudo ufw status numbered 2>/dev/null || true
-          sudo iptables -S 2>/dev/null | sed -n '1,200p' || true
-          sudo ip6tables -S 2>/dev/null | sed -n '1,200p' || true
-          
-          # Слушает ли порт и какой sshd
-          sudo ss -ltpn | grep ':22'
-          sudo ps -o pid,cmd -C sshd
+          # И build cache
+          docker builder prune -a -f
 
           cd /home
           rm -rf /home/v0-ai-solutions-website-l6
