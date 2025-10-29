@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/hero-section"
 import { TrustedCompanies } from "@/components/trusted-companies"
+import { PlatformFeaturesSection } from "@/components/platform-features-section"
 import { HowItWorksSection } from "@/components/how-it-works-section"
 import { BenefitsSection } from "@/components/benefits-section"
 import { SolutionsSection } from "@/components/solutions-section"
@@ -106,6 +107,7 @@ export default async function HomePage({ params }: HomePageProps) {
     <div className="bg-background">
       <HeroSection locale={locale} />
       <TrustedCompanies locale={locale} />
+      <PlatformFeaturesSection locale={locale} />
       <HowItWorksSection locale={locale} />
       <BenefitsSection locale={locale} />
       <SolutionsSection locale={locale} />

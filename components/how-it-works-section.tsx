@@ -1,9 +1,9 @@
 "use client"
 
-import { ArrowRight, ArrowDown } from "lucide-react"
-import { useState } from "react"
+import { Phone, Brain, Zap, TrendingUp } from "lucide-react"
 import type { Locale } from "@/lib/i18n/config"
 import { useTranslations } from "@/lib/i18n/translations"
+import { useCTA } from "@/components/modals/cta-provider"
 
 interface HowItWorksSectionProps {
   locale: Locale
@@ -11,124 +11,83 @@ interface HowItWorksSectionProps {
 
 export function HowItWorksSection({ locale }: HowItWorksSectionProps) {
   const { t } = useTranslations(locale)
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const { openModal } = useCTA()
 
   const steps = [
     {
-      title: t("howItWorks.step1.title"),
-      description: t("howItWorks.step1.description"),
-      image: "/minimalist-icon-of-phone-with-incoming-call-waves-.jpg",
-      color: "from-blue-500 to-cyan-500",
-      bgColor: "bg-blue-50",
+      number: 1,
+      icon: Phone,
+      title: "Клиент обращается",
+      description: "AI принимает звонки, сообщения и заявки — мгновенно и без очередей.",
+      points: [
+        "Любой канал: телефон, чат, мессенджер",
+        "Распознавание речи и текстов",
+        "Подтверждение личности клиента",
+      ],
     },
     {
-      title: t("howItWorks.step2.title"),
-      description: t("howItWorks.step2.description"),
-      image: "/minimalist-icon-of-ai-brain-with-neural-connection.jpg",
-      color: "from-purple-500 to-pink-500",
-      bgColor: "bg-purple-50",
+      number: 2,
+      icon: Brain,
+      title: "AI анализирует запрос",
+      description: "Определяет суть обращения и намерение клиента.",
+      points: ["Понимание контекста и эмоций", "Распознавание данных и целей", "Определение нужного сценария"],
     },
     {
-      title: t("howItWorks.step3.title"),
-      description: t("howItWorks.step3.description"),
-      image: "/minimalist-icon-of-lightning-bolt-with-automation-.jpg",
-      color: "from-green-500 to-emerald-500",
-      bgColor: "bg-green-50",
+      number: 3,
+      icon: Zap,
+      title: "Выполняет действия",
+      description: "AI применяет бизнес-логику и выполняет нужные операции.",
+      points: ["Расчёт стоимости и сроков", "Создание документов и КП", "Обновление CRM и отправка ответа"],
     },
     {
-      title: t("howItWorks.step4.title"),
-      description: t("howItWorks.step4.description"),
-      image: "/minimalist-icon-of-analytics-dashboard-with-charts.jpg",
-      color: "from-orange-500 to-red-500",
-      bgColor: "bg-orange-50",
+      number: 4,
+      icon: TrendingUp,
+      title: "Учится и улучшает",
+      description: "Каждый диалог анализируется, чтобы повышать точность и скорость.",
+      points: ["Автоматическое обучение на данных", "Оптимизация сценариев", "Рост конверсии и качества ответов"],
     },
   ]
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-background">
+    <section className="py-20 sm:py-24 lg:py-32 bg-[#F7F7FA]">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="text-center mb-10 sm:mb-12 lg:mb-16">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-balance px-4">
-            {t("howItWorks.title")}
-          </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty px-4">
-            {t("howItWorks.description")}
+        <div className="text-center mb-16 max-w-4xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-[#1E1E26]">Как работает AI-ассистент</h2>
+          <p className="text-lg sm:text-xl text-[#8E8EA0] leading-relaxed">
+            Простая схема, как мы превращаем обращения клиентов в готовые решения — от звонка до аналитики.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-6 lg:gap-8">
-          {steps.map((step, index) => (
-            <div key={index} className="relative">
-              <div
-                className={`group relative text-center space-y-3 sm:space-y-4 p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl border-2 transition-all duration-300 cursor-pointer ${
-                  hoveredIndex === index
-                    ? "border-primary shadow-xl scale-105 bg-card"
-                    : "border-transparent hover:border-primary/50 hover:shadow-lg"
-                }`}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <div className="relative overflow-hidden rounded-lg sm:rounded-xl">
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-20 transition-opacity duration-300`}
-                  />
-                  <img
-                    src={step.image || "/placeholder.svg"}
-                    alt={step.title}
-                    className="w-full h-36 sm:h-40 lg:h-48 object-cover rounded-lg sm:rounded-xl transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute top-3 left-3 sm:top-4 sm:left-4 h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center font-bold text-base sm:text-lg shadow-lg">
-                    {index + 1}
+        <div className="grid sm:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          {steps.map((step) => {
+            const Icon = step.icon
+            return (
+              <div key={step.number} className="p-6 rounded-xl border border-[#E0E0E7] bg-white">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="flex-shrink-0 h-12 w-12 rounded-full bg-[#7C3AED]/10 flex items-center justify-center">
+                    <span className="text-xl font-bold text-[#7C3AED]">{step.number}</span>
                   </div>
+                  <Icon className="h-8 w-8 text-[#7C3AED]" />
                 </div>
 
-                {/* Content */}
-                <div className="space-y-2">
-                  <h3 className="text-base sm:text-lg lg:text-xl font-semibold group-hover:text-primary transition-colors duration-300">
-                    {step.title}
-                  </h3>
-                  <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{step.description}</p>
-                </div>
+                <h3 className="text-xl font-bold text-[#1E1E26] mb-3">{step.title}</h3>
+                <p className="text-[#8E8EA0] mb-4 leading-relaxed">{step.description}</p>
 
-                {/* Hover indicator */}
-                <div
-                  className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${step.color} transform origin-left transition-transform duration-300 ${
-                    hoveredIndex === index ? "scale-x-100" : "scale-x-0"
-                  }`}
-                />
+                <ul className="space-y-2">
+                  {step.points.map((point, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-[#8E8EA0]">
+                      <div className="flex-shrink-0 h-1.5 w-1.5 rounded-full bg-[#7C3AED] mt-1.5" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              {index < steps.length - 1 && (
-                <>
-                  {/* Desktop arrow (horizontal) */}
-                  <div className="hidden lg:block absolute top-1/2 left-full w-full -translate-y-1/2 z-10">
-                    <div className="flex items-center justify-center">
-                      <ArrowRight
-                        className={`h-5 w-5 lg:h-6 lg:w-6 transition-colors duration-300 ${
-                          hoveredIndex === index ? "text-primary" : "text-muted-foreground/50"
-                        }`}
-                      />
-                    </div>
-                  </div>
-                  {/* Mobile/Tablet arrow (vertical) */}
-                  <div className="lg:hidden flex items-center justify-center py-2">
-                    <ArrowDown
-                      className={`h-5 w-5 transition-colors duration-300 ${
-                        hoveredIndex === index ? "text-primary" : "text-muted-foreground/50"
-                      }`}
-                    />
-                  </div>
-                </>
-              )}
-            </div>
-          ))}
+            )
+          })}
         </div>
 
-        <div className="mt-10 sm:mt-12 lg:mt-16 text-center">
-          <div className="inline-flex items-center space-x-2 bg-muted/50 rounded-full px-4 sm:px-6 py-2.5 sm:py-3">
-            <div className="h-2 w-2 bg-green-500 rounded-full animate-pulse" />
-            <span className="text-xs sm:text-sm font-medium">{t("howItWorks.responseTime")}</span>
-          </div>
+        <div className="text-center mt-12 max-w-2xl mx-auto">
+          <p className="text-lg text-[#8E8EA0]">Всё работает автоматически — без участия оператора.</p>
         </div>
       </div>
     </section>

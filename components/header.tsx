@@ -87,7 +87,7 @@ export function Header({ locale }: HeaderProps) {
               </span>
             </div>
             <span className="font-bold text-base sm:text-lg lg:text-xl truncate">AI Solutions</span>
-            <span className="text-xs text-muted-foreground font-mono ml-1">v1.0</span>
+            <span className="text-xs text-muted-foreground font-mono ml-1">v1.18</span>
           </Link>
 
           {/* Desktop Navigation */}
