@@ -18,6 +18,7 @@ export function Footer({ locale }: FooterProps) {
     { name: t("solutions.smb"), href: `/${locale}/solutions/smb` },
     { name: t("solutions.enterprise"), href: `/${locale}/solutions/enterprise` },
     { name: t("solutions.custom"), href: `/${locale}/solutions/custom` },
+    { name: "Умный дом на базе ИИ", href: `/${locale}/solutions/smart-home` },
   ]
 
   const company = [

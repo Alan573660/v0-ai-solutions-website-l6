@@ -55,7 +55,7 @@ export default function CTAModal({ isOpen, onClose, type, title }: CTAModalProps
     },
   }
 
-  const config = modalConfig[type]
+  const config = modalConfig[type] || modalConfig.trial
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

@@ -22,8 +22,8 @@ export function HeroSection({ locale }: HeroSectionProps) {
   }, [])
 
   return (
-    <section className="relative bg-gradient-to-b from-[#F6F6FB] to-white py-16 md:py-24 lg:py-32">
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+    <section className="relative bg-gradient-to-b from-[#F6F6FB] to-white min-h-screen flex items-center">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10 py-16 md:py-24">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-6">

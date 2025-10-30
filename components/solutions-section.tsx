@@ -103,9 +103,10 @@ export function SolutionsSection({ locale }: { locale: Locale }) {
 
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
           {solutions.map((solution, index) => (
-            <div
+            <Link
               key={index}
-              className={`group relative bg-card border rounded-2xl p-8 hover:shadow-2xl hover:border-primary/50 transition-all duration-500 hover:-translate-y-2 cursor-pointer overflow-hidden ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+              href={solution.href}
+              className={`group relative bg-card border rounded-2xl p-8 hover:shadow-2xl hover:border-primary/50 transition-all duration-500 hover:-translate-y-2 cursor-pointer overflow-hidden block ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div
@@ -141,20 +142,16 @@ export function SolutionsSection({ locale }: { locale: Locale }) {
                   ))}
                 </div>
 
-                <div className="pt-4 border-t">
-                  <Button variant="ghost" className="w-full justify-between group/btn hover:bg-background/50" asChild>
-                    <Link href={solution.href}>
-                      {t("solutions.learnMore")}
-                      <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </Link>
-                  </Button>
+                <div className="pt-4 border-t flex items-center justify-between">
+                  <span className="text-sm font-medium text-primary">{t("solutions.learnMore")}</span>
+                  <ArrowRight className="h-4 w-4 text-primary group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
 
               <div
                 className={`absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r ${solution.gradient} group-hover:w-full transition-all duration-500`}
               />
-            </div>
+            </Link>
           ))}
         </div>
 
