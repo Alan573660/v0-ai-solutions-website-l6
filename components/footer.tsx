@@ -18,49 +18,49 @@ export function Footer({ locale }: FooterProps) {
     { name: t("solutions.smb"), href: `/${locale}/solutions/smb` },
     { name: t("solutions.enterprise"), href: `/${locale}/solutions/enterprise` },
     { name: t("solutions.custom"), href: `/${locale}/solutions/custom` },
-    { name: "Умный дом на базе ИИ", href: `/${locale}/solutions/smart-home` },
+    { name: t("solutions.smartHome"), href: `/${locale}/solutions/smart-home` },
   ]
 
   const company = [
     { name: t("nav.about"), href: `/${locale}/about` },
-    { name: "Команда", href: `/${locale}/about/team` },
-    { name: "Карьера", href: `/${locale}/careers` },
-    { name: "Партнёрам", href: `/${locale}/partners` },
+    { name: t("about.team.title"), href: `/${locale}/about/team` },
+    { name: t("footer.careers"), href: `/${locale}/careers` },
+    { name: t("footer.partners"), href: `/${locale}/partners` },
     { name: t("nav.blog"), href: `/${locale}/blog` },
   ]
 
   const resources = [
-    { name: "Документация", href: `/${locale}/docs` },
-    { name: "База знаний", href: `/${locale}/knowledge-base` },
-    { name: "FAQ", href: `/${locale}/faq` },
-    { name: "Поддержка", href: `/${locale}/support` },
-    { name: "Статус системы", href: `/${locale}/status` },
+    { name: t("footer.documentation"), href: `/${locale}/docs` },
+    { name: t("footer.knowledgeBase"), href: `/${locale}/knowledge-base` },
+    { name: t("footer.faq"), href: `/${locale}/faq` },
+    { name: t("footer.support"), href: `/${locale}/support` },
+    { name: t("footer.systemStatus"), href: `/${locale}/status` },
   ]
 
   const legal = [
-    { name: "Политика конфиденциальности", href: `/${locale}/privacy` },
-    { name: "Условия использования", href: `/${locale}/terms` },
-    { name: "Соглашение об обработке данных", href: `/${locale}/dpa` },
-    { name: "Cookies", href: `/${locale}/cookies` },
+    { name: t("footer.privacyPolicy"), href: `/${locale}/privacy` },
+    { name: t("footer.termsOfUse"), href: `/${locale}/terms` },
+    { name: t("footer.dataProcessing"), href: `/${locale}/dpa` },
+    { name: t("footer.cookies"), href: `/${locale}/cookies` },
   ]
 
   const offices = [
     {
-      city: "Барселона",
-      country: "Испания",
+      city: t("footer.barcelona"),
+      country: t("footer.spain"),
       address: "Carrer de Mallorca, 401",
       phone: "+34 93 123 45 67",
     },
     {
-      city: "Москва",
-      country: "Россия",
-      address: "ул. Тверская, 15",
+      city: t("footer.moscow"),
+      country: t("footer.russia"),
+      address: t("footer.moscowAddress"),
       phone: "+7 (495) 123-45-67",
     },
     {
-      city: "Астана",
-      country: "Казахстан",
-      address: "пр. Кабанбай батыра, 53",
+      city: t("footer.astana"),
+      country: t("footer.kazakhstan"),
+      address: t("footer.astanaAddress"),
       phone: "+7 (717) 123-45-67",
     },
   ]
@@ -80,10 +80,7 @@ export function Footer({ locale }: FooterProps) {
                   </div>
                   <span className="font-bold text-xl">AI Solutions</span>
                 </Link>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  Голосовые AI-ассистенты для автоматизации продаж и обслуживания клиентов. Международная команда, офисы
-                  в Барселоне, Москве и Астане.
-                </p>
+                <p className="text-muted-foreground text-sm leading-relaxed">{t("footer.companyDescription")}</p>
               </div>
 
               <div className="space-y-3">
@@ -101,7 +98,7 @@ export function Footer({ locale }: FooterProps) {
                 </div>
                 <div className="flex items-center space-x-2 text-sm">
                   <Globe className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-muted-foreground">Работаем по всему миру</span>
+                  <span className="text-muted-foreground">{t("footer.worldwide")}</span>
                 </div>
               </div>
             </div>
@@ -198,25 +195,25 @@ export function Footer({ locale }: FooterProps) {
         {/* Bottom bar */}
         <div className="py-6 border-t border-muted">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-sm text-muted-foreground">© 2024 AI Solutions — M2 Решения. Все права защищены.</div>
+            <div className="text-sm text-muted-foreground">{t("footer.copyright")}</div>
             <div className="flex items-center space-x-6">
               <Link
                 href={`/${locale}/privacy`}
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                Конфиденциальность
+                {t("footer.privacy")}
               </Link>
               <Link
                 href={`/${locale}/terms`}
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                Условия
+                {t("footer.terms")}
               </Link>
               <Link
                 href={`/${locale}/cookies`}
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                Cookies
+                {t("footer.cookies")}
               </Link>
             </div>
           </div>

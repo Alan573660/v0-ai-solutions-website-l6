@@ -3,43 +3,38 @@
 import Image from "next/image"
 import { CheckCircle2 } from "lucide-react"
 import type { Locale } from "@/lib/i18n/config"
+import { useTranslations } from "@/lib/i18n/translations"
 
 interface PlatformFeaturesSectionProps {
   locale: Locale
 }
 
 export function PlatformFeaturesSection({ locale }: PlatformFeaturesSectionProps) {
+  const { t } = useTranslations(locale)
+
   const features = [
-    "Мультиязычная поддержка",
-    "Настройка и обучение менеджеров",
-    "Загрузка данных компании",
-    "Запись и анализ звонков",
-    "Интеграция с CRM системами",
-    "Email и чат интеграция",
-    "Workflow автоматизация",
-    "Аналитика и отчетность",
+    t("platform.feature1"),
+    t("platform.feature2"),
+    t("platform.feature3"),
+    t("platform.feature4"),
+    t("platform.feature5"),
+    t("platform.feature6"),
+    t("platform.feature7"),
+    t("platform.feature8"),
   ]
 
   return (
     <section className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1E1E26] mb-4">
-            Полнофункциональная SaaS-платформа
-          </h2>
-          <p className="text-lg text-[#8E8EA0] max-w-3xl mx-auto">
-            Управляйте голосовыми AI-ассистентами через интуитивный интерфейс. Настраивайте, обучайте и анализируйте
-            работу ваших виртуальных менеджеров.
-          </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1E1E26] mb-4">{t("platform.title")}</h2>
+          <p className="text-lg text-[#8E8EA0] max-w-3xl mx-auto">{t("platform.description")}</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div className="order-2 lg:order-1">
-            <h3 className="text-2xl sm:text-3xl font-bold text-[#1E1E26] mb-6">Визуальный конструктор workflow</h3>
-            <p className="text-lg text-[#8E8EA0] mb-6">
-              Создавайте сложные сценарии обработки звонков и заявок с помощью drag-and-drop интерфейса. Настраивайте
-              логику работы AI-ассистента под ваш бизнес без программирования.
-            </p>
+            <h3 className="text-2xl sm:text-3xl font-bold text-[#1E1E26] mb-6">{t("platform.workflow.title")}</h3>
+            <p className="text-lg text-[#8E8EA0] mb-6">{t("platform.workflow.description")}</p>
             <ul className="space-y-3">
               {features.slice(0, 4).map((feature, index) => (
                 <li key={index} className="flex items-start gap-3">
@@ -75,11 +70,8 @@ export function PlatformFeaturesSection({ locale }: PlatformFeaturesSectionProps
             </div>
           </div>
           <div>
-            <h3 className="text-2xl sm:text-3xl font-bold text-[#1E1E26] mb-6">Детальная аналитика и мониторинг</h3>
-            <p className="text-lg text-[#8E8EA0] mb-6">
-              Отслеживайте эффективность работы AI-ассистентов в реальном времени. Анализируйте звонки, конверсию, время
-              ответа и другие ключевые метрики для оптимизации бизнес-процессов.
-            </p>
+            <h3 className="text-2xl sm:text-3xl font-bold text-[#1E1E26] mb-6">{t("platform.analytics.title")}</h3>
+            <p className="text-lg text-[#8E8EA0] mb-6">{t("platform.analytics.description")}</p>
             <ul className="space-y-3">
               {features.slice(4).map((feature, index) => (
                 <li key={index} className="flex items-start gap-3">
@@ -93,13 +85,8 @@ export function PlatformFeaturesSection({ locale }: PlatformFeaturesSectionProps
 
         <div className="mt-16 bg-gradient-to-br from-[#7C3AED]/10 to-[#22D3EE]/10 rounded-2xl p-8 md:p-12">
           <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-2xl sm:text-3xl font-bold text-[#1E1E26] mb-4">
-              Интеграция с ведущими AI-провайдерами
-            </h3>
-            <p className="text-lg text-[#8E8EA0] mb-8">
-              Наша платформа интегрирована с лучшими нейросетями и AI-моделями. Голосовые ассистенты практически
-              неотличимы от живых менеджеров и справляются с задачами даже лучше человека.
-            </p>
+            <h3 className="text-2xl sm:text-3xl font-bold text-[#1E1E26] mb-4">{t("platform.integration.title")}</h3>
+            <p className="text-lg text-[#8E8EA0] mb-8">{t("platform.integration.description")}</p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               <div className="flex items-center justify-center h-12 w-auto grayscale hover:grayscale-0 transition-all duration-300">
                 <Image

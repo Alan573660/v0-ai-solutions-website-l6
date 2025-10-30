@@ -8,9 +8,17 @@ import { CTAProvider } from "@/components/modals/cta-provider"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ScrollToTop } from "@/components/scroll-to-top"
+import type { Metadata } from "next"
+
+export const dynamic = "force-static"
+export const revalidate = 3600
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
+}
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://m2solutions.ai"),
 }
 
 export default async function LocaleLayout({

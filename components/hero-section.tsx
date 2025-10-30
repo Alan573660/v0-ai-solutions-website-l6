@@ -28,11 +28,9 @@ export function HeroSection({ locale }: HeroSectionProps) {
           <div className="space-y-8">
             <div className="space-y-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1E1E26] leading-tight">
-                Голосовые AI-ассистенты, которые продают и обслуживают клиентов 24/7
+                {t("hero.title")}
               </h1>
-              <p className="text-lg sm:text-xl text-[#8E8EA0] leading-relaxed">
-                Автоматизируйте звонки, чаты и заявки — без потери качества и с гарантией результата.
-              </p>
+              <p className="text-lg sm:text-xl text-[#8E8EA0] leading-relaxed">{t("hero.description")}</p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -42,7 +40,7 @@ export function HeroSection({ locale }: HeroSectionProps) {
                 onClick={() => openModal("trial")}
               >
                 <Mic className="mr-2 h-5 w-5" />
-                Попробовать бесплатно
+                {t("cta.tryFree")}
               </Button>
               <Button
                 size="lg"
@@ -50,7 +48,7 @@ export function HeroSection({ locale }: HeroSectionProps) {
                 className="h-12 text-base border-2 bg-transparent"
                 onClick={() => openModal("demo")}
               >
-                Узнать больше
+                {t("cta.learnMore")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
