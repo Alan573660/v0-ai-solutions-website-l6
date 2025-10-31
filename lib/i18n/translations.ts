@@ -24,30 +24,6 @@ export type TranslationKey =
   | "nav.resources"
   | "nav.legal"
   | "nav.offices"
-  | "footer.careers"
-  | "footer.partners"
-  | "footer.documentation"
-  | "footer.knowledgeBase"
-  | "footer.faq"
-  | "footer.support"
-  | "footer.systemStatus"
-  | "footer.privacyPolicy"
-  | "footer.termsOfUse"
-  | "footer.dataProcessing"
-  | "footer.cookies"
-  | "footer.barcelona"
-  | "footer.spain"
-  | "footer.moscow"
-  | "footer.russia"
-  | "footer.moscowAddress"
-  | "footer.astana"
-  | "footer.kazakhstan"
-  | "footer.astanaAddress"
-  | "footer.companyDescription"
-  | "footer.worldwide"
-  | "footer.copyright"
-  | "footer.privacy"
-  | "footer.terms"
   // CTA buttons
   | "cta.tryFree"
   | "cta.requestDemo"
@@ -558,31 +534,6 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "nav.resources": "Документация",
     "nav.legal": "Политика конфиденциальности",
     "nav.offices": "Наши офисы",
-    "footer.careers": "Карьера",
-    "footer.partners": "Партнёрам",
-    "footer.documentation": "Документация",
-    "footer.knowledgeBase": "База знаний",
-    "footer.faq": "FAQ",
-    "footer.support": "Поддержка",
-    "footer.systemStatus": "Статус системы",
-    "footer.privacyPolicy": "Политика конфиденциальности",
-    "footer.termsOfUse": "Условия использования",
-    "footer.dataProcessing": "Обработка данных",
-    "footer.cookies": "Cookie",
-    "footer.barcelona": "Барселона",
-    "footer.spain": "Испания",
-    "footer.moscow": "Москва",
-    "footer.russia": "Россия",
-    "footer.moscowAddress": "ул. Ленина, д. 1, офис 101",
-    "footer.astana": "Астана",
-    "footer.kazakhstan": "Казахстан",
-    "footer.astanaAddress": "пр. Нурсултана Назарбаева, д. 10, офис 202",
-    "footer.companyDescription":
-      "AI Solutions — ведущий разработчик AI-ассистентов для бизнеса. Мы помогаем компаниям автоматизировать продажи, улучшать клиентский сервис и повышать эффективность.",
-    "footer.worldwide": "По всему миру",
-    "footer.copyright": "© 2024 AI Solutions. Все права защищены.",
-    "footer.privacy": "Политика конфиденциальности",
-    "footer.terms": "Условия использования",
     // CTA buttons
     "cta.tryFree": "Попробовать бесплатно",
     "cta.requestDemo": "Запросить демо",
@@ -1141,31 +1092,6 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "nav.resources": "Resources",
     "nav.legal": "Legal",
     "nav.offices": "Offices",
-    "footer.careers": "Careers",
-    "footer.partners": "For Partners",
-    "footer.documentation": "Documentation",
-    "footer.knowledgeBase": "Knowledge Base",
-    "footer.faq": "FAQ",
-    "footer.support": "Support",
-    "footer.systemStatus": "System Status",
-    "footer.privacyPolicy": "Privacy Policy",
-    "footer.termsOfUse": "Terms of Use",
-    "footer.dataProcessing": "Data Processing",
-    "footer.cookies": "Cookies",
-    "footer.barcelona": "Barcelona",
-    "footer.spain": "Spain",
-    "footer.moscow": "Moscow",
-    "footer.russia": "Russia",
-    "footer.moscowAddress": "Lenina St., 1, Office 101",
-    "footer.astana": "Astana",
-    "footer.kazakhstan": "Kazakhstan",
-    "footer.astanaAddress": "Nursultan Nazarbayev Ave., 10, Office 202",
-    "footer.companyDescription":
-      "AI Solutions is a leading developer of AI assistants for business. We help companies automate sales, improve customer service, and increase efficiency.",
-    "footer.worldwide": "Worldwide",
-    "footer.copyright": "© 2024 AI Solutions. All rights reserved.",
-    "footer.privacy": "Privacy Policy",
-    "footer.terms": "Terms of Use",
     // CTA buttons
     "cta.tryFree": "Try Free",
     "cta.requestDemo": "Request Demo",
@@ -1654,31 +1580,6 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "nav.resources": "Recursos",
     "nav.legal": "Legal",
     "nav.offices": "Oficinas",
-    "footer.careers": "Carreras",
-    "footer.partners": "Para Socios",
-    "footer.documentation": "Documentación",
-    "footer.knowledgeBase": "Base de Conocimiento",
-    "footer.faq": "FAQ",
-    "footer.support": "Soporte",
-    "footer.systemStatus": "Estado del Sistema",
-    "footer.privacyPolicy": "Política de Privacidad",
-    "footer.termsOfUse": "Términos de Uso",
-    "footer.dataProcessing": "Procesamiento de Datos",
-    "footer.cookies": "Cookies",
-    "footer.barcelona": "Barcelona",
-    "footer.spain": "España",
-    "footer.moscow": "Moscú",
-    "footer.russia": "Rusia",
-    "footer.moscowAddress": "Calle Lenin, 1, Oficina 101",
-    "footer.astana": "Astaná",
-    "footer.kazakhstan": "Kazajistán",
-    "footer.astanaAddress": "Av. Nursultan Nazarbayev, 10, Oficina 202",
-    "footer.companyDescription":
-      "AI Solutions es un desarrollador líder de asistentes IA para empresas. Ayudamos a las empresas a automatizar ventas, mejorar el servicio al cliente y aumentar la eficiencia.",
-    "footer.worldwide": "En todo el mundo",
-    "footer.copyright": "© 2024 AI Solutions. Todos los derechos reservados.",
-    "footer.privacy": "Política de Privacidad",
-    "footer.terms": "Términos de Uso",
     // CTA buttons
     "cta.tryFree": "Probar gratis",
     "cta.requestDemo": "Solicitar demo",
@@ -2177,31 +2078,6 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "nav.resources": "Ressourcen",
     "nav.legal": "Rechtliches",
     "nav.offices": "Büros",
-    "footer.careers": "Karriere",
-    "footer.partners": "Für Partner",
-    "footer.documentation": "Dokumentation",
-    "footer.knowledgeBase": "Wissensdatenbank",
-    "footer.faq": "FAQ",
-    "footer.support": "Support",
-    "footer.systemStatus": "Systemstatus",
-    "footer.privacyPolicy": "Datenschutzrichtlinie",
-    "footer.termsOfUse": "Nutzungsbedingungen",
-    "footer.dataProcessing": "Datenverarbeitung",
-    "footer.cookies": "Cookies",
-    "footer.barcelona": "Barcelona",
-    "footer.spain": "Spanien",
-    "footer.moscow": "Moskau",
-    "footer.russia": "Russland",
-    "footer.moscowAddress": "Lenin-Str. 1, Büro 101",
-    "footer.astana": "Astana",
-    "footer.kazakhstan": "Kasachstan",
-    "footer.astanaAddress": "Nursultan-Nasarbajew-Allee 10, Büro 202",
-    "footer.companyDescription":
-      "AI Solutions ist ein führender Entwickler von KI-Assistenten für Unternehmen. Wir helfen Unternehmen, Verkäufe zu automatisieren, den Kundenservice zu verbessern und die Effizienz zu steigern.",
-    "footer.worldwide": "Weltweit",
-    "footer.copyright": "© 2024 AI Solutions. Alle Rechte vorbehalten.",
-    "footer.privacy": "Datenschutzrichtlinie",
-    "footer.terms": "Nutzungsbedingungen",
     // CTA buttons
     "cta.tryFree": "Kostenlos testen",
     "cta.requestDemo": "Demo anfordern",
@@ -2706,31 +2582,6 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "nav.resources": "Bronnen",
     "nav.legal": "Juridisch",
     "nav.offices": "Kantoren",
-    "footer.careers": "Carrières",
-    "footer.partners": "Voor partners",
-    "footer.documentation": "Documentatie",
-    "footer.knowledgeBase": "Kennisbank",
-    "footer.faq": "FAQ",
-    "footer.support": "Ondersteuning",
-    "footer.systemStatus": "Systeemstatus",
-    "footer.privacyPolicy": "Privacybeleid",
-    "footer.termsOfUse": "Gebruiksvoorwaarden",
-    "footer.dataProcessing": "Gegevensverwerking",
-    "footer.cookies": "Cookies",
-    "footer.barcelona": "Barcelona",
-    "footer.spain": "Spanje",
-    "footer.moscow": "Moskou",
-    "footer.russia": "Rusland",
-    "footer.moscowAddress": "Leninstraat 1, kantoor 101",
-    "footer.astana": "Astana",
-    "footer.kazakhstan": "Kazachstan",
-    "footer.astanaAddress": "Nursultan Nazarbayevlaan 10, kantoor 202",
-    "footer.companyDescription":
-      "AI Solutions is een toonaangevende ontwikkelaar van AI-assistenten voor bedrijven. Wij helpen bedrijven bij het automatiseren van verkopen, het verbeteren van de klantenservice en het verhogen van de efficiëntie.",
-    "footer.worldwide": "Wereldwijd",
-    "footer.copyright": "© 2024 AI Solutions. Alle rechten voorbehouden.",
-    "footer.privacy": "Privacybeleid",
-    "footer.terms": "Gebruiksvoorwaarden",
     // CTA buttons
     "cta.tryFree": "Gratis proberen",
     "cta.requestDemo": "Demo aanvragen",
@@ -3226,31 +3077,6 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "nav.resources": "Ressources",
     "nav.legal": "Légal",
     "nav.offices": "Bureaux",
-    "footer.careers": "Carrières",
-    "footer.partners": "Pour les partenaires",
-    "footer.documentation": "Documentation",
-    "footer.knowledgeBase": "Base de connaissances",
-    "footer.faq": "FAQ",
-    "footer.support": "Support",
-    "footer.systemStatus": "État du système",
-    "footer.privacyPolicy": "Politique de confidentialité",
-    "footer.termsOfUse": "Conditions d'utilisation",
-    "footer.dataProcessing": "Traitement des données",
-    "footer.cookies": "Cookies",
-    "footer.barcelona": "Barcelone",
-    "footer.spain": "Espagne",
-    "footer.moscow": "Moscou",
-    "footer.russia": "Russie",
-    "footer.moscowAddress": "Rue Lénine, 1, Bureau 101",
-    "footer.astana": "Astana",
-    "footer.kazakhstan": "Kazakhstan",
-    "footer.astanaAddress": "Av. Noursoultan Nazarbaïev, 10, Bureau 202",
-    "footer.companyDescription":
-      "AI Solutions est un développeur leader d'assistants IA pour les entreprises. Nous aidons les entreprises à automatiser les ventes, à améliorer le service client et à accroître l'efficacité.",
-    "footer.worldwide": "Dans le monde entier",
-    "footer.copyright": "© 2024 AI Solutions. Tous droits réservés.",
-    "footer.privacy": "Politique de confidentialité",
-    "footer.terms": "Conditions d'utilisation",
     // CTA buttons
     "cta.tryFree": "Essayer gratuitement",
     "cta.requestDemo": "Demander une démo",
