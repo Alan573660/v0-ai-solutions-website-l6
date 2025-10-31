@@ -104,7 +104,7 @@
     "tailwindcss-animate": "^1.0.7",
     "tw-animate-css": "latest",
     "vaul": "latest",
-    "zod": "3.25.67"
+    "zod": "4.1.12"
   },
   "devDependencies": {
     "@jest/globals": "29.7.0",
