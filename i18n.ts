@@ -1,15 +1,16 @@
 import { getRequestConfig } from "next-intl/server"
-import { notFound } from "next/navigation"
-export { locales, type Locale, defaultLocale } from "@/lib/i18n/config"
 
-export { default } from "./i18n/request"
+export const locales = ["ru", "en", "es", "fr", "de", "nl"] as const
+export type Locale = (typeof locales)[number]
+export const defaultLocale: Locale = "ru"
 
 export default getRequestConfig(async ({ locale }) => {
-  // Validate that the incoming `locale` parameter is valid
-  const { locales } = await import("@/lib/i18n/config")
-  if (!locales.includes(locale as any)) notFound()
+  const safe = (locales as readonly string[]).includes(locale) ? (locale as Locale) : defaultLocale
 
   return {
-    messages: (await import(`./messages/${locale}.json`)).default,
+    locale: safe,
+    messages: (await import(`./messages/${safe}.json`)).default,
   }
 })
+
+export { locales as allLocales, defaultLocale as i18nDefaultLocale }

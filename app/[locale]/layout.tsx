@@ -2,17 +2,16 @@ import type React from "react"
 import "../globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
-import { locales, type Locale } from "@/lib/i18n/config"
-import { notFound } from "next/navigation"
+import { locales, type Locale } from "@/i18n"
 import { CTAProvider } from "@/components/modals/cta-provider"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { NextIntlClientProvider } from "next-intl"
-import { getMessages } from "next-intl/server"
+import { getMessages, unstable_setRequestLocale } from "next-intl/server"
 
-export async function generateStaticParams() {
-  return locales.map((locale) => ({ locale }))
+export function generateStaticParams() {
+  return (locales as readonly string[]).map((locale) => ({ locale }))
 }
 
 export default async function LocaleLayout({
@@ -20,13 +19,11 @@ export default async function LocaleLayout({
   params,
 }: {
   children: React.ReactNode
-  params: Promise<{ locale: Locale }>
+  params: { locale: Locale }
 }) {
-  const { locale } = await params
+  const { locale } = params
 
-  if (!locales.includes(locale)) {
-    notFound()
-  }
+  unstable_setRequestLocale(locale)
 
   const messages = await getMessages()
 
