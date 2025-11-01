@@ -4,11 +4,12 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Calculator, FileText, Phone, CheckCircle2, Shield, Zap, TrendingUp } from "lucide-react"
 import Link from "next/link"
 import { useCTA } from "@/components/modals/cta-provider"
-import { useTranslations, type Locale } from "@/lib/i18n/translations"
+import { useTranslations } from "next-intl"
+import type { Locale } from "@/lib/i18n/config"
 
 export function CTASection({ locale }: { locale: Locale }) {
   const { openModal } = useCTA()
-  const { t } = useTranslations(locale)
+  const t = useTranslations()
 
   const actions = [
     {

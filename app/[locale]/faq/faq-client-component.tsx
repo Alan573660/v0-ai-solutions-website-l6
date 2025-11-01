@@ -1,6 +1,6 @@
 "use client"
 
-import type { Locale } from "@/lib/i18n/translations"
+import type { Locale } from "@/lib/i18n/config"
 import { Header } from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"

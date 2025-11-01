@@ -1,5 +1,5 @@
 import type { Locale } from "@/lib/i18n/config"
-import { getTranslation } from "@/lib/i18n/translations"
+import { getTranslations } from "next-intl/server"
 import {
   generateOrganizationSchema,
   generateWebSiteSchema,
@@ -17,15 +17,15 @@ interface StructuredDataProps {
   data?: any
 }
 
-export function StructuredData({ locale, type = "home", data }: StructuredDataProps) {
+export async function StructuredData({ locale, type = "home", data }: StructuredDataProps) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://aisolutions-m2.com"
-  const t = getTranslation
+  const t = await getTranslations({ locale })
 
   const organizationSchema = generateOrganizationSchema(locale, {
     name: "AI Solutions M2",
     alternateName: "M2 Solutions",
     logo: `${baseUrl}/logo.png`,
-    description: t(locale, "hero.description"),
+    description: t("hero.description"),
     foundingDate: "2020",
     address: [
       {
@@ -51,11 +51,11 @@ export function StructuredData({ locale, type = "home", data }: StructuredDataPr
     ],
   })
 
-  const websiteSchema = generateWebSiteSchema(locale, t(locale, "hero.description"))
+  const websiteSchema = generateWebSiteSchema(locale, t("hero.description"))
 
   const breadcrumbItems: BreadcrumbItem[] = [
     {
-      name: t(locale, "nav.home"),
+      name: t("nav.home"),
       url: `${baseUrl}/${locale}`,
     },
   ]

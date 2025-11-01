@@ -2,11 +2,12 @@
 
 import { Clock, Users, TrendingUp, Shield, Zap, BarChart } from "lucide-react"
 import { useEffect, useState } from "react"
-import { useTranslations, type Locale } from "@/lib/i18n/translations"
+import { useTranslations } from "next-intl"
+import type { Locale } from "@/lib/i18n/config"
 
 export function BenefitsSection({ locale }: { locale: Locale }) {
   const [isVisible, setIsVisible] = useState(false)
-  const { t } = useTranslations(locale)
+  const t = useTranslations()
 
   useEffect(() => {
     const observer = new IntersectionObserver(

@@ -5,13 +5,14 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Mic, MicOff, Phone, Play, Volume2, MessageSquare } from "lucide-react"
 import { useCTA } from "@/components/modals/cta-provider"
-import { useTranslations, type Locale } from "@/lib/i18n/translations"
+import { useTranslations } from "next-intl"
+import type { Locale } from "@/lib/i18n/config"
 
 export function DemoSection({ locale }: { locale: Locale }) {
   const [isRecording, setIsRecording] = useState(false)
   const [selectedScenario, setSelectedScenario] = useState("sales")
   const { openModal } = useCTA()
-  const { t } = useTranslations(locale)
+  const t = useTranslations()
 
   const scenarios = [
     {

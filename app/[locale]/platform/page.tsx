@@ -6,16 +6,16 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Shield, Zap, Globe, Lock, BarChart3, Headphones } from "lucide-react"
 import Link from "next/link"
 import type { Locale } from "@/lib/i18n/config"
-import { useTranslations } from "@/lib/i18n/translations"
+import { useTranslations } from "next-intl"
 import { PlatformCTAButtons } from "@/components/platform/platform-cta-buttons"
 
 interface PlatformPageProps {
-  params: Promise<{ locale: Locale }>
+  params: { locale: Locale }
 }
 
-export default async function PlatformPage({ params }: PlatformPageProps) {
-  const { locale } = await params
-  const { t } = useTranslations(locale)
+export default function PlatformPage({ params }: PlatformPageProps) {
+  const { locale } = params
+  const t = useTranslations()
 
   const platformFeatures = [
     {

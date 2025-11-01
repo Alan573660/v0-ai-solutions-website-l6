@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Mic } from "lucide-react"
 import type { Locale } from "@/lib/i18n/config"
-import { useTranslations } from "@/lib/i18n/translations"
+import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { useCTA } from "@/components/modals/cta-provider"
 import Image from "next/image"
@@ -13,7 +13,7 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ locale }: HeroSectionProps) {
-  const { t } = useTranslations(locale)
+  const t = useTranslations()
   const [mounted, setMounted] = useState(false)
   const { openModal } = useCTA()
 

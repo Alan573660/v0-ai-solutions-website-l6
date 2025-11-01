@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import type { Locale } from "next-intl"
 
 import { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
@@ -13,8 +14,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ArrowRight, Mic, MicOff, Play, Pause, Phone, Volume2, CheckCircle, AlertCircle } from "lucide-react"
 import { useCTA } from "@/components/modals/cta-provider"
-import type { Locale } from "@/lib/i18n/config"
-import { useTranslations } from "@/lib/i18n/translations"
+import { useTranslations } from "next-intl"
 
 interface DemoPageProps {
   params: { locale: Locale }
@@ -22,7 +22,7 @@ interface DemoPageProps {
 
 export default function DemoPage({ params }: DemoPageProps) {
   const { locale } = params
-  const { t } = useTranslations(locale)
+  const t = useTranslations()
   const { openModal } = useCTA()
 
   const [isRecording, setIsRecording] = useState(false)

@@ -19,17 +19,16 @@ import {
   Globe,
 } from "lucide-react"
 import Link from "next/link"
-import type { Locale } from "@/lib/i18n/config"
-import { useTranslations } from "@/lib/i18n/translations"
+import { useTranslations } from "next-intl"
 import { useCTA } from "@/components/modals/cta-provider"
 
 interface ArchitecturePageProps {
-  params: { locale: Locale }
+  params: { locale: string }
 }
 
 export default function ArchitecturePage({ params }: ArchitecturePageProps) {
   const { locale } = params
-  const { t } = useTranslations(locale)
+  const t = useTranslations()
   const { openModal } = useCTA()
   const [selectedComponent, setSelectedComponent] = useState<string | null>(null)
 
