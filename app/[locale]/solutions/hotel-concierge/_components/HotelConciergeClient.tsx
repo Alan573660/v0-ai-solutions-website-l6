@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Building2, Utensils, Car, Calendar, MapPin, Phone, PlayCircle, CheckCircle } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useTranslations } from "@/lib/i18n/translations"
 import { useCTA } from "@/components/modals/cta-provider"
 import type { Locale } from "@/lib/i18n/config"
 
@@ -17,7 +17,7 @@ interface HotelConciergePageProps {
 
 export default function HotelConciergeClient({ params }: HotelConciergePageProps) {
   const { locale } = params
-  const t = useTranslations()
+  const { t } = useTranslations(locale)
   const { openModal } = useCTA()
 
   const functions = [

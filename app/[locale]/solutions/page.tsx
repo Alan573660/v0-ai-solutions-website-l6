@@ -7,7 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { ArrowRight, Phone, Users, Building2, Zap, Target } from "lucide-react"
 import Link from "next/link"
 import type { Locale } from "@/lib/i18n/config"
-import { useTranslations } from "next-intl"
+import { useTranslations } from "@/lib/i18n/translations"
 import { useCTA } from "@/components/modals/cta-provider"
 
 interface SolutionsPageProps {
@@ -16,12 +16,12 @@ interface SolutionsPageProps {
 
 export default function SolutionsPage({ params }: SolutionsPageProps) {
   const { locale } = params // No await needed - params is synchronous in client components
-  const t = useTranslations()
+  const { t } = useTranslations(locale)
   const { openModal } = useCTA()
 
   const solutions = [
     {
-      title: t("voiceSalesManager"),
+      title: t("solutions.voiceSalesManager"),
       description: "Увеличьте продажи на 40% с голосовым AI-менеджером, который работает 24/7",
       icon: Phone,
       href: `/${locale}/solutions/voice-sales-manager`,
@@ -29,7 +29,7 @@ export default function SolutionsPage({ params }: SolutionsPageProps) {
       color: "bg-blue-500",
     },
     {
-      title: t("hotelConcierge"),
+      title: t("solutions.hotelConcierge"),
       description: "AI-консьерж для отелей: заказы, бронирования и сервис без очередей",
       icon: Building2,
       href: `/${locale}/solutions/hotel-concierge`,
@@ -37,7 +37,7 @@ export default function SolutionsPage({ params }: SolutionsPageProps) {
       color: "bg-purple-500",
     },
     {
-      title: t("smb"),
+      title: t("solutions.smb"),
       description: "Готовые решения для малого и среднего бизнеса с быстрым запуском",
       icon: Users,
       href: `/${locale}/solutions/smb`,
@@ -45,7 +45,7 @@ export default function SolutionsPage({ params }: SolutionsPageProps) {
       color: "bg-green-500",
     },
     {
-      title: t("enterprise"),
+      title: t("solutions.enterprise"),
       description: "Корпоративные решения с высокой безопасностью и SLA",
       icon: Target,
       href: `/${locale}/solutions/enterprise`,
@@ -53,7 +53,7 @@ export default function SolutionsPage({ params }: SolutionsPageProps) {
       color: "bg-orange-500",
     },
     {
-      title: t("custom"),
+      title: t("solutions.custom"),
       description: "Индивидуальные AI-решения под любые бизнес-задачи",
       icon: Zap,
       href: `/${locale}/solutions/custom`,
@@ -61,7 +61,7 @@ export default function SolutionsPage({ params }: SolutionsPageProps) {
       color: "bg-red-500",
     },
     {
-      title: t("smartHome"),
+      title: t("solutions.smartHome"),
       description: "Умный дом с AI: голосовое управление, автоматизация и мобильное приложение",
       icon: Building2,
       href: `/${locale}/solutions/smart-home`,
@@ -129,11 +129,11 @@ export default function SolutionsPage({ params }: SolutionsPageProps) {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" onClick={() => openModal("trial")} data-cta="cta-try-free">
-                {t("tryFree")}
+                {t("cta.tryFree")}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               <Button size="lg" variant="outline" onClick={() => openModal("demo")} data-cta="cta-request-demo">
-                {t("requestDemo")}
+                {t("cta.requestDemo")}
               </Button>
             </div>
           </div>
@@ -240,7 +240,7 @@ export default function SolutionsPage({ params }: SolutionsPageProps) {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
               <Button size="lg" variant="secondary" onClick={() => openModal("consultation")} data-cta="cta-calculate">
-                {t("calculate")}
+                {t("cta.calculate")}
               </Button>
               <Button
                 size="lg"

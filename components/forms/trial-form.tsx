@@ -4,7 +4,7 @@ import { useState } from "react"
 import { FormShell } from "./form-shell"
 import { TextInput, SelectInput, PhoneInput, Checkbox } from "./form-inputs"
 import type { Locale } from "@/lib/i18n/config"
-import { useTranslations } from "next-intl"
+import { useTranslations } from "@/lib/i18n/translations"
 import { validateForm, type FormData } from "@/lib/forms/validation"
 
 interface TrialFormProps {
@@ -13,7 +13,7 @@ interface TrialFormProps {
 }
 
 export function TrialForm({ locale, className }: TrialFormProps) {
-  const t = useTranslations()
+  const { t } = useTranslations(locale)
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",

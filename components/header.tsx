@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Menu, X, ChevronDown } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { LocaleSwitcher } from "@/components/locale-switcher"
-import { useTranslations } from "next-intl"
+import { useTranslations } from "@/lib/i18n/translations"
 import type { Locale } from "@/lib/i18n/config"
 import { useCTA } from "@/components/modals/cta-provider"
 
@@ -16,7 +16,7 @@ interface HeaderProps {
 
 export function Header({ locale }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const t = useTranslations()
+  const { t } = useTranslations(locale)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
   const localeSwitcherRef = useRef<HTMLDivElement>(null)
   const { openModal } = useCTA()

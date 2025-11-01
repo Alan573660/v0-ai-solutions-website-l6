@@ -24,7 +24,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import type { Locale } from "@/lib/i18n/config"
-import { useTranslations } from "next-intl"
+import { useTranslations } from "@/lib/i18n/translations"
 import { useCTA } from "@/components/modals/cta-provider"
 
 interface VoiceSalesManagerPageProps {
@@ -33,7 +33,7 @@ interface VoiceSalesManagerPageProps {
 
 export function VoiceSalesManagerClientPage({ params }: VoiceSalesManagerPageProps) {
   const { locale } = params
-  const t = useTranslations()
+  const { t } = useTranslations(locale)
   const { openModal } = useCTA()
 
   const problems = [

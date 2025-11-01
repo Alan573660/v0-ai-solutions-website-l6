@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { MapPin, Phone, Mail, Globe } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useTranslations } from "@/lib/i18n/translations"
 import type { Locale } from "@/lib/i18n/config"
 
 interface FooterProps {
@@ -10,7 +10,7 @@ interface FooterProps {
 }
 
 export function Footer({ locale }: FooterProps) {
-  const t = useTranslations()
+  const { t } = useTranslations(locale)
 
   const solutions = [
     { name: t("solutions.voiceSalesManager"), href: `/${locale}/solutions/voice-sales-manager` },
@@ -198,7 +198,7 @@ export function Footer({ locale }: FooterProps) {
         {/* Bottom bar */}
         <div className="py-6 border-t border-muted">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-sm text-muted-foreground">© 2025 AI Solutions — M2 Решения. Все права защищены.</div>
+            <div className="text-sm text-muted-foreground">© 2024 AI Solutions — M2 Решения. Все права защищены.</div>
             <div className="flex items-center space-x-6">
               <Link
                 href={`/${locale}/privacy`}

@@ -1,12 +1,11 @@
 "use client"
 
 import { Star, ThumbsUp, MapPin } from "lucide-react"
-import { useTranslations } from "next-intl"
-import type { Locale } from "@/lib/i18n/config"
+import { useTranslations, type Locale } from "@/lib/i18n/translations"
 import Image from "next/image"
 
 export function TestimonialsSection({ locale }: { locale: Locale }) {
-  const t = useTranslations()
+  const { t } = useTranslations(locale)
 
   const testimonials = [
     {

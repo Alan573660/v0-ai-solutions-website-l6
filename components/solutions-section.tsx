@@ -5,13 +5,12 @@ import { ArrowRight, Phone, Hotel, Building2, Briefcase, Code } from "lucide-rea
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { useCTA } from "@/components/modals/cta-provider"
-import { useTranslations } from "next-intl"
-import type { Locale } from "@/lib/i18n/config"
+import { useTranslations, type Locale } from "@/lib/i18n/translations"
 
 export function SolutionsSection({ locale }: { locale: Locale }) {
   const [isVisible, setIsVisible] = useState(false)
   const { openModal } = useCTA()
-  const t = useTranslations()
+  const { t } = useTranslations(locale)
 
   useEffect(() => {
     const observer = new IntersectionObserver(

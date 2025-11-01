@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Slider } from "@/components/ui/slider"
 import { Calculator, Download, Mail } from "lucide-react"
 import type { Locale } from "@/lib/i18n/config"
-import { useTranslations } from "next-intl"
+import { useTranslations } from "@/lib/i18n/translations"
 
 interface PricingCalculatorPageProps {
   params: { locale: Locale }
@@ -20,7 +21,7 @@ interface PricingCalculatorPageProps {
 
 export default function PricingCalculatorPage({ params }: PricingCalculatorPageProps) {
   const { locale } = params
-  const t = useTranslations()
+  const { t } = useTranslations(locale)
 
   const [config, setConfig] = useState({
     solutionType: "sales",

@@ -1,6 +1,6 @@
 "use client"
 
-import { useTranslations } from "next-intl"
+import { useTranslations } from "@/lib/i18n/translations"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -11,7 +11,7 @@ import type { Locale } from "@/lib/i18n/config"
 
 export default function SMBSolutionsPage({ params }: { params: { locale: Locale } }) {
   const { openModal } = useCTA()
-  const t = useTranslations()
+  const { t } = useTranslations(params.locale as any)
 
   const features = [
     {
