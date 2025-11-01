@@ -1,0 +1,63 @@
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: ai-solutions-redis
+    command: >
+      redis-server
+      --appendonly yes
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+    volumes:
+      - redis-data:/data
+    networks: [app-network]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 2s
+      retries: 10
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
+    container_name: ai-solutions-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL:-https://m2solutions.ai}
+      - REDIS_URL=${REDIS_URL:-redis://redis:6379}
+      - HUBSPOT_API_KEY=${HUBSPOT_API_KEY}
+      - NEXT_PUBLIC_GA_ID=${NEXT_PUBLIC_GA_ID}
+      - NEXT_PUBLIC_YANDEX_METRICA_ID=${NEXT_PUBLIC_YANDEX_METRICA_ID}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - DB_POOL_MIN=2
+      - DB_POOL_MAX=10
+      - REDIS_POOL_MIN=2
+      - REDIS_POOL_MAX=20
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks: [app-network]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/api/health', r => process.exit(r.statusCode===200?0:1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+volumes:
+  redis-data:
+
+networks:
+  app-network:
+    driver: bridge

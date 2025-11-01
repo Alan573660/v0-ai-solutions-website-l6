@@ -1,33 +1,45 @@
 import type React from "react"
-import type { Metadata } from "next"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
-import { Analytics } from "@vercel/analytics/next"
-import { locales, type Locale } from "@/lib/i18n/config"
 import "../globals.css"
+import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
+import { locales, type Locale } from "@/lib/i18n/config"
+import { notFound } from "next/navigation"
+import { CTAProvider } from "@/components/modals/cta-provider"
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
+import { ScrollToTop } from "@/components/scroll-to-top"
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
 }
 
-export const metadata: Metadata = {
-  title: "AI Solutions - Smart Home",
-  description: "Smart Home Solutions with AI",
-  generator: "v0.app",
-}
-
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
   params,
 }: {
   children: React.ReactNode
-  params: { locale: Locale }
+  params: Promise<{ locale: Locale }>
 }) {
+  const { locale } = await params
+
+  if (!locales.includes(locale)) {
+    notFound()
+  }
+
   return (
-    <html lang={params.locale}>
-      <body className={`font-sans antialiased ${GeistSans.variable} ${GeistMono.variable}`}>
-        {children}
-        <Analytics />
+    <html lang={locale} suppressHydrationWarning>
+      <body className="font-sans antialiased">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <CTAProvider>
+            <div className="flex min-h-screen flex-col">
+              <Header locale={locale} />
+              <main className="flex-1">{children}</main>
+              <Footer locale={locale} />
+            </div>
+            <Toaster />
+            <ScrollToTop />
+          </CTAProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

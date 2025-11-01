@@ -1,0 +1,258 @@
+{
+  "hero": {
+    "title": "Soluciones Inteligentes para el Hogar",
+    "subtitle": "Soluciones integrales para promotores, constructores, comunidades de propietarios y empresas de gestión. Aumente el valor de la propiedad y reduzca los costos operativos",
+    "cta": "Solicitar Consulta",
+    "ctaSecondary": "Ver Demostración"
+  },
+  "tabs": {
+    "business": "Negocios",
+    "housing": "Comunidades",
+    "developers": "Promotores"
+  },
+  "business": {
+    "title": "Soluciones para Promotores y Constructores",
+    "description": "Automatización integral de nuevas construcciones, complejos residenciales y propiedades comerciales",
+    "image": "/images/smart-building.jpg",
+    "stats": {
+      "increase": {
+        "value": "+15-25%",
+        "label": "Aumento del valor de la propiedad con tecnologías inteligentes"
+      },
+      "payback": {
+        "value": "12-18 meses",
+        "label": "Período de recuperación de la inversión"
+      }
+    },
+    "benefits": {
+      "title": "Propuestas Específicas:",
+      "items": [
+        {
+          "icon": "TrendingUp",
+          "title": "Aumento del valor de la propiedad",
+          "description": "Los apartamentos con tecnologías inteligentes se venden un 15-25% más caros"
+        },
+        {
+          "icon": "Star",
+          "title": "Ventaja competitiva",
+          "description": "Destáquese entre la competencia con soluciones innovadoras"
+        },
+        {
+          "icon": "Zap",
+          "title": "Ocupación rápida",
+          "description": "Las inversiones se recuperan a través del precio premium de los apartamentos"
+        },
+        {
+          "icon": "Building",
+          "title": "Soluciones llave en mano",
+          "description": "Proyectos completos para una implementación rápida en nuevas construcciones"
+        }
+      ]
+    },
+    "services": {
+      "title": "Lista completa de servicios:",
+      "items": [
+        "Entradas inteligentes con conserje AI 24/7",
+        "Videoporteros interactivos con AI",
+        "Sistema de gestión de zonas comunes",
+        "Aplicación móvil para residentes",
+        "Reconocimiento biométrico de rostros de residentes",
+        "Videovigilancia con detección de objetos",
+        "Integración con sistemas de ingeniería",
+        "+ 4 servicios más"
+      ]
+    },
+    "contact": {
+      "title": "Contáctenos para una consulta:",
+      "phone": "Llámenos",
+      "email": "Escribir por correo",
+      "chat": "Consulta en línea"
+    }
+  },
+  "housing": {
+    "title": "Soluciones para Comunidades y Empresas de Gestión",
+    "description": "Reduzca los costos operativos y mejore la calidad del servicio a los residentes",
+    "image": "/images/smart-community.jpg",
+    "stats": {
+      "reduction": {
+        "value": "-30-40%",
+        "label": "Reducción de costos de electricidad y mantenimiento"
+      },
+      "satisfaction": {
+        "value": "+45%",
+        "label": "Aumento de la satisfacción de los residentes"
+      }
+    },
+    "benefits": {
+      "title": "Propuestas Específicas:",
+      "items": [
+        {
+          "icon": "DollarSign",
+          "title": "Reducción de costos",
+          "description": "Ahorre un 30-40% en electricidad y mantenimiento"
+        },
+        {
+          "icon": "Shield",
+          "title": "Seguridad mejorada",
+          "description": "Videovigilancia 24/7 con análisis AI"
+        },
+        {
+          "icon": "Users",
+          "title": "Conveniencia para residentes",
+          "description": "Aplicación móvil para todas las solicitudes y pagos"
+        },
+        {
+          "icon": "BarChart",
+          "title": "Transparencia de gestión",
+          "description": "Informes y análisis en tiempo real"
+        }
+      ]
+    },
+    "services": {
+      "title": "Lista completa de servicios:",
+      "items": [
+        "Conserje AI en la entrada",
+        "Cerraduras inteligentes biométricas",
+        "Control de acceso automatizado",
+        "Sistema de videovigilancia 360°",
+        "Aplicación móvil para residentes",
+        "Integración con sistemas de contabilidad",
+        "Análisis de consumo de recursos",
+        "+ 5 servicios más"
+      ]
+    },
+    "contact": {
+      "title": "Contáctenos para una consulta:",
+      "phone": "Llámenos",
+      "email": "Escribir por correo",
+      "chat": "Consulta en línea"
+    }
+  },
+  "developers": {
+    "title": "Soluciones para Promotores Inmobiliarios",
+    "description": "Aumente el atractivo de sus proyectos con tecnologías inteligentes modernas",
+    "image": "/images/smart-development.jpg",
+    "stats": {
+      "premium": {
+        "value": "+20-30%",
+        "label": "Prima por apartamentos con tecnologías inteligentes"
+      },
+      "speed": {
+        "value": "2x más rápido",
+        "label": "Velocidad de venta de apartamentos premium"
+      }
+    },
+    "benefits": {
+      "title": "Propuestas Específicas:",
+      "items": [
+        {
+          "icon": "Home",
+          "title": "Apartamentos premium",
+          "description": "Tecnologías inteligentes como estándar en proyectos de clase premium"
+        },
+        {
+          "icon": "TrendingUp",
+          "title": "Aumento de márgenes",
+          "description": "Prima del 20-30% por apartamentos con sistemas inteligentes"
+        },
+        {
+          "icon": "Award",
+          "title": "Ventaja de marketing",
+          "description": "Posicionamiento único en el mercado inmobiliario"
+        },
+        {
+          "icon": "Smartphone",
+          "title": "Showroom digital",
+          "description": "Demostración de tecnologías en la sala de ventas"
+        }
+      ]
+    },
+    "services": {
+      "title": "Lista completa de servicios:",
+      "items": [
+        "Concepto de hogar inteligente para el proyecto",
+        "Showroom interactivo con demostración",
+        "Paquetes de apartamentos inteligentes",
+        "Aplicación móvil de marca",
+        "Integración con sistemas de construcción",
+        "Soporte técnico para compradores",
+        "Materiales de marketing",
+        "+ 3 servicios más"
+      ]
+    },
+    "contact": {
+      "title": "Contáctenos para una consulta:",
+      "phone": "Llámenos",
+      "email": "Escribir por correo",
+      "chat": "Consulta en línea"
+    }
+  },
+  "features": {
+    "title": "Funciones únicas que lo distinguen en el mercado",
+    "items": [
+      {
+        "title": "Conserje AI en la entrada",
+        "description": "Conserje virtual con reconocimiento facial, control de voz y registro automático de invitados. Funciona 24/7 sin días libres.",
+        "benefits": ["Reconocimiento de residentes", "Registro de invitados", "Videollamadas", "Gestión de acceso"]
+      },
+      {
+        "title": "Cerraduras inteligentes biométricas",
+        "description": "Cerraduras con huella dactilar, reconocimiento facial, código PIN y llave móvil. Acceso temporal para invitados y servicios.",
+        "benefits": ["5 formas de abrir", "Historial de acceso", "Códigos temporales", "Gestión remota"]
+      },
+      {
+        "title": "Reconocimiento de rostros y objetos",
+        "description": "Las cámaras AI reconocen miembros de la familia, mascotas, paquetes y extraños. Notificaciones inteligentes solo sobre eventos importantes.",
+        "benefits": [
+          "Reconocimiento facial",
+          "Detección de objetos",
+          "Notificaciones inteligentes",
+          "Almacenamiento en la nube"
+        ]
+      }
+    ]
+  },
+  "additionalFeatures": {
+    "title": "Capacidades adicionales del sistema",
+    "items": [
+      {
+        "title": "Videoportero inteligente",
+        "description": "Responda a los invitados desde cualquier lugar del mundo a través de la aplicación móvil. Grabación de video de todas las visitas."
+      },
+      {
+        "title": "Videovigilancia 360°",
+        "description": "Cobertura completa del territorio con análisis AI. Detección automática de situaciones sospechosas."
+      },
+      {
+        "title": "Hogar ecológico e inteligente",
+        "description": "Paneles solares, almacenamiento de energía y gestión inteligente del consumo. Ahorre hasta un 60% en electricidad."
+      }
+    ]
+  },
+  "projects": {
+    "title": "Proyectos realizados",
+    "subtitle": "Más de 750 proyectos implementados en Rusia, Kazajstán y España",
+    "items": [
+      {
+        "title": "Apartamentos de clase premium",
+        "location": "Moscú, Rusia",
+        "description": "Complejo residencial con sistema completo de hogar inteligente"
+      },
+      {
+        "title": "Complejo de oficinas",
+        "location": "Almaty, Kazajstán",
+        "description": "Sistema inteligente de gestión de edificios"
+      },
+      {
+        "title": "Villa de lujo",
+        "location": "Moraira, España",
+        "description": "Hogar inteligente con integración de energía solar"
+      }
+    ]
+  },
+  "cta": {
+    "title": "¿Listo para comenzar?",
+    "description": "Solicite una consulta gratuita y obtenga un cálculo del costo de implementación para su proyecto",
+    "button": "Solicitar Consulta"
+  }
+}

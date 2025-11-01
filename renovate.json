@@ -1,0 +1,18 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 3am on Monday"]
+  },
+  "rangeStrategy": "bump",
+  "semanticCommits": "enabled",
+  "labels": ["dependencies", "automated"],
+  "reviewers": ["team:reviewers"]
+}
