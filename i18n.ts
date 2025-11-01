@@ -1,8 +1,11 @@
 import { getRequestConfig } from "next-intl/server"
-import { locales, defaultLocale } from "./src/i18n"
+
+export const locales = ["ru", "en", "es", "fr", "de", "nl"] as const
+export type Locale = (typeof locales)[number]
+export const defaultLocale: Locale = "ru"
 
 export default getRequestConfig(async ({ locale }) => {
-  const safe = locales.includes(locale) ? locale : defaultLocale
+  const safe = (locales as readonly string[]).includes(locale) ? (locale as Locale) : defaultLocale
 
   return {
     locale: safe,

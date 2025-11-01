@@ -12,9 +12,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 RUN corepack enable
 
-ARG NEXT_INTL_CONFIG_PATH=src/i18n.ts
-ENV NEXT_INTL_CONFIG=${NEXT_INTL_CONFIG_PATH}
-
+ENV NEXT_INTL_CONFIG=i18n.ts
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
@@ -34,8 +32,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-ARG NEXT_INTL_CONFIG_PATH=src/i18n.ts
-ENV NEXT_INTL_CONFIG=${NEXT_INTL_CONFIG_PATH}
+ENV NEXT_INTL_CONFIG=i18n.ts
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
