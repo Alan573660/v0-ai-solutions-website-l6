@@ -8,7 +8,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { NextIntlClientProvider } from "next-intl"
-import { getMessages, unstable_setRequestLocale } from "next-intl/server"
+import { getMessages } from "next-intl/server"
 
 export function generateStaticParams() {
   return (locales as readonly string[]).map((locale) => ({ locale }))
@@ -22,8 +22,6 @@ export default async function LocaleLayout({
   params: { locale: Locale }
 }) {
   const { locale } = params
-
-  unstable_setRequestLocale(locale)
 
   const messages = await getMessages()
 
