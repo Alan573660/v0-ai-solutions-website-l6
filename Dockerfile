@@ -21,14 +21,21 @@ RUN corepack enable
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV NODE_ENV=production
 
 # Copy package files and install ALL dependencies (including dev)
 COPY package.json pnpm-lock.yaml* ./
 RUN pnpm install --frozen-lockfile
 
-# Copy source code
-COPY . .
+COPY next.config.mjs ./
+COPY tsconfig.json ./
+COPY postcss.config.mjs ./
+COPY tailwind.config.ts ./
+
+COPY app ./app
+COPY components ./components
+COPY lib ./lib
+COPY public ./public
+COPY types ./types
 
 RUN pnpm build
 
@@ -47,8 +54,8 @@ RUN corepack enable
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
-# Copy standalone output from builder
 COPY --from=builder /app/public ./public
+
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
@@ -66,5 +73,4 @@ ENV PORT=3000
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD node -e "require('http').get('http://localhost:3000/api/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
 
-# Start the application
 CMD ["node", "server.js"]
