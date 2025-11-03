@@ -48,12 +48,31 @@ const nextConfig = {
     serverComponentsExternalPackages: ['@formatjs/intl-localematcher'],
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
     optimizeCss: true,
+    workerThreads: false,
+    cpus: 1,
   },
 
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,
   swcMinify: true,
+
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.optimization = {
+        ...config.optimization,
+        minimize: true,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            default: false,
+            vendors: false,
+          },
+        },
+      };
+    }
+    return config;
+  },
 
   async headers() {
     return [

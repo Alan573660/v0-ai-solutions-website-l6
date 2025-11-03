@@ -23,9 +23,12 @@ services:
       dockerfile: Dockerfile
       args:
         NODE_ENV: production
+      shm_size: '2gb'
     container_name: ai-solutions-app
     ports:
       - "3000:3000"
+    mem_limit: 2g
+    mem_reservation: 1g
     environment:
       - NODE_ENV=production
       - PORT=3000
@@ -39,6 +42,7 @@ services:
       - DB_POOL_MAX=10
       - REDIS_POOL_MIN=2
       - REDIS_POOL_MAX=20
+      - NODE_OPTIONS=--max-old-space-size=1536
     env_file:
       - .env
     volumes:

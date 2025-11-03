@@ -10,8 +10,7 @@ RUN corepack enable
 # Copy package files
 COPY package.json pnpm-lock.yaml* ./
 
-# Install all dependencies (including devDependencies for build)
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --prod
 
 # Stage 2: Builder
 FROM node:20-alpine AS builder
@@ -20,15 +19,17 @@ WORKDIR /app
 # Enable corepack
 RUN corepack enable
 
-# Copy dependencies from deps stage
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-
-# Set build-time environment variables
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
-# Build the application (requires devDependencies)
+# Copy package files and install ALL dependencies (including dev)
+COPY package.json pnpm-lock.yaml* ./
+RUN pnpm install --frozen-lockfile
+
+# Copy source code
+COPY . .
+
 RUN pnpm build
 
 # Stage 3: Runner
@@ -50,7 +51,6 @@ RUN addgroup --system --gid 1001 nodejs && \
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
 
 # Switch to non-root user
 USER nextjs
