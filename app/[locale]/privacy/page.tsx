@@ -131,8 +131,10 @@ export default function PrivacyPage({ params }: PrivacyPageProps) {
                 По вопросам обработки персональных данных обращайтесь:
               </p>
               <div className="bg-purple-50 p-6 rounded-lg mt-4">
-                <p className="font-medium">Email: privacy@ai-solutions.com</p>
-                <p className="font-medium">Телефон: +7 (495) 123-45-67</p>
+                <p className="font-medium">Email: info@m2solutions.ai</p>
+                <p className="font-medium">Телефон (Россия): +7 926 447 43 45</p>
+                <p className="font-medium">Телефон (Казахстан): +7 771 524 20 88</p>
+                <p className="font-medium">Телефон (Испания): +34 631 026 692</p>
                 <p className="font-medium">Адрес: ул. Тверская, 15, Москва, Россия</p>
               </div>
             </section>

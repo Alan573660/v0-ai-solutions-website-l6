@@ -4,6 +4,7 @@ import Link from "next/link"
 import { MapPin, Phone, Mail, Globe } from "lucide-react"
 import { useTranslations } from "@/lib/i18n/translations"
 import type { Locale } from "@/lib/i18n/config"
+import { MessengerLinks } from "@/components/messenger-links"
 
 interface FooterProps {
   locale: Locale
@@ -89,8 +90,8 @@ export function Footer({ locale }: FooterProps) {
               <div className="space-y-3">
                 <div className="flex items-center space-x-2 text-sm">
                   <Mail className="h-4 w-4 text-muted-foreground" />
-                  <a href="mailto:hello@ai-solutions.com" className="hover:text-primary transition-colors">
-                    hello@ai-solutions.com
+                  <a href="mailto:info@m2solutions.ai" className="hover:text-primary transition-colors">
+                    info@m2solutions.ai
                   </a>
                 </div>
                 <div className="flex items-center space-x-2 text-sm">
@@ -179,19 +180,39 @@ export function Footer({ locale }: FooterProps) {
         {/* Offices */}
         <div className="py-8 border-t border-muted">
           <h3 className="font-semibold mb-6 text-center">{t("nav.offices")}</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {offices.map((office, index) => (
-              <div key={index} className="text-center space-y-2">
-                <div className="flex items-center justify-center space-x-2">
-                  <MapPin className="h-4 w-4 text-primary" />
-                  <span className="font-medium">
-                    {office.city}, {office.country}
-                  </span>
-                </div>
-                <p className="text-sm text-muted-foreground">{office.address}</p>
-                <p className="text-sm text-muted-foreground">{office.phone}</p>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="space-y-3">
+              <div className="flex items-center justify-center space-x-2">
+                <MapPin className="h-4 w-4 text-primary" />
+                <span className="font-medium">Барселона, Испания</span>
               </div>
-            ))}
+              <p className="text-sm text-muted-foreground text-center">Carrer de Mallorca, 401</p>
+              <div className="flex justify-center">
+                <MessengerLinks phone="+34631026692" country="spain" />
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-center justify-center space-x-2">
+                <MapPin className="h-4 w-4 text-primary" />
+                <span className="font-medium">Астана, Казахстан</span>
+              </div>
+              <p className="text-sm text-muted-foreground text-center">пр. Кабанбай батыра, 53</p>
+              <div className="flex justify-center">
+                <MessengerLinks phone="+77715242088" country="kazakhstan" />
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-center justify-center space-x-2">
+                <MapPin className="h-4 w-4 text-primary" />
+                <span className="font-medium">Москва, Россия</span>
+              </div>
+              <p className="text-sm text-muted-foreground text-center">ул. Тверская, 15</p>
+              <div className="flex justify-center">
+                <MessengerLinks phone="+79264474345" country="russia" />
+              </div>
+            </div>
           </div>
         </div>
 

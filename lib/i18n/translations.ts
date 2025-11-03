@@ -73,6 +73,7 @@ export type TranslationKey =
   | "solutions.enterprise"
   | "solutions.custom"
   | "solutions.smartHome"
+  | "solutions.m2Agents"
   // Platform
   | "platform.architecture"
   | "platform.demo"
@@ -585,6 +586,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.enterprise": "Enterprise / Госсектор / Банки",
     "solutions.custom": "Индивидуальные разработки",
     "solutions.smartHome": "Умный дом на базе ИИ",
+    "solutions.m2Agents": "Агенты M2",
     // Platform
     "platform.architecture": "Архитектура",
     "platform.demo": "Демонстрация",
@@ -1145,6 +1147,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.enterprise": "Enterprise / Government / Banks",
     "solutions.custom": "Custom Development",
     "solutions.smartHome": "AI-Powered Smart Home",
+    "solutions.m2Agents": "M2 Agents",
     // Platform
     "platform.architecture": "Architecture",
     "platform.demo": "Demo",
@@ -1634,6 +1637,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.enterprise": "Enterprise / Gobierno / Bancos",
     "solutions.custom": "Desarrollo personalizado",
     "solutions.smartHome": "Casa Inteligente con IA",
+    "solutions.m2Agents": "Agentes M2",
     // Platform
     "platform.architecture": "Arquitectura",
     "platform.demo": "Demo",
@@ -2134,6 +2138,8 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.enterprise": "Enterprise / Regierung / Banken",
     "solutions.custom": "Individuelle Entwicklung",
     "solutions.smartHome": "KI-gesteuertes Smart Home",
+    // Added M2 Agents German translation
+    "solutions.m2Agents": "M2 Agenten",
     // Platform
     "platform.architecture": "Architektur",
     "platform.demo": "Demo",
@@ -2389,21 +2395,21 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "voiceSales.resultsTitle": "Implementierungsergebnisse",
     "voiceSales.resultsSubtitle": "Durchschnittliche Kennzahlen unserer Kunden",
     "voiceSales.kpi1.metric": "Konversion",
-    "voiceSales.kpi1.before": "12 %",
-    "voiceSales.kpi1.after": "28 %",
-    "voiceSales.kpi1.improvement": "+133 %",
+    "voiceSales.kpi1.before": "12%",
+    "voiceSales.kpi1.after": "28%",
+    "voiceSales.kpi1.improvement": "+133%",
     "voiceSales.kpi2.metric": "Reaktionszeit",
     "voiceSales.kpi2.before": "45 Sek.",
     "voiceSales.kpi2.after": "0 Sek.",
-    "voiceSales.kpi2.improvement": "100 %",
+    "voiceSales.kpi2.improvement": "100%",
     "voiceSales.kpi3.metric": "Lead-Verarbeitung",
-    "voiceSales.kpi3.before": "40 %",
-    "voiceSales.kpi3.after": "100 %",
-    "voiceSales.kpi3.improvement": "+150 %",
+    "voiceSales.kpi3.before": "40%",
+    "voiceSales.kpi3.after": "100%",
+    "voiceSales.kpi3.improvement": "+150%",
     "voiceSales.kpi4.metric": "Kosten pro Lead",
     "voiceSales.kpi4.before": "$50",
     "voiceSales.kpi4.after": "$18",
-    "voiceSales.kpi4.improvement": "-64 %",
+    "voiceSales.kpi4.improvement": "-64%",
     "voiceSales.casesTitle": "Kundenfälle",
     "voiceSales.casesSubtitle": "Reale Implementierungsergebnisse",
     "voiceSales.pricingTitle": "Transparente Preise",
@@ -2635,6 +2641,8 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.enterprise": "Enterprise / Overheid / Banken",
     "solutions.custom": "Maatwerk ontwikkeling",
     "solutions.smartHome": "AI-aangedreven Smart Home",
+    // Added M2 Agents Dutch translation
+    "solutions.m2Agents": "M2 Agenten",
     // Platform
     "platform.architecture": "Architectuur",
     "platform.demo": "Demo",
@@ -2997,7 +3005,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "hotelConcierge.casesTitle": "Hotel cases",
     "hotelConcierge.casesSubtitle": "Resultaten van onze klanten",
     "hotelConcierge.case1.title": "Boutique Hotel Barcelona",
-    "hotelConcierge.case1.description": "Gasttevredenheid met 40% verhoogd",
+    "hotelConcierge.case1.description": "Gastevredenheid met 40% verhoogd",
     "hotelConcierge.case1.result1": "95% positieve beoordelingen",
     "hotelConcierge.case1.result2": "60% tijdsbesparing personeel",
     "hotelConcierge.case1.result3": "24/7 beschikbaarheid",
@@ -3133,6 +3141,8 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "solutions.enterprise": "Enterprise / Gouvernement / Banques",
     "solutions.custom": "Développement sur mesure",
     "solutions.smartHome": "Maison Intelligente avec IA",
+    // Added M2 Agents French translation
+    "solutions.m2Agents": "Agents M2",
     // Platform
     "platform.architecture": "Architecture",
     "platform.demo": "Démo",
