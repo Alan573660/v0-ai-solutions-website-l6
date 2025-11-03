@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@edge-runtime/vm": "4.0.0",
-    "@hookform/resolvers": "3.10.0",
+    "@hookform/resolvers": "5.2.2",
     "@opentelemetry/api": "latest",
     "@opentelemetry/auto-instrumentations-node": "latest",
     "@opentelemetry/core": "1.28.0",
