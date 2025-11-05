@@ -29,13 +29,11 @@ RUN pnpm install --frozen-lockfile
 COPY next.config.mjs ./
 COPY tsconfig.json ./
 COPY postcss.config.mjs ./
-COPY tailwind.config.ts ./
 
 COPY app ./app
 COPY components ./components
 COPY lib ./lib
 COPY public ./public
-COPY types ./types
 
 RUN pnpm build
 
