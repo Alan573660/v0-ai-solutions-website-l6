@@ -37,7 +37,7 @@ import {
   ChevronDown,
   Settings,
   Maximize2,
-  X,
+  Zap,
 } from "lucide-react"
 import Image from "next/image"
 import type { Locale } from "@/lib/i18n/config"
@@ -74,17 +74,23 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
       useCases: [
         {
           title: "Голосовой менеджер продаж",
-          description: "Квалифицирует лиды, отвечает на возражения, рассчитывает цену и доставку, создает сделки в CRM",
+          description:
+            "Принимает звонки 24/7, квалифицирует лиды, отвечает на возражения, рассчитывает цену и доставку, создает сделки в CRM",
+          channels: ["Телефон", "WhatsApp звонки"],
           metrics: ["+17% конверсия", "24/7 доступность", "-40% нагрузка на отдел"],
         },
         {
-          title: "Генерация КП и писем",
-          description: "Собирает требования клиента, подтягивает прайсы и скидки, формирует КП и отправляет",
-          metrics: ["-60% время на КП", "100% точность", "Автоматическая отправка"],
+          title: "Чат-бот для продаж",
+          description:
+            "Отвечает на вопросы в WhatsApp, Telegram, VK, на сайте. Подбирает товары, консультирует, отправляет ссылки на оплату",
+          channels: ["WhatsApp", "Telegram", "VK", "Веб-чат"],
+          metrics: ["+25% конверсия в чате", "Мгновенные ответы", "Работа с 100+ чатами"],
         },
         {
-          title: "Email-ассистент",
-          description: "Парсит входящие письма, создает черновики ответов, ставит фоллоу-апы, обновляет CRM",
+          title: "Email-ассистент продаж",
+          description:
+            "Парсит входящие письма, создает черновики ответов с КП, ставит фоллоу-апы, обновляет CRM автоматически",
+          channels: ["Email", "Gmail", "Outlook"],
           metrics: ["-50% время на email", "Нет пропущенных писем", "Автоматический CRM"],
         },
       ],
@@ -96,14 +102,24 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
       color: "from-purple-600 to-pink-600",
       useCases: [
         {
-          title: "1-я линия поддержки",
-          description: "Отвечает на FAQ, проверяет статус заказов, обрабатывает возвраты через голос/чат/мессенджеры",
+          title: "Голосовая поддержка 24/7",
+          description:
+            "Отвечает на FAQ по телефону, проверяет статус заказов, обрабатывает возвраты, эскалирует сложные запросы",
+          channels: ["Телефон", "Обратный звонок"],
           metrics: ["-38% время ответа", "24/7 без выходных", "+25% удовлетворенность"],
         },
         {
-          title: "Ассистент диспетчера",
-          description: "Назначает слоты для визитов, следит за SLA, эскалирует критичные запросы",
-          metrics: ["-30% время назначения", "100% соблюдение SLA", "Автоэскалация"],
+          title: "Омниканальный чат-бот",
+          description:
+            "Единый агент для WhatsApp, Telegram, VK, веб-чата. Помнит историю клиента во всех каналах, передает контекст оператору",
+          channels: ["WhatsApp", "Telegram", "VK", "Веб-чат"],
+          metrics: ["70% автоматизация", "Единая история", "Бесшовная эскалация"],
+        },
+        {
+          title: "Email-поддержка",
+          description: "Автоматически отвечает на типовые запросы, создает тикеты, отслеживает SLA, отправляет статусы",
+          channels: ["Email", "Тикет-система"],
+          metrics: ["-60% время обработки", "100% фиксация", "Соблюдение SLA"],
         },
       ],
     },
@@ -115,13 +131,24 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
       useCases: [
         {
           title: "RPA-оператор",
-          description: "Выполняет рутинные действия в ERP/CRM: создает заказы, счета, акты, отгрузки",
+          description:
+            "Выполняет рутинные действия в ERP/CRM: создает заказы, счета, акты, отгрузки. Работает по расписанию или по триггерам",
+          channels: ["API", "Интеграции", "Webhook"],
           metrics: ["-42% ручных действий", "0 ошибок", "Мгновенная обработка"],
         },
         {
-          title: "Сравнение поставщиков",
-          description: "Анализирует цены, сроки и условия поставщиков, формирует оптимальную корзину",
-          metrics: ["-15% закупочные цены", "-50% время анализа", "Лучшие условия"],
+          title: "Голосовой диспетчер",
+          description:
+            "Принимает заявки на доставку/монтаж по телефону, назначает слоты, отправляет подтверждения в SMS/email",
+          channels: ["Телефон", "SMS", "Email"],
+          metrics: ["-30% время назначения", "100% соблюдение SLA", "Автоматические уведомления"],
+        },
+        {
+          title: "Чат-бот для логистики",
+          description:
+            "Отслеживает статус заказов, отправляет уведомления о доставке, принимает изменения адреса через чат",
+          channels: ["WhatsApp", "Telegram", "SMS"],
+          metrics: ["-50% звонков в поддержку", "Проактивные уведомления", "Самообслуживание"],
         },
       ],
     },
@@ -132,13 +159,23 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
       color: "from-orange-600 to-red-600",
       useCases: [
         {
-          title: "Счета и акты",
-          description: "Генерирует и рассылает счета, акты, УПД, сверяет оплаты, отправляет напоминания",
+          title: "Автоматизация документов",
+          description:
+            "Генерирует и рассылает счета, акты, УПД по email, сверяет оплаты, отправляет напоминания через чат/email",
+          channels: ["Email", "WhatsApp", "Telegram"],
           metrics: ["-70% время на документы", "100% точность", "Автонапоминания"],
         },
         {
-          title: "Извлечение данных",
-          description: "Парсит договоры, накладные, спецификации и структурирует данные для учета",
+          title: "Голосовой финансовый ассистент",
+          description:
+            "Отвечает на вопросы о задолженности по телефону, принимает обещания оплаты, отправляет реквизиты",
+          channels: ["Телефон", "SMS", "Email"],
+          metrics: ["+35% собираемость", "-60% нагрузка на бухгалтерию", "Вежливые напоминания"],
+        },
+        {
+          title: "Извлечение данных из документов",
+          description: "Парсит договоры, накладные, спецификации из email/чата и структурирует данные для учета",
+          channels: ["Email", "Чат", "API"],
           metrics: ["-80% время обработки", "99% точность", "Любые форматы"],
         },
       ],
@@ -150,14 +187,25 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
       color: "from-indigo-600 to-purple-600",
       useCases: [
         {
-          title: "Скрининг кандидатов",
-          description: "Анализирует резюме, проводит первичное интервью, назначает встречи с HR",
+          title: "Голосовой скрининг кандидатов",
+          description:
+            "Звонит кандидатам, проводит первичное интервью, задает квалификационные вопросы, назначает встречи с HR",
+          channels: ["Телефон", "Обратный звонок"],
           metrics: ["-60% время скрининга", "+30% качество отбора", "Автоматическое интервью"],
         },
         {
-          title: "Онбординг сотрудников",
-          description: "Отвечает на вопросы новичков, выдает доступы по правилам, контролирует прохождение обучения",
+          title: "Чат-бот для сотрудников",
+          description:
+            "Отвечает на вопросы новичков в корпоративном чате, выдает доступы по правилам, контролирует прохождение обучения",
+          channels: ["Slack", "Telegram", "MS Teams"],
           metrics: ["-50% нагрузка на HR", "100% выполнение чек-листов", "Быстрая адаптация"],
+        },
+        {
+          title: "Email-ассистент HR",
+          description:
+            "Обрабатывает заявки на отпуск/больничный, отправляет напоминания о дедлайнах, собирает обратную связь",
+          channels: ["Email", "Формы"],
+          metrics: ["-40% время обработки", "Автоматические напоминания", "Структурированные данные"],
         },
       ],
     },
@@ -168,14 +216,24 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
       color: "from-cyan-600 to-blue-600",
       useCases: [
         {
-          title: "Самообслуживание",
-          description: "Помогает сбросить пароль, настроить VPN, получить доступы, выдает справки",
+          title: "Голосовой IT-хелпдеск",
+          description:
+            "Помогает сбросить пароль, настроить VPN, получить доступы по телефону. Заводит тикеты для сложных запросов",
+          channels: ["Телефон", "Внутренний номер"],
           metrics: ["-45% тикетов в IT", "Мгновенное решение", "24/7 доступность"],
         },
         {
-          title: "Инцидент-бот",
-          description: "Собирает контекст проблемы, заводит тикеты, сообщает статус, эскалирует критичные",
+          title: "Чат-бот для IT-поддержки",
+          description:
+            "Отвечает на вопросы в корпоративном чате, выдает инструкции, собирает контекст проблемы, эскалирует критичные",
+          channels: ["Slack", "Telegram", "MS Teams"],
           metrics: ["-35% время реакции", "100% фиксация", "Автоэскалация"],
+        },
+        {
+          title: "Email-бот для инцидентов",
+          description: "Парсит письма об ошибках, заводит тикеты в Jira/ServiceNow, сообщает статус, отправляет отчеты",
+          channels: ["Email", "Jira", "ServiceNow"],
+          metrics: ["-50% ручная работа", "Автоматическая приоритизация", "SLA-контроль"],
         },
       ],
     },
@@ -289,6 +347,64 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
     },
   ]
 
+  const agentTypes = [
+    {
+      title: "Голосовые агенты",
+      icon: Phone,
+      color: "from-blue-600 to-cyan-600",
+      description:
+        "Принимают и совершают звонки, понимают естественную речь, отвечают на вопросы, квалифицируют лиды, назначают встречи",
+      features: [
+        "Распознавание речи на 15+ языках",
+        "Естественная интонация и эмоции",
+        "Обработка возражений и сложных вопросов",
+        "Интеграция с телефонией (Asterisk, Twilio, Zadarma)",
+      ],
+      useCases: ["Продажи", "Поддержка", "Опросы", "Напоминания", "Скрининг кандидатов"],
+    },
+    {
+      title: "Чат-боты",
+      icon: MessageSquare,
+      color: "from-purple-600 to-pink-600",
+      description:
+        "Работают в WhatsApp, Telegram, VK, на сайте. Отвечают мгновенно, помнят контекст, отправляют файлы и ссылки",
+      features: [
+        "Омниканальность (один агент для всех каналов)",
+        "Память истории диалогов",
+        "Отправка изображений, документов, кнопок",
+        "Интеграция с мессенджерами и веб-чатом",
+      ],
+      useCases: ["Консультации", "Заказы", "Поддержка", "Уведомления", "Опросы"],
+    },
+    {
+      title: "Email-агенты",
+      icon: Mail,
+      color: "from-green-600 to-emerald-600",
+      description: "Парсят входящие письма, создают черновики ответов, отправляют КП и документы, ставят задачи в CRM",
+      features: [
+        "Анализ темы и содержания письма",
+        "Генерация персонализированных ответов",
+        "Извлечение данных из вложений",
+        "Интеграция с Gmail, Outlook, Яндекс.Почта",
+      ],
+      useCases: ["Продажи", "Поддержка", "HR", "Финансы", "Закупки"],
+    },
+    {
+      title: "RPA-агенты",
+      icon: Zap,
+      color: "from-orange-600 to-red-600",
+      description:
+        "Выполняют рутинные действия в ERP/CRM/других системах: создают документы, обновляют данные, запускают процессы",
+      features: [
+        "Работа с любыми системами через API или UI",
+        "Запуск по расписанию или триггерам",
+        "Обработка больших объемов данных",
+        "Логирование всех действий",
+      ],
+      useCases: ["Операции", "Финансы", "Логистика", "Закупки", "Отчетность"],
+    },
+  ]
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log("[v0] M2 Agents form submitted:", formData)
@@ -381,7 +497,8 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5 pt-8 md:pt-12 pb-16 md:pb-32">
+      {/* Improved mobile padding and text sizes */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5 pt-6 sm:pt-8 md:pt-12 pb-12 sm:pb-16 md:pb-24 lg:pb-32">
         <div className="absolute inset-0 bg-grid-white/5 [mask-image:radial-gradient(white,transparent_85%)]" />
 
         <div className="container relative mx-auto px-4">
@@ -393,12 +510,13 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
               </Badge>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                Агенты M2, которые продают, поддерживают и автоматизируют 24/7
+                Агенты M2: голос, чат, email — автоматизируют ваш бизнес 24/7
               </h1>
 
               <p className="text-base md:text-xl text-muted-foreground leading-relaxed">
-                Внедрение под ключ. Подключим телефонию, чат и email, обучим на ваших данных, интегрируем с CRM/ERP.
-                Запуск от 2-4 недель.
+                Не только голосовые ассистенты — наши агенты работают в телефонии, WhatsApp, Telegram, email, на сайте.
+                Интегрируются с CRM/ERP, автоматизируют продажи, поддержку и операции. Настройте сами или с помощью
+                нашей команды.
               </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap gap-4">
@@ -463,42 +581,20 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
         </div>
       </section>
 
-      {isImageOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-0"
-          onClick={() => setIsImageOpen(false)}
-        >
-          <button
-            onClick={() => setIsImageOpen(false)}
-            className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-            aria-label="Закрыть"
-          >
-            <X className="h-6 w-6 text-white" />
-          </button>
-          <div className="relative w-full h-full flex items-center justify-center p-4">
-            <Image
-              src="/m2-platform-workflow-screenshot.png"
-              alt="M2 Platform - Визуальный конструктор AI-агентов"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-        </div>
-      )}
-
       {/* How It Works */}
-      <section className="py-12 md:py-20 px-4 bg-muted/30">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4 bg-muted/30">
         <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Как это работает</h2>
-            <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 px-2">
+              Как это работает
+            </h2>
+            <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-3 sm:px-4">
               Простая схема работы агента M2: от запроса клиента через каналы связи до результата с интеграцией в ваши
               системы
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12 md:mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12 md:mb-16">
             {[
               {
                 step: "1",
@@ -520,7 +616,7 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
                 step: "3",
                 title: "Инструменты",
                 description:
-                  "Агент использует интеграции с CRM, ERP, базой знаний, прайсами, календарем для выполнения задачи.",
+                  "Агент использует интеграции с CRM, базой знаний, прайсами, календарем для выполнения задачи.",
                 icon: Wrench,
                 color: "from-green-600 to-emerald-600",
               },
@@ -734,51 +830,159 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
         </div>
       </section>
 
-      {/* Use Cases by Roles */}
-      <section className="py-12 md:py-20 px-4 bg-muted/30">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4">
         <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Решения для каждой роли</h2>
-            <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
-              Агенты M2 автоматизируют задачи в продажах, поддержке, операциях, финансах, HR и IT
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 px-2">
+              Агенты M2 работают везде
+            </h2>
+            <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-3 sm:px-4">
+              Голосовые ассистенты, чат-боты, email-агенты и RPA-роботы — выберите нужный тип или комбинируйте
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+            {agentTypes.map((type, index) => (
+              <Card
+                key={index}
+                className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-primary/50"
+              >
+                <CardHeader className="p-6 md:p-8">
+                  <div
+                    className={`w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br ${type.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
+                  >
+                    <type.icon className="h-7 w-7 md:h-8 md:w-8 text-white" />
+                  </div>
+                  <CardTitle className="text-xl md:text-2xl mb-3">{type.title}</CardTitle>
+                  <CardDescription className="text-sm md:text-base leading-relaxed mb-6">
+                    {type.description}
+                  </CardDescription>
+
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="text-sm font-semibold mb-3 text-foreground">Возможности:</h4>
+                      <ul className="space-y-2">
+                        {type.features.map((feature, i) => (
+                          <li key={i} className="flex items-start gap-2 text-xs md:text-sm text-muted-foreground">
+                            <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="text-sm font-semibold mb-3 text-foreground">Применение:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {type.useCases.map((useCase, i) => (
+                          <Badge key={i} variant="secondary" className="text-xs">
+                            {useCase}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-12 md:mt-16 text-center">
+            <Card className="max-w-3xl mx-auto border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5">
+              <CardContent className="p-6 md:p-8">
+                <Globe className="h-12 w-12 md:h-16 md:w-16 text-primary mx-auto mb-4" />
+                <h3 className="text-xl md:text-2xl font-bold mb-3">Омниканальность</h3>
+                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                  Один агент M2 может работать одновременно во всех каналах: принимать звонки, отвечать в чатах,
+                  обрабатывать email. Клиент начинает диалог в WhatsApp, продолжает по телефону — агент помнит весь
+                  контекст и историю общения.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Use Cases by Roles */}
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4 bg-muted/30">
+        <div className="container mx-auto max-w-7xl">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 px-2">
+              Решения для каждой роли
+            </h2>
+            <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-3 sm:px-4">
+              Агенты M2 автоматизируют задачи в продажах, поддержке, операциях, финансах, HR и IT через голос, чат и
+              email
             </p>
           </div>
 
           <Tabs value={activeRole} onValueChange={setActiveRole} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mb-8 md:mb-12 h-auto">
-              {roles.map((role) => (
-                <TabsTrigger key={role.id} value={role.id} className="flex items-center gap-2 text-xs md:text-sm py-2">
-                  <role.icon className="h-3 w-3 md:h-4 md:w-4" />
-                  <span>{role.name}</span>
-                </TabsTrigger>
-              ))}
-            </TabsList>
+            <div className="mb-6 sm:mb-8 md:mb-12 overflow-x-auto">
+              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1.5 sm:gap-2 h-auto bg-transparent p-0 min-w-max lg:min-w-0">
+                {roles.map((role) => (
+                  <TabsTrigger
+                    key={role.id}
+                    value={role.id}
+                    className="flex flex-col items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm py-2.5 sm:py-3 px-2 sm:px-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg border-2 data-[state=active]:border-primary data-[state=inactive]:border-muted transition-all whitespace-nowrap"
+                  >
+                    <role.icon className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                    <span className="text-center leading-tight">{role.name}</span>
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
 
             {roles.map((role) => (
-              <TabsContent key={role.id} value={role.id} className="space-y-6 md:space-y-8">
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              <TabsContent key={role.id} value={role.id} className="space-y-4 sm:space-y-6 md:space-y-8">
+                <div className="grid gap-4 sm:gap-6 md:gap-8">
                   {role.useCases.map((useCase, index) => (
                     <Card
                       key={index}
-                      className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-primary/50"
+                      className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 border-2 hover:border-primary/50"
                     >
-                      <CardHeader className="p-4 md:p-6">
-                        <div
-                          className={`w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br ${role.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
-                        >
-                          <role.icon className="h-5 w-5 md:h-6 md:w-6 text-white" />
-                        </div>
-                        <CardTitle className="text-base md:text-xl mb-3">{useCase.title}</CardTitle>
-                        <CardDescription className="text-xs md:text-sm leading-relaxed mb-4">
-                          {useCase.description}
-                        </CardDescription>
-                        <div className="space-y-2 pt-4 border-t">
-                          {useCase.metrics.map((metric, i) => (
-                            <div key={i} className="flex items-center gap-2 text-xs md:text-sm">
-                              <CheckCircle2 className="h-3 w-3 md:h-4 md:w-4 text-green-600 flex-shrink-0" />
-                              <span className="font-medium">{metric}</span>
+                      <CardHeader className="p-4 sm:p-6 md:p-8">
+                        <div className="flex flex-col gap-4 sm:gap-6">
+                          <div
+                            className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br ${role.color} flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0 mx-auto sm:mx-0`}
+                          >
+                            <role.icon className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-white" />
+                          </div>
+
+                          <div className="flex-1 space-y-3 sm:space-y-4">
+                            <div>
+                              <CardTitle className="text-base sm:text-lg md:text-xl lg:text-2xl mb-2 sm:mb-3 text-center sm:text-left">
+                                {useCase.title}
+                              </CardTitle>
+                              <CardDescription className="text-xs sm:text-sm md:text-base leading-relaxed text-center sm:text-left">
+                                {useCase.description}
+                              </CardDescription>
                             </div>
-                          ))}
+
+                            <div>
+                              <h4 className="text-xs sm:text-sm font-semibold mb-2 text-foreground text-center sm:text-left">
+                                Каналы:
+                              </h4>
+                              <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center sm:justify-start">
+                                {useCase.channels.map((channel, i) => (
+                                  <Badge key={i} variant="outline" className="text-xs whitespace-nowrap">
+                                    {channel}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 pt-3 sm:pt-4 border-t">
+                              {useCase.metrics.map((metric, i) => (
+                                <div
+                                  key={i}
+                                  className="flex items-center gap-2 text-xs sm:text-sm p-2.5 sm:p-3 bg-muted/50 rounded-lg"
+                                >
+                                  <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-600 flex-shrink-0" />
+                                  <span className="font-medium">{metric}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       </CardHeader>
                     </Card>
@@ -787,6 +991,16 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
               </TabsContent>
             ))}
           </Tabs>
+
+          <div className="mt-8 sm:mt-12 md:mt-16 text-center px-3">
+            <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-3 sm:mb-4">
+              Не нашли свой сценарий? Мы настроим агента под ваши задачи
+            </p>
+            <Button size="lg" onClick={() => openModal("consultation")} className="w-full sm:w-auto">
+              Обсудить ваш сценарий
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
         </div>
       </section>
 
