@@ -86,5 +86,5 @@ export async function generateMetadata({ params }: VoiceSalesManagerPageProps): 
 }
 
 export default function VoiceSalesManagerPage({ params }: VoiceSalesManagerPageProps) {
-  return <VoiceSalesManagerClientPage params={params} />
+  return <VoiceSalesManagerClientPage />
 }

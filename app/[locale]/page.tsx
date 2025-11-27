@@ -2,7 +2,6 @@ import { HeroSection } from "@/components/hero-section"
 import { TrustedCompanies } from "@/components/trusted-companies"
 import { PlatformFeaturesSection } from "@/components/platform-features-section"
 import { HowItWorksSection } from "@/components/how-it-works-section"
-import { CostComparisonSection } from "@/components/cost-comparison-section"
 import { BenefitsSection } from "@/components/benefits-section"
 import { SolutionsSection } from "@/components/solutions-section"
 import dynamic from "next/dynamic"
@@ -110,7 +109,6 @@ export default async function HomePage({ params }: HomePageProps) {
       <TrustedCompanies locale={locale} />
       <PlatformFeaturesSection locale={locale} />
       <HowItWorksSection locale={locale} />
-      <CostComparisonSection locale={locale} />
       <BenefitsSection locale={locale} />
       <SolutionsSection locale={locale} />
       <DemoSection locale={locale} />

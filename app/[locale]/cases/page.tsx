@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowRight, TrendingUp, Users, Star, Building2, ShoppingCart, Banknote, Factory } from "lucide-react"
+import { ArrowRight, TrendingUp, Users, Star, Building2, ShoppingCart, Banknote, Factory } from 'lucide-react'
 import Link from "next/link"
 import type { Locale } from "@/lib/i18n/config"
 import { CasesCTASection } from "@/components/cases/cases-cta-section"
@@ -102,6 +102,69 @@ export default async function CasesPage({ params }: CasesPageProps) {
 
   const cases = [
     {
+      id: "online-education-english-school",
+      title: "Онлайн-школа английского: +280% обработанных заявок с AI-менеджером",
+      company: "Speak Easy Online",
+      industry: "Образование",
+      results: {
+        leads: "+280%",
+        conversion: "45%",
+        savings: "₽420К",
+      },
+      description:
+        "Как онлайн-школа английского языка перестала терять 60% заявок и увеличила продажи в 3 раза с помощью AI-ассистента.",
+      image: "/online-education-classroom.jpg",
+      tags: ["Образование", "Продажи", "Автоматизация"],
+      featured: true,
+      metrics: {
+        calls: "1,200 звонков/месяц",
+        response: "30 секунд",
+        conversion: "45%",
+      },
+    },
+    {
+      id: "logistics-transport-company",
+      title: "Транспортная компания: Круглосуточный AI-диспетчер",
+      company: "Быстрая Логистика",
+      industry: "Логистика",
+      results: {
+        calls: "+400%",
+        availability: "24/7",
+        savings: "₽300К",
+      },
+      description:
+        "Логистическая компания автоматизировала прием заказов на перевозки с помощью AI-диспетчера, работающего 24/7.",
+      image: "/logistics-warehouse-trucks.jpg",
+      tags: ["Логистика", "Диспетчеризация", "24/7"],
+      featured: true,
+      metrics: {
+        orders: "800 заказов/месяц",
+        routes: "150+ направлений",
+        fleet: "50+ машин",
+      },
+    },
+    {
+      id: "dental-clinic-network",
+      title: "Сеть стоматологий: AI-администратор для записи пациентов",
+      company: "Белоснежная Улыбка",
+      industry: "Медицина",
+      results: {
+        appointments: "+60%",
+        missed: "-85%",
+        savings: "₽250К",
+      },
+      description:
+        "Сеть стоматологических клиник освободила администраторов от рутины и увеличила поток пациентов с AI-помощником.",
+      image: "/modern-dental-clinic.png",
+      tags: ["Медицина", "Запись", "Напоминания"],
+      featured: true,
+      metrics: {
+        clinics: "5 клиник",
+        patients: "2,500 пациентов/месяц",
+        doctors: "25 специалистов",
+      },
+    },
+    {
       id: "sberbank-ai-assistant",
       title: "Сбербанк: Автоматизация 85% клиентских запросов",
       company: "ПАО Сбербанк",
@@ -115,7 +178,7 @@ export default async function CasesPage({ params }: CasesPageProps) {
         "Как крупнейший банк России сократил время обработки запросов с часов до секунд и повысил удовлетворенность клиентов.",
       image: "/modern-bank-interior-with-ai-assistant-technology.jpg",
       tags: ["Банки", "Клиентский сервис", "Автоматизация"],
-      featured: true,
+      featured: false,
       metrics: {
         calls: "2.5М звонков/месяц",
         savings: "₽180М экономии/год",
@@ -136,7 +199,7 @@ export default async function CasesPage({ params }: CasesPageProps) {
         "Голосовой ассистент обрабатывает заказы, консультирует по товарам и управляет программой лояльности.",
       image: "/modern-retail-store-with-ai-voice-assistant.jpg",
       tags: ["Ритейл", "Продажи", "Лояльность"],
-      featured: true,
+      featured: false,
       metrics: {
         stores: "25,000+ магазинов",
         customers: "40М клиентов",
@@ -277,6 +340,9 @@ export default async function CasesPage({ params }: CasesPageProps) {
     { name: "Авиация", icon: TrendingUp },
     { name: "Телекоммуникации", icon: Users },
     { name: "Энергетика", icon: Factory },
+    { name: "Образование", icon: null },
+    { name: "Логистика", icon: null },
+    { name: "Медицина", icon: null },
   ]
 
   const collectionPageSchema = {

@@ -38,6 +38,8 @@ import {
   Settings,
   Maximize2,
   Zap,
+  FileSearch,
+  Brain,
 } from "lucide-react"
 import Image from "next/image"
 import type { Locale } from "@/lib/i18n/config"
@@ -390,18 +392,58 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
       useCases: ["Продажи", "Поддержка", "HR", "Финансы", "Закупки"],
     },
     {
-      title: "RPA-агенты",
+      title: "RPA-агенты и аналитика",
       icon: Zap,
       color: "from-orange-600 to-red-600",
       description:
-        "Выполняют рутинные действия в ERP/CRM/других системах: создают документы, обновляют данные, запускают процессы",
+        "Выполняют рутинные действия в ERP/CRM, анализируют данные, строят отчеты, находят закономерности и аномалии",
       features: [
         "Работа с любыми системами через API или UI",
-        "Запуск по расписанию или триггерам",
-        "Обработка больших объемов данных",
-        "Логирование всех действий",
+        "Анализ больших объемов данных",
+        "Предиктивная аналитика и прогнозы",
+        "Автоматическое создание отчетов и дашбордов",
       ],
-      useCases: ["Операции", "Финансы", "Логистика", "Закупки", "Отчетность"],
+      useCases: ["Операции", "Финансы", "Аналитика", "Отчетность", "Прогнозирование"],
+    },
+  ]
+
+  const automationCapabilities = [
+    {
+      title: "Разбор и обработка почты",
+      icon: Mail,
+      color: "from-blue-600 to-cyan-600",
+      description:
+        "AI-агент автоматически читает входящие письма, классифицирует по типу (запрос, жалоба, КП), извлекает данные, создает черновики ответов и обновляет CRM",
+      benefits: ["-60% время на email", "0% пропущенных писем", "Автоматическая категоризация", "Извлечение данных"],
+    },
+    {
+      title: "Анализ данных и аналитика",
+      icon: BarChart3,
+      color: "from-purple-600 to-pink-600",
+      description:
+        "Собирает данные из всех систем (CRM, ERP, телефония, чаты), анализирует паттерны, строит прогнозы, выявляет аномалии и автоматически создает отчеты",
+      benefits: ["Единая аналитика из всех источников", "Предиктивные прогнозы", "Выявление аномалий", "Автоотчеты"],
+    },
+    {
+      title: "Обработка документов",
+      icon: FileSearch,
+      color: "from-green-600 to-emerald-600",
+      description:
+        "Извлекает данные из договоров, накладных, актов, счетов в любом формате. Проверяет на ошибки, сверяет с базой, создает записи в системе",
+      benefits: ["-80% ручная работа", "99% точность OCR", "Любые форматы", "Автоматическая сверка"],
+    },
+    {
+      title: "Неограниченный функционал",
+      icon: Brain,
+      color: "from-orange-600 to-red-600",
+      description:
+        "Адаптируем агентов под любые задачи вашего бизнеса: от скоринга лидов до мониторинга соцсетей, от управления складом до обучения сотрудников",
+      benefits: [
+        "Кастомные сценарии под ваш бизнес",
+        "Интеграция с любыми системами",
+        "Масштабируемость",
+        "Постоянное обучение",
+      ],
     },
   ]
 
@@ -420,9 +462,9 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Service",
-            name: "Агенты M2 для бизнеса",
+            name: "Агенты M2 для автоматизации бизнеса",
             description:
-              "AI-агенты для автоматизации продаж, поддержки клиентов и бизнес-операций 24/7. Голосовые ассистенты, чат-боты, email-автоматизация с интеграцией CRM/ERP. Настройте сами или с помощью команды.",
+              "Полная автоматизация бизнеса с искусственным интеллектом: голосовые ассистенты, чат-боты, email-агенты, RPA, аналитика, разбор почты. Адаптация под любой кейс и бизнес-процесс с интеграцией CRM/ERP.",
             provider: {
               "@type": "Organization",
               name: "M2 Solutions",
@@ -432,17 +474,7 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
             availableChannel: [
               {
                 "@type": "ServiceChannel",
-                serviceType: "Голосовые агенты",
-                availableLanguage: ["ru", "en", "es"],
-              },
-              {
-                "@type": "ServiceChannel",
-                serviceType: "Чат-боты",
-                availableLanguage: ["ru", "en", "es"],
-              },
-              {
-                "@type": "ServiceChannel",
-                serviceType: "Email-автоматизация",
+                serviceType: "Полная автоматизация с ИИ",
                 availableLanguage: ["ru", "en", "es"],
               },
             ],
@@ -497,7 +529,6 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
       </nav>
 
       {/* Hero Section */}
-      {/* Improved mobile padding and text sizes */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5 pt-6 sm:pt-8 md:pt-12 pb-12 sm:pb-16 md:pb-24 lg:pb-32">
         <div className="absolute inset-0 bg-grid-white/5 [mask-image:radial-gradient(white,transparent_85%)]" />
 
@@ -506,17 +537,17 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
             <div className="space-y-6 md:space-y-8">
               <Badge className="w-fit" variant="secondary">
                 <Bot className="w-3 h-3 mr-1" />
-                AI-агенты для бизнеса
+                Полная автоматизация бизнеса с ИИ
               </Badge>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                Агенты M2: голос, чат, email — автоматизируют ваш бизнес 24/7
+                Автоматизация всех бизнес-процессов с искусственным интеллектом
               </h1>
 
               <p className="text-base md:text-xl text-muted-foreground leading-relaxed">
-                Не только голосовые ассистенты — наши агенты работают в телефонии, WhatsApp, Telegram, email, на сайте.
-                Интегрируются с CRM/ERP, автоматизируют продажи, поддержку и операции. Настройте сами или с помощью
-                нашей команды.
+                Не просто голосовые ассистенты — полная операционная автоматизация: разбор почты и ответы, анализ
+                данных, работа с документами, чаты в мессенджерах, аналитика, прогнозы. Неограниченный функционал с
+                адаптацией под ваш кейс и бизнес. Настройте сами или с помощью нашей команды.
               </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap gap-4">
@@ -536,11 +567,11 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-6 md:pt-8 border-t">
                 <div>
                   <div className="text-2xl md:text-3xl font-bold text-primary">-30-60%</div>
-                  <div className="text-xs md:text-sm text-muted-foreground">Нагрузка на команды</div>
+                  <div className="text-xs md:text-sm text-muted-foreground">Операционные расходы</div>
                 </div>
                 <div>
                   <div className="text-2xl md:text-3xl font-bold text-primary">+10-25%</div>
-                  <div className="text-xs md:text-sm text-muted-foreground">Конверсия в заявку</div>
+                  <div className="text-xs md:text-sm text-muted-foreground">Конверсия и выручка</div>
                 </div>
                 <div>
                   <div className="text-2xl md:text-3xl font-bold text-primary">2-4 нед</div>
@@ -560,7 +591,7 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
               >
                 <Image
                   src="/m2-platform-workflow-screenshot.png"
-                  alt="M2 Platform - Визуальный конструктор AI-агентов с блоками для автоматизации продаж и поддержки"
+                  alt="M2 Platform - Визуальный конструктор AI-агентов для полной автоматизации бизнеса"
                   width={1920}
                   height={1080}
                   className="w-full h-auto transition-transform duration-300 group-hover:scale-105"
@@ -581,6 +612,74 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
         </div>
       </section>
 
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4">
+        <div className="container mx-auto max-w-7xl">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 px-2">
+              Полная автоматизация операционных процессов
+            </h2>
+            <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-3 sm:px-4">
+              AI-агенты M2 — это не только голос. Это комплексная автоматизация всех процессов вашего бизнеса с
+              искусственным интеллектом
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+            {automationCapabilities.map((capability, index) => (
+              <Card
+                key={index}
+                className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-primary/50"
+              >
+                <CardHeader className="p-6 md:p-8">
+                  <div
+                    className={`w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br ${capability.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
+                  >
+                    <capability.icon className="h-7 w-7 md:h-8 md:w-8 text-white" />
+                  </div>
+                  <CardTitle className="text-xl md:text-2xl mb-3">{capability.title}</CardTitle>
+                  <CardDescription className="text-sm md:text-base leading-relaxed mb-6">
+                    {capability.description}
+                  </CardDescription>
+
+                  <div className="grid grid-cols-2 gap-3 pt-4 border-t">
+                    {capability.benefits.map((benefit, i) => (
+                      <div key={i} className="flex items-start gap-2 text-xs md:text-sm">
+                        <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
+                        <span>{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-12 md:mt-16">
+            <Card className="max-w-4xl mx-auto border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5">
+              <CardContent className="p-6 md:p-10">
+                <div className="flex flex-col md:flex-row items-center gap-6">
+                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0">
+                    <Settings className="h-8 w-8 md:h-10 md:w-10 text-white" />
+                  </div>
+                  <div className="flex-1 text-center md:text-left">
+                    <h3 className="text-xl md:text-2xl font-bold mb-3">Адаптация под ваш бизнес</h3>
+                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                      Наша команда инженеров настроит агентов M2 под любую специфику вашего бизнеса: от скоринга лидов
+                      до управления складом, от анализа отзывов до прогнозирования спроса. Неограниченный функционал с
+                      интеграцией в ваши системы и процессы.
+                    </p>
+                  </div>
+                  <Button size="lg" onClick={() => openModal("consultation")} className="w-full md:w-auto">
+                    Обсудить проект
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* How It Works */}
       <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4 bg-muted/30">
         <div className="container mx-auto max-w-7xl">
@@ -589,7 +688,7 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
               Как это работает
             </h2>
             <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-3 sm:px-4">
-              Простая схема работы агента M2: от запроса клиента через каналы связи до результата с интеграцией в ваши
+              Простая схема работы агента M2: от запроса клиента через любой канал до результата с интеграцией в ваши
               системы
             </p>
           </div>
@@ -799,9 +898,9 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
                 color: "from-indigo-600 to-purple-600",
               },
               {
-                pain: "Неудобные процессы",
-                solution: "Омниканальный агент работает везде: голос, чат, email",
-                icon: Globe,
+                pain: "Нет аналитики",
+                solution: "AI собирает данные из всех систем и строит прогнозы",
+                icon: BarChart3,
                 color: "from-cyan-600 to-blue-600",
               },
             ].map((item, index) => (
@@ -837,7 +936,7 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
               Агенты M2 работают везде
             </h2>
             <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-3 sm:px-4">
-              Голосовые ассистенты, чат-боты, email-агенты и RPA-роботы — выберите нужный тип или комбинируйте
+              Голосовые ассистенты, чат-боты, email-агенты, RPA и аналитика — выберите нужный тип или комбинируйте
             </p>
           </div>
 
@@ -1141,69 +1240,6 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
       </section>
 
       {/* ROI/Value */}
-      <section className="py-12 md:py-20 px-4 bg-muted/30">
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Рассчитайте эффект от внедрения</h2>
-            <p className="text-base md:text-xl text-muted-foreground px-4">
-              Узнайте, сколько сэкономит ваш бизнес с агентами M2
-            </p>
-          </div>
-
-          <Card className="max-w-4xl mx-auto border-2 border-primary/20 shadow-2xl">
-            <CardContent className="p-6 md:p-12">
-              <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-                <div className="space-y-4 md:space-y-6">
-                  <h3 className="text-xl md:text-2xl font-bold">Без агента M2</h3>
-                  <div className="space-y-3 md:space-y-4">
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 p-3 md:p-4 bg-muted/50 rounded-lg">
-                      <span className="text-sm md:text-base">5 менеджеров × ₽100,000</span>
-                      <span className="font-bold text-base md:text-lg">₽500,000/мес</span>
-                    </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 p-3 md:p-4 bg-muted/50 rounded-lg">
-                      <span className="text-sm md:text-base">Потеря лидов ночью</span>
-                      <span className="font-bold text-red-600 text-base md:text-lg">-20%</span>
-                    </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 p-3 md:p-4 bg-muted/50 rounded-lg">
-                      <span className="text-sm md:text-base">Ручные операции</span>
-                      <span className="font-bold text-red-600 text-base md:text-lg">40 ч/нед</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-4 md:space-y-6">
-                  <h3 className="text-xl md:text-2xl font-bold text-primary">С агентом M2</h3>
-                  <div className="space-y-3 md:space-y-4">
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 p-3 md:p-4 bg-primary/10 rounded-lg">
-                      <span className="text-sm md:text-base">Агент M2 + 2 менеджера</span>
-                      <span className="font-bold text-primary text-base md:text-lg">₽250,000/мес</span>
-                    </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 p-3 md:p-4 bg-primary/10 rounded-lg">
-                      <span className="text-sm md:text-base">Работа 24/7</span>
-                      <span className="font-bold text-green-600 text-base md:text-lg">+25% лидов</span>
-                    </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 p-3 md:p-4 bg-primary/10 rounded-lg">
-                      <span className="text-sm md:text-base">Автоматизация</span>
-                      <span className="font-bold text-green-600 text-base md:text-lg">5 ч/нед</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8 md:mt-12 p-6 md:p-8 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl text-center">
-                <div className="text-3xl md:text-5xl font-bold text-primary mb-2">₽250,000/мес</div>
-                <div className="text-base md:text-xl text-muted-foreground mb-4 md:mb-6">Экономия + рост выручки</div>
-                <Button size="lg" asChild className="w-full sm:w-auto">
-                  <a href={`/${locale}/platform/pricing-calculator`}>
-                    <BarChart3 className="mr-2 h-4 w-4 md:h-5 md:w-5" />
-                    Рассчитать для вашего бизнеса
-                  </a>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
 
       {/* Testimonials */}
       <section className="py-12 md:py-20 px-4">
@@ -1455,6 +1491,32 @@ export function M2AgentsPage({ locale }: M2AgentsPageProps) {
 
       {/* CTA Section */}
       <CTASection locale={locale} />
+
+      {/* Fullscreen Image Modal */}
+      {isImageOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+          onClick={() => setIsImageOpen(false)}
+        >
+          <button
+            onClick={() => setIsImageOpen(false)}
+            className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+            aria-label="Закрыть"
+          >
+            <span className="text-white text-2xl">×</span>
+          </button>
+          <div className="relative w-full h-full flex items-center justify-center">
+            <Image
+              src="/m2-platform-workflow-screenshot.png"
+              alt="M2 Platform - Визуальный конструктор AI-агентов"
+              width={1920}
+              height={1080}
+              className="max-w-full max-h-full object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

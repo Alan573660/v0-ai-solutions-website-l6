@@ -116,14 +116,15 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
       ogDescription: "Уникальные AI-ассистенты под специфические бизнес-процессы и R&D проекты.",
     },
     "solutions-voice-sales": {
-      title: "Голосовой AI-менеджер по продажам — Автоматизация исходящих и входящих звонков | AI Solutions M2",
+      title:
+        "Голосовой AI-менеджер по продажам - Автоматизация звонков и продаж 24/7 | AI Solutions",
       description:
-        "Голосовой AI-менеджер автоматизирует продажи: обработка входящих заявок, исходящие звонки, квалификация лидов, расчет стоимости, выставление счетов. Увеличение продаж на 40%, работа 24/7, интеграция с любой CRM.",
+        "Голосовой AI-менеджер который звонит, продаёт и консультирует клиентов 24/7. Автоматизация холодных звонков, квалификация лидов, интеграция с CRM. Технологии GPT-4, Claude, DeepSeek для естественного общения. Результаты: +280% заявок, 45% конверсия, экономия ₽420К/мес. Внедрение от 2 до 4 недель.",
       keywords:
-        "голосовой менеджер продаж, AI для продаж, автоматизация продаж звонки, исходящие звонки AI, входящие звонки обработка, квалификация лидов AI, AI sales manager, voice sales automation, outbound calls AI, inbound calls processing, lead qualification AI, sales bot, продажи через AI, автоматический обзвон, холодные звонки AI, теплые звонки автоматизация",
-      ogTitle: "Голосовой AI-менеджер продаж — Автоматизация звонков 24/7",
+        "голосовой AI-менеджер продаж, автоматизация звонков GPT, AI ассистент для продаж Claude, голосовой бот ChatGPT, автоматизация холодных звонков, AI менеджер DeepSeek, интеграция AI с CRM, голосовой робот для бизнеса, автоматизация продаж с AI, AI помощник для менеджеров, искусственный интеллект в продажах, conversational AI для бизнеса, voice AI assistant, квалификация лидов AI, автоматический обзвон клиентов, AI колл-центр, умный голосовой ассистент, автоматизация обработки заявок, AI для малого бизнеса, голосовой помощник продавца, речевой AI GPT-4, Claude AI для звонков, DeepSeek интеграция продажи, OpenAI для бизнес-процессов, нейросети для продаж",
+      ogTitle: "Голосовой AI-менеджер - Ваш лучший сотрудник отдела продаж",
       ogDescription:
-        "Автоматизируйте продажи с голосовым AI-менеджером: обработка заявок, исходящие звонки, квалификация лидов. +40% продаж, работа 24/7.",
+        "Автоматизация звонков, продаж и консультаций с AI-менеджером на базе GPT-4, Claude, DeepSeek. Работает 24/7, интегрируется с CRM, увеличивает продажи на 280%.",
     },
     "solutions-hotel-concierge": {
       title: "AI-консьерж для отелей — Автоматизация бронирования и обслуживания гостей 24/7 | AI Solutions M2",
@@ -479,14 +480,15 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
       ogDescription: "Asistentes IA únicos para procesos empresariales específicos y proyectos I+D.",
     },
     "solutions-voice-sales": {
-      title: "Gerente de Ventas IA de Voz — Automatización de Llamadas Salientes y Entrantes | AI Solutions M2",
+      title:
+        "Голосовой AI-менеджер по продажам - Автоматизация звонков и продаж 24/7 | AI Solutions",
       description:
-        "Gerente de ventas IA de voz automatiza ventas: procesamiento de leads entrantes, llamadas salientes, calificación de leads, generación de cotizaciones, creación de facturas. Aumento de ventas del 40%, operación 24/7, integración con cualquier CRM.",
+        "Голосовой AI-менеджер который звонит, продаёт и консультирует клиентов 24/7. Автоматизация холодных звонков, квалификация лидов, интеграция с CRM. Технологии GPT-4, Claude, DeepSeek для естественного общения. Результаты: +280% заявок, 45% конверсия, экономия ₽420К/мес. Внедрение от 2 до 4 недель.",
       keywords:
-        "gerente de ventas IA de voz, IA para ventas, automatización ventas llamadas, llamadas salientes IA, procesamiento llamadas entrantes, calificación de leads IA, AI sales manager, voice sales automation, outbound calls AI, inbound calls processing, lead qualification AI, sales bot, ventas con IA, marcación automática, llamadas frías IA, automatización llamadas cálidas",
-      ogTitle: "Gerente de Ventas IA de Voz — Automatización de Llamadas 24/7",
+        "голосовой AI-менеджер продаж, автоматизация звонков GPT, AI ассистент для продаж Claude, голосовой бот ChatGPT, автоматизация холодных звонков, AI менеджер DeepSeek, интеграция AI с CRM, голосовой робот для бизнеса, автоматизация продаж с AI, AI помощник для менеджеров, искусственный интеллект в продажах, conversational AI для бизнеса, voice AI assistant, квалификация лидов AI, автоматический обзвон клиентов, AI колл-центр, умный голосовой ассистент, автоматизация обработки заявок, AI для малого бизнеса, голосовой помощник продавца, речевой AI GPT-4, Claude AI для звонков, DeepSeek интеграция продажи, OpenAI для бизнес-процессов, нейросети для продаж",
+      ogTitle: "Голосовой AI-менеджер - Ваш лучший сотрудник отдела продаж",
       ogDescription:
-        "Automatiza ventas con un gerente de ventas IA de voz: procesamiento de leads, llamadas salientes, calificación de leads. +40% ventas, operación 24/7.",
+        "Автоматизация звонков, продаж и консультаций с AI-менеджером на базе GPT-4, Claude, DeepSeek. Работает 24/7, интегрируется с CRM, увеличивает продажи на 280%.",
     },
     "solutions-hotel-concierge": {
       title: "Conserje IA para Hoteles — Automatización de Reservas y Servicios para Huéspedes 24/7 | AI Solutions M2",
@@ -513,7 +515,7 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
       description:
         "Explora la arquitectura de la Plataforma IA M2, prueba el demo del asistente de voz y calcula los costos de implementación para tu negocio.",
       keywords:
-        "arquitectura plataforma IA, demo asistente voz, calculadora costos IA, documentación técnica IA, API asistentes voz",
+        "arquitectura plataforma IA, demo asistente voz, calculadora costos IA, documentation técnica IA, API asistentes voz",
       ogTitle: "Plataforma IA M2 — Demo y Arquitectura",
       ogDescription: "Arquitectura de plataforma IA, demo interactivo y calculadora de costos.",
     },
@@ -522,7 +524,7 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
       description:
         "Documentación técnica detallada para la Plataforma IA M2: arquitectura del sistema, endpoints de API, integraciones con CRM y telefonía, seguridad de datos, escalabilidad. Documentación para desarrolladores.",
       keywords:
-        "arquitectura plataforma IA, API asistentes de voz, documentación técnica IA, voice AI API, speech recognition API, NLP API, CRM integration API, telephony API, webhooks AI, REST API AI, GraphQL AI, arquitectura microservicios, arquitectura cloud IA, seguridad sistemas IA",
+        "arquitectura plataforma IA, API asistentes de voz, documentation técnica IA, voice AI API, speech recognition API, NLP API, CRM integration API, telephony API, webhooks AI, REST API AI, GraphQL AI, arquitectura microservicios, arquitectura cloud IA, seguridad sistemas IA",
       ogTitle: "Arquitectura Plataforma IA M2 — Documentación Técnica",
       ogDescription: "Documentación técnica de la Plataforma IA M2: arquitectura, API, integraciones, seguridad.",
     },
@@ -661,14 +663,15 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
       ogDescription: "Einzigartige KI-Assistenten für spezifische Geschäftsprozesse und F&E-Projekte.",
     },
     "solutions-voice-sales": {
-      title: "Sprach-KI-Vertriebsmanager — Automatisierung von Ausgehenden und Eingehenden Anrufen | AI Solutions M2",
+      title:
+        "Голосовой AI-менеджер по продажам - Автоматизация звонков и продаж 24/7 | AI Solutions",
       description:
-        "Der Sprach-KI-Vertriebsmanager automatisiert den Vertrieb: Bearbeitung eingehender Anfragen, ausgehende Anrufe, Lead-Qualifizierung, Angebotserstellung, Rechnungsstellung. 40% Umsatzsteigerung, 24/7-Betrieb, Integration mit jedem CRM.",
+        "Голосовой AI-менеджер который звонит, продаёт и консультирует клиентов 24/7. Автоматизация холодных звонков, квалификация лидов, интеграция с CRM. Технологии GPT-4, Claude, DeepSeek для естественного общения. Результаты: +280% заявок, 45% конверсия, экономия ₽420К/мес. Внедрение от 2 до 4 недель.",
       keywords:
-        "Sprach-KI-Vertriebsmanager, KI für Vertrieb, Vertriebsautomatisierung Anrufe, ausgehende Anrufe KI, Anrufverarbeitung eingehend, Lead-Qualifizierung KI, AI sales manager, voice sales automation, outbound calls AI, inbound calls processing, lead qualification AI, sales bot, Vertrieb durch KI, automatische Wahlwiederholung, Kaltakquise KI, Warm-Anruf-Automatisierung",
-      ogTitle: "Sprach-KI-Vertriebsmanager — Anrufautomatisierung 24/7",
+        "голосовой AI-менеджер продаж, автоматизация звонков GPT, AI ассистент для продаж Claude, голосовой бот ChatGPT, автоматизация холодных звонков, AI менеджер DeepSeek, интеграция AI с CRM, голосовой робот для бизнеса, автоматизация продаж с AI, AI помощник для менеджеров, искусственный интеллект в продажах, conversational AI для бизнеса, voice AI assistant, квалификация лидов AI, автоматический обзвон клиентов, AI колл-центр, умный голосовой ассистент, автоматизация обработки заявок, AI для малого бизнеса, голосовой помощник продавца, речевой AI GPT-4, Claude AI для звонков, DeepSeek интеграция продажи, OpenAI для бизнес-процессов, нейросети для продаж",
+      ogTitle: "Голосовой AI-менеджер - Ваш лучший сотрудник отдела продаж",
       ogDescription:
-        "Automatisieren Sie den Vertrieb mit einem Sprach-KI-Vertriebsmanager: Anfragenbearbeitung, ausgehende Anrufe, Lead-Qualifizierung. +40% Umsatz, 24/7-Betrieb.",
+        "Автоматизация звонков, продаж и консультаций с AI-менеджером на базе GPT-4, Claude, DeepSeek. Работает 24/7, интегрируется с CRM, увеличивает продажи на 280%.",
     },
     "solutions-hotel-concierge": {
       title: "KI-Concierge für Hotels — Automatisierung von Buchungen und Gästeservices 24/7 | AI Solutions M2",
@@ -843,14 +846,15 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
       ogDescription: "Unieke AI-assistenten voor specifieke bedrijfsprocessen en O&O-projecten.",
     },
     "solutions-voice-sales": {
-      title: "Spraak AI Verkoopmanager — Automatiseer Uitgaande en Inkomende Gesprekken | AI Solutions M2",
+      title:
+        "Голосовой AI-менеджер по продажам - Автоматизация звонков и продаж 24/7 | AI Solutions",
       description:
-        "Spraak AI-verkoopmanager automatiseert verkopen: verwerking inkomende leads, uitgaande gesprekken, leadkwalificatie, offerteberekening, facturatie. 40% omzetverhoging, 24/7 werking, integratie met elke CRM.",
+        "Голосовой AI-менеджер который звонит, продаёт и консультирует клиентов 24/7. Автоматизация холодных звонков, квалификация лидов, интеграция с CRM. Технологии GPT-4, Claude, DeepSeek для естественного общения. Результаты: +280% заявок, 45% конверсия, экономия ₽420К/мес. Внедрение от 2 до 4 недель.",
       keywords:
-        "spraak verkoopmanager, AI voor verkoop, verkoopautomatisering gesprekken, uitgaande gesprekken AI, verwerking inkomende gesprekken, leadkwalificatie AI, AI sales manager, voice sales automation, outbound calls AI, inbound calls processing, lead qualification AI, sales bot, verkoop via AI, automatisch bellen, koude acquisitie AI, warme acquisitie automatisering",
-      ogTitle: "Spraak AI Verkoopmanager — Gespreksautomatisering 24/7",
+        "голосовой AI-менеджер продаж, автоматизация звонков GPT, AI ассистент для продаж Claude, голосовой бот ChatGPT, автоматизация холодных звонков, AI менеджер DeepSeek, интеграция AI с CRM, голосовой робот для бизнеса, автоматизация продаж с AI, AI помощник для менеджеров, искусственный интеллект в продажах, conversational AI для бизнеса, voice AI assistant, квалификация лидов AI, автоматический обзвон клиентов, AI колл-центр, умный голосовой ассистент, автоматизация обработки заявок, AI для малого бизнеса, голосовой помощник продавца, речевой AI GPT-4, Claude AI для звонков, DeepSeek интеграция продажи, OpenAI для бизнес-процессов, нейросети для продаж",
+      ogTitle: "Голосовой AI-менеджер - Ваш лучший сотрудник отдела продаж",
       ogDescription:
-        "Automatiseer verkopen met een spraak AI-verkoopmanager: leadverwerking, uitgaande gesprekken, leadkwalificatie. +40% omzet, 24/7 werking.",
+        "Автоматизация звонков, продаж и консультаций с AI-менеджером на базе GPT-4, Claude, DeepSeek. Работает 24/7, интегрируется с CRM, увеличивает продажи на 280%.",
     },
     "solutions-hotel-concierge": {
       title: "AI Concierge voor Hotels — Automatiseer Boekingen en Gastenservices 24/7 | AI Solutions M2",
@@ -1027,14 +1031,15 @@ const seoTranslations: Record<Locale, Record<SEOPageType, SEOMetadata>> = {
       ogDescription: "Assistants IA uniques pour processus métier spécifiques et projets R&D.",
     },
     "solutions-voice-sales": {
-      title: "Gestionnaire de Ventes IA Vocal — Automatisation des Appels Sortants et Entrants | AI Solutions M2",
+      title:
+        "Голосовой AI-менеджер по продажам - Автоматизация звонков и продаж 24/7 | AI Solutions",
       description:
-        "Le gestionnaire de ventes IA vocal automatise les ventes : traitement des leads entrants, appels sortants, qualification des leads, génération de devis, création de factures. Augmentation des ventes de 40%, opération 24/7, intégration avec tout CRM.",
+        "Голосовой AI-менеджер который звонит, продаёт и консультирует клиентов 24/7. Автоматизация холодных звонков, квалификация лидов, интеграция с CRM. Технологии GPT-4, Claude, DeepSeek для естественного общения. Результаты: +280% заявок, 45% конверсия, экономия ₽420К/мес. Внедрение от 2 до 4 недель.",
       keywords:
-        "gestionnaire ventes IA vocal, IA pour ventes, automatisation ventes appels, appels sortants IA, traitement appels entrants, qualification leads IA, AI sales manager, voice sales automation, outbound calls AI, inbound calls processing, lead qualification AI, sales bot, ventes via IA, numérotation automatique, appels froids IA, automatisation appels chauds",
-      ogTitle: "Gestionnaire de Ventes IA Vocal — Automatisation des Appels 24/7",
+        "голосовой AI-менеджер продаж, автоматизация звонков GPT, AI ассистент для продаж Claude, голосовой бот ChatGPT, автоматизация холодных звонков, AI менеджер DeepSeek, интеграция AI с CRM, голосовой робот для бизнеса, автоматизация продаж с AI, AI помощник для менеджеров, искусственный интеллект в продажах, conversational AI для бизнеса, voice AI assistant, квалификация лидов AI, автоматический обзвон клиентов, AI колл-центр, умный голосовой ассистент, автоматизация обработки заявок, AI для малого бизнеса, голосовой помощник продавца, речевой AI GPT-4, Claude AI для звонков, DeepSeek интеграция продажи, OpenAI для бизнес-процессов, нейросети для продаж",
+      ogTitle: "Голосовой AI-менеджер - Ваш лучший сотрудник отдела продаж",
       ogDescription:
-        "Automatisez les ventes avec un gestionnaire de ventes IA vocal : traitement des leads, appels sortants, qualification des leads. +40% ventes, opération 24/7.",
+        "Автоматизация звонков, продаж и консультаций с AI-менеджером на базе GPT-4, Claude, DeepSeek. Работает 24/7, интегрируется с CRM, увеличивает продажи на 280%.",
     },
     "solutions-hotel-concierge": {
       title: "Concierge IA pour Hôtels — Automatisation des Réservations et Services Hôtes 24/7 | AI Solutions M2",
