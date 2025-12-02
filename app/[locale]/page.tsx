@@ -1,10 +1,4 @@
-import { HeroSection } from "@/components/hero-section"
-import { TrustedCompanies } from "@/components/trusted-companies"
-import { PlatformFeaturesSection } from "@/components/platform-features-section"
-import { HowItWorksSection } from "@/components/how-it-works-section"
-import { BenefitsSection } from "@/components/benefits-section"
-import { SolutionsSection } from "@/components/solutions-section"
-import dynamic from "next/dynamic"
+import { HomeClientPage } from "./home-client-page"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 
@@ -16,18 +10,18 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
   const { locale } = await params
 
   const titles = {
-    ru: "AI Solutions - Голосовой AI-ассистент для бизнеса | Автоматизация продаж и клиентского сервиса",
-    en: "AI Solutions - Voice AI Assistant for Business | Sales & Customer Service Automation",
+    ru: "AI Solutions - Полная автоматизация бизнеса с искусственным интеллектом | Голосовой AI-менеджер, Умный дом",
+    en: "AI Solutions - Complete Business Automation with AI | Voice AI Manager, Smart Home",
   }
 
   const descriptions = {
-    ru: "Голосовой AI-ассистент для автоматизации продаж, клиентского сервиса и бизнес-процессов. Увеличьте конверсию в 3 раза, обрабатывайте 100% звонков 24/7. Интеграция с CRM, автоматизация звонков, виртуальный ассистент для отелей, банков, ритейла. Искусственный интеллект для бизнеса.",
-    en: "Voice AI assistant for sales automation, customer service and business processes. Increase conversion 3x, handle 100% calls 24/7. CRM integration, call automation, virtual assistant for hotels, banks, retail. Artificial intelligence for business.",
+    ru: "Комплексная автоматизация бизнеса с AI: голосовые менеджеры продаж 24/7, умные дома, решения для МСБ и Enterprise. Увеличьте конверсию на 87%, сократите расходы на 60%. Интеграция с amoCRM, Bitrix24. Опыт 10+ лет, 500+ проектов.",
+    en: "Complete business automation with AI: 24/7 voice sales managers, smart homes, SMB and Enterprise solutions. Increase conversion by 87%, reduce costs by 60%. Integration with amoCRM, Bitrix24. 10+ years experience, 500+ projects.",
   }
 
   const keywords = {
-    ru: "голосовой AI-ассистент, автоматизация продаж, AI для бизнеса, голосовой робот, виртуальный ассистент, CRM интеграция, автоматизация звонков, AI для отелей, AI для банков, AI для ритейла, искусственный интеллект для бизнеса, автоматизация клиентского сервиса, голосовые технологии, conversational AI, voice AI, speech recognition, natural language processing, AI automation, business automation, customer service automation, голосовой бот, AI-ассистент, автоматизация колл-центра, умный ассистент, голосовые продажи, AI менеджер, виртуальный менеджер продаж, автоматизация обслуживания клиентов",
-    en: "voice AI assistant, sales automation, AI for business, voice robot, virtual assistant, CRM integration, call automation, AI for hotels, AI for banks, AI for retail, artificial intelligence for business, customer service automation, voice technologies, conversational AI, voice AI, speech recognition, natural language processing, AI automation, business automation, customer service automation, voice bot, AI assistant, call center automation, smart assistant, voice sales, AI manager, virtual sales manager, customer service automation",
+    ru: "автоматизация бизнеса, AI для бизнеса, голосовой AI-менеджер, умный дом, автоматизация продаж, AI ассистент, искусственный интеллект, машинное обучение, CRM интеграция, автоматизация звонков, AI для МСБ, AI для enterprise, голосовой робот, виртуальный ассистент, conversational AI, автоматизация клиентского сервиса, AI технологии, бизнес-автоматизация, увеличение конверсии, умные системы, IoT, smart home, voice AI, AI solutions",
+    en: "business automation, AI for business, voice AI manager, smart home, sales automation, AI assistant, artificial intelligence, machine learning, CRM integration, call automation, AI for SMB, AI for enterprise, voice robot, virtual assistant, conversational AI, customer service automation, AI technologies, business automation, conversion increase, smart systems, IoT, smart home, voice AI, AI solutions",
   }
 
   const title = titles[locale] || titles.ru
@@ -50,7 +44,7 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
           url: "/og-image.jpg",
           width: 1200,
           height: 630,
-          alt: "AI Solutions - Voice AI Assistant",
+          alt: "AI Solutions - Complete Business Automation",
         },
       ],
     },
@@ -78,42 +72,11 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
         "max-snippet": -1,
       },
     },
-    other: {
-      "google-site-verification": "your-verification-code",
-      "yandex-verification": "your-verification-code",
-    },
   }
 }
-
-const DemoSection = dynamic(() => import("@/components/demo-section").then((mod) => ({ default: mod.DemoSection })), {
-  loading: () => <div className="min-h-[400px]" />,
-})
-
-const TestimonialsSection = dynamic(
-  () => import("@/components/testimonials-section").then((mod) => ({ default: mod.TestimonialsSection })),
-  {
-    loading: () => <div className="min-h-[400px]" />,
-  },
-)
-
-const CTASection = dynamic(() => import("@/components/cta-section").then((mod) => ({ default: mod.CTASection })), {
-  loading: () => <div className="min-h-[200px]" />,
-})
 
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params
 
-  return (
-    <div className="bg-background">
-      <HeroSection locale={locale} />
-      <TrustedCompanies locale={locale} />
-      <PlatformFeaturesSection locale={locale} />
-      <HowItWorksSection locale={locale} />
-      <BenefitsSection locale={locale} />
-      <SolutionsSection locale={locale} />
-      <DemoSection locale={locale} />
-      <TestimonialsSection locale={locale} />
-      <CTASection locale={locale} />
-    </div>
-  )
+  return <HomeClientPage locale={locale} />
 }
