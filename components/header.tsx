@@ -58,12 +58,12 @@ export function Header({ locale }: HeaderProps) {
 
   const solutions = [
     { name: t("solutions.voiceSalesManager"), href: `/${locale}/solutions/voice-sales-manager` },
+    { name: t("solutions.m2Agents"), href: `/${locale}/solutions/m2-agents` },
     { name: t("solutions.hotelConcierge"), href: `/${locale}/solutions/hotel-concierge` },
     { name: t("solutions.smb"), href: `/${locale}/solutions/smb` },
     { name: t("solutions.enterprise"), href: `/${locale}/solutions/enterprise` },
     { name: t("solutions.custom"), href: `/${locale}/solutions/custom` },
     { name: t("solutions.smartHome"), href: `/${locale}/solutions/smart-home` },
-    { name: t("solutions.m2Agents"), href: `/${locale}/solutions/m2-agents` },
   ]
 
   const platform = [

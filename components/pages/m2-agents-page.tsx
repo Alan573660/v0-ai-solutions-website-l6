@@ -1,52 +1,44 @@
 "use client"
-
-import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Card, CardContent } from "@/components/ui/card"
 import {
-  Bot,
-  Phone,
-  MessageSquare,
-  Mail,
-  ShoppingCart,
-  HeadphonesIcon,
-  FileText,
-  Users,
-  Wrench,
-  Shield,
-  TrendingUp,
-  Globe,
-  CheckCircle2,
   ArrowRight,
-  BarChart3,
-  Building2,
-  Hotel,
-  Home,
+  Check,
+  Play,
+  ShoppingBag,
   Briefcase,
-  GraduationCap,
-  Scale,
-  Star,
-  ChevronDown,
-  Settings,
-  Maximize2,
+  Truck,
+  Phone,
+  Shield,
   Zap,
-  FileSearch,
+  ChevronRight,
+  Quote,
+  Calculator,
+  Database,
   Brain,
+  Settings,
+  Globe,
+  Receipt,
+  UserCheck,
+  Package,
+  History,
+  Layers,
+  Mail,
+  MessageSquare,
+  Building,
+  Home,
+  Wrench,
+  FileText,
+  BarChart3,
+  Users,
+  Target,
+  Cpu,
+  Lock,
+  Headphones,
 } from "lucide-react"
-import Image from "next/image"
 import type { Locale } from "@/lib/i18n/config"
 import { useCTA } from "@/components/modals/cta-provider"
-import { BenefitsSection } from "@/components/benefits-section"
-import { CTASection } from "@/components/cta-section"
-import { DemoSection } from "@/components/demo-section"
 
 interface M2AgentsPageProps {
   locale: Locale
@@ -54,1469 +46,882 @@ interface M2AgentsPageProps {
 
 export function M2AgentsPage({ locale }: M2AgentsPageProps) {
   const { openModal } = useCTA()
-  const [activeRole, setActiveRole] = useState("sales")
-  const [isImageOpen, setIsImageOpen] = useState(false)
-  const [formData, setFormData] = useState({
-    company: "",
-    name: "",
-    email: "",
-    phone: "",
-    industry: "",
-    channels: [] as string[],
-    comment: "",
-    consent: false,
-  })
+  const [activeCapability, setActiveCapability] = useState(0)
+  const [activeIndustry, setActiveIndustry] = useState(0)
+  const [activeIntegration, setActiveIntegration] = useState(0)
 
-  const roles = [
+  const capabilities = [
     {
-      id: "sales",
-      name: "Продажи",
-      icon: ShoppingCart,
-      color: "from-blue-600 to-cyan-600",
-      useCases: [
-        {
-          title: "Голосовой менеджер продаж",
-          description:
-            "Принимает звонки 24/7, квалифицирует лиды, отвечает на возражения, рассчитывает цену и доставку, создает сделки в CRM",
-          channels: ["Телефон", "WhatsApp звонки"],
-          metrics: ["+17% конверсия", "24/7 доступность", "-40% нагрузка на отдел"],
-        },
-        {
-          title: "Чат-бот для продаж",
-          description:
-            "Отвечает на вопросы в WhatsApp, Telegram, VK, на сайте. Подбирает товары, консультирует, отправляет ссылки на оплату",
-          channels: ["WhatsApp", "Telegram", "VK", "Веб-чат"],
-          metrics: ["+25% конверсия в чате", "Мгновенные ответы", "Работа с 100+ чатами"],
-        },
-        {
-          title: "Email-ассистент продаж",
-          description:
-            "Парсит входящие письма, создает черновики ответов с КП, ставит фоллоу-апы, обновляет CRM автоматически",
-          channels: ["Email", "Gmail", "Outlook"],
-          metrics: ["-50% время на email", "Нет пропущенных писем", "Автоматический CRM"],
-        },
+      icon: Calculator,
+      title: "Работа с прайс-листами",
+      description: "Мгновенный просчет из 5000+ позиций с учетом скидок, акций и персональных условий",
+      features: [
+        "Поиск по 5000+ товарных позиций за секунды",
+        "Автоматический расчет скидок и наценок",
+        "Учет остатков на складе в реальном времени",
+        "Формирование коммерческих предложений",
       ],
+      color: "from-blue-500 to-cyan-500",
     },
     {
-      id: "support",
-      name: "Поддержка",
-      icon: HeadphonesIcon,
-      color: "from-purple-600 to-pink-600",
-      useCases: [
-        {
-          title: "Голосовая поддержка 24/7",
-          description:
-            "Отвечает на FAQ по телефону, проверяет статус заказов, обрабатывает возвраты, эскалирует сложные запросы",
-          channels: ["Телефон", "Обратный звонок"],
-          metrics: ["-38% время ответа", "24/7 без выходных", "+25% удовлетворенность"],
-        },
-        {
-          title: "Омниканальный чат-бот",
-          description:
-            "Единый агент для WhatsApp, Telegram, VK, веб-чата. Помнит историю клиента во всех каналах, передает контекст оператору",
-          channels: ["WhatsApp", "Telegram", "VK", "Веб-чат"],
-          metrics: ["70% автоматизация", "Единая история", "Бесшовная эскалация"],
-        },
-        {
-          title: "Email-поддержка",
-          description: "Автоматически отвечает на типовые запросы, создает тикеты, отслеживает SLA, отправляет статусы",
-          channels: ["Email", "Тикет-система"],
-          metrics: ["-60% время обработки", "100% фиксация", "Соблюдение SLA"],
-        },
+      icon: Truck,
+      title: "Логистика и доставка",
+      description: "Полный расчет маршрутов, стоимости и подбор транспорта по габаритам груза",
+      features: [
+        "Расчет километража и оптимальных маршрутов",
+        "Подбор транспорта по тоннажу и габаритам",
+        "Интеграция с логистическими компаниями",
+        "Отслеживание статуса доставки",
       ],
+      color: "from-orange-500 to-amber-500",
     },
     {
-      id: "operations",
-      name: "Операции",
-      icon: Wrench,
-      color: "from-green-600 to-emerald-600",
-      useCases: [
-        {
-          title: "RPA-оператор",
-          description:
-            "Выполняет рутинные действия в ERP/CRM: создает заказы, счета, акты, отгрузки. Работает по расписанию или по триггерам",
-          channels: ["API", "Интеграции", "Webhook"],
-          metrics: ["-42% ручных действий", "0 ошибок", "Мгновенная обработка"],
-        },
-        {
-          title: "Голосовой диспетчер",
-          description:
-            "Принимает заявки на доставку/монтаж по телефону, назначает слоты, отправляет подтверждения в SMS/email",
-          channels: ["Телефон", "SMS", "Email"],
-          metrics: ["-30% время назначения", "100% соблюдение SLA", "Автоматические уведомления"],
-        },
-        {
-          title: "Чат-бот для логистики",
-          description:
-            "Отслеживает статус заказов, отправляет уведомления о доставке, принимает изменения адреса через чат",
-          channels: ["WhatsApp", "Telegram", "SMS"],
-          metrics: ["-50% звонков в поддержку", "Проактивные уведомления", "Самообслуживание"],
-        },
+      icon: Receipt,
+      title: "Счета и документы",
+      description: "Автоматическое формирование счетов, КП и актов на основе диалога с клиентом",
+      features: [
+        "Парсинг реквизитов из входящих писем",
+        "Генерация счетов в PDF за секунды",
+        "Формирование коммерческих предложений",
+        "Отправка документов на email клиента",
       ],
+      color: "from-green-500 to-emerald-500",
     },
     {
-      id: "finance",
-      name: "Финансы",
-      icon: FileText,
-      color: "from-orange-600 to-red-600",
-      useCases: [
-        {
-          title: "Автоматизация документов",
-          description:
-            "Генерирует и рассылает счета, акты, УПД по email, сверяет оплаты, отправляет напоминания через чат/email",
-          channels: ["Email", "WhatsApp", "Telegram"],
-          metrics: ["-70% время на документы", "100% точность", "Автонапоминания"],
-        },
-        {
-          title: "Голосовой финансовый ассистент",
-          description:
-            "Отвечает на вопросы о задолженности по телефону, принимает обещания оплаты, отправляет реквизиты",
-          channels: ["Телефон", "SMS", "Email"],
-          metrics: ["+35% собираемость", "-60% нагрузка на бухгалтерию", "Вежливые напоминания"],
-        },
-        {
-          title: "Извлечение данных из документов",
-          description: "Парсит договоры, накладные, спецификации из email/чата и структурирует данные для учета",
-          channels: ["Email", "Чат", "API"],
-          metrics: ["-80% время обработки", "99% точность", "Любые форматы"],
-        },
+      icon: UserCheck,
+      title: "Узнавание клиентов",
+      description: "AI помнит каждого клиента, его историю заказов и предпочтения",
+      features: [
+        "Идентификация по номеру телефона и email",
+        "Полная история заказов и обращений",
+        "Персональные рекомендации на основе истории",
+        "Автоматическое обновление данных в CRM",
       ],
-    },
-    {
-      id: "hr",
-      name: "HR",
-      icon: Users,
-      color: "from-indigo-600 to-purple-600",
-      useCases: [
-        {
-          title: "Голосовой скрининг кандидатов",
-          description:
-            "Звонит кандидатам, проводит первичное интервью, задает квалификационные вопросы, назначает встречи с HR",
-          channels: ["Телефон", "Обратный звонок"],
-          metrics: ["-60% время скрининга", "+30% качество отбора", "Автоматическое интервью"],
-        },
-        {
-          title: "Чат-бот для сотрудников",
-          description:
-            "Отвечает на вопросы новичков в корпоративном чате, выдает доступы по правилам, контролирует прохождение обучения",
-          channels: ["Slack", "Telegram", "MS Teams"],
-          metrics: ["-50% нагрузка на HR", "100% выполнение чек-листов", "Быстрая адаптация"],
-        },
-        {
-          title: "Email-ассистент HR",
-          description:
-            "Обрабатывает заявки на отпуск/больничный, отправляет напоминания о дедлайнах, собирает обратную связь",
-          channels: ["Email", "Формы"],
-          metrics: ["-40% время обработки", "Автоматические напоминания", "Структурированные данные"],
-        },
-      ],
-    },
-    {
-      id: "it",
-      name: "IT/DevOps",
-      icon: Wrench,
-      color: "from-cyan-600 to-blue-600",
-      useCases: [
-        {
-          title: "Голосовой IT-хелпдеск",
-          description:
-            "Помогает сбросить пароль, настроить VPN, получить доступы по телефону. Заводит тикеты для сложных запросов",
-          channels: ["Телефон", "Внутренний номер"],
-          metrics: ["-45% тикетов в IT", "Мгновенное решение", "24/7 доступность"],
-        },
-        {
-          title: "Чат-бот для IT-поддержки",
-          description:
-            "Отвечает на вопросы в корпоративном чате, выдает инструкции, собирает контекст проблемы, эскалирует критичные",
-          channels: ["Slack", "Telegram", "MS Teams"],
-          metrics: ["-35% время реакции", "100% фиксация", "Автоэскалация"],
-        },
-        {
-          title: "Email-бот для инцидентов",
-          description: "Парсит письма об ошибках, заводит тикеты в Jira/ServiceNow, сообщает статус, отправляет отчеты",
-          channels: ["Email", "Jira", "ServiceNow"],
-          metrics: ["-50% ручная работа", "Автоматическая приоритизация", "SLA-контроль"],
-        },
-      ],
+      color: "from-purple-500 to-pink-500",
     },
   ]
 
   const industries = [
     {
-      name: "Строительство",
-      icon: Building2,
-      description: "Расчет смет, подбор материалов с учетом скидок и логистики, формирование КП",
-      metrics: ["-40% время на КП", "+20% точность расчетов"],
+      icon: Wrench,
+      name: "Стройматериалы и кровля",
+      description:
+        "Сложнейшие расчеты: профнастил, металлочерепица, сайдинг, водосточные системы с учетом рабочей ширины",
+      metrics: { value: "+183%", label: "рост конверсии" },
+      cases: ["Расчет кровли по площади", "Калькуляция заборов", "Подбор доборных элементов", "Формирование счетов"],
+      gradient: "from-amber-500 to-orange-600",
     },
     {
-      name: "Недвижимость",
+      icon: Building,
+      name: "Отели и гостиницы",
+      description: "AI-консьерж для бронирования, заказа услуг, информирования гостей 24/7 на любом языке",
+      metrics: { value: "24/7", label: "работа без выходных" },
+      cases: ["Бронирование номеров", "Заказ room-service", "Информация о городе", "Обратная связь"],
+      gradient: "from-blue-500 to-indigo-600",
+    },
+    {
       icon: Home,
-      description: "Подбор объектов, ответы на вопросы, бронирование показов, рассылка подборок",
-      metrics: ["+25% конверсия", "-50% нагрузка на агентов"],
+      name: "Недвижимость",
+      description: "Квалификация лидов, подбор объектов по параметрам, запись на просмотры",
+      metrics: { value: "3x", label: "больше просмотров" },
+      cases: ["Подбор объектов", "Запись на показы", "Ответы на вопросы", "Напоминания"],
+      gradient: "from-green-500 to-teal-600",
     },
     {
-      name: "Отели/HoReCa",
-      icon: Hotel,
-      description: "AI-консьерж 24/7 для уборки, room-service, рекомендаций, интеграция с PMS",
-      metrics: ["+30% удовлетворенность", "-35% операционные расходы"],
+      icon: Truck,
+      name: "Логистика",
+      description: "Автоматический расчет маршрутов, подбор транспорта и оформление заявок за 3 минуты",
+      metrics: { value: "3 мин", label: "на заявку" },
+      cases: ["Расчет стоимости", "Подбор авто", "Построение маршрутов", "Отслеживание грузов"],
+      gradient: "from-purple-500 to-violet-600",
     },
     {
-      name: "Госсектор",
+      icon: ShoppingBag,
+      name: "Оптовая торговля",
+      description: "Работа с каталогом 5000+ SKU, персональные цены и автоматизация заказов",
+      metrics: { value: "100%", label: "автоматизация" },
+      cases: ["Поиск по каталогу", "Персональные скидки", "Резерв на складе", "Повторные заказы"],
+      gradient: "from-pink-500 to-rose-600",
+    },
+    {
       icon: Briefcase,
-      description: "Предзаполнение заявлений, навигация по услугам, маршрутизация обращений",
-      metrics: ["-60% время обработки", "+40% доступность услуг"],
-    },
-    {
-      name: "Образование",
-      icon: GraduationCap,
-      description: "Ответы на вопросы студентов, запись на консультации, проверка заданий",
-      metrics: ["-50% нагрузка на преподавателей", "24/7 поддержка"],
-    },
-    {
-      name: "Юридические услуги",
-      icon: Scale,
-      description: "Анализ договоров, юридические консультации, подготовка документов",
-      metrics: ["-70% время на рутину", "+35% производительность"],
+      name: "B2B услуги",
+      description: "Квалификация лидов, запись на встречи и полное сопровождение сделки",
+      metrics: { value: "-60%", label: "времени менеджера" },
+      cases: ["Квалификация заявок", "Запись на демо", "Отправка КП", "Напоминания"],
+      gradient: "from-cyan-500 to-blue-600",
     },
   ]
 
   const integrations = [
-    { name: "Телефония", icon: Phone, description: "Asterisk, FreePBX, Twilio, Zadarma" },
-    { name: "CRM", icon: BarChart3, description: "Bitrix24, amoCRM, Salesforce, HubSpot" },
-    { name: "Мессенджеры", icon: MessageSquare, description: "WhatsApp, Telegram, Viber, VK" },
-    { name: "Email", icon: Mail, description: "Gmail, Outlook, Яндекс.Почта, Mail.ru" },
-    { name: "ERP", icon: Briefcase, description: "1C, SAP, Microsoft Dynamics, Odoo" },
-    { name: "Платежи", icon: ShoppingCart, description: "Stripe, PayPal, Яндекс.Касса, Сбербанк" },
+    {
+      icon: Phone,
+      title: "Телефония",
+      description: "Входящие и исходящие звонки с распознаванием речи и синтезом голоса",
+      providers: ["Asterisk", "Mango Office", "UIS", "Zadarma"],
+      color: "bg-green-500",
+    },
+    {
+      icon: Mail,
+      title: "Email",
+      description: "Обработка входящих писем, парсинг реквизитов, отправка документов",
+      providers: ["Gmail", "Outlook", "Яндекс Почта", "Mail.ru"],
+      color: "bg-blue-500",
+    },
+    {
+      icon: MessageSquare,
+      title: "Мессенджеры",
+      description: "Единое окно для всех каналов общения с клиентами",
+      providers: ["WhatsApp", "Telegram", "VK", "Viber"],
+      color: "bg-purple-500",
+    },
+    {
+      icon: Database,
+      title: "CRM системы",
+      description: "Двусторонняя синхронизация данных и автоматическое обновление",
+      providers: ["amoCRM", "Bitrix24", "1C:CRM", "RetailCRM"],
+      color: "bg-orange-500",
+    },
+    {
+      icon: Package,
+      title: "Складские системы",
+      description: "Актуальные остатки, резервирование и автоматические заказы поставщикам",
+      providers: ["МойСклад", "1C:УТ", "WMS", "SAP"],
+      color: "bg-teal-500",
+    },
+    {
+      icon: FileText,
+      title: "Документооборот",
+      description: "Генерация счетов, КП, договоров и актов на основе данных из диалога",
+      providers: ["PDF", "1C", "Контур.Диадок", "СБИС"],
+      color: "bg-red-500",
+    },
+  ]
+
+  const roofingCaseDetails = {
+    title: "Кейс: расчет кровельных материалов",
+    subtitle: "Один из сложнейших кейсов внедрения агента",
+    description:
+      "Научили AI работать с профнастилом, металлочерепицей, сайдингом и водосточными системами. Агент понимает разницу между общей и рабочей шириной листа, рассчитывает количество материала с учетом нахлеста.",
+    scenario: [
+      {
+        step: "Клиент звонит",
+        action: "Мне нужно рассчитать забор на участок 150 метров",
+        result: "Агент уточняет параметры: марку профлиста, толщину, покрытие, длину листа",
+      },
+      {
+        step: "Сбор данных",
+        action: "Профнастил С-8, 0.5 мм, полиэстер, длина 2 метра",
+        result: "Агент обращается к прайс-листу и получает цену за м2",
+      },
+      {
+        step: "Расчет",
+        action: "Автоматический просчет",
+        result: "Делит длину забора на рабочую ширину листа (1150 мм), считает количество и стоимость",
+      },
+      {
+        step: "Доп. материалы",
+        action: "Предложение комплектующих",
+        result: "Предлагает столбы, лаги, саморезы, заглушки по нормативам расхода",
+      },
+      {
+        step: "Логистика",
+        action: "Расчет доставки",
+        result: "Считает километраж от МКАД, подбирает машину по тоннажу груза",
+      },
+      {
+        step: "Счет",
+        action: "Формирование документов",
+        result: "Генерирует счет в PDF, отправляет на email с расшифровкой позиций",
+      },
+    ],
+    metrics: [
+      { value: "3 мин", label: "полный расчет" },
+      { value: "5000+", label: "позиций в прайсе" },
+      { value: "0", label: "ошибок в расчетах" },
+      { value: "+183%", label: "рост конверсии" },
+    ],
+  }
+
+  const platformFeatures = [
+    {
+      icon: Brain,
+      title: "Думающие модели",
+      description: "GPT-4, Claude и собственные модели, обученные на вашей специфике",
+    },
+    {
+      icon: Database,
+      title: "Интеграция с базами",
+      description: "1C, МойСклад, любые ERP и CRM системы через API",
+    },
+    {
+      icon: Globe,
+      title: "Омниканальность",
+      description: "Телефония, WhatsApp, Telegram, email, сайт в одном окне",
+    },
+    {
+      icon: Settings,
+      title: "SaaS-платформа",
+      description: "Конструктор для создания агентов без программирования",
+    },
+    {
+      icon: History,
+      title: "Память клиентов",
+      description: "Полная история взаимодействий и персонализация",
+    },
+    {
+      icon: Layers,
+      title: "Масштабирование",
+      description: "От 10 до 10 000 диалогов одновременно",
+    },
+  ]
+
+  const stats = [
+    { value: "5000+", label: "Позиций в прайсе", icon: Package },
+    { value: "<3 сек", label: "Расчет стоимости", icon: Zap },
+    { value: "100%", label: "Автоматизация возможна", icon: Target },
+    { value: "99.9%", label: "Uptime", icon: Shield },
+  ]
+
+  const processSteps = [
+    {
+      number: "01",
+      title: "Погружение в бизнес",
+      duration: "2-3 дня",
+      description:
+        "Изучаем вашу специфику: товары, услуги, скрипты продаж, частые вопросы клиентов, прайс-листы и бизнес-логику.",
+    },
+    {
+      number: "02",
+      title: "Настройка AI",
+      duration: "5-7 дней",
+      description: "Обучаем агента вашим товарам, ценам, условиям. Настраиваем интеграции с CRM, 1C, телефонией.",
+    },
+    {
+      number: "03",
+      title: "Тестовый запуск",
+      duration: "3-5 дней",
+      description: "Пилот на реальных клиентах с контролем качества. Доработка сценариев по результатам.",
+    },
+    {
+      number: "04",
+      title: "Полный запуск",
+      duration: "Постоянно",
+      description: "Передача в эксплуатацию, мониторинг, аналитика и постоянное улучшение на основе данных.",
+    },
   ]
 
   const testimonials = [
     {
-      company: "Строительная компания",
-      industry: "Строительство",
       quote:
-        "Агент M2 сократил время на подготовку КП с 2 часов до 15 минут. Конверсия выросла на 18%, так как клиенты получают предложения мгновенно.",
-      author: "Дмитрий К., директор по продажам",
-      metrics: ["-85% время на КП", "+18% конверсия", "ROI за 4 месяца"],
+        "Агент за месяц обработал 3000+ заявок на расчет профлиста. Конверсия в продажу выросла с 12% до 34%. Менеджеры теперь занимаются только крупными сделками.",
+      author: "Дмитрий Козлов",
+      position: "Коммерческий директор",
+      company: "МеталлПром",
+      metric: { value: "+183%", label: "рост конверсии" },
     },
     {
-      company: "Сеть отелей",
-      industry: "HoReCa",
       quote:
-        "AI-консьерж обрабатывает 70% запросов гостей без участия персонала. Удовлетворенность выросла на 32%, а операционные расходы снизились на 40%.",
-      author: "Елена М., управляющая",
-      metrics: ["70% автоматизация", "+32% удовлетворенность", "-40% расходы"],
+        "AI сам рассчитывает маршруты, подбирает машины по тоннажу и оформляет заявки. Время обработки заказа сократилось с 40 минут до 3.",
+      author: "Елена Сидорова",
+      position: "Руководитель логистики",
+      company: "ТрансЛогистик",
+      metric: { value: "3 мин", label: "на заявку" },
     },
     {
-      company: "Агентство недвижимости",
-      industry: "Недвижимость",
       quote:
-        "Голосовой агент квалифицирует лиды и назначает показы. Конверсия в показ выросла на 25%, а агенты тратят время только на реальных клиентов.",
-      author: "Андрей П., руководитель отдела продаж",
-      metrics: ["+25% конверсия", "-60% время на лиды", "24/7 доступность"],
+        "Полностью заменили ночную смену операторов. AI-консьерж отвечает гостям 24/7 на 5 языках, бронирует услуги и собирает отзывы.",
+      author: "Марина Волкова",
+      position: "Управляющая",
+      company: "Отель Премиум",
+      metric: { value: "24/7", label: "без выходных" },
     },
   ]
 
-  const faqItems = [
+  const fullAutomationCases = [
     {
-      question: "Сколько времени занимает внедрение агента M2?",
-      answer:
-        "Базовое внедрение занимает 2-4 недели: 1 неделя на настройку и обучение, 1-2 недели на интеграции с вашими системами, 1 неделя на тестирование и запуск. Для сложных проектов с множественными интеграциями срок может составить до 6-8 недель.",
+      title: "Прием и обработка заявок",
+      description: "100% входящих обращений обрабатываются без участия менеджера",
+      icon: Headphones,
     },
     {
-      question: "Какие языки поддерживает агент M2?",
-      answer:
-        "Агент M2 поддерживает русский, английский, испанский, немецкий, французский, китайский и другие языки. Мультиязычность настраивается индивидуально под ваш проект. Агент автоматически определяет язык клиента и переключается.",
+      title: "Расчет стоимости",
+      description: "Мгновенный просчет из прайса с учетом всех параметров",
+      icon: Calculator,
     },
     {
-      question: "Как агент M2 интегрируется с нашими системами?",
-      answer:
-        "Мы предоставляем готовые интеграции с популярными CRM (Bitrix24, amoCRM, Salesforce), ERP (1C, SAP), телефонией (Asterisk, Twilio), мессенджерами (WhatsApp, Telegram) и email. Для кастомных систем разрабатываем API-интеграции под ключ.",
+      title: "Формирование документов",
+      description: "Счета, КП и договоры генерируются автоматически",
+      icon: FileText,
     },
     {
-      question: "Какая стоимость агента M2?",
-      answer:
-        "Стоимость зависит от функционала и количества каналов. Базовый пакет (голос + чат) от 50,000₽/мес. Полный пакет (омниканал + интеграции + аналитика) от 150,000₽/мес. Предоставляем бесплатный расчет после консультации.",
+      title: "Логистика",
+      description: "Расчет доставки и подбор транспорта без участия логиста",
+      icon: Truck,
     },
     {
-      question: "Как обеспечивается безопасность данных?",
-      answer:
-        "Все данные шифруются (AES-256), хранятся на защищенных серверах с резервным копированием. Соответствие GDPR, DPA, ISO 27001. Ролевой доступ, аудит всех действий, возможность развертывания on-premise для максимальной безопасности.",
+      title: "Работа с CRM",
+      description: "Создание сделок, задач и обновление данных клиентов",
+      icon: Database,
     },
     {
-      question: "Что нужно от нас для запуска?",
-      answer:
-        "Для запуска нужны: доступы к вашим системам (CRM, телефония, email), база знаний (FAQ, прайсы, регламенты), примеры диалогов, описание бизнес-процессов. Мы проведем воркшоп для сбора требований и поможем подготовить все необходимое.",
-    },
-  ]
-
-  const agentTypes = [
-    {
-      title: "Голосовые агенты",
-      icon: Phone,
-      color: "from-blue-600 to-cyan-600",
-      description:
-        "Принимают и совершают звонки, понимают естественную речь, отвечают на вопросы, квалифицируют лиды, назначают встречи",
-      features: [
-        "Распознавание речи на 15+ языках",
-        "Естественная интонация и эмоции",
-        "Обработка возражений и сложных вопросов",
-        "Интеграция с телефонией (Asterisk, Twilio, Zadarma)",
-      ],
-      useCases: ["Продажи", "Поддержка", "Опросы", "Напоминания", "Скрининг кандидатов"],
-    },
-    {
-      title: "Чат-боты",
-      icon: MessageSquare,
-      color: "from-purple-600 to-pink-600",
-      description:
-        "Работают в WhatsApp, Telegram, VK, на сайте. Отвечают мгновенно, помнят контекст, отправляют файлы и ссылки",
-      features: [
-        "Омниканальность (один агент для всех каналов)",
-        "Память истории диалогов",
-        "Отправка изображений, документов, кнопок",
-        "Интеграция с мессенджерами и веб-чатом",
-      ],
-      useCases: ["Консультации", "Заказы", "Поддержка", "Уведомления", "Опросы"],
-    },
-    {
-      title: "Email-агенты",
-      icon: Mail,
-      color: "from-green-600 to-emerald-600",
-      description: "Парсят входящие письма, создают черновики ответов, отправляют КП и документы, ставят задачи в CRM",
-      features: [
-        "Анализ темы и содержания письма",
-        "Генерация персонализированных ответов",
-        "Извлечение данных из вложений",
-        "Интеграция с Gmail, Outlook, Яндекс.Почта",
-      ],
-      useCases: ["Продажи", "Поддержка", "HR", "Финансы", "Закупки"],
-    },
-    {
-      title: "RPA-агенты и аналитика",
-      icon: Zap,
-      color: "from-orange-600 to-red-600",
-      description:
-        "Выполняют рутинные действия в ERP/CRM, анализируют данные, строят отчеты, находят закономерности и аномалии",
-      features: [
-        "Работа с любыми системами через API или UI",
-        "Анализ больших объемов данных",
-        "Предиктивная аналитика и прогнозы",
-        "Автоматическое создание отчетов и дашбордов",
-      ],
-      useCases: ["Операции", "Финансы", "Аналитика", "Отчетность", "Прогнозирование"],
-    },
-  ]
-
-  const automationCapabilities = [
-    {
-      title: "Разбор и обработка почты",
-      icon: Mail,
-      color: "from-blue-600 to-cyan-600",
-      description:
-        "AI-агент автоматически читает входящие письма, классифицирует по типу (запрос, жалоба, КП), извлекает данные, создает черновики ответов и обновляет CRM",
-      benefits: ["-60% время на email", "0% пропущенных писем", "Автоматическая категоризация", "Извлечение данных"],
-    },
-    {
-      title: "Анализ данных и аналитика",
+      title: "Отчетность",
+      description: "Автоматические отчеты по продажам и эффективности",
       icon: BarChart3,
-      color: "from-purple-600 to-pink-600",
-      description:
-        "Собирает данные из всех систем (CRM, ERP, телефония, чаты), анализирует паттерны, строит прогнозы, выявляет аномалии и автоматически создает отчеты",
-      benefits: ["Единая аналитика из всех источников", "Предиктивные прогнозы", "Выявление аномалий", "Автоотчеты"],
-    },
-    {
-      title: "Обработка документов",
-      icon: FileSearch,
-      color: "from-green-600 to-emerald-600",
-      description:
-        "Извлекает данные из договоров, накладных, актов, счетов в любом формате. Проверяет на ошибки, сверяет с базой, создает записи в системе",
-      benefits: ["-80% ручная работа", "99% точность OCR", "Любые форматы", "Автоматическая сверка"],
-    },
-    {
-      title: "Неограниченный функционал",
-      icon: Brain,
-      color: "from-orange-600 to-red-600",
-      description:
-        "Адаптируем агентов под любые задачи вашего бизнеса: от скоринга лидов до мониторинга соцсетей, от управления складом до обучения сотрудников",
-      benefits: [
-        "Кастомные сценарии под ваш бизнес",
-        "Интеграция с любыми системами",
-        "Масштабируемость",
-        "Постоянное обучение",
-      ],
     },
   ]
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("[v0] M2 Agents form submitted:", formData)
-    openModal("consultation")
-  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted/20">
-      {/* Schema.org structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            name: "Агенты M2 для автоматизации бизнеса",
-            description:
-              "Полная автоматизация бизнеса с искусственным интеллектом: голосовые ассистенты, чат-боты, email-агенты, RPA, аналитика, разбор почты. Адаптация под любой кейс и бизнес-процесс с интеграцией CRM/ERP.",
-            provider: {
-              "@type": "Organization",
-              name: "M2 Solutions",
-              url: "https://m2solutions.ai",
-            },
-            areaServed: ["RU", "KZ", "ES", "Worldwide"],
-            availableChannel: [
-              {
-                "@type": "ServiceChannel",
-                serviceType: "Полная автоматизация с ИИ",
-                availableLanguage: ["ru", "en", "es"],
-              },
-            ],
-            offers: {
-              "@type": "Offer",
-              availability: "https://schema.org/InStock",
-              priceSpecification: {
-                "@type": "PriceSpecification",
-                priceCurrency: "RUB",
-                price: "50000",
-                unitText: "MONTH",
-              },
-            },
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "4.9",
-              reviewCount: "127",
-              bestRating: "5",
-            },
-          }),
-        }}
-      />
-
-      {/* Breadcrumbs */}
-      <nav aria-label="Breadcrumb" className="container mx-auto px-4 pt-4">
-        <ol
-          itemScope
-          itemType="https://schema.org/BreadcrumbList"
-          className="flex items-center gap-2 text-sm text-muted-foreground"
-        >
-          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-            <a itemProp="item" href={`/${locale}`} className="hover:text-foreground transition-colors">
-              <span itemProp="name">Главная</span>
-            </a>
-            <meta itemProp="position" content="1" />
-          </li>
-          <span>/</span>
-          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-            <a itemProp="item" href={`/${locale}/solutions`} className="hover:text-foreground transition-colors">
-              <span itemProp="name">Решения</span>
-            </a>
-            <meta itemProp="position" content="2" />
-          </li>
-          <span>/</span>
-          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-            <span itemProp="name" className="text-foreground font-medium">
-              Агенты M2
-            </span>
-            <meta itemProp="position" content="3" />
-          </li>
-        </ol>
-      </nav>
-
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5 pt-6 sm:pt-8 md:pt-12 pb-12 sm:pb-16 md:pb-24 lg:pb-32">
-        <div className="absolute inset-0 bg-grid-white/5 [mask-image:radial-gradient(white,transparent_85%)]" />
+      <section className="relative pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
+          <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-blue-500/20 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-purple-500/20 to-transparent" />
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
+        </div>
 
-        <div className="container relative mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div className="space-y-6 md:space-y-8">
-              <Badge className="w-fit" variant="secondary">
-                <Bot className="w-3 h-3 mr-1" />
-                Полная автоматизация бизнеса с ИИ
-              </Badge>
-
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                Автоматизация всех бизнес-процессов с искусственным интеллектом
-              </h1>
-
-              <p className="text-base md:text-xl text-muted-foreground leading-relaxed">
-                Не просто голосовые ассистенты — полная операционная автоматизация: разбор почты и ответы, анализ
-                данных, работа с документами, чаты в мессенджерах, аналитика, прогнозы. Неограниченный функционал с
-                адаптацией под ваш кейс и бизнес. Настройте сами или с помощью нашей команды.
-              </p>
-
-              <div className="flex flex-col sm:flex-row flex-wrap gap-4">
-                <Button size="lg" onClick={() => openModal("demo")} className="w-full sm:w-auto">
-                  Запросить демо
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button size="lg" variant="outline" asChild className="w-full sm:w-auto bg-transparent">
-                  <a href={`/${locale}/platform/pricing-calculator`}>
-                    <BarChart3 className="mr-2 h-4 w-4" />
-                    Рассчитать эффект
-                  </a>
-                </Button>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-6 md:pt-8 border-t">
-                <div>
-                  <div className="text-2xl md:text-3xl font-bold text-primary">-30-60%</div>
-                  <div className="text-xs md:text-sm text-muted-foreground">Операционные расходы</div>
-                </div>
-                <div>
-                  <div className="text-2xl md:text-3xl font-bold text-primary">+10-25%</div>
-                  <div className="text-xs md:text-sm text-muted-foreground">Конверсия и выручка</div>
-                </div>
-                <div>
-                  <div className="text-2xl md:text-3xl font-bold text-primary">2-4 нед</div>
-                  <div className="text-xs md:text-sm text-muted-foreground">Запуск</div>
-                </div>
-                <div>
-                  <div className="text-2xl md:text-3xl font-bold text-primary">24/7</div>
-                  <div className="text-xs md:text-sm text-muted-foreground">Без выходных</div>
-                </div>
-              </div>
+        <div className="container relative mx-auto px-4 max-w-6xl">
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 mb-8">
+              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span className="text-sm text-white/80">Платформа нового поколения</span>
             </div>
 
-            <div className="relative">
-              <div
-                onClick={() => setIsImageOpen(true)}
-                className="relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer group"
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-white">
+              AI-агенты которые
+              <span className="block bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                продают за вас
+              </span>
+            </h1>
+
+            <p className="text-xl md:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed">
+              До 100% автоматизации продаж. Мгновенный расчет из 5000+ позиций, формирование счетов, логистика. Есть
+              кейсы полной замены отдела продаж.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Button
+                size="lg"
+                onClick={() => openModal("consultation")}
+                className="h-14 px-8 text-base bg-white text-slate-900 hover:bg-slate-100 cursor-pointer"
               >
-                <Image
-                  src="/m2-platform-workflow-screenshot.png"
-                  alt="M2 Platform - Визуальный конструктор AI-агентов для полной автоматизации бизнеса"
-                  width={1920}
-                  height={1080}
-                  className="w-full h-auto transition-transform duration-300 group-hover:scale-105"
-                  priority
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 rounded-full p-3 md:p-4">
-                    <Maximize2 className="h-6 w-6 md:h-8 md:w-8 text-primary" />
-                  </div>
+                Запросить демо
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="h-14 px-8 text-base border-white/20 text-white hover:bg-white/10 bg-transparent cursor-pointer"
+              >
+                <Play className="mr-2 h-5 w-5" />
+                Смотреть как работает
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 border-t border-white/10">
+              {stats.map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-1">{stat.value}</div>
+                  <div className="text-sm text-slate-400">{stat.label}</div>
                 </div>
-              </div>
-              <div className="mt-3 md:mt-4 text-center text-xs md:text-sm text-muted-foreground">
-                <Maximize2 className="inline h-3 w-3 md:h-4 md:w-4 mr-1" />
-                Нажмите на изображение для увеличения
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4">
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 px-2">
-              Полная автоматизация операционных процессов
-            </h2>
-            <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-3 sm:px-4">
-              AI-агенты M2 — это не только голос. Это комплексная автоматизация всех процессов вашего бизнеса с
-              искусственным интеллектом
-            </p>
+      {/* Platform Features Grid */}
+      <section className="py-12 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {platformFeatures.map((feature) => {
+              const Icon = feature.icon
+              return (
+                <div
+                  key={feature.title}
+                  className="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center hover:shadow-lg transition-shadow"
+                >
+                  <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-semibold text-sm mb-1">{feature.title}</h4>
+                  <p className="text-xs text-muted-foreground">{feature.description}</p>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-20">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-sm font-medium mb-4">
+              <Wrench className="w-4 h-4" />
+              Сложнейший кейс
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{roofingCaseDetails.title}</h2>
+            <p className="text-lg text-muted-foreground">{roofingCaseDetails.description}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-            {automationCapabilities.map((capability, index) => (
-              <Card
-                key={index}
-                className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-primary/50"
-              >
-                <CardHeader className="p-6 md:p-8">
-                  <div
-                    className={`w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br ${capability.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
-                  >
-                    <capability.icon className="h-7 w-7 md:h-8 md:w-8 text-white" />
-                  </div>
-                  <CardTitle className="text-xl md:text-2xl mb-3">{capability.title}</CardTitle>
-                  <CardDescription className="text-sm md:text-base leading-relaxed mb-6">
-                    {capability.description}
-                  </CardDescription>
-
-                  <div className="grid grid-cols-2 gap-3 pt-4 border-t">
-                    {capability.benefits.map((benefit, i) => (
-                      <div key={i} className="flex items-start gap-2 text-xs md:text-sm">
-                        <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                        <span>{benefit}</span>
+          <div className="grid lg:grid-cols-3 gap-6 mb-12">
+            <div className="lg:col-span-2">
+              <div className="bg-slate-900 rounded-xl p-6 text-white">
+                <div className="text-sm text-slate-400 mb-4">Пример диалога с AI-агентом</div>
+                <div className="space-y-4">
+                  {roofingCaseDetails.scenario.map((item, idx) => (
+                    <div key={idx} className="flex gap-4">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center flex-shrink-0 text-sm font-bold">
+                        {idx + 1}
                       </div>
-                    ))}
-                  </div>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-12 md:mt-16">
-            <Card className="max-w-4xl mx-auto border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5">
-              <CardContent className="p-6 md:p-10">
-                <div className="flex flex-col md:flex-row items-center gap-6">
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0">
-                    <Settings className="h-8 w-8 md:h-10 md:w-10 text-white" />
-                  </div>
-                  <div className="flex-1 text-center md:text-left">
-                    <h3 className="text-xl md:text-2xl font-bold mb-3">Адаптация под ваш бизнес</h3>
-                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                      Наша команда инженеров настроит агентов M2 под любую специфику вашего бизнеса: от скоринга лидов
-                      до управления складом, от анализа отзывов до прогнозирования спроса. Неограниченный функционал с
-                      интеграцией в ваши системы и процессы.
-                    </p>
-                  </div>
-                  <Button size="lg" onClick={() => openModal("consultation")} className="w-full md:w-auto">
-                    Обсудить проект
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4 bg-muted/30">
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 px-2">
-              Как это работает
-            </h2>
-            <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-3 sm:px-4">
-              Простая схема работы агента M2: от запроса клиента через любой канал до результата с интеграцией в ваши
-              системы
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12 md:mb-16">
-            {[
-              {
-                step: "1",
-                title: "Каналы",
-                description:
-                  "Клиент обращается через телефон, WhatsApp, Telegram, email или веб-чат. Агент M2 принимает запрос в любом канале.",
-                icon: Phone,
-                color: "from-blue-600 to-cyan-600",
-              },
-              {
-                step: "2",
-                title: "Агенты M2",
-                description:
-                  "AI-агент понимает запрос на естественном языке, анализирует контекст диалога и выбирает нужное действие из сценария.",
-                icon: Bot,
-                color: "from-purple-600 to-pink-600",
-              },
-              {
-                step: "3",
-                title: "Инструменты",
-                description:
-                  "Агент использует интеграции с CRM, базой знаний, прайсами, календарем для выполнения задачи.",
-                icon: Wrench,
-                color: "from-green-600 to-emerald-600",
-              },
-              {
-                step: "4",
-                title: "Результат",
-                description:
-                  "Клиент получает ответ, создается сделка в CRM, отправляется КП, назначается встреча — все логируется автоматически.",
-                icon: CheckCircle2,
-                color: "from-orange-600 to-red-600",
-              },
-            ].map((item, index) => (
-              <div key={index} className="relative">
-                <Card className="h-full hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/50">
-                  <CardHeader className="text-center p-4 md:p-6">
-                    <div
-                      className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${item.color} flex items-center justify-center mx-auto mb-3 md:mb-4 text-xl md:text-2xl font-bold text-white`}
-                    >
-                      {item.step}
-                    </div>
-                    <div
-                      className={`w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mx-auto mb-3 md:mb-4`}
-                    >
-                      <item.icon className="h-5 w-5 md:h-6 md:w-6 text-white" />
-                    </div>
-                    <CardTitle className="text-base md:text-lg mb-2">{item.title}</CardTitle>
-                    <CardDescription className="text-xs md:text-sm leading-relaxed">{item.description}</CardDescription>
-                  </CardHeader>
-                </Card>
-                {index < 3 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
-                    <ArrowRight className="h-6 w-6 md:h-8 md:w-8 text-primary" />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 md:mt-16">
-            <h3 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">Визуальный конструктор workflow</h3>
-            <div
-              onClick={() => setIsImageOpen(true)}
-              className="relative rounded-2xl overflow-hidden shadow-2xl cursor-pointer group max-w-5xl mx-auto"
-            >
-              <Image
-                src="/m2-platform-workflow-screenshot.png"
-                alt="M2 Platform - Конструктор workflow для настройки AI-агентов"
-                width={1920}
-                height={1080}
-                className="w-full h-auto transition-transform duration-300 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 rounded-full p-3 md:p-4">
-                  <Maximize2 className="h-6 w-6 md:h-8 md:w-8 text-primary" />
-                </div>
-              </div>
-            </div>
-            <p className="text-center text-muted-foreground mt-3 md:mt-4 text-xs md:text-sm">
-              <Maximize2 className="inline h-3 w-3 md:h-4 md:w-4 mr-1" />
-              Нажмите на изображение для увеличения
-            </p>
-          </div>
-
-          <div className="mt-12 md:mt-20 grid md:grid-cols-2 gap-6 md:gap-8">
-            <Card className="border-2 border-primary/20 hover:shadow-xl transition-all duration-300">
-              <CardHeader className="p-4 md:p-6">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center mb-4">
-                  <Settings className="h-6 w-6 md:h-7 md:w-7 text-white" />
-                </div>
-                <CardTitle className="text-xl md:text-2xl mb-3">Настройте сами</CardTitle>
-                <CardDescription className="text-sm md:text-base leading-relaxed space-y-3">
-                  <p>
-                    Если у вас простой бизнес-процесс, вы можете создать и настроить агента самостоятельно через удобный
-                    веб-интерфейс:
-                  </p>
-                  <ul className="space-y-2 text-xs md:text-sm">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <span>Загрузите прайс-листы, скрипты продаж, базу знаний</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <span>Настройте сценарии: "Если клиент спрашивает X, то делай Y"</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <span>Обучите агента на примерах диалогов</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <span>Подключите каналы и запустите в работу</span>
-                    </li>
-                  </ul>
-                  <p className="pt-2 text-xs md:text-sm">
-                    Агент помнит всю историю общения с клиентом, даже если он звонит повторно или пишет на email.
-                  </p>
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-2 border-secondary/20 hover:shadow-xl transition-all duration-300">
-              <CardHeader className="p-4 md:p-6">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center mb-4">
-                  <Users className="h-6 w-6 md:h-7 md:w-7 text-white" />
-                </div>
-                <CardTitle className="text-xl md:text-2xl mb-3">Помощь команды</CardTitle>
-                <CardDescription className="text-sm md:text-base leading-relaxed space-y-3">
-                  <p>
-                    Если у вас сложный многоступенчатый бизнес-процесс, наши инженеры помогут вам разобраться и
-                    настроить все под ключ:
-                  </p>
-                  <ul className="space-y-2 text-xs md:text-sm">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                      <span>Проведем воркшоп для сбора требований</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                      <span>Разработаем сложные сценарии с ветвлениями</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                      <span>Настроим интеграции с вашими системами</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                      <span>Обучим вашу команду работе с платформой</span>
-                    </li>
-                  </ul>
-                  <p className="pt-2 text-xs md:text-sm">
-                    Полное сопровождение от идеи до запуска и дальнейшая техническая поддержка 24/7.
-                  </p>
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Pain Points → Solution */}
-      <section className="py-12 md:py-20 px-4">
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Решаем реальные проблемы бизнеса</h2>
-            <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
-              Агенты M2 автоматизируют рутину и освобождают команду для важных задач
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {[
-              {
-                pain: "Очереди в поддержке",
-                solution: "AI-агент обрабатывает 70% запросов мгновенно",
-                icon: HeadphonesIcon,
-                color: "from-blue-600 to-cyan-600",
-              },
-              {
-                pain: "Потеря лидов ночью",
-                solution: "Голосовой агент квалифицирует лиды 24/7",
-                icon: Phone,
-                color: "from-purple-600 to-pink-600",
-              },
-              {
-                pain: "Ручные операции в ERP",
-                solution: "RPA-агент создает заказы и документы автоматически",
-                icon: Wrench,
-                color: "from-green-600 to-emerald-600",
-              },
-              {
-                pain: "Долгая подготовка КП",
-                solution: "Агент формирует КП за 15 минут вместо 2 часов",
-                icon: FileText,
-                color: "from-orange-600 to-red-600",
-              },
-              {
-                pain: "Пропущенные email",
-                solution: "Email-ассистент парсит и отвечает на все письма",
-                icon: Mail,
-                color: "from-indigo-600 to-purple-600",
-              },
-              {
-                pain: "Нет аналитики",
-                solution: "AI собирает данные из всех систем и строит прогнозы",
-                icon: BarChart3,
-                color: "from-cyan-600 to-blue-600",
-              },
-            ].map((item, index) => (
-              <Card
-                key={index}
-                className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-primary/50"
-              >
-                <CardHeader className="p-4 md:p-6">
-                  <div
-                    className={`w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
-                  >
-                    <item.icon className="h-6 w-6 md:h-7 md:w-7 text-white" />
-                  </div>
-                  <div className="space-y-3">
-                    <div className="text-xs md:text-sm text-muted-foreground">
-                      <span className="font-semibold text-red-600">Проблема:</span> {item.pain}
-                    </div>
-                    <div className="text-xs md:text-sm">
-                      <span className="font-semibold text-green-600">Решение:</span> {item.solution}
-                    </div>
-                  </div>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4">
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 px-2">
-              Агенты M2 работают везде
-            </h2>
-            <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-3 sm:px-4">
-              Голосовые ассистенты, чат-боты, email-агенты, RPA и аналитика — выберите нужный тип или комбинируйте
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-            {agentTypes.map((type, index) => (
-              <Card
-                key={index}
-                className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-primary/50"
-              >
-                <CardHeader className="p-6 md:p-8">
-                  <div
-                    className={`w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br ${type.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
-                  >
-                    <type.icon className="h-7 w-7 md:h-8 md:w-8 text-white" />
-                  </div>
-                  <CardTitle className="text-xl md:text-2xl mb-3">{type.title}</CardTitle>
-                  <CardDescription className="text-sm md:text-base leading-relaxed mb-6">
-                    {type.description}
-                  </CardDescription>
-
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="text-sm font-semibold mb-3 text-foreground">Возможности:</h4>
-                      <ul className="space-y-2">
-                        {type.features.map((feature, i) => (
-                          <li key={i} className="flex items-start gap-2 text-xs md:text-sm text-muted-foreground">
-                            <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h4 className="text-sm font-semibold mb-3 text-foreground">Применение:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {type.useCases.map((useCase, i) => (
-                          <Badge key={i} variant="secondary" className="text-xs">
-                            {useCase}
-                          </Badge>
-                        ))}
+                      <div className="flex-1">
+                        <div className="text-cyan-400 text-sm font-medium mb-1">{item.step}</div>
+                        <div className="text-slate-300 text-sm mb-1">{item.action}</div>
+                        <div className="text-slate-500 text-xs">{item.result}</div>
                       </div>
                     </div>
-                  </div>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-12 md:mt-16 text-center">
-            <Card className="max-w-3xl mx-auto border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5">
-              <CardContent className="p-6 md:p-8">
-                <Globe className="h-12 w-12 md:h-16 md:w-16 text-primary mx-auto mb-4" />
-                <h3 className="text-xl md:text-2xl font-bold mb-3">Омниканальность</h3>
-                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                  Один агент M2 может работать одновременно во всех каналах: принимать звонки, отвечать в чатах,
-                  обрабатывать email. Клиент начинает диалог в WhatsApp, продолжает по телефону — агент помнит весь
-                  контекст и историю общения.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Use Cases by Roles */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-3 sm:px-4 bg-muted/30">
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 px-2">
-              Решения для каждой роли
-            </h2>
-            <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-3 sm:px-4">
-              Агенты M2 автоматизируют задачи в продажах, поддержке, операциях, финансах, HR и IT через голос, чат и
-              email
-            </p>
-          </div>
-
-          <Tabs value={activeRole} onValueChange={setActiveRole} className="w-full">
-            <div className="mb-6 sm:mb-8 md:mb-12 overflow-x-auto">
-              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1.5 sm:gap-2 h-auto bg-transparent p-0 min-w-max lg:min-w-0">
-                {roles.map((role) => (
-                  <TabsTrigger
-                    key={role.id}
-                    value={role.id}
-                    className="flex flex-col items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm py-2.5 sm:py-3 px-2 sm:px-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg border-2 data-[state=active]:border-primary data-[state=inactive]:border-muted transition-all whitespace-nowrap"
-                  >
-                    <role.icon className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-                    <span className="text-center leading-tight">{role.name}</span>
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </div>
-
-            {roles.map((role) => (
-              <TabsContent key={role.id} value={role.id} className="space-y-4 sm:space-y-6 md:space-y-8">
-                <div className="grid gap-4 sm:gap-6 md:gap-8">
-                  {role.useCases.map((useCase, index) => (
-                    <Card
-                      key={index}
-                      className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 border-2 hover:border-primary/50"
-                    >
-                      <CardHeader className="p-4 sm:p-6 md:p-8">
-                        <div className="flex flex-col gap-4 sm:gap-6">
-                          <div
-                            className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br ${role.color} flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0 mx-auto sm:mx-0`}
-                          >
-                            <role.icon className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-white" />
-                          </div>
-
-                          <div className="flex-1 space-y-3 sm:space-y-4">
-                            <div>
-                              <CardTitle className="text-base sm:text-lg md:text-xl lg:text-2xl mb-2 sm:mb-3 text-center sm:text-left">
-                                {useCase.title}
-                              </CardTitle>
-                              <CardDescription className="text-xs sm:text-sm md:text-base leading-relaxed text-center sm:text-left">
-                                {useCase.description}
-                              </CardDescription>
-                            </div>
-
-                            <div>
-                              <h4 className="text-xs sm:text-sm font-semibold mb-2 text-foreground text-center sm:text-left">
-                                Каналы:
-                              </h4>
-                              <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center sm:justify-start">
-                                {useCase.channels.map((channel, i) => (
-                                  <Badge key={i} variant="outline" className="text-xs whitespace-nowrap">
-                                    {channel}
-                                  </Badge>
-                                ))}
-                              </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 pt-3 sm:pt-4 border-t">
-                              {useCase.metrics.map((metric, i) => (
-                                <div
-                                  key={i}
-                                  className="flex items-center gap-2 text-xs sm:text-sm p-2.5 sm:p-3 bg-muted/50 rounded-lg"
-                                >
-                                  <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-600 flex-shrink-0" />
-                                  <span className="font-medium">{metric}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </CardHeader>
-                    </Card>
                   ))}
                 </div>
-              </TabsContent>
-            ))}
-          </Tabs>
+              </div>
+            </div>
 
-          <div className="mt-8 sm:mt-12 md:mt-16 text-center px-3">
-            <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-3 sm:mb-4">
-              Не нашли свой сценарий? Мы настроим агента под ваши задачи
+            <div className="space-y-4">
+              <div className="bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl p-6 text-white">
+                <h4 className="font-semibold mb-4">Результаты внедрения</h4>
+                <div className="grid grid-cols-2 gap-4">
+                  {roofingCaseDetails.metrics.map((metric) => (
+                    <div key={metric.label}>
+                      <div className="text-2xl font-bold">{metric.value}</div>
+                      <div className="text-sm text-white/70">{metric.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-slate-100 dark:bg-slate-800 rounded-xl p-6">
+                <h4 className="font-semibold mb-3">Что умеет агент</h4>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Различает общую и рабочую ширину листа</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Считает количество листов с учетом нахлеста</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Предлагает доборные элементы по нормам</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Рассчитывает доставку по километражу</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Формирует счет и отправляет на email</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-20 bg-gradient-to-br from-green-600 to-emerald-700 text-white">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-sm font-medium mb-4">
+              <Target className="w-4 h-4" />
+              Есть кейсы полной автоматизации
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">До 100% автоматизации продаж</h2>
+            <p className="text-lg text-white/80 max-w-2xl mx-auto">
+              Мы не просто помогаем менеджерам. В ряде бизнесов агенты полностью заменили отдел продаж без потери
+              качества.
             </p>
-            <Button size="lg" onClick={() => openModal("consultation")} className="w-full sm:w-auto">
-              Обсудить ваш сценарий
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {fullAutomationCases.map((item) => {
+              const Icon = item.icon
+              return (
+                <div key={item.title} className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10">
+                  <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center mb-3">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-semibold mb-1">{item.title}</h4>
+                  <p className="text-sm text-white/70">{item.description}</p>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-20">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Интеграция в вашу инфраструктуру</h2>
+            <p className="text-lg text-muted-foreground">
+              Агент подключается к телефонии, почте, мессенджерам, CRM и складским системам. Все настраивается под вашу
+              структуру бизнеса.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {integrations.map((integration) => {
+              const Icon = integration.icon
+              return (
+                <Card key={integration.title} className="hover:shadow-lg transition-shadow">
+                  <CardContent className="p-5">
+                    <div className="flex items-start gap-4">
+                      <div
+                        className={`w-12 h-12 rounded-xl ${integration.color} flex items-center justify-center flex-shrink-0`}
+                      >
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold mb-1">{integration.title}</h4>
+                        <p className="text-sm text-muted-foreground mb-3">{integration.description}</p>
+                        <div className="flex flex-wrap gap-1">
+                          {integration.providers.map((provider) => (
+                            <span
+                              key={provider}
+                              className="text-xs px-2 py-1 rounded-md bg-slate-100 dark:bg-slate-800"
+                            >
+                              {provider}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+
+          <div className="mt-8 p-6 rounded-xl bg-slate-100 dark:bg-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+              <h4 className="font-semibold mb-1">Нужна кастомная интеграция?</h4>
+              <p className="text-sm text-muted-foreground">Подключим агента к любым вашим системам через API</p>
+            </div>
+            <Button onClick={() => openModal("consultation")} className="cursor-pointer">
+              Обсудить интеграцию
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Industries */}
-      <section className="py-12 md:py-20 px-4">
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Решения для вашей отрасли</h2>
-            <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
-              Агенты M2 адаптированы под специфику строительства, недвижимости, HoReCa, госсектора и других отраслей
+      {/* Capabilities Section */}
+      <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Что умеет AI-агент</h2>
+            <p className="text-lg text-muted-foreground">
+              Полная автоматизация продаж: от первого звонка до выставления счета и контроля оплаты.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {industries.map((industry, index) => (
-              <Card
-                key={index}
-                className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-primary/50"
-              >
-                <CardHeader className="p-4 md:p-6">
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <industry.icon className="h-6 w-6 md:h-7 md:w-7 text-white" />
-                  </div>
-                  <CardTitle className="text-base md:text-xl mb-3">{industry.name}</CardTitle>
-                  <CardDescription className="text-xs md:text-sm leading-relaxed mb-4">
-                    {industry.description}
-                  </CardDescription>
-                  <div className="space-y-2 pt-4 border-t">
-                    {industry.metrics.map((metric, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs md:text-sm">
-                        <TrendingUp className="h-3 w-3 md:h-4 md:w-4 text-green-600 flex-shrink-0" />
-                        <span className="font-medium">{metric}</span>
+          <div className="grid lg:grid-cols-2 gap-6">
+            <div className="space-y-3">
+              {capabilities.map((cap, idx) => {
+                const Icon = cap.icon
+                return (
+                  <button
+                    key={cap.title}
+                    onClick={() => setActiveCapability(idx)}
+                    className={`w-full text-left p-4 rounded-xl transition-all cursor-pointer ${
+                      activeCapability === idx
+                        ? `bg-gradient-to-r ${cap.color} text-white shadow-lg`
+                        : "bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"
+                    }`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div
+                        className={`p-3 rounded-lg ${activeCapability === idx ? "bg-white/20" : "bg-slate-100 dark:bg-slate-700"}`}
+                      >
+                        <Icon className={`w-5 h-5 ${activeCapability === idx ? "text-white" : ""}`} />
                       </div>
-                    ))}
-                  </div>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Demo Section */}
-      <DemoSection locale={locale} />
-
-      {/* Integrations */}
-      <section className="py-12 md:py-20 px-4 bg-muted/30">
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Интеграции с вашими системами</h2>
-            <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
-              Агенты M2 подключаются к телефонии, CRM, ERP, мессенджерам, email и платежным системам
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {integrations.map((integration, index) => (
-              <Card
-                key={index}
-                className="hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/50"
-              >
-                <CardHeader className="p-4 md:p-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <integration.icon className="h-5 w-5 md:h-6 md:w-6 text-primary" />
+                      <div className="flex-1">
+                        <h3 className="font-semibold">{cap.title}</h3>
+                        <p
+                          className={`text-sm mt-1 ${activeCapability === idx ? "text-white/80" : "text-muted-foreground"}`}
+                        >
+                          {cap.description}
+                        </p>
+                      </div>
+                      <ChevronRight
+                        className={`w-5 h-5 transition-transform ${activeCapability === idx ? "rotate-90" : ""}`}
+                      />
                     </div>
-                    <CardTitle className="text-base md:text-lg">{integration.name}</CardTitle>
+                  </button>
+                )
+              })}
+            </div>
+
+            <div className={`rounded-xl p-6 bg-gradient-to-br ${capabilities[activeCapability].color} text-white`}>
+              {(() => {
+                const Icon = capabilities[activeCapability].icon
+                return (
+                  <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center mb-5">
+                    <Icon className="w-7 h-7" />
                   </div>
-                  <CardDescription className="text-xs md:text-sm">{integration.description}</CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
+                )
+              })()}
+              <h3 className="text-xl font-bold mb-3">{capabilities[activeCapability].title}</h3>
+              <p className="text-white/80 mb-6">{capabilities[activeCapability].description}</p>
 
-          <div className="mt-8 md:mt-12 text-center">
-            <p className="text-sm md:text-base text-muted-foreground mb-4">Нужна кастомная интеграция?</p>
-            <Button size="lg" variant="outline" onClick={() => openModal("consultation")} className="w-full sm:w-auto">
-              Обсудить интеграцию
-            </Button>
-          </div>
-        </div>
-      </section>
+              <ul className="space-y-3">
+                {capabilities[activeCapability].features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-3 h-3" />
+                    </div>
+                    <span className="text-sm">{feature}</span>
+                  </li>
+                ))}
+              </ul>
 
-      {/* Security & Compliance */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Безопасность и соответствие</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Шифрование, роли, аудит, соответствие GDPR/DPA/ISO 27001
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: Shield,
-                title: "Шифрование AES-256",
-                description: "Все данные шифруются при передаче и хранении",
-              },
-              {
-                icon: Users,
-                title: "Ролевой доступ",
-                description: "Гибкая настройка прав доступа для команды",
-              },
-              {
-                icon: FileText,
-                title: "Полный аудит",
-                description: "Логирование всех действий агента и пользователей",
-              },
-              {
-                icon: CheckCircle2,
-                title: "GDPR/DPA/ISO",
-                description: "Соответствие международным стандартам безопасности",
-              },
-            ].map((item, index) => (
-              <Card key={index} className="hover:shadow-xl transition-all duration-300">
-                <CardHeader className="text-center">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <item.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <CardTitle className="text-lg mb-2">{item.title}</CardTitle>
-                  <CardDescription className="text-sm">{item.description}</CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Button size="lg" variant="outline" asChild>
-              <a href={`/${locale}/trust`}>
-                Подробнее о безопасности
+              <Button
+                onClick={() => openModal("consultation")}
+                className="w-full mt-6 bg-white text-slate-900 hover:bg-slate-100 cursor-pointer"
+              >
+                Обсудить внедрение
                 <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ROI/Value */}
-
-      {/* Testimonials */}
-      <section className="py-12 md:py-20 px-4">
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Истории успеха</h2>
-            <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
-              Реальные результаты компаний, которые внедрили агентов M2
+      {/* Industries */}
+      <section className="py-16 md:py-20">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Готовые решения для отраслей</h2>
+            <p className="text-lg text-muted-foreground">
+              AI-агенты с глубоким пониманием специфики вашего бизнеса, обученные на реальных кейсах.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                <CardHeader className="p-4 md:p-6">
-                  <div className="flex flex-wrap items-center gap-2 mb-4">
-                    <Badge variant="secondary" className="text-xs">
-                      {testimonial.industry}
-                    </Badge>
-                    <div className="flex gap-1">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star key={star} className="h-3 w-3 md:h-4 md:w-4 fill-yellow-400 text-yellow-400" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {industries.map((industry) => {
+              const Icon = industry.icon
+              return (
+                <Card key={industry.name} className="group overflow-hidden hover:shadow-lg transition-all">
+                  <div className={`h-1.5 bg-gradient-to-r ${industry.gradient}`} />
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className={`p-2.5 rounded-lg bg-gradient-to-br ${industry.gradient}`}>
+                        <Icon className="w-5 h-5 text-white" />
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xl font-bold">{industry.metrics.value}</div>
+                        <div className="text-xs text-muted-foreground">{industry.metrics.label}</div>
+                      </div>
+                    </div>
+
+                    <h3 className="font-semibold mb-1">{industry.name}</h3>
+                    <p className="text-sm text-muted-foreground mb-3">{industry.description}</p>
+
+                    <div className="grid grid-cols-2 gap-1.5">
+                      {industry.cases.map((useCase) => (
+                        <div key={useCase} className="flex items-center gap-1.5 text-xs">
+                          <Check className="w-3 h-3 text-green-500 flex-shrink-0" />
+                          <span>{useCase}</span>
+                        </div>
                       ))}
                     </div>
-                  </div>
-                  <CardTitle className="text-base md:text-xl mb-4">{testimonial.company}</CardTitle>
-                  <CardDescription className="text-xs md:text-sm leading-relaxed italic mb-6">
-                    "{testimonial.quote}"
-                  </CardDescription>
-                  <div className="space-y-2 pt-4 border-t">
-                    {testimonial.metrics.map((metric, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs md:text-sm">
-                        <TrendingUp className="h-3 w-3 md:h-4 md:w-4 text-green-600 flex-shrink-0" />
-                        <span className="font-medium">{metric}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-4 md:mt-6 text-xs md:text-sm font-medium text-muted-foreground">
-                    — {testimonial.author}
-                  </div>
-                </CardHeader>
-              </Card>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Запуск за 2-3 недели</h2>
+            <p className="text-lg text-muted-foreground">
+              Прозрачный процесс от первой встречи до работающего агента с гарантией результата.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-6">
+            {processSteps.map((step) => (
+              <div key={step.number} className="relative">
+                <div className="text-4xl font-bold text-slate-200 dark:text-slate-800 mb-2">{step.number}</div>
+                <div className="inline-block px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium mb-2">
+                  {step.duration}
+                </div>
+                <h3 className="font-semibold mb-1">{step.title}</h3>
+                <p className="text-sm text-muted-foreground">{step.description}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-12 md:py-20 px-4 bg-muted/30">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Часто задаваемые вопросы</h2>
-            <p className="text-base md:text-xl text-muted-foreground px-4">
-              Ответы на популярные вопросы об агентах M2
+      {/* Testimonials */}
+      <section className="py-16 md:py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Результаты клиентов</h2>
+            <p className="text-lg text-slate-300">
+              Реальные кейсы компаний, которые автоматизировали продажи с M2 Agents.
             </p>
           </div>
 
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                mainEntity: faqItems.map((item) => ({
-                  "@type": "Question",
-                  name: item.question,
-                  acceptedAnswer: {
-                    "@type": "Answer",
-                    text: item.answer,
-                  },
-                })),
-              }),
-            }}
-          />
-
-          <div className="space-y-3 md:space-y-4">
-            {faqItems.map((item, index) => (
-              <Card key={index} className="hover:shadow-lg transition-all duration-300">
-                <CardHeader className="p-4 md:p-6">
-                  <details className="group">
-                    <summary className="flex items-center justify-between cursor-pointer list-none">
-                      <CardTitle className="text-sm md:text-lg pr-4">{item.question}</CardTitle>
-                      <ChevronDown className="h-4 w-4 md:h-5 md:w-5 text-muted-foreground group-open:rotate-180 transition-transform flex-shrink-0" />
-                    </summary>
-                    <CardDescription className="mt-4 text-xs md:text-sm leading-relaxed">{item.answer}</CardDescription>
-                  </details>
-                </CardHeader>
-              </Card>
+          <div className="grid md:grid-cols-3 gap-4">
+            {testimonials.map((testimonial) => (
+              <div
+                key={testimonial.author}
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10"
+              >
+                <Quote className="w-6 h-6 text-white/20 mb-3" />
+                <blockquote className="text-sm leading-relaxed mb-4">{testimonial.quote}</blockquote>
+                <div className="flex items-center justify-between pt-3 border-t border-white/10">
+                  <div>
+                    <div className="font-semibold text-sm">{testimonial.author}</div>
+                    <div className="text-xs text-slate-400">
+                      {testimonial.position}, {testimonial.company}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xl font-bold text-cyan-400">{testimonial.metric.value}</div>
+                    <div className="text-xs text-slate-400">{testimonial.metric.label}</div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Lead Form */}
-      <section className="py-12 md:py-20 px-4 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Начните автоматизацию сегодня</h2>
-            <p className="text-base md:text-xl text-muted-foreground px-4">
-              Оставьте заявку, и мы подберем решение для вашего бизнеса
-            </p>
-          </div>
-
-          <Card className="shadow-2xl border-2">
-            <CardContent className="p-6 md:p-8 lg:p-12">
-              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
-                <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="company" className="text-sm md:text-base">
-                      Компания *
-                    </Label>
-                    <Input
-                      id="company"
-                      placeholder="ООО Ромашка"
-                      required
-                      value={formData.company}
-                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="text-sm md:text-base"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="name" className="text-sm md:text-base">
-                      Ваше имя *
-                    </Label>
-                    <Input
-                      id="name"
-                      placeholder="Иван Иванов"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="text-sm md:text-base"
-                    />
-                  </div>
+      <section className="py-16 md:py-20">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-8 md:p-12">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-medium mb-4">
+                  <Settings className="w-4 h-4" />
+                  Индивидуальная разработка
                 </div>
-
-                <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm md:text-base">
-                      Email *
-                    </Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="ivan@company.com"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="text-sm md:text-base"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-sm md:text-base">
-                      Телефон *
-                    </Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="+7 900 000 00 00"
-                      required
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="text-sm md:text-base"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="industry" className="text-sm md:text-base">
-                    Отрасль
-                  </Label>
-                  <Input
-                    id="industry"
-                    placeholder="Строительство, Недвижимость, HoReCa..."
-                    value={formData.industry}
-                    onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
-                    className="text-sm md:text-base"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label className="text-sm md:text-base">Интересующие каналы</Label>
-                  <div className="grid grid-cols-2 gap-3 md:gap-4">
-                    {["Телефония", "Чат", "Email", "Мессенджеры"].map((channel) => (
-                      <div key={channel} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={channel}
-                          checked={formData.channels.includes(channel)}
-                          onCheckedChange={(checked) => {
-                            if (checked) {
-                              setFormData({ ...formData, channels: [...formData.channels, channel] })
-                            } else {
-                              setFormData({
-                                ...formData,
-                                channels: formData.channels.filter((c) => c !== channel),
-                              })
-                            }
-                          }}
-                        />
-                        <label htmlFor={channel} className="text-xs md:text-sm cursor-pointer">
-                          {channel}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="comment" className="text-sm md:text-base">
-                    Комментарий
-                  </Label>
-                  <Textarea
-                    id="comment"
-                    placeholder="Расскажите о ваших задачах..."
-                    rows={4}
-                    value={formData.comment}
-                    onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
-                    className="text-sm md:text-base"
-                  />
-                </div>
-
-                <div className="flex items-start space-x-2">
-                  <Checkbox
-                    id="consent"
-                    required
-                    checked={formData.consent}
-                    onCheckedChange={(checked) => setFormData({ ...formData, consent: checked as boolean })}
-                  />
-                  <label htmlFor="consent" className="text-xs md:text-sm text-muted-foreground cursor-pointer">
-                    Я согласен с{" "}
-                    <a href={`/${locale}/privacy`} className="underline hover:text-foreground">
-                      политикой конфиденциальности
-                    </a>{" "}
-                    и обработкой персональных данных
-                  </label>
-                </div>
-
-                <Button type="submit" size="lg" className="w-full text-base md:text-lg h-12 md:h-14">
-                  Отправить заявку
-                  <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
+                <h2 className="text-2xl md:text-3xl font-bold mb-4">Агент под вашу структуру бизнеса</h2>
+                <p className="text-muted-foreground mb-6">
+                  Мы знаем, какой агент, какая модель и какой стек технологий подойдет именно для вашей задачи. Все
+                  решения индивидуальны и согласовываются на основе анализа вашего бизнеса.
+                </p>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-4 h-4 text-green-500" />
+                    </div>
+                    <span>Анализ бизнес-процессов и точек автоматизации</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-4 h-4 text-green-500" />
+                    </div>
+                    <span>Подбор оптимальной AI-модели под задачу</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-4 h-4 text-green-500" />
+                    </div>
+                    <span>Интеграция с вашими системами и базами данных</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-4 h-4 text-green-500" />
+                    </div>
+                    <span>Обучение на ваших скриптах и корпоративных стандартах</span>
+                  </li>
+                </ul>
+                <Button size="lg" onClick={() => openModal("consultation")} className="cursor-pointer">
+                  Обсудить проект
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-              </form>
-            </CardContent>
-          </Card>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-4">
+                  <div className="bg-white dark:bg-slate-700 rounded-xl p-4 shadow-lg">
+                    <Cpu className="w-8 h-8 text-blue-500 mb-2" />
+                    <div className="font-semibold">GPT-4 / Claude</div>
+                    <div className="text-xs text-muted-foreground">Лучшие языковые модели</div>
+                  </div>
+                  <div className="bg-white dark:bg-slate-700 rounded-xl p-4 shadow-lg">
+                    <Lock className="w-8 h-8 text-green-500 mb-2" />
+                    <div className="font-semibold">On-premise</div>
+                    <div className="text-xs text-muted-foreground">Размещение на ваших серверах</div>
+                  </div>
+                </div>
+                <div className="space-y-4 mt-8">
+                  <div className="bg-white dark:bg-slate-700 rounded-xl p-4 shadow-lg">
+                    <Database className="w-8 h-8 text-purple-500 mb-2" />
+                    <div className="font-semibold">Ваши базы данных</div>
+                    <div className="text-xs text-muted-foreground">Прямое подключение к 1C, CRM</div>
+                  </div>
+                  <div className="bg-white dark:bg-slate-700 rounded-xl p-4 shadow-lg">
+                    <Users className="w-8 h-8 text-orange-500 mb-2" />
+                    <div className="font-semibold">Команда экспертов</div>
+                    <div className="text-xs text-muted-foreground">Сопровождение проекта</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-
-      {/* Benefits Section */}
-      <BenefitsSection locale={locale} />
 
       {/* CTA Section */}
-      <CTASection locale={locale} />
+      <section className="py-16 md:py-20 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-4xl text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Готовы автоматизировать продажи?</h2>
+          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Оставьте заявку на бесплатную консультацию. Покажем демо и рассчитаем окупаемость для вашего бизнеса.
+          </p>
 
-      {/* Fullscreen Image Modal */}
-      {isImageOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
-          onClick={() => setIsImageOpen(false)}
-        >
-          <button
-            onClick={() => setIsImageOpen(false)}
-            className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-            aria-label="Закрыть"
-          >
-            <span className="text-white text-2xl">×</span>
-          </button>
-          <div className="relative w-full h-full flex items-center justify-center">
-            <Image
-              src="/m2-platform-workflow-screenshot.png"
-              alt="M2 Platform - Визуальный конструктор AI-агентов"
-              width={1920}
-              height={1080}
-              className="max-w-full max-h-full object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <Button
+              size="lg"
+              onClick={() => openModal("consultation")}
+              className="h-14 px-8 text-base bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 cursor-pointer"
+            >
+              Получить консультацию
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            <Button size="lg" variant="outline" className="h-14 px-8 text-base bg-transparent cursor-pointer">
+              <Phone className="mr-2 h-5 w-5" />
+              +7 (495) 123-45-67
+            </Button>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-green-500" />
+              <span>Бесплатная консультация</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-green-500" />
+              <span>Демо на ваших данных</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Check className="w-4 h-4 text-green-500" />
+              <span>Расчет ROI</span>
+            </div>
           </div>
         </div>
-      )}
+      </section>
     </div>
   )
 }
+
+export default M2AgentsPage

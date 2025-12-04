@@ -15,6 +15,7 @@ export function Footer({ locale }: FooterProps) {
 
   const solutions = [
     { name: t("solutions.voiceSalesManager"), href: `/${locale}/solutions/voice-sales-manager` },
+    { name: t("solutions.m2Agents"), href: `/${locale}/solutions/m2-agents` },
     { name: t("solutions.hotelConcierge"), href: `/${locale}/solutions/hotel-concierge` },
     { name: t("solutions.smb"), href: `/${locale}/solutions/smb` },
     { name: t("solutions.enterprise"), href: `/${locale}/solutions/enterprise` },

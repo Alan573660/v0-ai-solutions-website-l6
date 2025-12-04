@@ -208,9 +208,19 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1400px] mx-auto">
             {solutions.map((solution, idx) => (
               <Link key={solution.id} href={solution.href} className="group">
-                <Card className="h-full overflow-hidden border-2 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 bg-gradient-to-br from-white to-slate-50">
+                <Card className="h-full overflow-hidden border-2 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 bg-white">
                   {/* Top gradient accent */}
-                  <div className={`h-1.5 bg-gradient-to-r ${solution.gradient}`} />
+                  <div
+                    className={
+                      solution.id === "voice-sales"
+                        ? "h-1.5 bg-gradient-to-r from-blue-600 to-cyan-600"
+                        : solution.id === "smart-home"
+                          ? "h-1.5 bg-gradient-to-r from-purple-600 to-pink-600"
+                          : solution.id === "smb"
+                            ? "h-1.5 bg-gradient-to-r from-green-600 to-emerald-600"
+                            : "h-1.5 bg-gradient-to-r from-orange-600 to-red-600"
+                    }
+                  />
 
                   {/* Image Section - made more compact */}
                   <div className={`relative h-36 overflow-hidden bg-gradient-to-br ${solution.bgGradient}`}>
