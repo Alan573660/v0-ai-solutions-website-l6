@@ -28,7 +28,7 @@ import {
   Headphones,
 } from "lucide-react"
 import type { Locale } from "@/lib/i18n/config"
-import { useTranslation } from "react-i18next"
+import { useTranslations } from "@/lib/i18n/translations"
 import { solutions, callExamples } from "./home-data"
 
 interface HomeClientPageProps {
@@ -36,7 +36,7 @@ interface HomeClientPageProps {
 }
 
 function HomeClientPage({ locale }: HomeClientPageProps) {
-  const { t } = useTranslation()
+  const { t } = useTranslations(locale)
   const [playingAudio, setPlayingAudio] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState("voice-manager")
   const [audioProgress, setAudioProgress] = useState<Record<string, number>>({})
