@@ -57,7 +57,7 @@ jobs:
           rm -rf "$APP_DIR"
           mkdir -p /home
           cd /home
-          git clone git@github.com:Alan573660/v0-ai-solutions-website-l6.git
+          git clone @github.com:Alan573660/v0-ai-solutions-website-l6.git
           cd "$APP_DIR"
 
           echo "[4/7] Create .env"
