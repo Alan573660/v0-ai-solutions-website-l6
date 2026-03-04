@@ -36,8 +36,7 @@ jobs:
       - name: Test SSH connectivity
         run: |
           ssh -tt target "echo 'SSH OK'; whoami; uname -a"
-
-      - name: Remote deploy (pull, build, up)
+          - name: Remote deploy (pull, build, up)
         run: |
           ssh -tt target << 'EOF'
           set -euo pipefail
