@@ -20,23 +20,21 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Write SSH config (keep-alive, no host key prompts)
+      - name: Write SSH config
         run: |
           install -m 700 -d ~/.ssh
           {
             echo "Host target"
             echo "  HostName ${SSH_HOST}"
             echo "  User ${SSH_USER}"
-            echo "  ServerAliveInterval 20"
-            echo "  ServerAliveCountMax 6"
-            echo "  TCPKeepAlive yes"
             echo "  StrictHostKeyChecking no"
           } >> ~/.ssh/config
 
       - name: Test SSH connectivity
         run: |
-          ssh -tt target "echo 'SSH OK'; whoami; uname -a"
-          - name: Remote deploy (pull, build, up)
+          ssh -tt target "echo SSH OK; whoami; uname -a"
+
+      - name: Remote deploy
         run: |
           ssh -tt target << 'EOF'
           set -euo pipefail
@@ -44,108 +42,22 @@ jobs:
           APP_DIR="/home/v0-ai-solutions-website-l6"
           PROJECT_NAME="v0-ai-solutions-website-l6"
 
-          echo "[1/7] Stop stack (no volume wipe)"
+          echo "[1/5] Stop stack"
           docker compose -p "$PROJECT_NAME" down --remove-orphans || true
 
-          echo "[2/7] Light cleanup (safe)"
+          echo "[2/5] Cleanup"
           docker image prune -a -f || true
           docker builder prune -a -f || true
-          # НЕ трогаем volume prune тут, чтобы случайно не снести БД/данные
 
-          echo "[3/7] Refresh repo"
+          echo "[3/5] Refresh repo"
           rm -rf "$APP_DIR"
-          mkdir -p /home
           cd /home
-         git clone https://github.com/Alan573660/v0-ai-solutions-website-l6.git 
+          git clone https://github.com/Alan573660/v0-ai-solutions-website-l6.git
           cd "$APP_DIR"
 
-          echo "[4/7] Create .env"
-          cat > .env << 'EOENV'
-          # =========================
-          # Base Configuration
-          # =========================
-          NEXT_PUBLIC_BASE_URL=https://m2solutions.ai
-          NEXT_PUBLIC_SITE_URL=https://m2solutions.ai
-          
-          # =========================
-          # API Keys
-          # =========================
-          API_KEY=
-          HUBSPOT_API_KEY=
-          
-          # =========================
-          # Analytics
-          # =========================
-          NEXT_PUBLIC_GA_ID=
-          NEXT_PUBLIC_YANDEX_METRICA_ID=
-          
-          # =========================
-          # Redis (LOCAL, via docker-compose)
-          # REDIS_URL=redis://redis:6379
-          
-          # =========================
-          # Upstash KV / Redis (REST)
-          KV_URL=
-          KV_REST_API_URL=
-          KV_REST_API_TOKEN=
-          KV_REST_API_READ_ONLY_TOKEN=
-          
-          # =========================
-          # Database / Pools
-          DB_POOL_MIN=2
-          DB_POOL_MAX=10
-          REDIS_POOL_MIN=2
-          REDIS_POOL_MAX=10
-          
-          # =========================
-          # Security & CORS
-          ALLOWED_ORIGINS=https://m2solutions.ai,https://www.m2solutions.ai
-          METRICS_TOKEN=
-          
-          # =========================
-          # Rate Limiting
-          RATE_LIMIT_MAX=100
-          RATE_LIMIT_WINDOW_MS=60000
-          
-          # =========================
-          # Internationalization
-          DEFAULT_LOCALE=ru
-          SUPPORTED_LOCALES=ru,en,es,de,fr,zh
-          
-          # =========================
-          # Logging
-          LOG_LEVEL=info
-          
-          # =========================
-          # OpenTelemetry / Observability
-          OTEL_SERVICE_NAME=ai-solutions-website
-          OTEL_EXPORTER_OTLP_ENDPOINT=
-          
-          # =========================
-          # Server Configuration
-          PORT=3000
-          WORKER_MODE=false
-          
-          # =========================
-          # CI/CD
-          CI=false
-          EOENV
+          echo "[4/5] Build & run"
+          docker compose up -d --build --pull always
 
-          echo "[5/7] Pre-pull base images with retry (helps with flaky DNS)"
-          for i in 1 2 3; do
-            docker pull node:20-alpine && break || sleep 3
-          done || true
-
-          echo "[6/7] Build & run"
-          export DOCKER_BUILDKIT=1
-          export NODE_OPTIONS="--max-old-space-size=3072 --dns-result-order=ipv4first"
-          # Если у тебя прод-композ: docker-compose.prod.yml
-          if [ -f docker-compose.prod.yml ]; then
-            docker compose -f docker-compose.prod.yml up -d --build --pull always
-          else
-            docker compose up -d --build --pull always
-          fi
-
-          echo "[7/7] Health info"
-          docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'
+          echo "[5/5] Done"
+          docker ps
           EOF
