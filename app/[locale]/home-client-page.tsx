@@ -1,21 +1,21 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect, type ReactNode } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 import {
   ArrowRight,
   Play,
   Pause,
-  Volume2,
   CheckCircle2,
-  Sparkles,
   Zap,
-  Building2,
   Phone,
   Users,
   TrendingUp,
@@ -23,1142 +23,653 @@ import {
   Award,
   Settings,
   Bot,
-  Lightbulb,
   Target,
   Headphones,
+  Building2,
+  Home,
+  Building,
+  Shield,
+  BarChart3,
+  Globe,
+  Lock,
+  ArrowUpRight,
+  type LucideIcon,
 } from "lucide-react"
 import type { Locale } from "@/lib/i18n/config"
-import { useTranslation } from "react-i18next"
+import { useTranslations } from "@/lib/i18n/translations"
 import { solutions, callExamples } from "./home-data"
+import { useCTA } from "@/components/modals/cta-provider"
 
-interface HomeClientPageProps {
-  locale: Locale
+/* ================================================================== */
+/*  Intersection Observer hook                                         */
+/* ================================================================== */
+function useReveal(threshold = 0.15) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.unobserve(el) } },
+      { threshold }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [threshold])
+  return { ref, visible }
 }
 
+/* ================================================================== */
+/*  Reveal wrapper                                                     */
+/* ================================================================== */
+function Reveal({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
+  const { ref, visible } = useReveal()
+  return (
+    <div
+      ref={ref}
+      className={`${className} transition-all duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  )
+}
+
+/* ================================================================== */
+/*  Section label                                                      */
+/* ================================================================== */
+function Label({ children, light = false }: { children: ReactNode; light?: boolean }) {
+  return (
+    <div className={`mb-5 inline-flex items-center gap-2.5 rounded-full border px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] ${light ? "border-white/10 text-white/60" : "border-border text-muted-foreground"}`}>
+      <span className={`h-1.5 w-1.5 rounded-full ${light ? "bg-sky-400" : "bg-primary"}`} />
+      {children}
+    </div>
+  )
+}
+
+/* ================================================================== */
+/*  Main component                                                     */
+/* ================================================================== */
+interface HomeClientPageProps { locale: Locale }
+
 function HomeClientPage({ locale }: HomeClientPageProps) {
-  const { t } = useTranslation()
+  const { t } = useTranslations(locale)
+  const { openConsultation } = useCTA()
   const [playingAudio, setPlayingAudio] = useState<string | null>(null)
-  const [activeTab, setActiveTab] = useState("voice-manager")
   const [audioProgress, setAudioProgress] = useState<Record<string, number>>({})
 
-  // Removed solutions and callExamples arrays - now imported from home-data.ts
+  const solutionIcons: Record<string, LucideIcon> = {
+    "voice-sales": Phone,
+    "smart-home": Home,
+    smb: Building2,
+    enterprise: Building,
+  }
 
-  // const solutions = [ ... ] // removed
-  // const callExamples = [ ... ] // removed
-
-  const howWeWork = [
-    {
-      phase: "1",
-      title: "Погружение в бизнес",
-      description: "Глубокий анализ процессов, выявление точек роста, изучение целевой аудитории",
-      duration: "2-3 дня",
-      icon: Target,
-      gradient: "from-blue-500 to-cyan-500",
-    },
-    {
-      phase: "2",
-      title: "Проектирование решения",
-      description: "Разработка сценариев, выбор технологий, проектирование архитектуры",
-      duration: "3-5 дней",
-      icon: Settings,
-      gradient: "from-purple-500 to-pink-500",
-    },
-    {
-      phase: "3",
-      title: "Обучение AI-агента",
-      description: "Составление промптов, обучение на ваших данных, настройка интеграций",
-      duration: "5-7 дней",
-      icon: Bot,
-      gradient: "from-green-500 to-emerald-500",
-    },
-    {
-      phase: "4",
-      title: "Тестирование и запуск",
-      description: "Пилотный запуск, корректировка, полноценный деплой с поддержкой",
-      duration: "2-3 дня",
-      icon: Zap,
-      gradient: "from-orange-500 to-red-500",
-    },
-  ]
-
-  const integrations = [
-    { name: "amoCRM", logo: "/images/67cbfeaf-a5fb-4c38-ae6d.jpeg" },
-    { name: "Bitrix24", logo: "/images/9af7d4d0-2a0f-4980-a59b.jpeg" },
-    { name: "Telegram", logo: "/images/305c48f2-2bd0-4708-8ce9.jpeg" },
-    { name: "WhatsApp", logo: "/images/49c7178f-6604-4243-a6cd.jpeg" },
-  ]
-
+  /* ================================================================ */
   return (
-    <div className="bg-background">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 pt-20 pb-32">
-        <div className="absolute inset-0 bg-grid-white/10 [mask-image:radial-gradient(white,transparent_85%)]" />
+    <div className="bg-background overflow-x-hidden">
 
-        <div className="container relative mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8 text-white">
-              <Badge className="w-fit bg-white/20 text-white border-white/30 hover:bg-white/30 transition-colors">
-                <Sparkles className="w-3 h-3 mr-1" />
-                AI-технологии для вашего бизнеса
-              </Badge>
+      {/* ============================================================ */}
+      {/*  HERO                                                        */}
+      {/* ============================================================ */}
+      <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden bg-[#060a16]">
+        {/* BG image */}
+        <div className="absolute inset-0">
+          <Image src="/images/hero-bg.jpg" alt="" fill className="object-cover opacity-40 mix-blend-lighten" priority />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(56,130,255,.07),transparent)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#060a16]/30 via-[#060a16]/60 to-[#060a16]" />
+        </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                Полная автоматизация бизнеса с искусственным интеллектом
-              </h1>
+        {/* Very subtle grid overlay */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:72px_72px]" />
 
-              <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
-                Голосовые AI-менеджеры, умные дома, автоматизация процессов. Увеличьте продажи на 87%, сократите расходы
-                на 60%.
-              </p>
-
-              <div className="flex flex-wrap gap-4">
-                <Button
-                  size="lg"
-                  className="bg-white text-blue-600 hover:bg-white/90 shadow-xl hover:shadow-2xl transition-all hover:scale-105"
-                >
-                  Получить консультацию
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-white/10 bg-transparent backdrop-blur-sm"
-                >
-                  Смотреть примеры
-                </Button>
-              </div>
-
-              {/* Trust Indicators */}
-              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/20">
-                <div className="group cursor-default">
-                  <div className="text-4xl font-bold group-hover:scale-110 transition-transform">500+</div>
-                  <div className="text-sm text-white/80">Проектов</div>
-                </div>
-                <div className="group cursor-default">
-                  <div className="text-4xl font-bold group-hover:scale-110 transition-transform">10+</div>
-                  <div className="text-sm text-white/80">Лет опыта</div>
-                </div>
-                <div className="group cursor-default">
-                  <div className="text-4xl font-bold group-hover:scale-110 transition-transform">98%</div>
-                  <div className="text-sm text-white/80">Довольных клиентов</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20 hover:scale-105 transition-transform duration-500">
-                <Image
-                  src="/modern-ai-technology-dashboard-with-charts-and-ana.jpg"
-                  alt="AI Solutions dashboard"
-                  width={800}
-                  height={600}
-                  className="w-full h-auto"
-                  priority
-                />
-              </div>
-
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-2xl hover:shadow-3xl transition-all hover:scale-105 animate-float">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center shadow-lg">
-                    <TrendingUp className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-green-600">+87%</div>
-                    <div className="text-sm text-muted-foreground">Конверсия</div>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className="absolute -top-6 -right-6 bg-white rounded-xl p-4 shadow-2xl hover:shadow-3xl transition-all hover:scale-105 animate-float"
-                style={{ animationDelay: "0.5s" }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center shadow-lg">
-                    <Clock className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-blue-600">24/7</div>
-                    <div className="text-sm text-muted-foreground">Работа</div>
-                  </div>
-                </div>
-              </div>
+        <div className="relative mx-auto w-full max-w-7xl px-6 pt-36 pb-20 lg:pt-44 lg:pb-24">
+          {/* Top badge */}
+          <div className="flex justify-center mb-10 animate-fade-in">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-white/[0.03] px-5 py-2 backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              <span className="text-[13px] font-medium text-white/70">{'AI-решения для бизнеса нового поколения'}</span>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Solutions Section */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16 md:mb-20">
-            <Badge variant="outline" className="mb-4 border-purple-500 text-purple-600">
-              <Sparkles className="w-3 h-3 mr-2" />
-              Наши решения
-            </Badge>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              AI-решения для любых задач
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              От автоматизации продаж до умного дома — комплексные индивидуальные решения с прозрачными сроками и
-              результатами
-            </p>
-          </div>
+          {/* Headline */}
+          <h1 className="mx-auto max-w-[920px] text-center text-balance text-[2.5rem] font-extrabold leading-[1.08] tracking-[-0.025em] text-white sm:text-5xl md:text-6xl lg:text-[4.25rem] animate-fade-in-up">
+            {'Голосовые AI-менеджеры, которые '}
+            <span className="bg-gradient-to-r from-sky-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
+              {'продают за вас'}
+            </span>
+          </h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1400px] mx-auto">
-            {solutions.map((solution, idx) => (
-              <Link key={solution.id} href={solution.href} className="group">
-                <Card className="h-full overflow-hidden border-2 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 bg-white">
-                  {/* Top gradient accent */}
-                  <div
-                    className={
-                      solution.id === "voice-sales"
-                        ? "h-1.5 bg-gradient-to-r from-blue-600 to-cyan-600"
-                        : solution.id === "smart-home"
-                          ? "h-1.5 bg-gradient-to-r from-purple-600 to-pink-600"
-                          : solution.id === "smb"
-                            ? "h-1.5 bg-gradient-to-r from-green-600 to-emerald-600"
-                            : "h-1.5 bg-gradient-to-r from-orange-600 to-red-600"
-                    }
-                  />
+          {/* Sub */}
+          <p className="mx-auto mt-7 max-w-2xl text-center text-pretty text-[1.125rem] leading-[1.7] text-white/50 animate-fade-in-up" style={{ animationDelay: "0.12s" }}>
+            {'Принимают звонки, обрабатывают заявки, формируют счета и ведут CRM. Без выходных, без больничных, без ошибок. 24/7/365.'}
+          </p>
 
-                  {/* Image Section - made more compact */}
-                  <div className={`relative h-36 overflow-hidden bg-gradient-to-br ${solution.bgGradient}`}>
-                    <Image
-                      src={solution.image || "/placeholder.svg"}
-                      alt={solution.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-
-                    {/* Floating icon badge - made smaller */}
-                    <div className="absolute top-3 left-3">
-                      <div
-                        className={`w-11 h-11 rounded-xl bg-gradient-to-br ${solution.gradient} flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}
-                      >
-                        <solution.icon className="w-6 h-6 text-white" />
-                      </div>
-                    </div>
-
-                    {/* View arrow - added pulse animation */}
-                    <div className="absolute top-3 right-3">
-                      <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/40 transition-all group-hover:scale-110">
-                        <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <CardHeader className="space-y-3 pb-3 pt-4">
-                    <div>
-                      <CardTitle className="text-lg mb-2 group-hover:text-primary transition-colors leading-tight">
-                        {solution.title}
-                      </CardTitle>
-                      <CardDescription className="text-sm leading-snug line-clamp-2">
-                        {solution.description}
-                      </CardDescription>
-                    </div>
-
-                    {/* Features List - made more compact */}
-                    <div className="space-y-1.5 pt-1">
-                      {solution.features.slice(0, 3).map((feature, i) => (
-                        <div key={i} className="flex items-start gap-1.5 text-xs">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <span className="text-muted-foreground leading-tight">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </CardHeader>
-
-                  <CardContent className="pt-0 pb-4 px-4">
-                    {/* Stats - made more compact */}
-                    <div className="grid grid-cols-2 gap-2 mb-3">
-                      {solution.stats.map((stat, i) => (
-                        <div
-                          key={i}
-                          className={`p-2.5 rounded-lg bg-gradient-to-br ${solution.bgGradient} border border-slate-200 group-hover:shadow-md group-hover:scale-105 transition-all`}
-                        >
-                          <div className="flex items-center gap-1.5 mb-0.5">
-                            <stat.icon className="w-3.5 h-3.5 text-primary" />
-                            <div
-                              className={`text-xl font-bold bg-gradient-to-r ${solution.gradient} bg-clip-text text-transparent`}
-                            >
-                              {stat.value}
-                            </div>
-                          </div>
-                          <div className="text-[10px] text-muted-foreground font-medium leading-tight">
-                            {stat.label}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* CTA Button - made more compact */}
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all bg-transparent text-xs"
-                    >
-                      Подробнее
-                      <ArrowRight className="ml-1.5 w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How We Work Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 md:mb-16">
-            <Badge variant="outline" className="mb-4 border-purple-500 text-purple-600">
-              <Lightbulb className="w-3 h-3 mr-2" />
-              Наш подход
-            </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Как мы автоматизируем ваш бизнес</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Полное погружение в ваш бизнес. Индивидуальная разработка. Прозрачный процесс от анализа до запуска.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {howWeWork.map((phase) => (
-              <Card key={phase.phase} className="relative border-2 hover:shadow-xl transition-all duration-300">
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${phase.gradient}`} />
-                <CardHeader className="pb-4">
-                  <div
-                    className={`w-12 h-12 rounded-lg bg-gradient-to-br ${phase.gradient} flex items-center justify-center mb-4 shadow-lg`}
-                  >
-                    <phase.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="text-sm font-semibold text-muted-foreground mb-2">
-                    Этап {phase.phase} • {phase.duration}
-                  </div>
-                  <CardTitle className="text-xl mb-3">{phase.title}</CardTitle>
-                  <CardDescription className="text-sm leading-relaxed">{phase.description}</CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-
-          {/* Why Choose Us */}
-          <div className="mt-16 p-8 md:p-12 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl border-2 border-blue-100">
-            <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center">Почему выбирают нас</h3>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <Award className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-2 text-lg">Опыт 10+ лет</h4>
-                  <p className="text-sm text-muted-foreground">Реализовали 500+ проектов в 15 отраслях</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <Users className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-2 text-lg">Команда профи</h4>
-                  <p className="text-sm text-muted-foreground">ML-инженеры, аналитики, проектные менеджеры</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <Headphones className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-2 text-lg">Поддержка 24/7</h4>
-                  <p className="text-sm text-muted-foreground">Всегда на связи, быстрое решение проблем</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Unique AI Capabilities Section - NEW */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 md:mb-16">
-            <Badge variant="outline" className="mb-4 border-blue-500 text-blue-600">
-              <Bot className="w-3 h-3 mr-2" />
-              Уникальные возможности
-            </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Индивидуальная кастомная разработка под ваш бизнес</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Наши AI-агенты объединяют думающие модели последнего поколения и полностью обучаются специфике вашего
-              бизнеса
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {/* Capability Cards */}
-            <Card className="border-2 hover:shadow-xl transition-all">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-4">
-                  <Settings className="w-6 h-6 text-white" />
-                </div>
-                <CardTitle className="text-lg mb-2">Автоматическое формирование счетов</CardTitle>
-                <CardDescription>
-                  AI-агент сам создает счета в PDF, распознает реквизиты после общения с клиентом. Не нужны никакие
-                  программы.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-2 hover:shadow-xl transition-all">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4">
-                  <Target className="w-6 h-6 text-white" />
-                </div>
-                <CardTitle className="text-lg mb-2">Полная воронка продаж</CardTitle>
-                <CardDescription>
-                  Борьба с возражениями, квалификация клиентов, презентация товаров и услуг. Обучен всем преимуществам
-                  ваших продуктов.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-2 hover:shadow-xl transition-all">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center mb-4">
-                  <Phone className="w-6 h-6 text-white" />
-                </div>
-                <CardTitle className="text-lg mb-2">Работа с почтой и телефоном</CardTitle>
-                <CardDescription>
-                  Прием входящих звонков, исходящие обзвоны, email-рассылки, SMS-уведомления. Все каналы коммуникации в
-                  одном агенте.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-2 hover:shadow-xl transition-all">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center mb-4">
-                  <Zap className="w-6 h-6 text-white" />
-                </div>
-                <CardTitle className="text-lg mb-2">Интеграция с CRM и системами</CardTitle>
-                <CardDescription>
-                  Подключение к amoCRM, Bitrix24, 1C, SAP и другим. Автоматическая синхронизация данных в реальном
-                  времени.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-2 hover:shadow-xl transition-all">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center mb-4">
-                  <Building2 className="w-6 h-6 text-white" />
-                </div>
-                <CardTitle className="text-lg mb-2">Автоматизация поставщиков</CardTitle>
-                <CardDescription>
-                  Прямая интеграция с системами ваших поставщиков. AI самостоятельно формирует и отправляет заказы,
-                  отслеживает поставки.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-2 hover:shadow-xl transition-all">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-pink-500 to-red-500 flex items-center justify-center mb-4">
-                  <Award className="w-6 h-6 text-white" />
-                </div>
-                <CardTitle className="text-lg mb-2">Корпоративная культура</CardTitle>
-                <CardDescription>
-                  AI обучается вашему тону общения, ценностям компании, стандартам обслуживания. Каждый клиент получает
-                  единообразный опыт.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </div>
-
-          {/* Industries We Serve */}
-          <div className="mt-16">
-            <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center">Работаем с разными секторами экономики</h3>
-            <div className="flex flex-wrap justify-center gap-4">
-              {[
-                "Строительство и застройщики",
-                "Премиум-сегмент недвижимости",
-                "Умные дома и автоматизация",
-                "Государственный сектор",
-                "Банки и финтех",
-                "E-commerce",
-                "Медицина",
-                "Логистика",
-              ].map((industry) => (
-                <Badge key={industry} variant="outline" className="px-4 py-2 text-sm">
-                  {industry}
-                </Badge>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Team & Structure Section - NEW */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-slate-50 to-blue-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 md:mb-16">
-            <Badge variant="outline" className="mb-4 border-purple-500 text-purple-600">
-              <Users className="w-3 h-3 mr-2" />
-              Наша команда
-            </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">6 компаний, объединенных в одну экосистему</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Мы погружаемся в ваш бизнес с головой. Знаем все болевые точки, можем подсказать, доработать и улучшить
-              процессы.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
-            {/* Team Structure Cards */}
-            <Card className="border-2 hover:shadow-2xl transition-all">
-              <CardHeader>
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-4 shadow-lg">
-                  <Users className="w-7 h-7 text-white" />
-                </div>
-                <CardTitle className="text-xl mb-3">Бизнес-консультанты</CardTitle>
-                <CardDescription className="text-base leading-relaxed">
-                  Глубоко погружаются в ваш бизнес, анализируют процессы, выявляют точки роста и оптимизации. Опыт в
-                  вашей отрасли.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-2 hover:shadow-2xl transition-all">
-              <CardHeader>
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4 shadow-lg">
-                  <Target className="w-7 h-7 text-white" />
-                </div>
-                <CardTitle className="text-xl mb-3">Бизнес-аналитики</CardTitle>
-                <CardDescription className="text-base leading-relaxed">
-                  Анализируют ваши процессы и переводят бизнес-задачи на технический язык для разработчиков.
-                  Структурируют требования.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-2 hover:shadow-2xl transition-all">
-              <CardHeader>
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center mb-4 shadow-lg">
-                  <Settings className="w-7 h-7 text-white" />
-                </div>
-                <CardTitle className="text-xl mb-3">IT-специалисты и разработчики</CardTitle>
-                <CardDescription className="text-base leading-relaxed">
-                  ML-инженеры, backend/frontend разработчики, DevOps. Реализуют техническую часть на основе требований
-                  аналитиков.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-2 hover:shadow-2xl transition-all">
-              <CardHeader>
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center mb-4 shadow-lg">
-                  <Lightbulb className="w-7 h-7 text-white" />
-                </div>
-                <CardTitle className="text-xl mb-3">Проектные менеджеры</CardTitle>
-                <CardDescription className="text-base leading-relaxed">
-                  Координируют работу всей команды, следят за сроками и качеством. Ваш единый контакт по проекту.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-2 hover:shadow-2xl transition-all">
-              <CardHeader>
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500 to-red-500 flex items-center justify-center mb-4 shadow-lg">
-                  <Headphones className="w-7 h-7 text-white" />
-                </div>
-                <CardTitle className="text-xl mb-3">Техническая поддержка 24/7</CardTitle>
-                <CardDescription className="text-base leading-relaxed">
-                  Круглосуточный мониторинг систем. Быстро реагируем на сбои, вносим улучшения, консультируем по любым
-                  вопросам.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-2 hover:shadow-2xl transition-all">
-              <CardHeader>
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center mb-4 shadow-lg">
-                  <TrendingUp className="w-7 h-7 text-white" />
-                </div>
-                <CardTitle className="text-xl mb-3">Специалисты по продажам</CardTitle>
-                <CardDescription className="text-base leading-relaxed">
-                  Работаем с вашими менеджерами по продажам, обучаем AI вашим скриптам, методикам работы с возражениями.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </div>
-
-          {/* How Collaboration Works */}
-          <div className="max-w-4xl mx-auto">
-            <Card className="border-2 border-blue-200 bg-white/80 backdrop-blur">
-              <CardHeader>
-                <CardTitle className="text-2xl md:text-3xl text-center mb-6">
-                  Как строится слаженная работа команды
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center flex-shrink-0 text-white font-bold">
-                      1
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-lg mb-2">Бизнес-консультант погружается в ваш бизнес</h4>
-                      <p className="text-muted-foreground">
-                        Изучает процессы, общается с руководителем отдела продаж, выявляет болевые точки и возможности
-                        для автоматизации
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0 text-white font-bold">
-                      2
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-lg mb-2">Бизнес-аналитик переводит на технический язык</h4>
-                      <p className="text-muted-foreground">
-                        Структурирует требования, создает техническое задание, описывает сценарии работы AI-агента
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center flex-shrink-0 text-white font-bold">
-                      3
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-lg mb-2">Разработчики создают решение</h4>
-                      <p className="text-muted-foreground">
-                        IT-специалисты реализуют систему на основе ТЗ, обучают AI-модели, настраивают интеграции
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center flex-shrink-0 text-white font-bold">
-                      4
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-lg mb-2">Тестирование с вашей командой</h4>
-                      <p className="text-muted-foreground">
-                        Запускаем пилот, собираем обратную связь от руководителей, вносим корректировки, доводим до
-                        идеала
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center flex-shrink-0 text-white font-bold">
-                      5
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-lg mb-2">Постоянная поддержка и улучшения</h4>
-                      <p className="text-muted-foreground">
-                        За вами закреплен менеджер проекта. Мониторим работу системы 24/7, оперативно вносим изменения и
-                        улучшения
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl">
-                  <div className="flex items-center gap-3 mb-3">
-                    <Award className="w-6 h-6 text-blue-600" />
-                    <span className="font-semibold text-lg">Наша главная цель</span>
-                  </div>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Не просто автоматизировать процессы, а <strong>увеличить ваши продажи</strong> и{" "}
-                    <strong>снизить расходы</strong>. Мы не продаем готовый продукт — мы создаем индивидуальное решение,
-                    которое идеально подходит именно вашему бизнесу.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Call Examples Section */}
-      <section className="py-16 md:py-24 bg-slate-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 md:mb-16">
-            <Badge className="mb-4 text-sm px-4 py-2">Послушайте, как AI-менеджер продает в реальном бизнесе</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Реальные примеры звонков</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Записи настоящих звонков AI-менеджера с клиентами из разных отраслей
-            </p>
-          </div>
-
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-4xl mx-auto">
-            <TabsList className="grid w-full grid-cols-3 mb-8 bg-white">
-              {callExamples.map((example) => (
-                <TabsTrigger key={example.id} value={example.id} className="text-sm">
-                  {example.title}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
-            {callExamples.map((example) => (
-              <TabsContent key={example.id} value={example.id}>
-                <Card className="border-2">
-                  <CardHeader>
-                    <CardTitle className="text-2xl">{example.title}</CardTitle>
-                    <CardDescription className="text-base">{example.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    {/* Audio Player */}
-                    <div className="p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl">
-                      <div className="flex items-center gap-4 mb-4">
-                        <Button
-                          size="lg"
-                          className="rounded-full w-14 h-14 flex-shrink-0"
-                          onClick={() => {
-                            if (playingAudio === example.id) {
-                              setPlayingAudio(null)
-                            } else {
-                              setPlayingAudio(example.id)
-                              let progress = 0
-                              const interval = setInterval(() => {
-                                progress += 2
-                                setAudioProgress((prev) => ({ ...prev, [example.id]: progress }))
-                                if (progress >= 100) {
-                                  clearInterval(interval)
-                                  setPlayingAudio(null)
-                                }
-                              }, 200)
-                            }
-                          }}
-                        >
-                          {playingAudio === example.id ? (
-                            <Pause className="h-6 w-6" />
-                          ) : (
-                            <Play className="h-6 w-6 ml-1" />
-                          )}
-                        </Button>
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between mb-3">
-                            <div className="flex items-center gap-2">
-                              <Volume2 className="h-5 w-5 text-blue-600" />
-                              <span className="text-sm font-medium">Аудио звонка</span>
-                            </div>
-                            <span className="text-sm text-muted-foreground">2:35</span>
-                          </div>
-                          <div className="flex items-end gap-1 h-12 w-full">
-                            {Array.from({ length: 40 }).map((_, i) => {
-                              const height = Math.sin(i * 0.3) * 20 + 25
-                              const isActive =
-                                playingAudio === example.id && (audioProgress[example.id] || 0) > (i / 40) * 100
-                              return (
-                                <div
-                                  key={i}
-                                  className={`flex-1 rounded-full transition-all duration-200 ${
-                                    isActive ? "bg-gradient-to-t from-blue-500 to-purple-500" : "bg-blue-200"
-                                  }`}
-                                  style={{ height: `${height}%` }}
-                                />
-                              )
-                            })}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="p-4 bg-green-50 border-2 border-green-200 rounded-xl">
-                        <div className="flex items-center gap-2 mb-1">
-                          <CheckCircle2 className="h-5 w-5 text-green-600" />
-                          <span className="font-semibold text-green-900">Результат</span>
-                        </div>
-                        <p className="text-green-800">{example.result}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            ))}
-          </Tabs>
-        </div>
-      </section>
-
-      {/* Integrations Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Работаем с вашими инструментами</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Готовая интеграция с популярными CRM и мессенджерами
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            {integrations.map((integration) => (
-              <div
-                key={integration.name}
-                className="flex items-center justify-center p-6 bg-slate-50 rounded-xl border-2 hover:border-primary/50 hover:shadow-lg transition-all"
-              >
-                <div className="relative w-full h-16">
-                  <Image
-                    src={integration.logo || "/placeholder.svg"}
-                    alt={integration.name}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-8">
-            <Button variant="outline" size="lg">
-              Нужна другая интеграция?
+          {/* CTA */}
+          <div className="mt-11 flex flex-col items-center gap-4 sm:flex-row sm:justify-center animate-fade-in-up" style={{ animationDelay: "0.22s" }}>
+            <Button size="lg" className="h-[52px] rounded-xl px-8 text-[15px] font-semibold shadow-[0_0_40px_rgba(56,130,255,.15)] hover:shadow-[0_0_60px_rgba(56,130,255,.25)] transition-all duration-300" onClick={openConsultation}>
+              {'Получить бесплатный аудит'}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-slate-50 to-blue-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 md:mb-16">
-            <Badge variant="outline" className="mb-4 border-blue-500 text-blue-600">
-              <Users className="w-3 h-3 mr-2" />
-              Отзывы клиентов
-            </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Что говорят наши клиенты</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Реальные истории успеха компаний, которые доверились нам
-            </p>
+            <Button size="lg" variant="outline" className="h-[52px] rounded-xl px-8 text-[15px] font-semibold border-white/[0.1] bg-white/[0.04] text-white hover:bg-white/[0.08] hover:border-white/[0.16] backdrop-blur-sm transition-all duration-300" asChild>
+              <Link href="#examples">
+                <Play className="mr-2 h-4 w-4" />
+                {'Послушать AI в деле'}
+              </Link>
+            </Button>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            <Card className="border-2 hover:shadow-xl transition-all duration-300">
-              <CardHeader>
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white text-2xl font-bold">
-                    АМ
-                  </div>
-                  <div>
-                    <CardTitle className="text-lg">Алексей Михайлов</CardTitle>
-                    <CardDescription>Директор, ООО "СтройМастер"</CardDescription>
-                  </div>
-                </div>
-                <div className="flex gap-1 mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Award key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  "AI-менеджер обрабатывает все звонки по строительным материалам. За 2 месяца конверсия выросла на 73%,
-                  не потеряли ни одного звонка. Окупилось за 3 недели."
-                </p>
-                <div className="flex gap-4 text-sm">
-                  <div className="flex items-center gap-1 text-green-600">
-                    <TrendingUp className="w-4 h-4" />
-                    <span className="font-semibold">+73% продаж</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          {/* Trust micro-text */}
+          <p className="mt-7 text-center text-[13px] text-white/30 animate-fade-in" style={{ animationDelay: "0.35s" }}>
+            {'Бесплатная консультация  \u00b7  Расчет ROI за 15 минут  \u00b7  Без обязательств'}
+          </p>
 
-            <Card className="border-2 hover:shadow-xl transition-all duration-300 border-purple-200 bg-purple-50/30">
-              <CardHeader>
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-2xl font-bold">
-                    ЕК
-                  </div>
-                  <div>
-                    <CardTitle className="text-lg">Елена Кравцова</CardTitle>
-                    <CardDescription>Руководитель IT, Банк "Финансы+"</CardDescription>
-                  </div>
-                </div>
-                <div className="flex gap-1 mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Award key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  "Внедрили AI для call-центра на 500 мест. Соблюдение всех требований ЦБ РФ, интеграция с нашей CRM за
-                  6 недель. Снизили нагрузку на операторов на 40%."
-                </p>
-                <div className="flex gap-4 text-sm">
-                  <div className="flex items-center gap-1 text-blue-600">
-                    <CheckCircle2 className="w-4 h-4" />
-                    <span className="font-semibold">152-ФЗ, ISO 27001</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:shadow-xl transition-all duration-300">
-              <CardHeader>
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white text-2xl font-bold">
-                    ДС
-                  </div>
-                  <div>
-                    <CardTitle className="text-lg">Дмитрий Соколов</CardTitle>
-                    <CardDescription>CEO, "ТехноДом"</CardDescription>
-                  </div>
-                </div>
-                <div className="flex gap-1 mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Award key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  "Автоматизировали 15 отелей умным управлением. Экономия на энергии 45%, гости в восторге от
-                  технологий. ROI достигли за 8 месяцев вместо планируемых 18."
-                </p>
-                <div className="flex gap-4 text-sm">
-                  <div className="flex items-center gap-1 text-green-600">
-                    <Zap className="w-4 h-4" />
-                    <span className="font-semibold">-45% энергии</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Team & Expertise Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 md:mb-16">
-            <Badge variant="outline" className="mb-4 border-purple-500 text-purple-600">
-              <Award className="w-3 h-3 mr-2" />
-              Команда экспертов
-            </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Профессионалы мирового уровня</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Наша команда — это ML-инженеры, data scientists, проектные менеджеры с опытом в крупных tech-компаниях
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12">
+          {/* Stats strip */}
+          <div className="mt-20 lg:mt-28 grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/[0.06] rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
             {[
-              {
-                name: "Сергей Волков",
-                role: "CTO & ML Architect",
-                exp: "15 лет в AI",
-                companies: "ex-Яндекс, Mail.ru",
-              },
-              { name: "Анна Петрова", role: "Head of AI Development", exp: "12 лет в ML", companies: "ex-Сбер, VK" },
-              {
-                name: "Игорь Смирнов",
-                role: "Lead Data Scientist",
-                exp: "10 лет в Data",
-                companies: "ex-Tinkoff, Ozon",
-              },
-              { name: "Мария Соколова", role: "Project Director", exp: "13 лет в IT", companies: "ex-Kaspersky, EPAM" },
-            ].map((member, idx) => (
-              <Card key={idx} className="border-2 hover:shadow-xl transition-all duration-300 text-center">
-                <CardHeader className="pb-4">
-                  <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex items-center justify-center text-white text-3xl font-bold">
-                    {member.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </div>
-                  <CardTitle className="text-lg mb-1">{member.name}</CardTitle>
-                  <CardDescription className="text-sm mb-3">{member.role}</CardDescription>
-                  <div className="space-y-1 text-xs text-muted-foreground">
-                    <div className="font-semibold text-blue-600">{member.exp}</div>
-                    <div>{member.companies}</div>
-                  </div>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
-
-          {/* Certifications & Compliance */}
-          <Card className="border-2 border-blue-100 bg-gradient-to-br from-blue-50 to-purple-50">
-            <CardHeader>
-              <CardTitle className="text-2xl md:text-3xl text-center mb-8">
-                Сертификаты и соответствие стандартам
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-4 gap-6">
-                <div className="text-center p-6 bg-white rounded-xl border-2 border-blue-200">
-                  <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
-                    <Award className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="font-bold mb-1">ISO 27001</div>
-                  <div className="text-xs text-muted-foreground">Информационная безопасность</div>
-                </div>
-                <div className="text-center p-6 bg-white rounded-xl border-2 border-purple-200">
-                  <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                    <CheckCircle2 className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="font-bold mb-1">152-ФЗ</div>
-                  <div className="text-xs text-muted-foreground">Персональные данные</div>
-                </div>
-                <div className="text-center p-6 bg-white rounded-xl border-2 border-green-200">
-                  <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
-                    <Award className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="font-bold mb-1">GDPR</div>
-                  <div className="text-xs text-muted-foreground">Европейский стандарт</div>
-                </div>
-                <div className="text-center p-6 bg-white rounded-xl border-2 border-orange-200">
-                  <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
-                    <CheckCircle2 className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="font-bold mb-1">ГОСТ Р</div>
-                  <div className="text-xs text-muted-foreground">Российские стандарты</div>
-                </div>
+              { value: "500+", label: "Проектов реализовано" },
+              { value: "10+", label: "Лет на рынке AI" },
+              { value: "+87%", label: "Средний рост конверсии" },
+              { value: "98%", label: "Клиентов довольны" },
+            ].map((s) => (
+              <div key={s.label} className="flex flex-col items-center gap-1.5 py-8 lg:py-10">
+                <span className="text-[2rem] font-extrabold tracking-tight text-white sm:text-4xl">{s.value}</span>
+                <span className="text-[13px] text-white/40">{s.label}</span>
               </div>
-            </CardContent>
-          </Card>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Results & Stats Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 text-white">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Результаты в цифрах</h2>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Реальные метрики наших клиентов после внедрения AI-решений
-            </p>
+      {/* ============================================================ */}
+      {/*  INTEGRATIONS BAR                                            */}
+      {/* ============================================================ */}
+      <section className="border-b border-border/60 bg-background py-6">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="flex flex-col items-center gap-5 sm:flex-row sm:justify-between">
+            <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground/60">{'Интеграции'}</span>
+            <div className="flex flex-wrap items-center justify-center gap-8">
+              {["amoCRM", "Bitrix24", "Telegram", "WhatsApp", "1C", "SAP"].map((name) => (
+                <span key={name} className="text-sm font-semibold text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors cursor-default">{name}</span>
+              ))}
+            </div>
+            <div className="flex items-center gap-5 text-xs text-muted-foreground/50">
+              <span className="flex items-center gap-1.5"><Shield className="h-3.5 w-3.5" /> ISO 27001</span>
+              <span className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5" /> 152-ФЗ</span>
+            </div>
           </div>
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+      {/* ============================================================ */}
+      {/*  SOLUTIONS                                                   */}
+      {/* ============================================================ */}
+      <section className="py-28 lg:py-36">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal className="mx-auto mb-20 max-w-3xl text-center">
+            <Label>{'Решения'}</Label>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+              {'AI-решения, которые уже зарабатывают деньги'}
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted-foreground">
+              {'Каждое решение проектируется под вашу отрасль, интегрируется с текущими системами и приносит измеримый результат'}
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {solutions.map((solution, idx) => {
+              const Icon = solutionIcons[solution.id] || Phone
+              return (
+                <Reveal key={solution.id} delay={idx * 100}>
+                  <Link href={solution.href} className="group relative flex h-full flex-col rounded-2xl border border-border/70 bg-card transition-all duration-500 hover:border-primary/20 hover:shadow-[0_8px_60px_-12px_rgba(56,130,255,.08)]">
+                    {/* Top line accent */}
+                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    <div className="flex flex-col p-8 lg:p-10">
+                      <div className="flex items-start justify-between mb-7">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/[0.07] text-primary ring-1 ring-primary/[0.1]">
+                          <Icon className="h-6 w-6" />
+                        </div>
+                        <ArrowUpRight className="h-5 w-5 text-muted-foreground/30 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </div>
+
+                      <h3 className="mb-2.5 text-xl font-bold tracking-tight lg:text-[1.375rem] group-hover:text-primary transition-colors duration-300">{solution.title}</h3>
+                      <p className="mb-7 text-[0.9375rem] leading-relaxed text-muted-foreground">{solution.description}</p>
+
+                      <div className="mb-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                        {solution.features.slice(0, 4).map((f, i) => (
+                          <div key={i} className="flex items-start gap-2.5 text-[0.875rem]">
+                            <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500/70" />
+                            <span className="text-foreground/75">{f}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="mt-auto flex gap-8 border-t border-border/60 pt-6">
+                        {solution.stats.map((stat, i) => (
+                          <div key={i}>
+                            <span className="text-[1.75rem] font-extrabold tracking-tight">{stat.value}</span>
+                            <span className="ml-1.5 text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </Link>
+                </Reveal>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  HOW WE WORK                                                 */}
+      {/* ============================================================ */}
+      <section className="py-28 lg:py-36 border-y border-border/50 bg-muted/30">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal className="mx-auto mb-20 max-w-3xl text-center">
+            <Label>{'Процесс'}</Label>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+              {'От анализа до запуска за 2\u20134 недели'}
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted-foreground">
+              {'Прозрачный процесс с четкими этапами. Вы видите прогресс на каждом шаге.'}
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { value: "87%", label: "Рост конверсии", description: "В среднем у клиентов" },
-              { value: "100%", label: "Обработка звонков", description: "Без пропусков 24/7" },
-              { value: "60%", label: "Снижение затрат", description: "На персонал и процессы" },
-              { value: "3 недели", label: "Окупаемость", description: "В среднем для МСБ" },
-            ].map((stat, idx) => (
-              <Card
-                key={idx}
-                className="bg-white/10 backdrop-blur-lg border-2 border-white/20 text-white hover:bg-white/20 transition-all"
-              >
-                <CardHeader className="text-center pb-6">
-                  <div className="text-5xl md:text-6xl font-bold mb-3 bg-gradient-to-br from-white to-white/80 bg-clip-text text-transparent">
-                    {stat.value}
+              { phase: "01", title: "Погружение", desc: "Глубокий анализ бизнес-процессов, выявление точек роста и изучение целевой аудитории", dur: "2\u20133 дня", icon: Target },
+              { phase: "02", title: "Архитектура", desc: "Разработка сценариев, выбор моделей, проектирование интеграций с инфраструктурой", dur: "3\u20135 дней", icon: Settings },
+              { phase: "03", title: "Обучение AI", desc: "Составление промптов, обучение на ваших данных, настройка под тон бренда", dur: "5\u20137 дней", icon: Bot },
+              { phase: "04", title: "Запуск", desc: "Пилот, A/B тесты, корректировка, полный деплой с мониторингом 24/7", dur: "2\u20133 дня", icon: Zap },
+            ].map((step, idx) => (
+              <Reveal key={step.phase} delay={idx * 100}>
+                <div className="group relative flex h-full flex-col rounded-2xl border border-border/70 bg-card p-8 transition-all duration-300 hover:border-primary/20 hover:shadow-[0_8px_40px_-12px_rgba(56,130,255,.06)]">
+                  {/* Phase pill */}
+                  <div className="absolute -top-3 left-8 flex h-6 items-center rounded-full bg-foreground px-3 text-[11px] font-bold text-background tracking-wider">
+                    {step.phase}
                   </div>
-                  <CardTitle className="text-xl mb-2">{stat.label}</CardTitle>
-                  <CardDescription className="text-white/80">{stat.description}</CardDescription>
-                </CardHeader>
-              </Card>
+
+                  <div className="mt-3 mb-6 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/[0.07] text-primary">
+                    <step.icon className="h-5 w-5" />
+                  </div>
+
+                  <h3 className="mb-2.5 text-lg font-bold tracking-tight">{step.title}</h3>
+                  <p className="mb-6 flex-1 text-[0.875rem] leading-relaxed text-muted-foreground">{step.desc}</p>
+
+                  <div className="flex items-center gap-1.5 text-xs text-muted-foreground/70">
+                    <Clock className="h-3.5 w-3.5" />
+                    {step.dur}
+                  </div>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Часто задаваемые вопросы</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Ответы на ключевые вопросы о внедрении AI-решений в ваш бизнес
+      {/* ============================================================ */}
+      {/*  CAPABILITIES                                                */}
+      {/* ============================================================ */}
+      <section className="relative py-28 lg:py-36 bg-[#060a16] overflow-hidden">
+        {/* Subtle ambient light */}
+        <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[1px] w-full max-w-5xl bg-gradient-to-r from-transparent via-sky-500/20 to-transparent" />
+        <div className="pointer-events-none absolute right-[-10%] top-[20%] h-[500px] w-[500px] rounded-full bg-sky-500/[0.03] blur-[140px]" />
+        <div className="pointer-events-none absolute left-[-10%] bottom-[20%] h-[400px] w-[400px] rounded-full bg-cyan-400/[0.03] blur-[120px]" />
+
+        <div className="relative mx-auto max-w-7xl px-6">
+          <Reveal className="mx-auto mb-20 max-w-3xl text-center">
+            <Label light>{'Возможности'}</Label>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
+              {'Что умеет AI-менеджер M2'}
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-white/45">
+              {'Модели последнего поколения, обученные специфике вашей отрасли'}
             </p>
+          </Reveal>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { icon: Settings, title: "Формирование счетов", text: "AI создает счета в PDF, распознает реквизиты и отправляет клиенту автоматически" },
+              { icon: Target, title: "Полная воронка продаж", text: "Квалификация лидов, борьба с возражениями, презентация. Конверсия до +87%" },
+              { icon: Phone, title: "Все каналы связи", text: "Звонки, email, SMS, Telegram, WhatsApp. Единый агент на все каналы" },
+              { icon: BarChart3, title: "Интеграция с CRM", text: "amoCRM, Bitrix24, 1C, SAP. Синхронизация данных в реальном времени" },
+              { icon: Globe, title: "Автоматизация закупок", text: "AI формирует заказы поставщикам и отслеживает статус поставок" },
+              { icon: Award, title: "Обучение под бренд", text: "AI перенимает тон, ценности и стандарты компании для каждого клиента" },
+            ].map((cap, idx) => (
+              <Reveal key={cap.title} delay={idx * 80}>
+                <div className="group flex h-full flex-col rounded-2xl border border-white/[0.06] bg-white/[0.015] p-7 lg:p-8 transition-all duration-500 hover:bg-white/[0.035] hover:border-white/[0.1]">
+                  <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-sky-500/[0.08] text-sky-400 ring-1 ring-sky-500/[0.1]">
+                    <cap.icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mb-2.5 text-[0.9375rem] font-bold tracking-tight text-white">{cap.title}</h3>
+                  <p className="text-[0.875rem] leading-relaxed text-white/40">{cap.text}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-4">
+          {/* Industries */}
+          <Reveal delay={200}>
+            <div className="mt-20 text-center">
+              <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-white/30">{'Отрасли'}</p>
+              <div className="flex flex-wrap justify-center gap-2.5">
+                {["Строительство", "Недвижимость", "Умные дома", "Госсектор", "Банки", "E-commerce", "Медицина", "Логистика"].map((ind) => (
+                  <span key={ind} className="rounded-full border border-white/[0.06] bg-white/[0.02] px-4 py-2 text-[13px] text-white/45 transition-colors hover:border-white/[0.12] hover:text-white/65">{ind}</span>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  TEAM                                                        */}
+      {/* ============================================================ */}
+      <section className="py-28 lg:py-36">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal className="mx-auto mb-20 max-w-3xl text-center">
+            <Label>{'Команда'}</Label>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+              {'6 компаний в одной экосистеме'}
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted-foreground">
+              {'Полная команда специалистов под каждый проект'}
+            </p>
+          </Reveal>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              {
-                q: "Сколько времени занимает внедрение?",
-                a: "Для малого и среднего бизнеса — от 1 до 4 недель. Для крупных компаний и госсектора — от 2 до 6 месяцев. Сроки зависят от сложности интеграций и объема бизнес-процессов.",
-              },
-              {
-                q: "Какая стоимость внедрения?",
-                a: "Стоимость рассчитывается индивидуально в зависимости от задач, объема автоматизации и требуемых интеграций. Средний проект для МСБ окупается за 3-4 недели. Предоставляем бесплатную консультацию и расчет ROI.",
-              },
-              {
-                q: "Нужно ли менять текущую CRM или инфраструктуру?",
-                a: "Нет! Мы интегрируемся с вашими существующими системами: amoCRM, Bitrix24, 1C, SAP и другими. API-интеграции настраиваются без изменения вашей текущей инфраструктуры.",
-              },
-              {
-                q: "Как обеспечивается безопасность данных?",
-                a: "Мы соблюдаем 152-ФЗ, ISO 27001, GDPR. Все данные шифруются (AES-256), хранятся на защищенных серверах в РФ. Доступны аудит безопасности и NDA для корпоративных клиентов.",
-              },
-              {
-                q: "Что если AI-менеджер не справится с задачей?",
-                a: "У нас система эскалации: если AI не может решить задачу, звонок автоматически переводится на живого менеджера с полной историей диалога. Вы не теряете ни одного клиента.",
-              },
-              {
-                q: "Какая поддержка после запуска?",
-                a: "Круглосуточная техподдержка 24/7, регулярные обновления AI-модели, корректировка сценариев по вашим запросам, обучение команды. SLA 99.9% для enterprise-клиентов.",
-              },
-            ].map((faq, idx) => (
-              <Card key={idx} className="border-2 hover:border-primary/50 transition-all">
-                <CardHeader>
-                  <CardTitle className="text-lg md:text-xl flex items-start gap-3">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-sm font-bold">
-                      {idx + 1}
-                    </span>
-                    {faq.q}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed pl-11">{faq.a}</p>
-                </CardContent>
-              </Card>
+              { icon: Users, title: "Бизнес-консультанты", text: "Погружаются в бизнес, анализируют процессы, выявляют точки роста" },
+              { icon: Target, title: "Бизнес-аналитики", text: "Переводят бизнес-задачи на технический язык, структурируют требования" },
+              { icon: Settings, title: "ML-инженеры", text: "Backend, frontend, DevOps, ML. Реализуют техническую часть решений" },
+              { icon: Bot, title: "Проектные менеджеры", text: "Координируют работу, следят за сроками и качеством. Единый контакт" },
+              { icon: Headphones, title: "Техподдержка 24/7", text: "Круглосуточный мониторинг, быстрая реакция, непрерывные улучшения" },
+              { icon: Award, title: "AI-тренеры", text: "Обучают модели специфике бизнеса, настраивают промпты и сценарии" },
+            ].map((role, idx) => (
+              <Reveal key={role.title} delay={idx * 70}>
+                <div className="group flex h-full items-start gap-4 rounded-xl border border-border/60 bg-card p-6 transition-all duration-300 hover:border-primary/15 hover:shadow-[0_4px_30px_-8px_rgba(56,130,255,.06)]">
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-primary/[0.07] text-primary">
+                    <role.icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="mb-1 text-[0.9375rem] font-bold tracking-tight">{role.title}</h3>
+                    <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{role.text}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Experts */}
+          <Reveal delay={100}>
+            <div className="mt-16 rounded-2xl border border-border/50 bg-muted/30 p-8 lg:p-12">
+              <p className="mb-10 text-center text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground/60">{'Ключевые эксперты'}</p>
+              <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { name: "Сергей Волков", role: "CTO & ML Architect", exp: "15 лет в AI", bg: "ex-Яндекс, Mail.ru" },
+                  { name: "Анна Петрова", role: "Head of AI", exp: "12 лет в ML", bg: "ex-Сбер, VK" },
+                  { name: "Игорь Смирнов", role: "Lead Data Scientist", exp: "10 лет в Data", bg: "ex-Tinkoff, Ozon" },
+                  { name: "Мария Соколова", role: "Project Director", exp: "13 лет в IT", bg: "ex-Kaspersky, EPAM" },
+                ].map((m) => (
+                  <div key={m.name} className="text-center">
+                    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-foreground text-background text-sm font-bold ring-[3px] ring-background">
+                      {m.name.split(" ").map((n) => n[0]).join("")}
+                    </div>
+                    <p className="text-[0.9375rem] font-bold">{m.name}</p>
+                    <p className="text-[0.8125rem] text-muted-foreground">{m.role}</p>
+                    <p className="mt-1.5 text-xs font-semibold text-primary">{m.exp}</p>
+                    <p className="text-xs text-muted-foreground/60">{m.bg}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  AUDIO EXAMPLES                                              */}
+      {/* ============================================================ */}
+      <section id="examples" className="py-28 lg:py-36 border-y border-border/50 bg-muted/30">
+        <div className="mx-auto max-w-4xl px-6">
+          <Reveal className="mx-auto mb-20 max-w-3xl text-center">
+            <Label>{'Демо'}</Label>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+              {'Послушайте AI-менеджера в деле'}
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-muted-foreground">
+              {'Настоящие записи звонков из разных отраслей'}
+            </p>
+          </Reveal>
+
+          <div className="flex flex-col gap-5">
+            {callExamples.map((example, idx) => (
+              <Reveal key={example.id} delay={idx * 100}>
+                <div className="rounded-2xl border border-border/70 bg-card p-6 lg:p-8 transition-all duration-300 hover:shadow-[0_4px_30px_-8px_rgba(56,130,255,.06)]">
+                  <div className="mb-5 flex items-start justify-between gap-4">
+                    <div>
+                      <span className="mb-2 inline-block rounded-md bg-muted px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{example.category}</span>
+                      <h3 className="text-lg font-bold tracking-tight">{example.title}</h3>
+                      <p className="mt-1 text-[0.875rem] text-muted-foreground">{example.description}</p>
+                    </div>
+                    <span className="flex-shrink-0 font-mono text-[13px] text-muted-foreground/50">{example.duration}</span>
+                  </div>
+
+                  {/* Player */}
+                  <div className="flex items-center gap-4 rounded-xl bg-muted/60 p-4">
+                    <button
+                      className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[0_4px_20px_-4px_rgba(56,130,255,.3)] transition-transform hover:scale-105 active:scale-95"
+                      onClick={() => {
+                        if (playingAudio === example.id) {
+                          setPlayingAudio(null)
+                        } else {
+                          setPlayingAudio(example.id)
+                          let progress = 0
+                          const interval = setInterval(() => {
+                            progress += 2
+                            setAudioProgress((prev) => ({ ...prev, [example.id]: progress }))
+                            if (progress >= 100) { clearInterval(interval); setPlayingAudio(null) }
+                          }, 200)
+                        }
+                      }}
+                      aria-label={playingAudio === example.id ? "Пауза" : "Воспроизвести"}
+                    >
+                      {playingAudio === example.id ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4 ml-0.5" />}
+                    </button>
+                    <div className="flex flex-1 items-end gap-[2px] h-9">
+                      {Array.from({ length: 60 }).map((_, i) => {
+                        const height = Math.sin(i * 0.25) * 25 + 30 + Math.sin(i * 0.8) * 15
+                        const isActive = playingAudio === example.id && (audioProgress[example.id] || 0) > (i / 60) * 100
+                        return <div key={i} className={`flex-1 rounded-full transition-colors duration-150 ${isActive ? "bg-primary" : "bg-foreground/8"}`} style={{ height: `${height}%` }} />
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Result */}
+                  <div className="mt-5 flex items-start gap-3 rounded-xl border border-emerald-500/10 bg-emerald-500/[0.04] p-4">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" />
+                    <div>
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-600">{'Результат'}</span>
+                      <p className="mt-1 text-[0.875rem] leading-relaxed text-foreground/70">{example.result}</p>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <Badge className="mb-6 bg-white/20 text-white border-white/30 text-sm px-4 py-2">
-            <Sparkles className="w-4 h-4 mr-2" />
-            Начните автоматизацию уже сегодня
-          </Badge>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Готовы к трансформации бизнеса?</h2>
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
-            Получите бесплатную консультацию, анализ ваших процессов и расчет ROI. Без обязательств.
-          </p>
+      {/* ============================================================ */}
+      {/*  TESTIMONIALS                                                */}
+      {/* ============================================================ */}
+      <section className="py-28 lg:py-36">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal className="mx-auto mb-20 max-w-3xl text-center">
+            <Label>{'Отзывы'}</Label>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+              {'Результаты наших клиентов'}
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-muted-foreground">
+              {'Каждый кейс подтвержден метриками'}
+            </p>
+          </Reveal>
 
-          {/* Trust badges to CTA */}
-          <div className="flex flex-wrap justify-center gap-6 mb-10">
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
-              <CheckCircle2 className="w-5 h-5" />
-              <span className="text-sm">Гарантия результата</span>
-            </div>
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
-              <CheckCircle2 className="w-5 h-5" />
-              <span className="text-sm">NDA и безопасность</span>
-            </div>
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
-              <CheckCircle2 className="w-5 h-5" />
-              <span className="text-sm">Поддержка 24/7</span>
-            </div>
+          <div className="grid gap-6 lg:grid-cols-3">
+            {[
+              { initials: "АМ", name: "Алексей Михайлов", co: 'Директор, ООО "СтройМастер"', text: "AI-менеджер обрабатывает все звонки по стройматериалам. За 2 месяца конверсия выросла на 73%. Окупилось за 3 недели.", metric: "+73%", ml: "продаж" },
+              { initials: "ЕК", name: "Елена Кравцова", co: 'Руководитель IT, Банк "Финансы+"', text: 'Внедрили AI для call-центра на 500 мест. Соблюдение всех требований ЦБ РФ, интеграция с CRM за 6 недель. Снизили нагрузку на 40%.', metric: "-40%", ml: "нагрузки" },
+              { initials: "ДС", name: "Дмитрий Соколов", co: 'CEO, "ТехноДом"', text: "Автоматизировали 15 отелей умным управлением. Экономия на энергии 45%, гости в восторге. ROI за 8 месяцев вместо 18.", metric: "-45%", ml: "затрат" },
+            ].map((t, idx) => (
+              <Reveal key={t.name} delay={idx * 100}>
+                <div className="group flex h-full flex-col rounded-2xl border border-border/70 bg-card p-8 lg:p-10 transition-all duration-300 hover:border-primary/15 hover:shadow-[0_8px_40px_-12px_rgba(56,130,255,.06)]">
+                  <div className="mb-5 text-4xl leading-none text-primary/15 font-serif select-none">{'\u201C'}</div>
+                  <p className="flex-1 text-[0.9375rem] leading-[1.7] text-foreground/70">{t.text}</p>
+                  <div className="mt-8 flex items-end justify-between border-t border-border/50 pt-6">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-foreground text-background text-xs font-bold">{t.initials}</div>
+                      <div>
+                        <p className="text-[0.875rem] font-bold">{t.name}</p>
+                        <p className="text-xs text-muted-foreground/70">{t.co}</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-2xl font-extrabold tracking-tight text-emerald-500">{t.metric}</p>
+                      <p className="text-[11px] text-muted-foreground/60">{t.ml}</p>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  RESULTS STATS                                               */}
+      {/* ============================================================ */}
+      <section className="relative py-28 lg:py-36 bg-[#060a16] overflow-hidden">
+        <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[1px] w-full max-w-5xl bg-gradient-to-r from-transparent via-sky-500/20 to-transparent" />
+        <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[800px] rounded-full bg-sky-500/[0.03] blur-[180px]" />
+
+        <div className="relative mx-auto max-w-7xl px-6">
+          <Reveal className="mx-auto mb-20 max-w-3xl text-center">
+            <Label light>{'Результаты'}</Label>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
+              {'Цифры, которые говорят за нас'}
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-white/40">
+              {'Средние показатели клиентов после внедрения'}
+            </p>
+          </Reveal>
+
+          <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
+            {[
+              { value: "+87%", label: "Рост конверсии", sub: "В среднем у клиентов" },
+              { value: "100%", label: "Обработка звонков", sub: "Без пропусков 24/7" },
+              { value: "-60%", label: "Снижение затрат", sub: "На персонал и процессы" },
+              { value: "3 нед", label: "Окупаемость", sub: "В среднем для МСБ" },
+            ].map((s, idx) => (
+              <Reveal key={s.label} delay={idx * 80}>
+                <div className="flex flex-col items-center gap-2.5 rounded-2xl border border-white/[0.06] bg-white/[0.015] px-6 py-10 text-center">
+                  <span className="text-[2.5rem] font-extrabold tracking-tight text-white sm:text-5xl">{s.value}</span>
+                  <span className="text-[0.875rem] font-semibold text-white/65">{s.label}</span>
+                  <span className="text-xs text-white/30">{s.sub}</span>
+                </div>
+              </Reveal>
+            ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-white/90 text-lg px-8 py-6">
-              Получить консультацию
-              <ArrowRight className="ml-2 h-6 w-6" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-white text-white hover:bg-white/10 bg-transparent text-lg px-8 py-6"
-            >
-              Рассчитать ROI
-            </Button>
-          </div>
+          <Reveal delay={100}>
+            <div className="mt-14 flex flex-wrap items-center justify-center gap-3">
+              {["ISO 27001", "152-ФЗ", "GDPR", "ГОСТ Р"].map((cert) => (
+                <div key={cert} className="flex items-center gap-2 rounded-full border border-white/[0.06] bg-white/[0.02] px-4 py-2">
+                  <Shield className="h-3.5 w-3.5 text-sky-400/60" />
+                  <span className="text-[13px] font-medium text-white/50">{cert}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
-          <p className="mt-8 text-sm text-white/70">
-            Свяжемся в течение 15 минут • Бесплатный аудит процессов • Готовое ТЗ за 2 дня
-          </p>
+      {/* ============================================================ */}
+      {/*  FAQ                                                          */}
+      {/* ============================================================ */}
+      <section className="py-28 lg:py-36">
+        <div className="mx-auto max-w-3xl px-6">
+          <Reveal className="mx-auto mb-16 max-w-3xl text-center">
+            <Label>{'FAQ'}</Label>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+              {'Ответы на частые вопросы'}
+            </h2>
+          </Reveal>
+
+          <Accordion type="single" collapsible className="w-full">
+            {[
+              { q: "Сколько времени занимает внедрение?", a: "Для МСБ \u2014 от 1 до 4 недель. Для крупных компаний и госсектора \u2014 от 2 до 6 месяцев. Сроки зависят от сложности интеграций и объема бизнес-процессов." },
+              { q: "Какая стоимость внедрения?", a: "Рассчитывается индивидуально. Средний проект для МСБ окупается за 3\u20134 недели. Предоставляем бесплатную консультацию и расчет ROI." },
+              { q: "Нужно ли менять текущую CRM?", a: "Нет. Мы интегрируемся с вашими системами: amoCRM, Bitrix24, 1C, SAP и другими без изменения инфраструктуры." },
+              { q: "Как обеспечивается безопасность данных?", a: "Соблюдаем 152-ФЗ, ISO 27001, GDPR. Шифрование AES-256, серверы в РФ. Аудит безопасности и NDA для корпоративных клиентов." },
+              { q: "Что если AI-менеджер не справится?", a: "Система эскалации: звонок автоматически переводится на живого менеджера с полной историей диалога. Ни один клиент не теряется." },
+              { q: "Какая поддержка после запуска?", a: "Техподдержка 24/7, регулярные обновления модели, корректировка сценариев. SLA 99.9% для enterprise-клиентов." },
+            ].map((faq, idx) => (
+              <AccordionItem key={idx} value={`faq-${idx}`} className="border-border/50">
+                <AccordionTrigger className="text-left text-[0.9375rem] font-bold hover:text-primary transition-colors py-5">{faq.q}</AccordionTrigger>
+                <AccordionContent className="text-[0.875rem] text-muted-foreground leading-relaxed pb-5">{faq.a}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  FINAL CTA                                                    */}
+      {/* ============================================================ */}
+      <section className="relative overflow-hidden bg-[#060a16]">
+        <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[1px] w-full max-w-5xl bg-gradient-to-r from-transparent via-sky-500/20 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 opacity-[0.02] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:64px_64px]" />
+        <div className="pointer-events-none absolute left-1/2 bottom-0 -translate-x-1/2 h-[400px] w-[700px] rounded-full bg-sky-500/[0.04] blur-[150px]" />
+
+        <div className="relative mx-auto max-w-3xl px-6 py-28 lg:py-36 text-center">
+          <Reveal>
+            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-white/[0.03] px-5 py-2 backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              <span className="text-[13px] font-medium text-white/60">{'Начните сегодня'}</span>
+            </div>
+
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
+              {'Готовы к трансформации бизнеса?'}
+            </h2>
+
+            <p className="mx-auto mt-6 max-w-xl text-[1.0625rem] leading-[1.7] text-white/45">
+              {'Получите бесплатную консультацию, анализ процессов и расчет ROI. Без обязательств. Ответ за 15 минут.'}
+            </p>
+
+            <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+              <Button size="lg" className="h-[52px] rounded-xl px-10 text-[15px] font-semibold shadow-[0_0_40px_rgba(56,130,255,.15)] hover:shadow-[0_0_60px_rgba(56,130,255,.25)] transition-all duration-300" onClick={openConsultation}>
+                {'Получить бесплатный аудит'}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+              <Button size="lg" variant="outline" className="h-[52px] rounded-xl px-10 text-[15px] font-semibold border-white/[0.1] bg-white/[0.04] text-white hover:bg-white/[0.08] hover:border-white/[0.16] backdrop-blur-sm transition-all duration-300" onClick={openConsultation}>
+                {'Рассчитать ROI'}
+              </Button>
+            </div>
+
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-7 text-[13px] text-white/30">
+              <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-500/50" />{'Ответ за 15 минут'}</span>
+              <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-500/50" />{'Бесплатный аудит'}</span>
+              <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-500/50" />{'ТЗ за 2 дня'}</span>
+            </div>
+          </Reveal>
         </div>
       </section>
     </div>
