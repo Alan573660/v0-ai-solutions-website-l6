@@ -19,6 +19,9 @@ export const metadata = {
     "Голосовые AI-ассистенты, которые продают и обслуживают клиентов 24/7. Автоматизируйте весь путь клиента от заявки до счёта.",
   keywords: "AI ассистент, голосовой бот, автоматизация продаж, AI консьерж, бизнес автоматизация",
   generator: "v0.app",
+  verification: {
+    yandex: "49597ab2b5da9621",
+  },
 }
 
 export default function RootLayout({
