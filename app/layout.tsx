@@ -44,7 +44,6 @@ export const metadata: Metadata = {
     yandex: "49597ab2b5da9621",
   },
   alternates: {
-    canonical: `${BASE_URL}/ru`,
     languages: {
       "ru": `${BASE_URL}/ru`,
       "en": `${BASE_URL}/en`,
@@ -64,12 +63,21 @@ export const metadata: Metadata = {
     title: "M2 AI Solutions | Голосовые AI-ассистенты для бизнеса",
     description:
       "Голосовые AI-ассистенты, которые продают и обслуживают клиентов 24/7. 500+ проектов, 87% рост конверсии.",
+    images: [
+      {
+        url: `${BASE_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "M2 AI Solutions",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "M2 AI Solutions | Голосовые AI-ассистенты для бизнеса",
     description:
       "Голосовые AI-ассистенты, которые продают и обслуживают клиентов 24/7. 500+ проектов, 87% рост конверсии.",
+    images: [`${BASE_URL}/og-image.png`],
   },
   robots: {
     index: true,
@@ -106,30 +114,51 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "M2 AI Solutions",
-              url: "https://m2solutions.ai",
-              description:
-                "Голосовые AI-ассистенты для бизнеса. Автоматизация звонков, продаж и поддержки клиентов 24/7.",
-              telephone: "+7-995-796-75-06",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "ул. Тверская, 15",
-                addressLocality: "Москва",
-                addressCountry: "RU",
-              },
-              sameAs: [
-                "https://t.me/m2solutions",
-              ],
-              contactPoint: {
-                "@type": "ContactPoint",
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "M2 AI Solutions",
+                url: "https://m2solutions.ai",
+                description:
+                  "Голосовые AI-ассистенты для бизнеса. Автоматизация звонков, продаж и поддержки клиентов 24/7.",
+                logo: `${BASE_URL}/logo.svg`,
                 telephone: "+7-995-796-75-06",
-                contactType: "sales",
-                availableLanguage: ["Russian", "English", "Spanish", "German", "Dutch", "French"],
+                email: "info@m2solutions.ai",
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: "ул. Тверская, 15",
+                  addressLocality: "Москва",
+                  addressCountry: "RU",
+                  postalCode: "125009",
+                },
+                sameAs: [
+                  "https://t.me/m2solutions",
+                ],
+                contactPoint: {
+                  "@type": "ContactPoint",
+                  telephone: "+7-995-796-75-06",
+                  contactType: "sales",
+                  availableLanguage: ["Russian", "English", "Spanish", "German", "Dutch", "French"],
+                },
               },
-            }),
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                url: "https://m2solutions.ai",
+                name: "M2 AI Solutions",
+                description:
+                  "Голосовые AI-ассистенты для автоматизации продаж, поддержки и управления клиентами",
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target: {
+                    "@type": "EntryPoint",
+                    urlTemplate: "https://m2solutions.ai/search?q={search_term_string}",
+                  },
+                  query_input: "required name=search_term_string",
+                },
+              },
+            ]),
           }}
         />
         {children}
