@@ -22,6 +22,9 @@ export const metadata = {
   verification: {
     yandex: "49597ab2b5da9621",
   },
+  alternates: {
+    mobile: "https://m2solutions.ai/ru",
+  },
 }
 
 export default function RootLayout({
