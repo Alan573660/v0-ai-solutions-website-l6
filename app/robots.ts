@@ -1,19 +1,25 @@
 import type { MetadataRoute } from "next"
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://m2solutions.ai"
+  const baseUrl = "https://m2solutions.ai"
 
   return {
     rules: [
       {
-        userAgent: "*",
+        userAgent: "Yandex",
         allow: "/",
-        disallow: ["/api/", "/admin/", "/_next/", "/private/"],
+        disallow: ["/api/", "/admin/", "/_next/", "/static/", "/private/", "/login"],
+        crawlDelay: 2,
       },
       {
-        userAgent: ["GPTBot", "ChatGPT-User", "CCBot", "anthropic-ai", "Claude-Web"],
+        userAgent: "Googlebot",
         allow: "/",
-        disallow: ["/api/", "/admin/", "/private/"],
+        disallow: ["/api/", "/admin/", "/_next/", "/static/", "/private/", "/login"],
+      },
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/api/", "/admin/", "/_next/", "/static/", "/private/", "/login"],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

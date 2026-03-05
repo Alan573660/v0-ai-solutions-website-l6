@@ -1,0 +1,7 @@
+Contact: security@m2solutions.ai
+Contact: +7-995-796-75-06
+Expires: 2026-12-31T23:59:59.000Z
+Preferred-Languages: en, ru
+Canonical: https://m2solutions.ai/.well-known/security.txt
+Policy: https://m2solutions.ai/privacy
+Acknowledgments: https://m2solutions.ai/security-acknowledgments

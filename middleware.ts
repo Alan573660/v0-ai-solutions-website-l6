@@ -4,7 +4,19 @@ import { defaultLocale, locales } from "@/lib/i18n/config"
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  if (pathname.match(/\.(jpg|jpeg|png|gif|svg|webp|ico|css|js|woff|woff2|ttf|eot)$/i)) {
+  // Skip static files
+  if (pathname.match(/\.(jpg|jpeg|png|gif|svg|webp|ico|css|js|woff|woff2|ttf|eot|xml|txt|html)$/i)) {
+    return NextResponse.next()
+  }
+
+  // Skip sitemap, robots, llms, and verification files
+  if (
+    pathname === "/sitemap.xml" ||
+    pathname === "/robots.txt" ||
+    pathname === "/llms.txt" ||
+    pathname.startsWith("/yandex_") ||
+    pathname.startsWith("/api")
+  ) {
     return NextResponse.next()
   }
 
