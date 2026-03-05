@@ -36,7 +36,7 @@ export default async function ContactsPage({ params }: ContactsPageProps) {
       city: "Москва",
       country: "Россия",
       address: "ул. Тверская, 12, стр. 1\nБизнес-центр «Галерея Актер», офис 1205\nМосква 125009",
-      phone: "+79264474345",
+      phone: "+79957967506",
       email: "info@m2solutions.ai",
       timezone: "MSK (UTC+3)",
       hours: "Пн-Пт: 9:00 - 18:00",
@@ -76,7 +76,7 @@ export default async function ContactsPage({ params }: ContactsPageProps) {
       title: "Позвонить нам",
       description: "Говорите напрямую с нашей командой продаж или поддержки",
       action: "Позвонить",
-      href: "tel:+79264474345",
+      href: "tel:+79957967506",
       gradient: "from-green-500 to-blue-500",
     },
     {

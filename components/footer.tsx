@@ -97,8 +97,8 @@ export function Footer({ locale }: FooterProps) {
                 </div>
                 <div className="flex items-center space-x-2 text-sm">
                   <Phone className="h-4 w-4 text-muted-foreground" />
-                  <a href="tel:+74951234567" className="hover:text-primary transition-colors">
-                    +7 (495) 123-45-67
+                  <a href="tel:+79957967506" className="hover:text-primary transition-colors">
+                    +7 995 796 75 06
                   </a>
                 </div>
                 <div className="flex items-center space-x-2 text-sm">
@@ -211,7 +211,7 @@ export function Footer({ locale }: FooterProps) {
               </div>
               <p className="text-sm text-muted-foreground text-center">ул. Тверская, 15</p>
               <div className="flex justify-center">
-                <MessengerLinks phone="+79264474345" country="russia" />
+                <MessengerLinks phone="+79957967506" country="russia" />
               </div>
             </div>
           </div>
