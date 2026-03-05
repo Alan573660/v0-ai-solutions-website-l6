@@ -39,37 +39,54 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
           ssh -o BatchMode=yes -o ConnectTimeout=20 "${SSH_USER}@${SSH_HOST}" 'bash -se' <<'EOF'
           set -euo pipefail
 
+          # ===== CONFIG =====
           DEPLOY_USER="deployer"
           REPO_DIR="/home/v0-ai-solutions-website-l6"
           RELEASE_DIR="/opt/ai-solutions"
+          REPO_URL="https://github.com/Alan573660/v0-ai-solutions-website-l6.git"
 
-          echo "[0/7] Context"
+          # IMPORTANT: use exact paths (match sudoers)
+          SYSTEMCTL="/usr/bin/systemctl"
+          RSYNC="/usr/bin/rsync"
+          MKDIR="/usr/bin/mkdir"
+          CHOWN="/usr/bin/chown"
+          CHMOD="/usr/bin/chmod"
+          RM="/usr/bin/rm"
+
+          echo "[0/9] Context"
           whoami
           hostname
+          echo "SYSTEMCTL=$(command -v systemctl || true)"
           node -v || true
           pnpm -v || true
 
-          echo "[1/7] Ensure repo dir exists & owned by deployer"
-          sudo -n /bin/mkdir -p "$REPO_DIR"
-          sudo -n /bin/chown -R "${DEPLOY_USER}:${DEPLOY_USER}" "$REPO_DIR"
+          echo "[1/9] Ensure repo dir exists & owned by deployer"
+          sudo -n "$MKDIR" -p "$REPO_DIR"
+          sudo -n "$CHOWN" -R "${DEPLOY_USER}:${DEPLOY_USER}" "$REPO_DIR"
 
-          echo "[2/7] Update repo to origin/main (as deployer)"
+          echo "[2/9] Ensure repo is marked safe (avoid dubious ownership)"
+          sudo -u "$DEPLOY_USER" -H bash -lc "git config --global --add safe.directory '$REPO_DIR' || true"
+
+          echo "[3/9] Update repo to origin/main (as deployer)"
           sudo -u "$DEPLOY_USER" -H bash -lc "
             set -euo pipefail
             if [ ! -d '$REPO_DIR/.git' ]; then
               rm -rf '$REPO_DIR'
-              git clone --depth 1 https://github.com/Alan573660/v0-ai-solutions-website-l6.git '$REPO_DIR'
+              git clone --depth 1 '$REPO_URL' '$REPO_DIR'
             fi
-            git config --global --add safe.directory '$REPO_DIR' || true
             cd '$REPO_DIR'
             git fetch origin main --depth 1
             git reset --hard origin/main
           "
 
-          echo "[3/7] Install deps (as deployer, non-interactive)"
+          echo "[4/9] Fix ownership inside repo (in case something was created by root earlier)"
+          sudo -n "$CHOWN" -R "${DEPLOY_USER}:${DEPLOY_USER}" "$REPO_DIR"
+
+          echo "[5/9] Install deps (as deployer, non-interactive)"
           sudo -u "$DEPLOY_USER" -H bash -lc "
             set -euo pipefail
             export CI=1
@@ -78,25 +95,27 @@ jobs:
             pnpm install --frozen-lockfile --prefer-offline
           "
 
-          echo "[4/7] Build (as deployer)"
+          echo "[6/9] Build (as deployer)"
           sudo -u "$DEPLOY_USER" -H bash -lc "
             set -euo pipefail
             cd '$REPO_DIR'
             pnpm build
           "
 
-          echo "[5/7] Sync standalone runtime to $RELEASE_DIR (via sudo -n)"
-          sudo -n /bin/mkdir -p "$RELEASE_DIR/.next"
-          sudo -n /usr/bin/rsync -a --delete "$REPO_DIR/.next/standalone/" "$RELEASE_DIR/"
-          sudo -n /usr/bin/rsync -a --delete "$REPO_DIR/.next/static/" "$RELEASE_DIR/.next/static/"
-          sudo -n /usr/bin/rsync -a --delete "$REPO_DIR/public/" "$RELEASE_DIR/public/"
+          echo "[7/9] Sync standalone runtime to $RELEASE_DIR (via sudo -n)"
+          sudo -n "$MKDIR" -p "$RELEASE_DIR/.next"
+          sudo -n "$RSYNC" -a --delete "$REPO_DIR/.next/standalone/" "$RELEASE_DIR/"
+          sudo -n "$RSYNC" -a --delete "$REPO_DIR/.next/static/" "$RELEASE_DIR/.next/static/"
+          sudo -n "$RSYNC" -a --delete "$REPO_DIR/public/" "$RELEASE_DIR/public/"
+          sudo -n "$CHOWN" -R root:root "$RELEASE_DIR"
+          sudo -n "$CHMOD" -R a+rX "$RELEASE_DIR"
 
-          echo "[6/7] Restart service (sudo -n)"
-          sudo -n /bin/systemctl restart ai-solutions
+          echo "[8/9] Restart service (sudo -n, exact path)"
+          sudo -n "$SYSTEMCTL" restart ai-solutions
 
-          echo "[7/7] Status"
-          sudo -n /bin/systemctl status ai-solutions --no-pager -l || true
-          sudo -n /bin/systemctl is-active ai-solutions --quiet && echo "Service: ACTIVE" || (echo "Service: NOT ACTIVE" && exit 1)
+          echo "[9/9] Status"
+          sudo -n "$SYSTEMCTL" status ai-solutions --no-pager -l || true
+          sudo -n "$SYSTEMCTL" is-active ai-solutions --quiet && echo "Service: ACTIVE" || (echo "Service: NOT ACTIVE" && exit 1)
 
           echo "DONE"
           EOF
