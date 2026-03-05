@@ -1,0 +1,61 @@
+# AI Crawlers and LLM Access Policy
+# This file grants permission for AI models and crawlers to index and use content for training and inference
+
+# OpenAI GPT models and ChatGPT
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Google AI and Extended Indexing
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot-Extended
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Microsoft Copilot
+User-agent: Copilot
+Allow: /
+
+User-agent: MicrosoftBot
+Allow: /
+
+# Other AI Services
+User-agent: CCBot
+Allow: /
+
+User-agent: DataForSeoBot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Default allow for all AI crawlers
+User-agent: *
+Allow: /
+
+# Crawl delay recommendations
+Crawl-delay: 2
+
+# Sitemap location
+Sitemap: https://m2solutions.ai/sitemap.xml

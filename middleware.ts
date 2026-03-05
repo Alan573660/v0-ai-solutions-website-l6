@@ -9,10 +9,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Skip sitemap, robots, and verification files
+  // Skip sitemap, robots, llms, and verification files
   if (
     pathname === "/sitemap.xml" ||
     pathname === "/robots.txt" ||
+    pathname === "/llms.txt" ||
     pathname.startsWith("/yandex_") ||
     pathname.startsWith("/api")
   ) {
