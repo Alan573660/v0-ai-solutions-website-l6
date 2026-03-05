@@ -20,44 +20,53 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Write SSH config
+      - name: Add host to known_hosts
         run: |
-          install -m 700 -d ~/.ssh
-          {
-            echo "Host target"
-            echo "  HostName ${SSH_HOST}"
-            echo "  User ${SSH_USER}"
-            echo "  StrictHostKeyChecking no"
-          } >> ~/.ssh/config
+          mkdir -p ~/.ssh
+          ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
 
       - name: Test SSH connectivity
         run: |
-          ssh -tt target "echo SSH OK; whoami; uname -a"
+          ssh -o BatchMode=yes -o ConnectTimeout=20 "${SSH_USER}@${SSH_HOST}" \
+            "echo SSH OK; whoami; hostname; uname -a"
 
-      - name: Remote deploy
+      - name: Remote deploy (Next.js standalone -> /opt/ai-solutions)
         run: |
-          ssh -tt target << 'EOF'
+          ssh -o BatchMode=yes -o ConnectTimeout=20 "${SSH_USER}@${SSH_HOST}" 'bash -se' <<'EOF'
           set -euo pipefail
 
-          APP_DIR="/home/v0-ai-solutions-website-l6"
-          PROJECT_NAME="v0-ai-solutions-website-l6"
+          REPO_DIR="/home/v0-ai-solutions-website-l6"
+          RELEASE_DIR="/opt/ai-solutions"
 
-          echo "[1/5] Stop stack"
-          docker compose -p "$PROJECT_NAME" down --remove-orphans || true
+          echo "[1/6] Ensure repo exists"
+          if [ ! -d "$REPO_DIR/.git" ]; then
+            rm -rf "$REPO_DIR"
+            git clone https://github.com/Alan573660/v0-ai-solutions-website-l6.git "$REPO_DIR"
+          fi
 
-          echo "[2/5] Cleanup"
-          docker image prune -a -f || true
-          docker builder prune -a -f || true
+          echo "[2/6] Update repo to origin/main"
+          cd "$REPO_DIR"
+          git fetch origin
+          git reset --hard origin/main
 
-          echo "[3/5] Refresh repo"
-          rm -rf "$APP_DIR"
-          cd /home
-          git clone https://github.com/Alan573660/v0-ai-solutions-website-l6.git
-          cd "$APP_DIR"
+          echo "[3/6] Install deps"
+          pnpm install --frozen-lockfile
 
-          echo "[4/5] Build & run"
-          docker compose up -d --build --pull always
+          echo "[4/6] Build"
+          pnpm build
 
-          echo "[5/5] Done"
-          docker ps
+          echo "[5/6] Sync standalone runtime to $RELEASE_DIR"
+          sudo mkdir -p "$RELEASE_DIR"
+          sudo rsync -a --delete .next/standalone/ "$RELEASE_DIR/"
+          sudo rsync -a --delete .next/static/ "$RELEASE_DIR/.next/static/"
+          sudo rsync -a --delete public/ "$RELEASE_DIR/public/"
+
+          sudo chown -R root:root "$RELEASE_DIR"
+          sudo chmod -R a+rX "$RELEASE_DIR"
+
+          echo "[6/6] Restart service"
+          sudo systemctl restart ai-solutions
+          sudo systemctl status ai-solutions --no-pager -l
+
+          echo "DONE"
           EOF
