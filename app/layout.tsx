@@ -42,6 +42,7 @@ export const metadata: Metadata = {
   publisher: "M2 AI Solutions",
   verification: {
     yandex: "49597ab2b5da9621",
+    google: "UlX8afSv-5VEW8Cyh6pLlFXk_1-3XKJzzRim_StwUJo",
   },
   alternates: {
     languages: {
