@@ -636,7 +636,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                       <div>
                         <h4 className="text-xl font-bold mb-3">Остались вопросы?</h4>
                         <p className="text-white/90 text-sm mb-4">
-                          Свяжитесь с нами для получения индивидуального решения.
+                          Свяжитесь с нами для получения индивидуального решен��я.
                         </p>
                       </div>
                       <div className="space-y-2">
@@ -1196,7 +1196,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                 <div>
                   <h4 className="font-semibold mb-2 text-lg">Проактивная безопасность</h4>
                   <p className="text-sm text-muted-foreground">
-                    Система распознает потенциальные угрозы и предотвращает инциденты.
+                    Сис��ема распознает потенциальные угрозы и предотвращает инциденты.
                   </p>
                 </div>
               </div>
@@ -1214,7 +1214,7 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
               Кейсы
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Наши проекты умного дома в России, Казахстане и Испании
+              Наши проекты умного дома в ��оссии, Казахстане и Испании
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Более 500 успешно реализованных проектов автоматизации зданий в Барселоне, Москве, Алматы,
@@ -1260,8 +1260,6 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
               <article
                 key={study.location + study.project}
                 className="overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-500 group border-2 hover:border-primary/50 cursor-pointer rounded-lg bg-card"
-                itemScope
-                itemType="https://schema.org/Review"
               >
                 <div className="relative h-64 w-full overflow-hidden">
                   <Image
@@ -1286,12 +1284,12 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
                 <CardHeader>
-                  <CardTitle className="text-2xl mb-2 group-hover:text-primary transition-colors" itemProp="name">
+                  <CardTitle className="text-2xl mb-2 group-hover:text-primary transition-colors">
                     {study.project}
                   </CardTitle>
                   <CardDescription className="text-base mb-4">
                     <MapPin className="h-4 w-4 inline mr-2" />
-                    <span itemProp="location">{study.location}</span> • {study.area}
+                    <span>{study.location}</span> • {study.area}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -1303,14 +1301,20 @@ export default function SmartHomePage({ params }: SmartHomePageProps) {
                       </li>
                     ))}
                   </ul>
-                  <div className="pt-4 border-t" itemProp="review" itemScope itemType="https://schema.org/Review">
+                  <div className="pt-4 border-t" itemScope itemType="https://schema.org/Review">
                     <p className="text-sm italic text-muted-foreground mb-2" itemProp="reviewBody">
                       "{study.testimonial}"
                     </p>
                     <p className="text-sm font-semibold">
-                      — <span itemProp="author">{study.client}</span>
+                      — <span itemProp="author" itemScope itemType="https://schema.org/Person"><span itemProp="name">{study.client}</span></span>
                     </p>
-                    <meta itemProp="reviewRating" content="5" />
+                    <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                      <meta itemProp="ratingValue" content="5" />
+                      <meta itemProp="bestRating" content="5" />
+                    </div>
+                    <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Service">
+                      <meta itemProp="name" content="Умный дом под ключ - AI Solutions" />
+                    </div>
                   </div>
                 </CardContent>
               </article>
