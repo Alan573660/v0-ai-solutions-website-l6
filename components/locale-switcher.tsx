@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { ChevronDown, Globe, Check } from "lucide-react"
@@ -13,12 +13,20 @@ interface LocaleSwitcherProps {
 
 export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
   const pathname = usePathname()
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
 
   const getLocaleUrl = (newLocale: Locale): string => {
     const segments = pathname.split("/").filter(Boolean)
+    // First segment is the current locale, remove it and add new locale
     const pathWithoutLocale = segments.slice(1).join("/")
     return `/${newLocale}${pathWithoutLocale ? `/${pathWithoutLocale}` : ""}`
+  }
+
+  const handleLocaleChange = (newLocale: Locale) => {
+    const url = getLocaleUrl(newLocale)
+    setIsOpen(false)
+    router.push(url)
   }
 
   return (
@@ -50,24 +58,21 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
         </div>
         <div className="h-px bg-border my-1" />
         {locales.map((locale) => {
-          const localeUrl = getLocaleUrl(locale)
           const isCurrentLocale = locale === currentLocale
 
           return (
             <DropdownMenuItem
               key={locale}
-              asChild
+              onClick={() => handleLocaleChange(locale)}
               className={`
                 gap-3 cursor-pointer rounded-md px-2 py-2.5 my-0.5
                 transition-all duration-150
                 ${isCurrentLocale ? "bg-primary/10 text-primary font-medium" : "hover:bg-accent/50"}
               `}
             >
-              <a href={localeUrl} onClick={() => setIsOpen(false)} className="flex items-center w-full">
-                <span className="text-lg leading-none">{localeFlags[locale]}</span>
-                <span className="flex-1 text-sm">{localeNames[locale]}</span>
-                {isCurrentLocale && <Check className="h-4 w-4 text-primary" aria-label="Current language" />}
-              </a>
+              <span className="text-lg leading-none">{localeFlags[locale]}</span>
+              <span className="flex-1 text-sm">{localeNames[locale]}</span>
+              {isCurrentLocale && <Check className="h-4 w-4 text-primary" aria-label="Current language" />}
             </DropdownMenuItem>
           )
         })}
