@@ -37,7 +37,7 @@ import {
 } from "lucide-react"
 import type { Locale } from "@/lib/i18n/config"
 import { useTranslations } from "@/lib/i18n/translations"
-import { solutions, callExamples } from "./home-data"
+import { getSolutions, getCallExamples } from "./home-data"
 import { useCTA } from "@/components/modals/cta-provider"
 
 /* ================================================================== */
@@ -98,6 +98,10 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
   const [playingAudio, setPlayingAudio] = useState<string | null>(null)
   const [audioProgress, setAudioProgress] = useState<Record<string, number>>({})
 
+  // Get locale-specific data
+  const solutions = getSolutions(locale)
+  const callExamples = getCallExamples(locale)
+
   const solutionIcons: Record<string, LucideIcon> = {
     "voice-sales": Phone,
     "smart-home": Home,
@@ -131,49 +135,49 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
               </span>
-              <span className="text-[13px] font-medium text-white/70">{'AI-решения для бизнеса нового поколения'}</span>
+              <span className="text-[13px] font-medium text-white/70">{t("homepage.badge")}</span>
             </div>
           </div>
 
           {/* Headline */}
           <h1 className="mx-auto max-w-[920px] text-center text-balance text-[2.5rem] font-extrabold leading-[1.08] tracking-[-0.025em] text-white sm:text-5xl md:text-6xl lg:text-[4.25rem] animate-fade-in-up">
-            {'Голосовые AI-менеджеры, которые '}
+            {t("homepage.title")}
             <span className="bg-gradient-to-r from-sky-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
-              {'продают за вас'}
+              {t("homepage.titleHighlight")}
             </span>
           </h1>
 
           {/* Sub */}
           <p className="mx-auto mt-7 max-w-2xl text-center text-pretty text-[1.125rem] leading-[1.7] text-white/50 animate-fade-in-up" style={{ animationDelay: "0.12s" }}>
-            {'Принимают звонки, обрабатывают заявки, формируют счета и ведут CRM. Без выходных, без больничных, без ошибок. 24/7/365.'}
+            {t("homepage.subtitle")}
           </p>
 
           {/* CTA */}
           <div className="mt-11 flex flex-col items-center gap-4 sm:flex-row sm:justify-center animate-fade-in-up" style={{ animationDelay: "0.22s" }}>
             <Button size="lg" className="h-[52px] rounded-xl px-8 text-[15px] font-semibold shadow-[0_0_40px_rgba(56,130,255,.15)] hover:shadow-[0_0_60px_rgba(56,130,255,.25)] transition-all duration-300" onClick={openConsultation}>
-              {'Получить бесплатный аудит'}
+              {t("homepage.ctaPrimary")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button size="lg" variant="outline" className="h-[52px] rounded-xl px-8 text-[15px] font-semibold border-white/[0.1] bg-white/[0.04] text-white hover:bg-white/[0.08] hover:border-white/[0.16] backdrop-blur-sm transition-all duration-300" asChild>
               <Link href="#examples">
                 <Play className="mr-2 h-4 w-4" />
-                {'Послушать AI в деле'}
+                {t("homepage.ctaSecondary")}
               </Link>
             </Button>
           </div>
 
           {/* Trust micro-text */}
           <p className="mt-7 text-center text-[13px] text-white/30 animate-fade-in" style={{ animationDelay: "0.35s" }}>
-            {'Бесплатная консультация  \u00b7  Расчет ROI за 15 минут  \u00b7  Без обязательств'}
+            {t("homepage.trustText")}
           </p>
 
           {/* Stats strip */}
           <div className="mt-20 lg:mt-28 grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/[0.06] rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
             {[
-              { value: "500+", label: "Проектов реализовано" },
-              { value: "10+", label: "Лет на рынке AI" },
-              { value: "+87%", label: "Средний рост конверсии" },
-              { value: "98%", label: "Клиентов довольны" },
+              { value: t("homepage.stat1.value"), label: t("homepage.stat1.label") },
+              { value: t("homepage.stat2.value"), label: t("homepage.stat2.label") },
+              { value: t("homepage.stat3.value"), label: t("homepage.stat3.label") },
+              { value: t("homepage.stat4.value"), label: t("homepage.stat4.label") },
             ].map((s) => (
               <div key={s.label} className="flex flex-col items-center gap-1.5 py-8 lg:py-10">
                 <span className="text-[2rem] font-extrabold tracking-tight text-white sm:text-4xl">{s.value}</span>
@@ -190,7 +194,7 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
       <section className="border-b border-border/60 bg-background py-6">
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex flex-col items-center gap-5 sm:flex-row sm:justify-between">
-            <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground/60">{'Интеграции'}</span>
+            <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground/60">{t("homepage.integrations")}</span>
             <div className="flex flex-wrap items-center justify-center gap-8">
               {["amoCRM", "Bitrix24", "Telegram", "WhatsApp", "1C", "SAP"].map((name) => (
                 <span key={name} className="text-sm font-semibold text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors cursor-default">{name}</span>
@@ -210,12 +214,12 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
       <section className="py-28 lg:py-36">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mx-auto mb-20 max-w-3xl text-center">
-            <Label>{'Решения'}</Label>
+            <Label>{t("homepage.solutionsLabel")}</Label>
             <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
-              {'AI-решения, которые уже зарабатывают деньги'}
+              {t("homepage.solutionsTitle")}
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted-foreground">
-              {'Каждое решение проектируется под вашу отрасль, интегрируется с текущими системами и приносит измеримый результат'}
+              {t("homepage.solutionsDesc")}
             </p>
           </Reveal>
 
@@ -271,21 +275,21 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
       <section className="py-28 lg:py-36 border-y border-border/50 bg-muted/30">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mx-auto mb-20 max-w-3xl text-center">
-            <Label>{'Процесс'}</Label>
+            <Label>{t("homepage.processLabel")}</Label>
             <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
-              {'От анализа до запуска за 2\u20134 недели'}
+              {t("homepage.processTitle")}
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted-foreground">
-              {'Прозрачный процесс с четкими этапами. Вы видите прогресс на каждом шаге.'}
+              {t("homepage.processDesc")}
             </p>
           </Reveal>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { phase: "01", title: "Погружение", desc: "Глубокий анализ бизнес-процессов, выявление точек роста и изучение целевой аудитории", dur: "2\u20133 дня", icon: Target },
-              { phase: "02", title: "Архитектура", desc: "Разработка сценариев, выбор моделей, проектирование интеграций с инфраструктурой", dur: "3\u20135 дней", icon: Settings },
-              { phase: "03", title: "Обучение AI", desc: "Составление промптов, обучение на ваших данных, настройка под тон бренда", dur: "5\u20137 дней", icon: Bot },
-              { phase: "04", title: "Запуск", desc: "Пилот, A/B тесты, корректировка, полный деплой с мониторингом 24/7", dur: "2\u20133 дня", icon: Zap },
+              { phase: "01", title: t("homepage.step1.title"), desc: t("homepage.step1.desc"), dur: t("homepage.step1.dur"), icon: Target },
+              { phase: "02", title: t("homepage.step2.title"), desc: t("homepage.step2.desc"), dur: t("homepage.step2.dur"), icon: Settings },
+              { phase: "03", title: t("homepage.step3.title"), desc: t("homepage.step3.desc"), dur: t("homepage.step3.dur"), icon: Bot },
+              { phase: "04", title: t("homepage.step4.title"), desc: t("homepage.step4.desc"), dur: t("homepage.step4.dur"), icon: Zap },
             ].map((step, idx) => (
               <Reveal key={step.phase} delay={idx * 100}>
                 <div className="group relative flex h-full flex-col rounded-2xl border border-border/70 bg-card p-8 transition-all duration-300 hover:border-primary/20 hover:shadow-[0_8px_40px_-12px_rgba(56,130,255,.06)]">
@@ -323,23 +327,23 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
 
         <div className="relative mx-auto max-w-7xl px-6">
           <Reveal className="mx-auto mb-20 max-w-3xl text-center">
-            <Label light>{'Возможности'}</Label>
+            <Label light>{t("homepage.capabilitiesLabel")}</Label>
             <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
-              {'Что умеет AI-менеджер M2'}
+              {t("homepage.capabilitiesTitle")}
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-white/45">
-              {'Модели последнего поколения, обученные специфике вашей отрасли'}
+              {t("homepage.capabilitiesDesc")}
             </p>
           </Reveal>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { icon: Settings, title: "Формирование счетов", text: "AI создает счета в PDF, распознает реквизиты и отправляет клиенту автоматически" },
-              { icon: Target, title: "Полная воронка продаж", text: "Квалификация лидов, борьба с возражениями, презентация. Конверсия до +87%" },
-              { icon: Phone, title: "Все каналы связи", text: "Звонки, email, SMS, Telegram, WhatsApp. Единый агент на все каналы" },
-              { icon: BarChart3, title: "Интеграция с CRM", text: "amoCRM, Bitrix24, 1C, SAP. Синхронизация данных в реальном времени" },
-              { icon: Globe, title: "Автоматизация закупок", text: "AI формирует заказы поставщикам и отслеживает статус поставок" },
-              { icon: Award, title: "Обучение под бренд", text: "AI перенимает тон, ценности и стандарты компании для каждого клиента" },
+              { icon: Settings, title: t("homepage.cap1.title"), text: t("homepage.cap1.text") },
+              { icon: Target, title: t("homepage.cap2.title"), text: t("homepage.cap2.text") },
+              { icon: Phone, title: t("homepage.cap3.title"), text: t("homepage.cap3.text") },
+              { icon: BarChart3, title: t("homepage.cap4.title"), text: t("homepage.cap4.text") },
+              { icon: Globe, title: t("homepage.cap5.title"), text: t("homepage.cap5.text") },
+              { icon: Award, title: t("homepage.cap6.title"), text: t("homepage.cap6.text") },
             ].map((cap, idx) => (
               <Reveal key={cap.title} delay={idx * 80}>
                 <div className="group flex h-full flex-col rounded-2xl border border-white/[0.06] bg-white/[0.015] p-7 lg:p-8 transition-all duration-500 hover:bg-white/[0.035] hover:border-white/[0.1]">
@@ -356,9 +360,9 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
           {/* Industries */}
           <Reveal delay={200}>
             <div className="mt-20 text-center">
-              <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-white/30">{'Отрасли'}</p>
+              <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-white/30">{t("homepage.industriesLabel")}</p>
               <div className="flex flex-wrap justify-center gap-2.5">
-                {["Строительство", "Недвижимость", "Умные дома", "Госсектор", "Банки", "E-commerce", "Медицина", "Логистика"].map((ind) => (
+                {t("homepage.industries").split(",").map((ind) => (
                   <span key={ind} className="rounded-full border border-white/[0.06] bg-white/[0.02] px-4 py-2 text-[13px] text-white/45 transition-colors hover:border-white/[0.12] hover:text-white/65">{ind}</span>
                 ))}
               </div>
@@ -373,23 +377,23 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
       <section className="py-28 lg:py-36">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mx-auto mb-20 max-w-3xl text-center">
-            <Label>{'Команда'}</Label>
+            <Label>{t("homepage.teamLabel")}</Label>
             <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
-              {'6 компаний в одной экосистеме'}
+              {t("homepage.teamTitle")}
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted-foreground">
-              {'Полная команда специалистов под каждый проект'}
+              {t("homepage.teamDesc")}
             </p>
           </Reveal>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { icon: Users, title: "Бизнес-консультанты", text: "Погружаются в бизнес, анализируют процессы, выявляют точки роста" },
-              { icon: Target, title: "Бизнес-аналитики", text: "Переводят бизнес-задачи на технический язык, структурируют требования" },
-              { icon: Settings, title: "ML-инженеры", text: "Backend, frontend, DevOps, ML. Реализуют техническую часть решений" },
-              { icon: Bot, title: "Проектные менеджеры", text: "Координируют работу, следят за сроками и качеством. Единый контакт" },
-              { icon: Headphones, title: "Техподдержка 24/7", text: "Круглосуточный мониторинг, быстрая реакция, непрерывные улучшения" },
-              { icon: Award, title: "AI-тренеры", text: "Обучают модели специфике бизнеса, настраивают промпты и сценарии" },
+              { icon: Users, title: t("homepage.role1.title"), text: t("homepage.role1.text") },
+              { icon: Target, title: t("homepage.role2.title"), text: t("homepage.role2.text") },
+              { icon: Settings, title: t("homepage.role3.title"), text: t("homepage.role3.text") },
+              { icon: Bot, title: t("homepage.role4.title"), text: t("homepage.role4.text") },
+              { icon: Headphones, title: t("homepage.role5.title"), text: t("homepage.role5.text") },
+              { icon: Award, title: t("homepage.role6.title"), text: t("homepage.role6.text") },
             ].map((role, idx) => (
               <Reveal key={role.title} delay={idx * 70}>
                 <div className="group flex h-full items-start gap-4 rounded-xl border border-border/60 bg-card p-6 transition-all duration-300 hover:border-primary/15 hover:shadow-[0_4px_30px_-8px_rgba(56,130,255,.06)]">
@@ -408,7 +412,7 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
           {/* Experts */}
           <Reveal delay={100}>
             <div className="mt-16 rounded-2xl border border-border/50 bg-muted/30 p-8 lg:p-12">
-              <p className="mb-10 text-center text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground/60">{'Ключевые эксперты'}</p>
+              <p className="mb-10 text-center text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground/60">{t("homepage.expertsLabel")}</p>
               <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
                 {[
                   { name: "Сергей Волков", role: "CTO & ML Architect", exp: "15 лет в AI", bg: "ex-Яндекс, Mail.ru" },
@@ -438,12 +442,12 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
       <section id="examples" className="py-28 lg:py-36 border-y border-border/50 bg-muted/30">
         <div className="mx-auto max-w-4xl px-6">
           <Reveal className="mx-auto mb-20 max-w-3xl text-center">
-            <Label>{'Демо'}</Label>
+            <Label>{t("homepage.demoLabel")}</Label>
             <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
-              {'Послушайте AI-менеджера в деле'}
+              {t("homepage.demoTitle")}
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-muted-foreground">
-              {'Настоящие записи звонков из разных отраслей'}
+              {t("homepage.demoDesc")}
             </p>
           </Reveal>
 
@@ -494,7 +498,7 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
                   <div className="mt-5 flex items-start gap-3 rounded-xl border border-emerald-500/10 bg-emerald-500/[0.04] p-4">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" />
                     <div>
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-600">{'Результат'}</span>
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-600">{t("homepage.resultLabel")}</span>
                       <p className="mt-1 text-[0.875rem] leading-relaxed text-foreground/70">{example.result}</p>
                     </div>
                   </div>
@@ -511,12 +515,12 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
       <section className="py-28 lg:py-36">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mx-auto mb-20 max-w-3xl text-center">
-            <Label>{'Отзывы'}</Label>
+            <Label>{t("homepage.testimonialsLabel")}</Label>
             <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
-              {'Результаты наших клиентов'}
+              {t("homepage.testimonialsTitle")}
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-muted-foreground">
-              {'Каждый кейс подтвержден метриками'}
+              {t("homepage.testimonialsDesc")}
             </p>
           </Reveal>
 
@@ -559,12 +563,12 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
 
         <div className="relative mx-auto max-w-7xl px-6">
           <Reveal className="mx-auto mb-20 max-w-3xl text-center">
-            <Label light>{'Результаты'}</Label>
+            <Label light>{t("homepage.statsLabel")}</Label>
             <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
-              {'Цифры, которые говорят за нас'}
+              {t("homepage.statsTitle")}
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-white/40">
-              {'Средние показатели клиентов после внедрения'}
+              {t("homepage.statsDesc")}
             </p>
           </Reveal>
 
@@ -604,16 +608,16 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
       <section className="py-28 lg:py-36">
         <div className="mx-auto max-w-3xl px-6">
           <Reveal className="mx-auto mb-16 max-w-3xl text-center">
-            <Label>{'FAQ'}</Label>
+            <Label>{t("homepage.faqLabel")}</Label>
             <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
-              {'Ответы на частые вопросы'}
+              {t("homepage.faqTitle")}
             </h2>
           </Reveal>
 
           <Accordion type="single" collapsible className="w-full">
             {[
               { q: "Сколько времени занимает внедрение?", a: "Для МСБ \u2014 от 1 до 4 недель. Для крупных компаний и госсектора \u2014 от 2 до 6 месяцев. Сроки зависят от сложности интеграций и объема бизнес-процессов." },
-              { q: "Какая стоимость внедрения?", a: "Рассчитывается индивидуально. Средний проект для МСБ окупается за 3\u20134 недели. Предоставляем бесплатную консультацию и расчет ROI." },
+              { q: "Какая стоимость внедрения?", a: "Рассчитывается индивидуально. Средний проект для МСБ окупается за 3\u20134 недели. Предоставляем бесплатную консультацию �� расчет ROI." },
               { q: "Нужно ли менять текущую CRM?", a: "Нет. Мы интегрируемся с вашими системами: amoCRM, Bitrix24, 1C, SAP и другими без изменения инфраструктуры." },
               { q: "Как обеспечивается безопасность данных?", a: "Соблюдаем 152-ФЗ, ISO 27001, GDPR. Шифрование AES-256, серверы в РФ. Аудит безопасности и NDA для корпоративных клиентов." },
               { q: "Что если AI-менеджер не справится?", a: "Система эскалации: звонок автоматически переводится на живого менеджера с полной историей диалога. Ни один клиент не теряется." },
@@ -643,32 +647,27 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
               </span>
-              <span className="text-[13px] font-medium text-white/60">{'Начните сегодня'}</span>
+              <span className="text-[13px] font-medium text-white/60">{t("homepage.finalCtaLabel")}</span>
             </div>
 
             <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
-              {'Готовы к трансформации бизнеса?'}
+              {t("homepage.finalCtaTitle")}
             </h2>
 
             <p className="mx-auto mt-6 max-w-xl text-[1.0625rem] leading-[1.7] text-white/45">
-              {'Получите бесплатную консультацию, анализ процессов и расчет ROI. Без обязательств. Ответ за 15 минут.'}
+              {t("homepage.finalCtaDesc")}
             </p>
 
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Button size="lg" className="h-[52px] rounded-xl px-10 text-[15px] font-semibold shadow-[0_0_40px_rgba(56,130,255,.15)] hover:shadow-[0_0_60px_rgba(56,130,255,.25)] transition-all duration-300" onClick={openConsultation}>
-                {'Получить бесплатный аудит'}
+                {t("homepage.finalCtaButton")}
                 <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-              <Button size="lg" variant="outline" className="h-[52px] rounded-xl px-10 text-[15px] font-semibold border-white/[0.1] bg-white/[0.04] text-white hover:bg-white/[0.08] hover:border-white/[0.16] backdrop-blur-sm transition-all duration-300" onClick={openConsultation}>
-                {'Рассчитать ROI'}
               </Button>
             </div>
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-7 text-[13px] text-white/30">
-              <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-500/50" />{'Ответ за 15 минут'}</span>
-              <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-500/50" />{'Бесплатный аудит'}</span>
-              <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-500/50" />{'ТЗ за 2 дня'}</span>
-            </div>
+            <p className="mt-10 text-[13px] text-white/30">
+              {t("homepage.finalCtaTrust")}
+            </p>
           </Reveal>
         </div>
       </section>
