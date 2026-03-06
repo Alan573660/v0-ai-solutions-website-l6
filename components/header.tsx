@@ -18,7 +18,7 @@ export function Header({ locale }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { t } = useTranslations(locale)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
-  const localeSwitcherRef = useRef<HTMLDivElement>(null)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
   const { openModal } = useCTA()
 
   useEffect(() => {
@@ -32,8 +32,8 @@ export function Header({ locale }: HeaderProps) {
       if (
         mobileMenuRef.current &&
         !mobileMenuRef.current.contains(e.target as Node) &&
-        localeSwitcherRef.current &&
-        !localeSwitcherRef.current.contains(e.target as Node)
+        menuButtonRef.current &&
+        !menuButtonRef.current.contains(e.target as Node)
       ) {
         setIsMenuOpen(false)
       }
@@ -173,10 +173,9 @@ export function Header({ locale }: HeaderProps) {
 
           {/* Mobile menu button */}
           <div className="flex items-center gap-2 md:hidden">
-            <div ref={localeSwitcherRef}>
-              <LocaleSwitcher currentLocale={locale} />
-            </div>
+            <LocaleSwitcher currentLocale={locale} />
             <Button
+              ref={menuButtonRef}
               variant="ghost"
               size="sm"
               className="h-9 w-9 p-0"
