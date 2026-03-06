@@ -56,20 +56,16 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body className="font-sans antialiased">
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <CTAProvider>
-            <div className="flex min-h-screen flex-col">
-              <Header locale={locale} />
-              <main className="flex-1">{children}</main>
-              <Footer locale={locale} />
-            </div>
-            <Toaster />
-            <ScrollToTop />
-          </CTAProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+      <CTAProvider>
+        <div className="flex min-h-screen flex-col">
+          <Header locale={locale} />
+          <main className="flex-1">{children}</main>
+          <Footer locale={locale} />
+        </div>
+        <Toaster />
+        <ScrollToTop />
+      </CTAProvider>
+    </ThemeProvider>
   )
 }
