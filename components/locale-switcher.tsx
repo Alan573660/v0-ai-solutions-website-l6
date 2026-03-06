@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -14,7 +13,6 @@ interface LocaleSwitcherProps {
 export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
   const pathname = usePathname()
   const router = useRouter()
-  const [isOpen, setIsOpen] = useState(false)
 
   const getLocaleUrl = (newLocale: Locale): string => {
     const segments = pathname.split("/").filter(Boolean)
@@ -24,18 +22,18 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
   }
 
   const handleLocaleChange = (newLocale: Locale) => {
+    if (newLocale === currentLocale) return
     const url = getLocaleUrl(newLocale)
-    setIsOpen(false)
     router.push(url)
   }
 
   return (
-    <DropdownMenu open={isOpen} onOpenChange={setIsOpen} modal={false}>
+    <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
           size="sm"
-          className="gap-2 h-9 px-3 hover:bg-accent/50 transition-all duration-200 border border-transparent hover:border-border/50"
+          className="gap-2 h-9 px-3 hover:bg-accent/50 transition-all duration-200 border border-transparent hover:border-border/50 data-[state=open]:bg-accent/50"
         >
           <Globe className="h-4 w-4 text-muted-foreground" />
           <span className="hidden sm:inline font-medium text-sm">
@@ -43,14 +41,14 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
           </span>
           <span className="sm:hidden text-base">{localeFlags[currentLocale]}</span>
           <ChevronDown
-            className={`h-3.5 w-3.5 text-muted-foreground transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+            className="h-3.5 w-3.5 text-muted-foreground transition-transform duration-200 data-[state=open]:rotate-180"
             aria-hidden="true"
           />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="min-w-[200px] p-1 z-[100] animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-200"
+        className="min-w-[200px] p-1 z-[9999]"
         sideOffset={8}
       >
         <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
@@ -63,7 +61,7 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
           return (
             <DropdownMenuItem
               key={locale}
-              onClick={() => handleLocaleChange(locale)}
+              onSelect={() => handleLocaleChange(locale)}
               className={`
                 gap-3 cursor-pointer rounded-md px-2 py-2.5 my-0.5
                 transition-all duration-150
