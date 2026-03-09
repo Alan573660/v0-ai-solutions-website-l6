@@ -80,17 +80,27 @@ export function Header({ locale }: HeaderProps) {
           {/* Logo */}
           <Link
             href={`/${locale}`}
-            className="flex items-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md"
+            className="flex items-center gap-2.5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md group"
             aria-label={t("nav.home")}
           >
-            <Image
-              src="/images/logo.svg"
-              alt="M2 AI Solutions"
-              width={140}
-              height={36}
-              className="h-8 sm:h-9 w-auto"
-              priority
-            />
+            <div className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-xl overflow-hidden ring-1 ring-white/10 group-hover:ring-primary/50 transition-all">
+              <Image
+                src="/images/logo-icon.jpg"
+                alt=""
+                fill
+                className="object-cover object-right"
+                priority
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-base sm:text-lg font-bold leading-tight tracking-tight">
+                <span className="text-primary">M2</span>
+                <span className="text-foreground"> AI Solutions</span>
+              </span>
+              <span className="text-[10px] sm:text-xs text-muted-foreground leading-tight hidden sm:block">
+                Голосовые AI-менеджеры
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
