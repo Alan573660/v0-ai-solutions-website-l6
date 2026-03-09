@@ -82,6 +82,112 @@ const nextConfig = {
       },
     ];
   },
+
+  async redirects() {
+    return [
+      // Redirect root to default locale
+      {
+        source: '/',
+        destination: '/ru',
+        permanent: true, // 301 redirect
+      },
+      // Redirect /blog/* to /ru/blog/* (default locale)
+      {
+        source: '/blog',
+        destination: '/ru/blog',
+        permanent: true,
+      },
+      {
+        source: '/blog/:slug*',
+        destination: '/ru/blog/:slug*',
+        permanent: true,
+      },
+      // Redirect /solutions/* to /ru/solutions/*
+      {
+        source: '/solutions',
+        destination: '/ru/solutions',
+        permanent: true,
+      },
+      {
+        source: '/solutions/:slug*',
+        destination: '/ru/solutions/:slug*',
+        permanent: true,
+      },
+      // Redirect /cases/* to /ru/cases/*
+      {
+        source: '/cases',
+        destination: '/ru/cases',
+        permanent: true,
+      },
+      {
+        source: '/cases/:slug*',
+        destination: '/ru/cases/:slug*',
+        permanent: true,
+      },
+      // Redirect /platform/* to /ru/platform/*
+      {
+        source: '/platform',
+        destination: '/ru/platform',
+        permanent: true,
+      },
+      {
+        source: '/platform/:slug*',
+        destination: '/ru/platform/:slug*',
+        permanent: true,
+      },
+      // Other main pages
+      {
+        source: '/about',
+        destination: '/ru/about',
+        permanent: true,
+      },
+      {
+        source: '/contacts',
+        destination: '/ru/contacts',
+        permanent: true,
+      },
+      {
+        source: '/faq',
+        destination: '/ru/faq',
+        permanent: true,
+      },
+      {
+        source: '/partners',
+        destination: '/ru/partners',
+        permanent: true,
+      },
+      {
+        source: '/careers',
+        destination: '/ru/careers',
+        permanent: true,
+      },
+      {
+        source: '/docs',
+        destination: '/ru/docs',
+        permanent: true,
+      },
+      {
+        source: '/support',
+        destination: '/ru/support',
+        permanent: true,
+      },
+      {
+        source: '/login',
+        destination: '/ru/login',
+        permanent: true,
+      },
+      {
+        source: '/privacy',
+        destination: '/ru/privacy',
+        permanent: true,
+      },
+      {
+        source: '/terms',
+        destination: '/ru/terms',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -24,10 +24,10 @@ export function middleware(request: NextRequest) {
   const pathnameHasLocale = locales.some((locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`)
 
   if (!pathnameHasLocale) {
-    // Redirect to default locale
+    // Permanent redirect (301) to default locale for better SEO
     const locale = defaultLocale
     request.nextUrl.pathname = `/${locale}${pathname}`
-    return NextResponse.redirect(request.nextUrl)
+    return NextResponse.redirect(request.nextUrl, { status: 301 })
   }
 
   return NextResponse.next()
