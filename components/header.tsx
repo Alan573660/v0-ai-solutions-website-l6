@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X, ChevronDown } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -79,16 +80,27 @@ export function Header({ locale }: HeaderProps) {
           {/* Logo */}
           <Link
             href={`/${locale}`}
-            className="flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md"
+            className="flex items-center gap-2.5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md group"
             aria-label={t("nav.home")}
           >
-            <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
-              <span className="text-primary-foreground font-bold text-xs sm:text-sm" aria-hidden="true">
-                M2
+            <div className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-xl overflow-hidden ring-1 ring-white/10 group-hover:ring-primary/50 transition-all">
+              <Image
+                src="/images/logo-icon.jpg"
+                alt=""
+                fill
+                className="object-cover object-right"
+                priority
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-base sm:text-lg font-bold leading-tight tracking-tight">
+                <span className="text-primary">M2</span>
+                <span className="text-foreground"> AI Solutions</span>
+              </span>
+              <span className="text-[10px] sm:text-xs text-muted-foreground leading-tight hidden sm:block">
+                Голосовые AI-менеджеры
               </span>
             </div>
-            <span className="font-bold text-base sm:text-lg lg:text-xl truncate">AI Solutions</span>
-            <span className="text-xs text-muted-foreground font-mono ml-1">v1.22</span>
           </Link>
 
           {/* Desktop Navigation */}

@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { MapPin, Phone, Mail, Globe } from "lucide-react"
 import { useTranslations } from "@/lib/i18n/translations"
 import type { Locale } from "@/lib/i18n/config"
@@ -76,15 +77,28 @@ export function Footer({ locale }: FooterProps) {
             {/* Company info */}
             <div className="lg:col-span-2 space-y-6">
               <div>
-                <Link href={`/${locale}`} className="flex items-center space-x-2 mb-4">
-                  <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                    <span className="text-primary-foreground font-bold text-sm">M2</span>
+                <Link href={`/${locale}`} className="flex items-center gap-3 mb-4 group">
+                  <div className="relative h-11 w-11 rounded-xl overflow-hidden ring-1 ring-white/10 group-hover:ring-primary/50 transition-all">
+                    <Image
+                      src="/images/logo-icon.jpg"
+                      alt=""
+                      fill
+                      className="object-cover object-right"
+                    />
                   </div>
-                  <span className="font-bold text-xl">AI Solutions</span>
+                  <div className="flex flex-col">
+                    <span className="text-lg font-bold leading-tight tracking-tight">
+                      <span className="text-primary">M2</span>
+                      <span className="text-foreground"> AI Solutions</span>
+                    </span>
+                    <span className="text-xs text-muted-foreground leading-tight">
+                      Голосовые AI-менеджеры
+                    </span>
+                  </div>
                 </Link>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  Голосовые AI-ассистенты для автоматизации продаж и обслуживания клиентов. Международная команда, офисы
-                  в Барселоне, Москве и Астане.
+                  Автоматизация продаж и обслуживания клиентов с помощью голосовых AI-ассистентов. 
+                  Международная команда с офисами в Барселоне, Москве и Астане.
                 </p>
               </div>
 
