@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X, ChevronDown } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -82,12 +83,14 @@ export function Header({ locale }: HeaderProps) {
             className="flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md"
             aria-label={t("nav.home")}
           >
-            <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
-              <span className="text-primary-foreground font-bold text-xs sm:text-sm" aria-hidden="true">
-                M2
-              </span>
-            </div>
-            <span className="font-bold text-base sm:text-lg lg:text-xl truncate">AI Solutions</span>
+            <Image
+              src="/images/logo.svg"
+              alt="M2 AI Solutions"
+              width={140}
+              height={32}
+              className="h-7 sm:h-8 w-auto"
+              priority
+            />
             <span className="text-xs text-muted-foreground font-mono ml-1">v1.22</span>
           </Link>
 

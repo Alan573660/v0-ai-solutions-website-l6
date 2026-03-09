@@ -92,6 +92,11 @@ export const metadata: Metadata = {
     },
   },
   category: "technology",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/images/logo.png",
+  },
 }
 
 export const viewport: Viewport = {
@@ -154,7 +159,7 @@ export default function RootLayout({
                 url: "https://m2solutions.ai",
                 description:
                   "Голосовые AI-ассистенты для бизнеса. Автоматизация звонков, продаж и поддержки клиентов 24/7.",
-                logo: `${BASE_URL}/logo.svg`,
+                logo: `${BASE_URL}/images/logo.svg`,
                 telephone: "+7-995-796-75-06",
                 email: "info@m2solutions.ai",
                 address: {
