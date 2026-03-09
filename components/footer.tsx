@@ -77,13 +77,13 @@ export function Footer({ locale }: FooterProps) {
             {/* Company info */}
             <div className="lg:col-span-2 space-y-6">
               <div>
-                <Link href={`/${locale}`} className="flex items-center space-x-2 mb-4">
+                <Link href={`/${locale}`} className="flex items-center mb-4">
                   <Image
                     src="/images/logo.svg"
                     alt="M2 AI Solutions"
-                    width={140}
-                    height={32}
-                    className="h-8 w-auto"
+                    width={150}
+                    height={40}
+                    className="h-9 w-auto"
                   />
                 </Link>
                 <p className="text-muted-foreground text-sm leading-relaxed">

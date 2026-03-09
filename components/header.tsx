@@ -80,18 +80,17 @@ export function Header({ locale }: HeaderProps) {
           {/* Logo */}
           <Link
             href={`/${locale}`}
-            className="flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md"
+            className="flex items-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md"
             aria-label={t("nav.home")}
           >
             <Image
               src="/images/logo.svg"
               alt="M2 AI Solutions"
               width={140}
-              height={32}
-              className="h-7 sm:h-8 w-auto"
+              height={36}
+              className="h-8 sm:h-9 w-auto"
               priority
             />
-            <span className="text-xs text-muted-foreground font-mono ml-1">v1.22</span>
           </Link>
 
           {/* Desktop Navigation */}
