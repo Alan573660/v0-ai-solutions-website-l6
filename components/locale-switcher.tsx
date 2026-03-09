@@ -22,11 +22,13 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
   }
 
   const handleLocaleChange = (newLocale: Locale) => {
+    console.log("[v0] handleLocaleChange called with:", newLocale)
     if (newLocale === currentLocale) {
       setIsOpen(false)
       return
     }
     const url = getLocaleUrl(newLocale)
+    console.log("[v0] Navigating to:", url)
     setIsOpen(false)
     router.push(url)
   }
@@ -69,7 +71,12 @@ export function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
     <div ref={dropdownRef} className="relative">
       <button
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          console.log("[v0] LocaleSwitcher clicked, isOpen:", !isOpen)
+          setIsOpen(!isOpen)
+        }}
         className="flex items-center gap-2 h-9 px-3 rounded-md text-sm font-medium hover:bg-accent/50 transition-all duration-200 border border-transparent hover:border-border/50"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
