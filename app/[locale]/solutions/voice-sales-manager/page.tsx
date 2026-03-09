@@ -95,33 +95,98 @@ export async function generateMetadata({ params }: VoiceSalesManagerPageProps): 
   }
 }
 
-// JSON-LD Structured Data
+// JSON-LD Structured Data with full i18n
 function generateJsonLd(locale: Locale) {
-  const names = {
-    ru: "Голосовой AI-менеджер по продажам",
-    en: "Voice AI Sales Manager",
-    es: "Gerente de Ventas AI por Voz",
-    de: "Sprach-KI-Vertriebsmanager",
-    nl: "Stem AI Verkoopmanager",
-    fr: "Gestionnaire des Ventes IA Vocal",
+  const data = {
+    ru: {
+      name: "Голосовой AI-менеджер по продажам",
+      description: "Автоматизация продаж с помощью голосового AI. Ведёт диалоги, делает расчёты, работает с каталогами, формирует документы и закрывает сделки 24/7.",
+      home: "Главная",
+      solutions: "Решения",
+      faq: [
+        { q: "Чем AI-менеджер отличается от обычного голосового бота?", a: "Обычные боты читают скрипты и не умеют думать. Наш AI-менеджер ведёт динамический диалог, делает расчёты, работает с базами данных и может полностью закрыть сделку." },
+        { q: "Сколько времени занимает внедрение?", a: "От нескольких недель для типовых сценариев до 4-6 месяцев для сложных enterprise-проектов. Срок зависит от интеграций и сложности бизнес-логики." },
+        { q: "Можно ли интегрировать с нашей CRM?", a: "Да, мы интегрируемся с любыми системами: Bitrix24, AmoCRM, Salesforce, HubSpot, 1C и другими." },
+        { q: "Как AI справляется со сложными расчётами?", a: "AI выполняет математические операции мгновенно: расчёт площади, объёма, стоимости с учётом коэффициентов, скидок, доставки." },
+        { q: "Это шаблонный продукт?", a: "Нет. Каждый AI-менеджер создаётся индивидуально под конкретный бизнес: обучается на ваших данных, интегрируется с вашими системами." },
+      ],
+    },
+    en: {
+      name: "Voice AI Sales Manager",
+      description: "Sales automation with voice AI. Conducts dialogues, makes calculations, works with catalogs, generates documents and closes deals 24/7.",
+      home: "Home",
+      solutions: "Solutions",
+      faq: [
+        { q: "How is the AI manager different from a regular voice bot?", a: "Regular bots read scripts and can't think. Our AI manager conducts dynamic dialogues, makes calculations, works with databases and can completely close deals." },
+        { q: "How long does implementation take?", a: "From a few weeks for standard scenarios to 4-6 months for complex enterprise projects. Timeline depends on integrations and business logic complexity." },
+        { q: "Can it integrate with our CRM?", a: "Yes, we integrate with any systems: Bitrix24, AmoCRM, Salesforce, HubSpot, SAP and others." },
+        { q: "How does AI handle complex calculations?", a: "AI performs mathematical operations instantly: area, volume, cost calculations with coefficients, discounts, delivery." },
+        { q: "Is this a template product?", a: "No. Each AI manager is created individually for a specific business: trained on your data, integrated with your systems." },
+      ],
+    },
+    es: {
+      name: "Gerente de Ventas AI por Voz",
+      description: "Automatización de ventas con IA de voz. Conduce diálogos, hace cálculos, trabaja con catálogos, genera documentos y cierra ventas 24/7.",
+      home: "Inicio",
+      solutions: "Soluciones",
+      faq: [
+        { q: "¿En qué se diferencia el gerente IA de un bot de voz común?", a: "Los bots comunes leen guiones y no pueden pensar. Nuestro gerente IA conduce diálogos dinámicos, hace cálculos, trabaja con bases de datos y puede cerrar ventas completamente." },
+        { q: "¿Cuánto tiempo toma la implementación?", a: "Desde unas semanas para escenarios estándar hasta 4-6 meses para proyectos enterprise complejos." },
+        { q: "¿Se puede integrar con nuestro CRM?", a: "Sí, nos integramos con cualquier sistema: Bitrix24, AmoCRM, Salesforce, HubSpot, SAP y otros." },
+        { q: "¿Cómo maneja la IA cálculos complejos?", a: "La IA realiza operaciones matemáticas instantáneamente: cálculos de área, volumen, costo con coeficientes, descuentos, entrega." },
+        { q: "¿Es un producto de plantilla?", a: "No. Cada gerente IA se crea individualmente para un negocio específico: entrenado con sus datos, integrado con sus sistemas." },
+      ],
+    },
+    de: {
+      name: "Sprach-KI-Vertriebsmanager",
+      description: "Vertriebsautomatisierung mit Sprach-KI. Führt Dialoge, macht Berechnungen, arbeitet mit Katalogen, erstellt Dokumente und schließt Geschäfte 24/7.",
+      home: "Startseite",
+      solutions: "Lösungen",
+      faq: [
+        { q: "Wie unterscheidet sich der KI-Manager von einem gewöhnlichen Sprachbot?", a: "Gewöhnliche Bots lesen Skripte und können nicht denken. Unser KI-Manager führt dynamische Dialoge, macht Berechnungen, arbeitet mit Datenbanken und kann Geschäfte vollständig abschließen." },
+        { q: "Wie lange dauert die Implementierung?", a: "Von wenigen Wochen für Standardszenarien bis 4-6 Monate für komplexe Enterprise-Projekte." },
+        { q: "Kann es mit unserem CRM integriert werden?", a: "Ja, wir integrieren mit allen Systemen: Bitrix24, Salesforce, HubSpot, SAP und anderen." },
+        { q: "Wie geht KI mit komplexen Berechnungen um?", a: "KI führt mathematische Operationen sofort durch: Flächen-, Volumen-, Kostenberechnungen mit Koeffizienten, Rabatten, Lieferung." },
+        { q: "Ist das ein Vorlagenprodukt?", a: "Nein. Jeder KI-Manager wird individuell für ein bestimmtes Unternehmen erstellt: mit Ihren Daten trainiert, mit Ihren Systemen integriert." },
+      ],
+    },
+    nl: {
+      name: "Stem AI Verkoopmanager",
+      description: "Verkoopautomatisering met stem-AI. Voert dialogen, maakt berekeningen, werkt met catalogi, genereert documenten en sluit deals 24/7.",
+      home: "Home",
+      solutions: "Oplossingen",
+      faq: [
+        { q: "Hoe verschilt de AI-manager van een gewone stembot?", a: "Gewone bots lezen scripts en kunnen niet denken. Onze AI-manager voert dynamische dialogen, maakt berekeningen, werkt met databases en kan deals volledig sluiten." },
+        { q: "Hoe lang duurt de implementatie?", a: "Van enkele weken voor standaardscenario's tot 4-6 maanden voor complexe enterprise-projecten." },
+        { q: "Kan het integreren met ons CRM?", a: "Ja, we integreren met alle systemen: Bitrix24, Salesforce, HubSpot, SAP en andere." },
+        { q: "Hoe gaat AI om met complexe berekeningen?", a: "AI voert wiskundige operaties direct uit: oppervlakte-, volume-, kostenberekeningen met coëfficiënten, kortingen, levering." },
+        { q: "Is dit een sjabloonproduct?", a: "Nee. Elke AI-manager wordt individueel gemaakt voor een specifiek bedrijf: getraind met uw data, geïntegreerd met uw systemen." },
+      ],
+    },
+    fr: {
+      name: "Gestionnaire des Ventes IA Vocal",
+      description: "Automatisation des ventes avec IA vocale. Mène des dialogues, fait des calculs, travaille avec les catalogues, génère des documents et conclut des ventes 24/7.",
+      home: "Accueil",
+      solutions: "Solutions",
+      faq: [
+        { q: "Comment le gestionnaire IA diffère-t-il d'un bot vocal ordinaire?", a: "Les bots ordinaires lisent des scripts et ne peuvent pas penser. Notre gestionnaire IA mène des dialogues dynamiques, fait des calculs, travaille avec des bases de données et peut conclure des affaires complètement." },
+        { q: "Combien de temps prend l'implémentation?", a: "De quelques semaines pour les scénarios standard à 4-6 mois pour les projets enterprise complexes." },
+        { q: "Peut-il s'intégrer avec notre CRM?", a: "Oui, nous nous intégrons avec tous les systèmes: Bitrix24, Salesforce, HubSpot, SAP et autres." },
+        { q: "Comment l'IA gère-t-elle les calculs complexes?", a: "L'IA effectue les opérations mathématiques instantanément: calculs de surface, volume, coût avec coefficients, remises, livraison." },
+        { q: "Est-ce un produit modèle?", a: "Non. Chaque gestionnaire IA est créé individuellement pour une entreprise spécifique: entraîné sur vos données, intégré à vos systèmes." },
+      ],
+    },
   }
 
-  const descriptions = {
-    ru: "Автоматизация продаж с помощью голосового AI. Квалификация лидов, презентация продуктов, расчет стоимости и выставление счетов 24/7.",
-    en: "Sales automation with voice AI. Lead qualification, product presentation, cost calculation and invoicing 24/7.",
-    es: "Automatización de ventas con IA de voz. Calificación de leads, presentación de productos, cálculo de costos y facturación 24/7.",
-    de: "Vertriebsautomatisierung mit Sprach-KI. Lead-Qualifizierung, Produktpräsentation, Kostenberechnung und Rechnungsstellung 24/7.",
-    nl: "Verkoopautomatisering met stem-AI. Lead-kwalificatie, productpresentatie, kostenberekening en facturering 24/7.",
-    fr: "Automatisation des ventes avec IA vocale. Qualification des prospects, présentation des produits, calcul des coûts et facturation 24/7.",
-  }
+  const d = data[locale] || data.ru
 
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Product",
-        name: names[locale],
-        description: descriptions[locale],
+        name: d.name,
+        description: d.description,
         brand: {
           "@type": "Brand",
           name: "M2 AI Solutions",
@@ -143,7 +208,7 @@ function generateJsonLd(locale: Locale) {
       },
       {
         "@type": "SoftwareApplication",
-        name: names[locale],
+        name: d.name,
         applicationCategory: "BusinessApplication",
         operatingSystem: "Cloud",
         offers: {
@@ -159,38 +224,14 @@ function generateJsonLd(locale: Locale) {
       },
       {
         "@type": "FAQPage",
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: locale === "ru" ? "Как быстро можно запустить AI-менеджера?" : "How quickly can you launch the AI manager?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: locale === "ru" 
-                ? "Базовая настройка занимает 2-3 дня. Полная интеграция с CRM и обучение на ваших скриптах - 1-2 недели."
-                : "Basic setup takes 2-3 days. Full CRM integration and training on your scripts - 1-2 weeks.",
-            },
+        mainEntity: d.faq.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.a,
           },
-          {
-            "@type": "Question",
-            name: locale === "ru" ? "Сколько звонков может обработать AI одновременно?" : "How many calls can AI handle simultaneously?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: locale === "ru"
-                ? "Неограниченное количество. AI масштабируется автоматически под любую нагрузку."
-                : "Unlimited. AI scales automatically for any load.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: locale === "ru" ? "Можно ли интегрировать с нашей CRM?" : "Can it integrate with our CRM?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: locale === "ru"
-                ? "Да, поддерживаем интеграцию с Bitrix24, AmoCRM, Salesforce, HubSpot и любыми CRM через API."
-                : "Yes, we support integration with Bitrix24, AmoCRM, Salesforce, HubSpot and any CRM via API.",
-            },
-          },
-        ],
+        })),
       },
       {
         "@type": "BreadcrumbList",
@@ -198,22 +239,38 @@ function generateJsonLd(locale: Locale) {
           {
             "@type": "ListItem",
             position: 1,
-            name: locale === "ru" ? "Главная" : "Home",
+            name: d.home,
             item: `${BASE_URL}/${locale}`,
           },
           {
             "@type": "ListItem",
             position: 2,
-            name: locale === "ru" ? "Решения" : "Solutions",
+            name: d.solutions,
             item: `${BASE_URL}/${locale}/solutions`,
           },
           {
             "@type": "ListItem",
             position: 3,
-            name: names[locale],
+            name: d.name,
             item: `${BASE_URL}/${locale}/solutions/voice-sales-manager`,
           },
         ],
+      },
+      {
+        "@type": "Organization",
+        name: "M2 AI Solutions",
+        url: BASE_URL,
+        logo: `${BASE_URL}/images/logo.svg`,
+        sameAs: [
+          "https://www.linkedin.com/company/m2-ai-solutions",
+          "https://t.me/m2solutions",
+        ],
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: "+34-XXX-XXX-XXX",
+          contactType: "sales",
+          availableLanguage: ["Russian", "English", "Spanish", "German", "Dutch", "French"],
+        },
       },
     ],
   }
