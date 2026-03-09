@@ -168,7 +168,7 @@ const translations = {
         {
           icon: "truck",
           title: "Рассчитывает доставку",
-          desc: "Определяет вес заказа, длину материалов, подбирает подходящий транспорт, рассчитывает стоимость доставки и предлагает оптимальный вариант клиенту.",
+          desc: "Определяет вес заказа, длину материалов, подбирает подход��щий транспорт, рассчитывает стоимость доставки и предлагает оптимальный вариант клиенту.",
         },
         {
           icon: "fileText",
@@ -217,17 +217,7 @@ const translations = {
         { icon: "messageSquare", title: "Слой синтеза", desc: "Естественный голос, правильные интонации, паузы и эмоции" },
       ],
     },
-    integrations: {
-      label: "Интеграции",
-      title: "Работает с вашими системами",
-      subtitle: "AI-менеджер интегрируется с любой инфраструктурой",
-      categories: [
-        { title: "CRM системы", items: ["Bitrix24", "AmoCRM", "Salesforce", "HubSpot", "1C:CRM"] },
-        { title: "Учётные системы", items: ["1C:Предприятие", "SAP", "Oracle", "Microsoft Dynamics"] },
-        { title: "Телефония", items: ["Asterisk", "Mango Office", "Билайн", "МТТ", "Zadarma"] },
-        { title: "Склад и логистика", items: ["МойСклад", "СДЭК", "Деловые Линии", "Яндекс.Доставка"] },
-      ],
-    },
+
     industries: {
       label: "Для кого подходит",
       title: "Отрасли и сценарии",
@@ -307,8 +297,8 @@ const translations = {
           a: "От нескольких недель для типовых сценариев до 4-6 месяцев для сложных enterprise-проектов. Срок зависит от количества интеграций, сложности бизнес-логики и объёма обучающих данных.",
         },
         {
-          q: "Можно ли интегрировать с нашей CRM?",
-          a: "Да, мы интегрируемся с любыми системами: Bitrix24, AmoCRM, Salesforce, HubSpot, 1C и другими. Также работаем с ERP, складскими системами, бухгалтерией и телефонией.",
+          q: "Можно ли интегрировать с нашей системой?",
+          a: "Да, мы интегрируемся с любыми системами, у которых есть API: CRM, ERP, складскими системами, бухгалтерией и телефонией. Если у вашей системы есть API — мы с ней работаем.",
         },
         {
           q: "Как AI справляется со сложными расчётами?",
@@ -450,17 +440,7 @@ const translations = {
         { icon: "messageSquare", title: "Synthesis layer", desc: "Natural voice, correct intonations, pauses, and emotions" },
       ],
     },
-    integrations: {
-      label: "Integrations",
-      title: "Works with your systems",
-      subtitle: "The AI manager integrates with any infrastructure",
-      categories: [
-        { title: "CRM systems", items: ["Bitrix24", "AmoCRM", "Salesforce", "HubSpot", "Pipedrive"] },
-        { title: "ERP systems", items: ["SAP", "Oracle", "Microsoft Dynamics", "NetSuite"] },
-        { title: "Telephony", items: ["Asterisk", "Twilio", "Vonage", "RingCentral", "Genesys"] },
-        { title: "Warehouse & Logistics", items: ["ShipStation", "Shippo", "FedEx", "UPS", "DHL"] },
-      ],
-    },
+
     industries: {
       label: "Who it's for",
       title: "Industries and scenarios",
@@ -540,8 +520,8 @@ const translations = {
           a: "From a few weeks for standard scenarios to 4-6 months for complex enterprise projects. The timeline depends on the number of integrations, business logic complexity, and training data volume.",
         },
         {
-          q: "Can it integrate with our CRM?",
-          a: "Yes, we integrate with any systems: Bitrix24, AmoCRM, Salesforce, HubSpot, SAP, and others. We also work with ERP, warehouse systems, accounting, and telephony.",
+          q: "Can it integrate with our system?",
+          a: "Yes, we integrate with any systems that have an API: CRM, ERP, warehouse systems, accounting, and telephony. If your system has an API — we work with it.",
         },
         {
           q: "How does AI handle complex calculations?",
@@ -683,17 +663,7 @@ const translations = {
         { icon: "messageSquare", title: "Capa de síntesis", desc: "Voz natural, entonaciones correctas, pausas y emociones" },
       ],
     },
-    integrations: {
-      label: "Integraciones",
-      title: "Funciona con sus sistemas",
-      subtitle: "El gerente IA se integra con cualquier infraestructura",
-      categories: [
-        { title: "Sistemas CRM", items: ["Bitrix24", "AmoCRM", "Salesforce", "HubSpot", "Pipedrive"] },
-        { title: "Sistemas ERP", items: ["SAP", "Oracle", "Microsoft Dynamics", "NetSuite"] },
-        { title: "Telefonía", items: ["Asterisk", "Twilio", "Vonage", "RingCentral", "Genesys"] },
-        { title: "Almacén y Logística", items: ["ShipStation", "Shippo", "FedEx", "UPS", "DHL"] },
-      ],
-    },
+
     industries: {
       label: "Para quién es",
       title: "Industrias y escenarios",
@@ -774,7 +744,7 @@ const translations = {
         },
         {
           q: "¿Se puede integrar con nuestro CRM?",
-          a: "Sí, nos integramos con cualquier sistema: Bitrix24, AmoCRM, Salesforce, HubSpot, SAP y otros. También trabajamos con ERP, sistemas de almacén, contabilidad y telefonía.",
+          a: "Sí, nos integramos con cualquier sistema que tenga API: CRM, ERP, sistemas de almacén, contabilidad y telefonía. Si su sistema tiene API — trabajamos con él.",
         },
         {
           q: "¿Cómo maneja la IA cálculos complejos?",
@@ -916,17 +886,7 @@ const translations = {
         { icon: "messageSquare", title: "Syntheseschicht", desc: "Natürliche Stimme, korrekte Intonationen, Pausen und Emotionen" },
       ],
     },
-    integrations: {
-      label: "Integrationen",
-      title: "Funktioniert mit Ihren Systemen",
-      subtitle: "Der KI-Manager integriert sich mit jeder Infrastruktur",
-      categories: [
-        { title: "CRM-Systeme", items: ["Bitrix24", "Salesforce", "HubSpot", "Pipedrive", "SAP CRM"] },
-        { title: "ERP-Systeme", items: ["SAP", "Oracle", "Microsoft Dynamics", "NetSuite"] },
-        { title: "Telefonie", items: ["Asterisk", "Twilio", "Sipgate", "Placetel", "Genesys"] },
-        { title: "Lager & Logistik", items: ["SAP WM", "DHL", "UPS", "FedEx", "Hermes"] },
-      ],
-    },
+
     industries: {
       label: "Für wen es ist",
       title: "Branchen und Szenarien",
@@ -1007,7 +967,7 @@ const translations = {
         },
         {
           q: "Kann es mit unserem CRM integriert werden?",
-          a: "Ja, wir integrieren mit allen Systemen: Bitrix24, Salesforce, HubSpot, SAP und anderen. Wir arbeiten auch mit ERP, Lagersystemen, Buchhaltung und Telefonie.",
+          a: "Ja, wir integrieren mit allen Systemen, die eine API haben: CRM, ERP, Lagersystemen, Buchhaltung und Telefonie. Wenn Ihr System eine API hat — arbeiten wir damit.",
         },
         {
           q: "Wie geht KI mit komplexen Berechnungen um?",
@@ -1149,17 +1109,7 @@ const translations = {
         { icon: "messageSquare", title: "Syntheselaag", desc: "Natuurlijke stem, correcte intonaties, pauzes en emoties" },
       ],
     },
-    integrations: {
-      label: "Integraties",
-      title: "Werkt met uw systemen",
-      subtitle: "De AI-manager integreert met elke infrastructuur",
-      categories: [
-        { title: "CRM-systemen", items: ["Bitrix24", "Salesforce", "HubSpot", "Pipedrive", "Microsoft Dynamics"] },
-        { title: "ERP-systemen", items: ["SAP", "Oracle", "Microsoft Dynamics", "NetSuite"] },
-        { title: "Telefonie", items: ["Asterisk", "Twilio", "Vonage", "RingCentral", "Genesys"] },
-        { title: "Magazijn & Logistiek", items: ["ShipStation", "PostNL", "DHL", "UPS", "FedEx"] },
-      ],
-    },
+
     industries: {
       label: "Voor wie het is",
       title: "Industrieën en scenario's",
@@ -1240,7 +1190,7 @@ const translations = {
         },
         {
           q: "Kan het integreren met ons CRM?",
-          a: "Ja, we integreren met alle systemen: Bitrix24, Salesforce, HubSpot, SAP en andere. We werken ook met ERP, magazijnsystemen, boekhouding en telefonie.",
+          a: "Ja, we integreren met alle systemen die een API hebben: CRM, ERP, magazijnsystemen, boekhouding en telefonie. Als uw systeem een API heeft — werken we ermee.",
         },
         {
           q: "Hoe gaat AI om met complexe berekeningen?",
@@ -1382,17 +1332,7 @@ const translations = {
         { icon: "messageSquare", title: "Couche synthèse", desc: "Voix naturelle, intonations correctes, pauses et émotions" },
       ],
     },
-    integrations: {
-      label: "Intégrations",
-      title: "Fonctionne avec vos systèmes",
-      subtitle: "Le gestionnaire IA s'intègre avec toute infrastructure",
-      categories: [
-        { title: "Systèmes CRM", items: ["Bitrix24", "Salesforce", "HubSpot", "Pipedrive", "Microsoft Dynamics"] },
-        { title: "Systèmes ERP", items: ["SAP", "Oracle", "Microsoft Dynamics", "NetSuite"] },
-        { title: "Téléphonie", items: ["Asterisk", "Twilio", "Vonage", "RingCentral", "Genesys"] },
-        { title: "Entrepôt & Logistique", items: ["ShipStation", "Chronopost", "DHL", "UPS", "FedEx"] },
-      ],
-    },
+
     industries: {
       label: "Pour qui c'est",
       title: "Industries et scénarios",
@@ -1473,7 +1413,7 @@ const translations = {
         },
         {
           q: "Peut-il s'intégrer avec notre CRM ?",
-          a: "Oui, nous nous intégrons avec tous les systèmes : Bitrix24, Salesforce, HubSpot, SAP et autres. Nous travaillons aussi avec ERP, systèmes d'entrepôt, comptabilité et téléphonie.",
+          a: "Oui, nous nous intégrons avec tous les systèmes qui ont une API : CRM, ERP, systèmes d'entrepôt, comptabilité et téléphonie. Si votre système a une API — nous travaillons avec.",
         },
         {
           q: "Comment l'IA gère-t-elle les calculs complexes ?",
@@ -1789,32 +1729,6 @@ export function VoiceSalesManagerClientPage({ locale }: Props) {
                       </li>
                     ))}
                   </ul>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ==================== Integrations ==================== */}
-      <section className="py-20 sm:py-28 bg-muted/30">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="text-center mb-14">
-            <Label>{t.integrations.label}</Label>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4">{t.integrations.title}</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">{t.integrations.subtitle}</p>
-          </Reveal>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {t.integrations.categories.map((category, i) => (
-              <Reveal key={i} delay={i * 100}>
-                <div className="bg-card border border-border/50 rounded-2xl p-6 h-full">
-                  <h3 className="font-semibold mb-4">{category.title}</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {category.items.map((item, j) => (
-                      <Badge key={j} variant="secondary" className="text-xs">{item}</Badge>
-                    ))}
-                  </div>
                 </div>
               </Reveal>
             ))}

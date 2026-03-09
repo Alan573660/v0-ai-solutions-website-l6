@@ -106,7 +106,7 @@ function generateJsonLd(locale: Locale) {
       faq: [
         { q: "Чем AI-менеджер отличается от обычного голосового бота?", a: "Обычные боты читают скрипты и не умеют думать. Наш AI-менеджер ведёт динамический диалог, делает расчёты, работает с базами данных и может полностью закрыть сделку." },
         { q: "Сколько времени занимает внедрение?", a: "От нескольких недель для типовых сценариев до 4-6 месяцев для сложных enterprise-проектов. Срок зависит от интеграций и сложности бизнес-логики." },
-        { q: "Можно ли интегрировать с нашей CRM?", a: "Да, мы интегрируемся с любыми системами: Bitrix24, AmoCRM, Salesforce, HubSpot, 1C и другими." },
+        { q: "Можно ли интегрировать с нашей системой?", a: "Да, мы интегрируемся с любыми системами, у которых есть API: CRM, ERP, складскими системами, бухгалтерией и телефонией." },
         { q: "Как AI справляется со сложными расчётами?", a: "AI выполняет математические операции мгновенно: расчёт площади, объёма, стоимости с учётом коэффициентов, скидок, доставки." },
         { q: "Это шаблонный продукт?", a: "Нет. Каждый AI-менеджер создаётся индивидуально под конкретный бизнес: обучается на ваших данных, интегрируется с вашими системами." },
       ],
@@ -119,7 +119,7 @@ function generateJsonLd(locale: Locale) {
       faq: [
         { q: "How is the AI manager different from a regular voice bot?", a: "Regular bots read scripts and can't think. Our AI manager conducts dynamic dialogues, makes calculations, works with databases and can completely close deals." },
         { q: "How long does implementation take?", a: "From a few weeks for standard scenarios to 4-6 months for complex enterprise projects. Timeline depends on integrations and business logic complexity." },
-        { q: "Can it integrate with our CRM?", a: "Yes, we integrate with any systems: Bitrix24, AmoCRM, Salesforce, HubSpot, SAP and others." },
+        { q: "Can it integrate with our system?", a: "Yes, we integrate with any systems that have an API: CRM, ERP, warehouse systems, accounting, and telephony." },
         { q: "How does AI handle complex calculations?", a: "AI performs mathematical operations instantly: area, volume, cost calculations with coefficients, discounts, delivery." },
         { q: "Is this a template product?", a: "No. Each AI manager is created individually for a specific business: trained on your data, integrated with your systems." },
       ],
@@ -132,7 +132,7 @@ function generateJsonLd(locale: Locale) {
       faq: [
         { q: "¿En qué se diferencia el gerente IA de un bot de voz común?", a: "Los bots comunes leen guiones y no pueden pensar. Nuestro gerente IA conduce diálogos dinámicos, hace cálculos, trabaja con bases de datos y puede cerrar ventas completamente." },
         { q: "¿Cuánto tiempo toma la implementación?", a: "Desde unas semanas para escenarios estándar hasta 4-6 meses para proyectos enterprise complejos." },
-        { q: "¿Se puede integrar con nuestro CRM?", a: "Sí, nos integramos con cualquier sistema: Bitrix24, AmoCRM, Salesforce, HubSpot, SAP y otros." },
+        { q: "¿Se puede integrar con nuestro sistema?", a: "Sí, nos integramos con cualquier sistema que tenga API: CRM, ERP, sistemas de almacén, contabilidad y telefonía." },
         { q: "¿Cómo maneja la IA cálculos complejos?", a: "La IA realiza operaciones matemáticas instantáneamente: cálculos de área, volumen, costo con coeficientes, descuentos, entrega." },
         { q: "¿Es un producto de plantilla?", a: "No. Cada gerente IA se crea individualmente para un negocio específico: entrenado con sus datos, integrado con sus sistemas." },
       ],
@@ -145,7 +145,7 @@ function generateJsonLd(locale: Locale) {
       faq: [
         { q: "Wie unterscheidet sich der KI-Manager von einem gewöhnlichen Sprachbot?", a: "Gewöhnliche Bots lesen Skripte und können nicht denken. Unser KI-Manager führt dynamische Dialoge, macht Berechnungen, arbeitet mit Datenbanken und kann Geschäfte vollständig abschließen." },
         { q: "Wie lange dauert die Implementierung?", a: "Von wenigen Wochen für Standardszenarien bis 4-6 Monate für komplexe Enterprise-Projekte." },
-        { q: "Kann es mit unserem CRM integriert werden?", a: "Ja, wir integrieren mit allen Systemen: Bitrix24, Salesforce, HubSpot, SAP und anderen." },
+        { q: "Kann es mit unserem System integriert werden?", a: "Ja, wir integrieren mit allen Systemen, die eine API haben: CRM, ERP, Lagersystemen, Buchhaltung und Telefonie." },
         { q: "Wie geht KI mit komplexen Berechnungen um?", a: "KI führt mathematische Operationen sofort durch: Flächen-, Volumen-, Kostenberechnungen mit Koeffizienten, Rabatten, Lieferung." },
         { q: "Ist das ein Vorlagenprodukt?", a: "Nein. Jeder KI-Manager wird individuell für ein bestimmtes Unternehmen erstellt: mit Ihren Daten trainiert, mit Ihren Systemen integriert." },
       ],
@@ -158,7 +158,7 @@ function generateJsonLd(locale: Locale) {
       faq: [
         { q: "Hoe verschilt de AI-manager van een gewone stembot?", a: "Gewone bots lezen scripts en kunnen niet denken. Onze AI-manager voert dynamische dialogen, maakt berekeningen, werkt met databases en kan deals volledig sluiten." },
         { q: "Hoe lang duurt de implementatie?", a: "Van enkele weken voor standaardscenario's tot 4-6 maanden voor complexe enterprise-projecten." },
-        { q: "Kan het integreren met ons CRM?", a: "Ja, we integreren met alle systemen: Bitrix24, Salesforce, HubSpot, SAP en andere." },
+        { q: "Kan het integreren met ons systeem?", a: "Ja, we integreren met alle systemen die een API hebben: CRM, ERP, magazijnsystemen, boekhouding en telefonie." },
         { q: "Hoe gaat AI om met complexe berekeningen?", a: "AI voert wiskundige operaties direct uit: oppervlakte-, volume-, kostenberekeningen met coëfficiënten, kortingen, levering." },
         { q: "Is dit een sjabloonproduct?", a: "Nee. Elke AI-manager wordt individueel gemaakt voor een specifiek bedrijf: getraind met uw data, geïntegreerd met uw systemen." },
       ],
@@ -171,7 +171,7 @@ function generateJsonLd(locale: Locale) {
       faq: [
         { q: "Comment le gestionnaire IA diffère-t-il d'un bot vocal ordinaire?", a: "Les bots ordinaires lisent des scripts et ne peuvent pas penser. Notre gestionnaire IA mène des dialogues dynamiques, fait des calculs, travaille avec des bases de données et peut conclure des affaires complètement." },
         { q: "Combien de temps prend l'implémentation?", a: "De quelques semaines pour les scénarios standard à 4-6 mois pour les projets enterprise complexes." },
-        { q: "Peut-il s'intégrer avec notre CRM?", a: "Oui, nous nous intégrons avec tous les systèmes: Bitrix24, Salesforce, HubSpot, SAP et autres." },
+        { q: "Peut-il s'intégrer avec notre système?", a: "Oui, nous nous intégrons avec tous les systèmes qui ont une API: CRM, ERP, systèmes d'entrepôt, comptabilité et téléphonie." },
         { q: "Comment l'IA gère-t-elle les calculs complexes?", a: "L'IA effectue les opérations mathématiques instantanément: calculs de surface, volume, coût avec coefficients, remises, livraison." },
         { q: "Est-ce un produit modèle?", a: "Non. Chaque gestionnaire IA est créé individuellement pour une entreprise spécifique: entraîné sur vos données, intégré à vos systèmes." },
       ],
