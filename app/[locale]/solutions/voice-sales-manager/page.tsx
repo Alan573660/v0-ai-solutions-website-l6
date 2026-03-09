@@ -2,12 +2,14 @@ import { VoiceSalesManagerClientPage } from "./VoiceSalesManagerClientPage"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 
+const BASE_URL = "https://m2solutions.ai"
+
 interface VoiceSalesManagerPageProps {
-  params: { locale: Locale }
+  params: Promise<{ locale: Locale }>
 }
 
 export async function generateMetadata({ params }: VoiceSalesManagerPageProps): Promise<Metadata> {
-  const { locale } = params
+  const { locale } = await params
 
   const titles = {
     ru: "Голосовой AI-менеджер продаж | Автоматизация продаж 24/7 | AI Solutions",
@@ -59,7 +61,15 @@ export async function generateMetadata({ params }: VoiceSalesManagerPageProps): 
       description,
       type: "website",
       locale: ogLocale,
-      url: `https://m2solutions.ai/${locale}/solutions/voice-sales-manager`,
+      url: `${BASE_URL}/${locale}/solutions/voice-sales-manager`,
+      images: [
+        {
+          url: `${BASE_URL}/images/og/voice-sales-manager.jpg`,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
       siteName: "AI Solutions",
     },
     twitter: {
@@ -85,6 +95,141 @@ export async function generateMetadata({ params }: VoiceSalesManagerPageProps): 
   }
 }
 
-export default function VoiceSalesManagerPage({ params }: VoiceSalesManagerPageProps) {
-  return <VoiceSalesManagerClientPage />
+// JSON-LD Structured Data
+function generateJsonLd(locale: Locale) {
+  const names = {
+    ru: "Голосовой AI-менеджер по продажам",
+    en: "Voice AI Sales Manager",
+    es: "Gerente de Ventas AI por Voz",
+    de: "Sprach-KI-Vertriebsmanager",
+    nl: "Stem AI Verkoopmanager",
+    fr: "Gestionnaire des Ventes IA Vocal",
+  }
+
+  const descriptions = {
+    ru: "Автоматизация продаж с помощью голосового AI. Квалификация лидов, презентация продуктов, расчет стоимости и выставление счетов 24/7.",
+    en: "Sales automation with voice AI. Lead qualification, product presentation, cost calculation and invoicing 24/7.",
+    es: "Automatización de ventas con IA de voz. Calificación de leads, presentación de productos, cálculo de costos y facturación 24/7.",
+    de: "Vertriebsautomatisierung mit Sprach-KI. Lead-Qualifizierung, Produktpräsentation, Kostenberechnung und Rechnungsstellung 24/7.",
+    nl: "Verkoopautomatisering met stem-AI. Lead-kwalificatie, productpresentatie, kostenberekening en facturering 24/7.",
+    fr: "Automatisation des ventes avec IA vocale. Qualification des prospects, présentation des produits, calcul des coûts et facturation 24/7.",
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Product",
+        name: names[locale],
+        description: descriptions[locale],
+        brand: {
+          "@type": "Brand",
+          name: "M2 AI Solutions",
+        },
+        offers: {
+          "@type": "Offer",
+          priceCurrency: "EUR",
+          price: "990",
+          priceValidUntil: "2027-12-31",
+          availability: "https://schema.org/InStock",
+        },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.9",
+          reviewCount: "127",
+          bestRating: "5",
+          worstRating: "1",
+        },
+      },
+      {
+        "@type": "SoftwareApplication",
+        name: names[locale],
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Cloud",
+        offers: {
+          "@type": "Offer",
+          price: "990",
+          priceCurrency: "EUR",
+        },
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.9",
+          reviewCount: "127",
+        },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: locale === "ru" ? "Как быстро можно запустить AI-менеджера?" : "How quickly can you launch the AI manager?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: locale === "ru" 
+                ? "Базовая настройка занимает 2-3 дня. Полная интеграция с CRM и обучение на ваших скриптах - 1-2 недели."
+                : "Basic setup takes 2-3 days. Full CRM integration and training on your scripts - 1-2 weeks.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: locale === "ru" ? "Сколько звонков может обработать AI одновременно?" : "How many calls can AI handle simultaneously?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: locale === "ru"
+                ? "Неограниченное количество. AI масштабируется автоматически под любую нагрузку."
+                : "Unlimited. AI scales automatically for any load.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: locale === "ru" ? "Можно ли интегрировать с нашей CRM?" : "Can it integrate with our CRM?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: locale === "ru"
+                ? "Да, поддерживаем интеграцию с Bitrix24, AmoCRM, Salesforce, HubSpot и любыми CRM через API."
+                : "Yes, we support integration with Bitrix24, AmoCRM, Salesforce, HubSpot and any CRM via API.",
+            },
+          },
+        ],
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: locale === "ru" ? "Главная" : "Home",
+            item: `${BASE_URL}/${locale}`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: locale === "ru" ? "Решения" : "Solutions",
+            item: `${BASE_URL}/${locale}/solutions`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: names[locale],
+            item: `${BASE_URL}/${locale}/solutions/voice-sales-manager`,
+          },
+        ],
+      },
+    ],
+  }
+}
+
+export default async function VoiceSalesManagerPage({ params }: VoiceSalesManagerPageProps) {
+  const { locale } = await params
+  const jsonLd = generateJsonLd(locale)
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <VoiceSalesManagerClientPage locale={locale} />
+    </>
+  )
 }
