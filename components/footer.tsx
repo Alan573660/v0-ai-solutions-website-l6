@@ -3,7 +3,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { MapPin, Phone, Mail, Globe } from "lucide-react"
-import { useTranslations } from "@/lib/i18n/translations"
 import type { Locale } from "@/lib/i18n/config"
 import { MessengerLinks } from "@/components/messenger-links"
 
@@ -11,61 +10,319 @@ interface FooterProps {
   locale: Locale
 }
 
+// Footer translations
+const footerTranslations = {
+  ru: {
+    tagline: "Голосовые AI-менеджеры",
+    description: "Автоматизация продаж и обслуживания клиентов с помощью голосовых AI-ассистентов. Международная команда с офисами в Барселоне, Москве и Астане.",
+    workWorldwide: "Работаем по всему миру",
+    solutions: "Решения",
+    company: "Компания",
+    resources: "Ресурсы",
+    legal: "Правовая информация",
+    offices: "Наши офисы",
+    solutionsList: {
+      voiceSales: "Голосовой AI-менеджер",
+      hotelConcierge: "AI-консьерж для отелей",
+      smb: "Для малого бизнеса",
+      enterprise: "Enterprise решения",
+      custom: "Индивидуальные решения",
+      smartHome: "Умный дом на базе ИИ",
+    },
+    companyList: {
+      about: "О компании",
+      team: "Команда",
+      careers: "Карьера",
+      partners: "Партнёрам",
+      blog: "Блог",
+    },
+    resourcesList: {
+      docs: "Документация",
+      knowledgeBase: "База знаний",
+      faq: "FAQ",
+      support: "Поддержка",
+      status: "Статус системы",
+    },
+    legalList: {
+      privacy: "Политика конфиденциальности",
+      terms: "Условия использования",
+      dpa: "Соглашение об обработке данных",
+      cookies: "Cookies",
+    },
+    officesList: {
+      barcelona: { city: "Барселона", country: "Испания" },
+      astana: { city: "Астана", country: "Казахстан" },
+      moscow: { city: "Москва", country: "Россия" },
+    },
+    copyright: "M2 AI Solutions. Все права защищены.",
+    privacyShort: "Конфиденциальность",
+    termsShort: "Условия",
+  },
+  en: {
+    tagline: "Voice AI Managers",
+    description: "Sales and customer service automation with voice AI assistants. International team with offices in Barcelona, Moscow and Astana.",
+    workWorldwide: "We work worldwide",
+    solutions: "Solutions",
+    company: "Company",
+    resources: "Resources",
+    legal: "Legal",
+    offices: "Our Offices",
+    solutionsList: {
+      voiceSales: "Voice AI Sales Manager",
+      hotelConcierge: "AI Hotel Concierge",
+      smb: "For Small Business",
+      enterprise: "Enterprise Solutions",
+      custom: "Custom Solutions",
+      smartHome: "AI Smart Home",
+    },
+    companyList: {
+      about: "About Us",
+      team: "Team",
+      careers: "Careers",
+      partners: "Partners",
+      blog: "Blog",
+    },
+    resourcesList: {
+      docs: "Documentation",
+      knowledgeBase: "Knowledge Base",
+      faq: "FAQ",
+      support: "Support",
+      status: "System Status",
+    },
+    legalList: {
+      privacy: "Privacy Policy",
+      terms: "Terms of Service",
+      dpa: "Data Processing Agreement",
+      cookies: "Cookies",
+    },
+    officesList: {
+      barcelona: { city: "Barcelona", country: "Spain" },
+      astana: { city: "Astana", country: "Kazakhstan" },
+      moscow: { city: "Moscow", country: "Russia" },
+    },
+    copyright: "M2 AI Solutions. All rights reserved.",
+    privacyShort: "Privacy",
+    termsShort: "Terms",
+  },
+  es: {
+    tagline: "Gerentes de IA por Voz",
+    description: "Automatización de ventas y atención al cliente con asistentes de IA de voz. Equipo internacional con oficinas en Barcelona, Moscú y Astaná.",
+    workWorldwide: "Trabajamos en todo el mundo",
+    solutions: "Soluciones",
+    company: "Empresa",
+    resources: "Recursos",
+    legal: "Legal",
+    offices: "Nuestras Oficinas",
+    solutionsList: {
+      voiceSales: "Gerente de Ventas IA",
+      hotelConcierge: "Conserje IA para Hoteles",
+      smb: "Para Pequeñas Empresas",
+      enterprise: "Soluciones Enterprise",
+      custom: "Soluciones Personalizadas",
+      smartHome: "Casa Inteligente con IA",
+    },
+    companyList: {
+      about: "Sobre Nosotros",
+      team: "Equipo",
+      careers: "Carreras",
+      partners: "Socios",
+      blog: "Blog",
+    },
+    resourcesList: {
+      docs: "Documentación",
+      knowledgeBase: "Base de Conocimiento",
+      faq: "FAQ",
+      support: "Soporte",
+      status: "Estado del Sistema",
+    },
+    legalList: {
+      privacy: "Política de Privacidad",
+      terms: "Términos de Servicio",
+      dpa: "Acuerdo de Procesamiento de Datos",
+      cookies: "Cookies",
+    },
+    officesList: {
+      barcelona: { city: "Barcelona", country: "España" },
+      astana: { city: "Astaná", country: "Kazajistán" },
+      moscow: { city: "Moscú", country: "Rusia" },
+    },
+    copyright: "M2 AI Solutions. Todos los derechos reservados.",
+    privacyShort: "Privacidad",
+    termsShort: "Términos",
+  },
+  de: {
+    tagline: "Sprach-KI-Manager",
+    description: "Vertriebs- und Kundenservice-Automatisierung mit Sprach-KI-Assistenten. Internationales Team mit Büros in Barcelona, Moskau und Astana.",
+    workWorldwide: "Wir arbeiten weltweit",
+    solutions: "Lösungen",
+    company: "Unternehmen",
+    resources: "Ressourcen",
+    legal: "Rechtliches",
+    offices: "Unsere Büros",
+    solutionsList: {
+      voiceSales: "Sprach-KI-Vertriebsmanager",
+      hotelConcierge: "KI-Hotelconcierge",
+      smb: "Für kleine Unternehmen",
+      enterprise: "Enterprise-Lösungen",
+      custom: "Individuelle Lösungen",
+      smartHome: "KI Smart Home",
+    },
+    companyList: {
+      about: "Über uns",
+      team: "Team",
+      careers: "Karriere",
+      partners: "Partner",
+      blog: "Blog",
+    },
+    resourcesList: {
+      docs: "Dokumentation",
+      knowledgeBase: "Wissensdatenbank",
+      faq: "FAQ",
+      support: "Support",
+      status: "Systemstatus",
+    },
+    legalList: {
+      privacy: "Datenschutzrichtlinie",
+      terms: "Nutzungsbedingungen",
+      dpa: "Datenverarbeitungsvereinbarung",
+      cookies: "Cookies",
+    },
+    officesList: {
+      barcelona: { city: "Barcelona", country: "Spanien" },
+      astana: { city: "Astana", country: "Kasachstan" },
+      moscow: { city: "Moskau", country: "Russland" },
+    },
+    copyright: "M2 AI Solutions. Alle Rechte vorbehalten.",
+    privacyShort: "Datenschutz",
+    termsShort: "AGB",
+  },
+  nl: {
+    tagline: "Stem AI Managers",
+    description: "Verkoop- en klantenservice-automatisering met stem AI-assistenten. Internationaal team met kantoren in Barcelona, Moskou en Astana.",
+    workWorldwide: "We werken wereldwijd",
+    solutions: "Oplossingen",
+    company: "Bedrijf",
+    resources: "Bronnen",
+    legal: "Juridisch",
+    offices: "Onze Kantoren",
+    solutionsList: {
+      voiceSales: "Stem AI Verkoopmanager",
+      hotelConcierge: "AI Hotelconciërge",
+      smb: "Voor Kleine Bedrijven",
+      enterprise: "Enterprise Oplossingen",
+      custom: "Maatwerkoplossingen",
+      smartHome: "AI Smart Home",
+    },
+    companyList: {
+      about: "Over Ons",
+      team: "Team",
+      careers: "Carrières",
+      partners: "Partners",
+      blog: "Blog",
+    },
+    resourcesList: {
+      docs: "Documentatie",
+      knowledgeBase: "Kennisbank",
+      faq: "FAQ",
+      support: "Ondersteuning",
+      status: "Systeemstatus",
+    },
+    legalList: {
+      privacy: "Privacybeleid",
+      terms: "Servicevoorwaarden",
+      dpa: "Gegevensverwerkingsovereenkomst",
+      cookies: "Cookies",
+    },
+    officesList: {
+      barcelona: { city: "Barcelona", country: "Spanje" },
+      astana: { city: "Astana", country: "Kazachstan" },
+      moscow: { city: "Moskou", country: "Rusland" },
+    },
+    copyright: "M2 AI Solutions. Alle rechten voorbehouden.",
+    privacyShort: "Privacy",
+    termsShort: "Voorwaarden",
+  },
+  fr: {
+    tagline: "Gestionnaires IA Vocaux",
+    description: "Automatisation des ventes et du service client avec des assistants IA vocaux. Équipe internationale avec des bureaux à Barcelone, Moscou et Astana.",
+    workWorldwide: "Nous travaillons dans le monde entier",
+    solutions: "Solutions",
+    company: "Entreprise",
+    resources: "Ressources",
+    legal: "Mentions légales",
+    offices: "Nos Bureaux",
+    solutionsList: {
+      voiceSales: "Gestionnaire des Ventes IA",
+      hotelConcierge: "Concierge IA pour Hôtels",
+      smb: "Pour les PME",
+      enterprise: "Solutions Enterprise",
+      custom: "Solutions Personnalisées",
+      smartHome: "Maison Intelligente IA",
+    },
+    companyList: {
+      about: "À propos",
+      team: "Équipe",
+      careers: "Carrières",
+      partners: "Partenaires",
+      blog: "Blog",
+    },
+    resourcesList: {
+      docs: "Documentation",
+      knowledgeBase: "Base de connaissances",
+      faq: "FAQ",
+      support: "Support",
+      status: "Statut du système",
+    },
+    legalList: {
+      privacy: "Politique de confidentialité",
+      terms: "Conditions d'utilisation",
+      dpa: "Accord de traitement des données",
+      cookies: "Cookies",
+    },
+    officesList: {
+      barcelona: { city: "Barcelone", country: "Espagne" },
+      astana: { city: "Astana", country: "Kazakhstan" },
+      moscow: { city: "Moscou", country: "Russie" },
+    },
+    copyright: "M2 AI Solutions. Tous droits réservés.",
+    privacyShort: "Confidentialité",
+    termsShort: "Conditions",
+  },
+}
+
 export function Footer({ locale }: FooterProps) {
-  const { t } = useTranslations(locale)
+  const t = footerTranslations[locale] || footerTranslations.ru
 
   const solutions = [
-    { name: t("solutions.voiceSalesManager"), href: `/${locale}/solutions/voice-sales-manager` },
-    { name: t("solutions.m2Agents"), href: `/${locale}/solutions/m2-agents` },
-    { name: t("solutions.hotelConcierge"), href: `/${locale}/solutions/hotel-concierge` },
-    { name: t("solutions.smb"), href: `/${locale}/solutions/smb` },
-    { name: t("solutions.enterprise"), href: `/${locale}/solutions/enterprise` },
-    { name: t("solutions.custom"), href: `/${locale}/solutions/custom` },
-    { name: "Умный дом на базе ИИ", href: `/${locale}/solutions/smart-home` },
+    { name: t.solutionsList.voiceSales, href: `/${locale}/solutions/voice-sales-manager` },
+    { name: t.solutionsList.hotelConcierge, href: `/${locale}/solutions/hotel-concierge` },
+    { name: t.solutionsList.smb, href: `/${locale}/solutions/smb` },
+    { name: t.solutionsList.enterprise, href: `/${locale}/solutions/enterprise` },
+    { name: t.solutionsList.custom, href: `/${locale}/solutions/custom` },
+    { name: t.solutionsList.smartHome, href: `/${locale}/solutions/smart-home` },
   ]
 
   const company = [
-    { name: t("nav.about"), href: `/${locale}/about` },
-    { name: "Команда", href: `/${locale}/about/team` },
-    { name: "Карьера", href: `/${locale}/careers` },
-    { name: "Партнёрам", href: `/${locale}/partners` },
-    { name: t("nav.blog"), href: `/${locale}/blog` },
+    { name: t.companyList.about, href: `/${locale}/about` },
+    { name: t.companyList.team, href: `/${locale}/about/team` },
+    { name: t.companyList.careers, href: `/${locale}/careers` },
+    { name: t.companyList.partners, href: `/${locale}/partners` },
+    { name: t.companyList.blog, href: `/${locale}/blog` },
   ]
 
   const resources = [
-    { name: "Документация", href: `/${locale}/docs` },
-    { name: "База знаний", href: `/${locale}/knowledge-base` },
-    { name: "FAQ", href: `/${locale}/faq` },
-    { name: "Поддержка", href: `/${locale}/support` },
-    { name: "Статус системы", href: `/${locale}/status` },
+    { name: t.resourcesList.docs, href: `/${locale}/docs` },
+    { name: t.resourcesList.knowledgeBase, href: `/${locale}/knowledge-base` },
+    { name: t.resourcesList.faq, href: `/${locale}/faq` },
+    { name: t.resourcesList.support, href: `/${locale}/support` },
+    { name: t.resourcesList.status, href: `/${locale}/status` },
   ]
 
   const legal = [
-    { name: "Политика конфиденциальности", href: `/${locale}/privacy` },
-    { name: "Условия использования", href: `/${locale}/terms` },
-    { name: "Соглашение об обработке данных", href: `/${locale}/dpa` },
-    { name: "Cookies", href: `/${locale}/cookies` },
-  ]
-
-  const offices = [
-    {
-      city: "Барселона",
-      country: "Испания",
-      address: "Carrer de Mallorca, 401",
-      phone: "+34 93 123 45 67",
-    },
-    {
-      city: "Москва",
-      country: "Россия",
-      address: "ул. Тверская, 15",
-      phone: "+7 (495) 123-45-67",
-    },
-    {
-      city: "Астана",
-      country: "Казахстан",
-      address: "пр. Кабанбай батыра, 53",
-      phone: "+7 (717) 123-45-67",
-    },
+    { name: t.legalList.privacy, href: `/${locale}/privacy` },
+    { name: t.legalList.terms, href: `/${locale}/terms` },
+    { name: t.legalList.dpa, href: `/${locale}/dpa` },
+    { name: t.legalList.cookies, href: `/${locale}/cookies` },
   ]
 
   return (
@@ -92,13 +349,12 @@ export function Footer({ locale }: FooterProps) {
                       <span className="text-foreground"> AI Solutions</span>
                     </span>
                     <span className="text-xs text-muted-foreground leading-tight">
-                      Голосовые AI-менеджеры
+                      {t.tagline}
                     </span>
                   </div>
                 </Link>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  Автоматизация продаж и обслуживания клиентов с помощью голосовых AI-ассистентов. 
-                  Международная команда с офисами в Барселоне, Москве и Астане.
+                  {t.description}
                 </p>
               </div>
 
@@ -117,14 +373,14 @@ export function Footer({ locale }: FooterProps) {
                 </div>
                 <div className="flex items-center space-x-2 text-sm">
                   <Globe className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-muted-foreground">Работаем по всему миру</span>
+                  <span className="text-muted-foreground">{t.workWorldwide}</span>
                 </div>
               </div>
             </div>
 
             {/* Solutions */}
             <div>
-              <h3 className="font-semibold mb-4">{t("nav.solutions")}</h3>
+              <h3 className="font-semibold mb-4">{t.solutions}</h3>
               <ul className="space-y-2">
                 {solutions.map((item) => (
                   <li key={item.href}>
@@ -141,7 +397,7 @@ export function Footer({ locale }: FooterProps) {
 
             {/* Company */}
             <div>
-              <h3 className="font-semibold mb-4">{t("nav.company")}</h3>
+              <h3 className="font-semibold mb-4">{t.company}</h3>
               <ul className="space-y-2">
                 {company.map((item) => (
                   <li key={item.href}>
@@ -158,7 +414,7 @@ export function Footer({ locale }: FooterProps) {
 
             {/* Resources */}
             <div>
-              <h3 className="font-semibold mb-4">{t("nav.resources")}</h3>
+              <h3 className="font-semibold mb-4">{t.resources}</h3>
               <ul className="space-y-2">
                 {resources.map((item) => (
                   <li key={item.href}>
@@ -175,7 +431,7 @@ export function Footer({ locale }: FooterProps) {
 
             {/* Legal */}
             <div>
-              <h3 className="font-semibold mb-4">{t("nav.legal")}</h3>
+              <h3 className="font-semibold mb-4">{t.legal}</h3>
               <ul className="space-y-2">
                 {legal.map((item) => (
                   <li key={item.href}>
@@ -194,12 +450,12 @@ export function Footer({ locale }: FooterProps) {
 
         {/* Offices */}
         <div className="py-8 border-t border-muted">
-          <h3 className="font-semibold mb-6 text-center">{t("nav.offices")}</h3>
+          <h3 className="font-semibold mb-6 text-center">{t.offices}</h3>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="space-y-3">
               <div className="flex items-center justify-center space-x-2">
                 <MapPin className="h-4 w-4 text-primary" />
-                <span className="font-medium">Барселона, Испания</span>
+                <span className="font-medium">{t.officesList.barcelona.city}, {t.officesList.barcelona.country}</span>
               </div>
               <p className="text-sm text-muted-foreground text-center">Carrer de Mallorca, 401</p>
               <div className="flex justify-center">
@@ -210,9 +466,9 @@ export function Footer({ locale }: FooterProps) {
             <div className="space-y-3">
               <div className="flex items-center justify-center space-x-2">
                 <MapPin className="h-4 w-4 text-primary" />
-                <span className="font-medium">Астана, Казахстан</span>
+                <span className="font-medium">{t.officesList.astana.city}, {t.officesList.astana.country}</span>
               </div>
-              <p className="text-sm text-muted-foreground text-center">пр. Кабанбай батыра, 53</p>
+              <p className="text-sm text-muted-foreground text-center">pr. Kabanbay Batyr, 53</p>
               <div className="flex justify-center">
                 <MessengerLinks phone="+77715242088" country="kazakhstan" />
               </div>
@@ -221,9 +477,9 @@ export function Footer({ locale }: FooterProps) {
             <div className="space-y-3">
               <div className="flex items-center justify-center space-x-2">
                 <MapPin className="h-4 w-4 text-primary" />
-                <span className="font-medium">Москва, Россия</span>
+                <span className="font-medium">{t.officesList.moscow.city}, {t.officesList.moscow.country}</span>
               </div>
-              <p className="text-sm text-muted-foreground text-center">ул. Тверская, 15</p>
+              <p className="text-sm text-muted-foreground text-center">ul. Tverskaya, 15</p>
               <div className="flex justify-center">
                 <MessengerLinks phone="+79957967506" country="russia" />
               </div>
@@ -234,19 +490,19 @@ export function Footer({ locale }: FooterProps) {
         {/* Bottom bar */}
         <div className="py-6 border-t border-muted">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-sm text-muted-foreground">© 2024 AI Solutions — M2 Решения. Все права защищены.</div>
+            <div className="text-sm text-muted-foreground">© 2024 {t.copyright}</div>
             <div className="flex items-center space-x-6">
               <Link
                 href={`/${locale}/privacy`}
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                Конфиденциальность
+                {t.privacyShort}
               </Link>
               <Link
                 href={`/${locale}/terms`}
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                Условия
+                {t.termsShort}
               </Link>
               <Link
                 href={`/${locale}/cookies`}
