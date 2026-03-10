@@ -6,11 +6,15 @@ import "./globals.css"
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
   variable: "--font-inter",
+  display: "swap",
+  preload: true,
 })
 
 const robotoMono = Roboto_Mono({
   subsets: ["latin", "cyrillic"],
   variable: "--font-roboto-mono",
+  display: "swap",
+  preload: false, // Secondary font - load lazily
 })
 
 const BASE_URL = "https://m2solutions.ai"
@@ -117,35 +121,16 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${inter.variable} ${robotoMono.variable}`}>
       <head>
-        {/* Yandex.Metrika counter */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(m,e,t,r,i,k,a){
-                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-                m[i].l=1*new Date();
-                for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-              })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=107161758', 'ym');
-              ym(107161758, 'init', {
-                ssr: true,
-                webvisor: true,
-                clickmap: true,
-                ecommerce: "dataLayer",
-                referrer: document.referrer,
-                url: location.href,
-                accurateTrackBounce: true,
-                trackLinks: true
-              });
-            `,
-          }}
+        {/* Preconnect to critical domains */}
+        <link rel="preconnect" href="https://mc.yandex.ru" />
+        <link rel="dns-prefetch" href="https://mc.yandex.ru" />
+        {/* Preload critical hero image for LCP */}
+        <link 
+          rel="preload" 
+          href="/images/hero-bg.jpg" 
+          as="image" 
+          type="image/jpeg"
         />
-        <noscript>
-          <div>
-            <img src="https://mc.yandex.ru/watch/107161758" style={{ position: 'absolute', left: '-9999px' }} alt="" />
-          </div>
-        </noscript>
-        {/* /Yandex.Metrika counter */}
       </head>
       <body className="font-sans antialiased">
         <script
@@ -199,6 +184,38 @@ export default function RootLayout({
           }}
         />
         {children}
+        {/* Yandex.Metrika - deferred loading for better LCP */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.addEventListener('load', function() {
+                setTimeout(function() {
+                  (function(m,e,t,r,i,k,a){
+                    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                    m[i].l=1*new Date();
+                    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+                    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+                  })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=107161758', 'ym');
+                  ym(107161758, 'init', {
+                    ssr: true,
+                    webvisor: true,
+                    clickmap: true,
+                    ecommerce: "dataLayer",
+                    referrer: document.referrer,
+                    url: location.href,
+                    accurateTrackBounce: true,
+                    trackLinks: true
+                  });
+                }, 2000);
+              });
+            `,
+          }}
+        />
+        <noscript>
+          <div>
+            <img src="https://mc.yandex.ru/watch/107161758" style={{ position: 'absolute', left: '-9999px' }} alt="" />
+          </div>
+        </noscript>
       </body>
     </html>
   )

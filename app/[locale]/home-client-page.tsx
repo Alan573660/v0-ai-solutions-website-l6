@@ -119,7 +119,15 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
       <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden bg-[#060a16]">
         {/* BG image */}
         <div className="absolute inset-0">
-          <Image src="/images/hero-bg.jpg" alt="" fill className="object-cover opacity-40 mix-blend-lighten" priority />
+          <Image 
+              src="/images/hero-bg.jpg" 
+              alt="" 
+              fill 
+              className="object-cover opacity-40 mix-blend-lighten" 
+              priority 
+              sizes="100vw"
+              quality={75}
+            />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(56,130,255,.07),transparent)]" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#060a16]/30 via-[#060a16]/60 to-[#060a16]" />
         </div>
