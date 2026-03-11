@@ -1,4 +1,4 @@
-import { AutomaticOperatorClientPage } from "./AutomaticOperatorClientPage"
+import { AutomaticOperatorPage as AutomaticOperatorClientPage } from "@/components/pages/automatic-operator-page"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 

@@ -1,4 +1,4 @@
-import { VirtualOperatorClientPage } from "./VirtualOperatorClientPage"
+import { VirtualOperatorPage as VirtualOperatorClientPage } from "@/components/pages/virtual-operator-page"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 

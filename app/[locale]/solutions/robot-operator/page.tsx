@@ -1,4 +1,4 @@
-import { RobotOperatorClientPage } from "./RobotOperatorClientPage"
+import { RobotOperatorPage as RobotOperatorClientPage } from "@/components/pages/robot-operator-page"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 
