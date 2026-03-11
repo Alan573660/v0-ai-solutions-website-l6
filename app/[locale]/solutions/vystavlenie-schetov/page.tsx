@@ -1,4 +1,4 @@
-import { VystavlenieSchetovClientPage } from "./VystavlenieSchetovClientPage"
+import { VystavlenieSchetovPage } from "@/components/pages/vystavlenie-schetov-page"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: VystavlenieSchetovPageProps):
   }
 }
 
-export default async function VystavlenieSchetovPage({ params }: VystavlenieSchetovPageProps) {
+export default async function VystavlenieSchetovPageWrapper({ params }: VystavlenieSchetovPageProps) {
   const { locale } = await params
-  return <VystavlenieSchetovClientPage locale={locale} />
+  return <VystavlenieSchetovPage />
 }

@@ -1,4 +1,4 @@
-import { RobotDlyaZvonkovClientPage } from "./RobotDlyaZvonkovClientPage"
+import { RobotDlyaZvonkovPage } from "@/components/pages/robot-dlya-zvonkov-page"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: RobotDlyaZvonkovPageProps): P
   }
 }
 
-export default async function RobotDlyaZvonkovPage({ params }: RobotDlyaZvonkovPageProps) {
+export default async function RobotDlyaZvonkovPageWrapper({ params }: RobotDlyaZvonkovPageProps) {
   const { locale } = await params
-  return <RobotDlyaZvonkovClientPage locale={locale} />
+  return <RobotDlyaZvonkovPage />
 }

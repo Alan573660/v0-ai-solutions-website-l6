@@ -1,4 +1,4 @@
-import { ObrabotkZakazovClientPage } from "./ObrabotkZakazovClientPage"
+import { ObrabotkZakazovPage } from "@/components/pages/obrabotka-zakazov-page"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: ObrabotkZakazovPageProps): Pr
   }
 }
 
-export default async function ObrabotkZakazovPage({ params }: ObrabotkZakazovPageProps) {
+export default async function ObrabotkZakazovPageWrapper({ params }: ObrabotkZakazovPageProps) {
   const { locale } = await params
-  return <ObrabotkZakazovClientPage locale={locale} />
+  return <ObrabotkZakazovPage />
 }

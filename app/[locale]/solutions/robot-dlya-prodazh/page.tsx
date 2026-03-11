@@ -1,4 +1,4 @@
-import { RobotDlyaProdazhClientPage } from "./RobotDlyaProdazhClientPage"
+import { RobotDlyaProdazhPage } from "@/components/pages/robot-dlya-prodazh-page"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: RobotDlyaProdazhPageProps): P
   }
 }
 
-export default async function RobotDlyaProdazhPage({ params }: RobotDlyaProdazhPageProps) {
+export default async function RobotDlyaProdazhPageWrapper({ params }: RobotDlyaProdazhPageProps) {
   const { locale } = await params
-  return <RobotDlyaProdazhClientPage locale={locale} />
+  return <RobotDlyaProdazhPage />
 }
