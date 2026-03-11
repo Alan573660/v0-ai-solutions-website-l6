@@ -12,6 +12,7 @@ type CTAType = "trial" | "demo" | "call" | "consultation"
 
 interface CTAContextType {
   openModal: (type: CTAType, title?: string) => void
+  openCTA: () => void
   openConsultation: () => void
   openDemo: () => void
   openTrial: () => void
@@ -31,13 +32,14 @@ export function CTAProvider({ children, locale = "ru" }: { children: ReactNode; 
     setIsOpen(true)
   }
 
+  const openCTA = () => openModal("consultation")
   const openConsultation = () => openModal("consultation")
   const openDemo = () => openModal("demo")
   const openTrial = () => openModal("trial")
   const openCall = () => openModal("call")
 
   return (
-    <CTAContext.Provider value={{ openModal, openConsultation, openDemo, openTrial, openCall }}>
+    <CTAContext.Provider value={{ openModal, openCTA, openConsultation, openDemo, openTrial, openCall }}>
       {children}
       {isOpen && <CTAModal isOpen={isOpen} onClose={() => setIsOpen(false)} type={modalType} title={modalTitle} locale={locale} />}
     </CTAContext.Provider>
