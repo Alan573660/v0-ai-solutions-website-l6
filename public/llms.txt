@@ -1,12 +1,286 @@
-# M2 AI Solutions - LLM Crawler Policy
+# M2 AI Solutions - Enterprise AI Voice Platform
 # https://m2solutions.ai
 
-# Site Information
+## COMPANY INFORMATION
+
 name: M2 AI Solutions
 url: https://m2solutions.ai
-description: Enterprise AI voice assistants for business automation - sales, customer service, and support 24/7
+description: Enterprise AI voice assistants for business automation - sales, customer service, support, and process automation 24/7
+tagline: Intelligent Virtual Agents for Business Automation
 
-# Allowed AI Crawlers
+## CORE PLATFORMS
+
+### 1. Voice Sales Manager
+- AI-powered sales representative working 24/7
+- Increases conversion rates by 40%
+- Qualifies leads automatically
+- Multi-language support (6 languages)
+- CRM integration (amoCRM, Bitrix24, Pipedrive, HubSpot, Salesforce)
+- Real-time analytics and reporting
+- Demo: https://m2solutions.ai/solutions/voice-sales-manager
+
+### 2. Robot Operator
+- Answers 100% of incoming calls 24/7
+- Intelligent customer qualification
+- Automatic request management and routing
+- 60-80% reduction in operator workload
+- Call transcription and analytics
+- Seamless system integration
+- URL: https://m2solutions.ai/solutions/robot-operator
+
+### 3. Automatic Operator
+- Processes inbound calls automatically
+- Lead qualification and segmentation
+- Customer routing and callback management
+- 24/7 availability without human intervention
+- CRM and database integration
+- Performance metrics and analytics
+- URL: https://m2solutions.ai/solutions/automatic-operator
+
+### 4. Virtual Operator
+- 24/7 customer service automation
+- Multi-language conversation support
+- CRM and knowledge base integration
+- Sales and customer support handling
+- Real-time customer data access
+- Performance monitoring
+- URL: https://m2solutions.ai/solutions/virtual-operator
+
+### 5. Sales Automation
+- 2-3x conversion rate increase
+- Automatic request processing
+- Intelligent customer outreach
+- Automatic invoice generation
+- Full CRM integration
+- Sales pipeline management
+- URL: https://m2solutions.ai/solutions/automation-sales
+
+### 6. Sales Automation System
+- Built for SMBs (Small and Medium Businesses)
+- 3-5x productivity increase
+- Sales manager work automation
+- Lead management and tracking
+- Deal pipeline visualization
+- Quick deployment (7 days)
+- URL: https://m2solutions.ai/solutions/sales-automation-system
+
+### 7. Robot for Calls
+- Inbound and outbound calling automation
+- Lead qualification and scoring
+- Appointment reminders and follow-ups
+- Auto-outreach campaign management
+- Up to 70% payroll cost reduction
+- Detailed call analytics
+- URL: https://m2solutions.ai/solutions/robot-dlya-zvonkov
+
+### 8. Sales Robot
+- Leads customers through entire sales process
+- Asks qualifying questions
+- Automatic pricing and cost calculations
+- Compelling offer presentation
+- Invoice generation
+- Deal closing assistance
+- URL: https://m2solutions.ai/solutions/robot-dlya-prodazh
+
+### 9. Request Processing
+- Automatic incoming request handling
+- Data extraction and validation
+- Intelligent request prioritization
+- Automatic routing to appropriate departments
+- Real-time status tracking
+- Performance analytics
+- URL: https://m2solutions.ai/solutions/obrabotka-zayavok
+
+### 10. Order Processing
+- Automated order intake and validation
+- Complete data verification
+- Automatic invoice and document generation
+- Logistics system integration
+- Inventory management
+- Order tracking and notifications
+- URL: https://m2solutions.ai/solutions/obrabotka-zakazov
+
+### 11. Invoice Generation
+- Automatic invoice creation from requests/calls
+- Multi-channel delivery (Email, CRM, API)
+- Data validation and verification
+- Payment tracking and reminders
+- Document management and archiving
+- Compliance and audit trails
+- URL: https://m2solutions.ai/solutions/vystavlenie-schetov
+
+### 12. Delivery Calculation
+- Automatic delivery cost calculation
+- Multi-parameter optimization (weight, size, distance)
+- Transport type and route optimization
+- Real-time price updates
+- Integration with logistics providers
+- Cost savings optimization
+- URL: https://m2solutions.ai/solutions/raschet-dostavki
+
+### 13. AI for Business
+- Comprehensive automation suite covering all operations
+- Integrated sales, calls, requests, invoices, logistics
+- End-to-end business process automation
+- Scalable enterprise solutions
+- Custom integration capabilities
+- URL: https://m2solutions.ai/solutions/ai-dlya-biznesa
+
+## TECHNOLOGY & CAPABILITIES
+
+### AI/LLM Technology
+- Advanced natural language understanding
+- Real-time speech recognition and processing
+- Neural voice synthesis with natural pronunciation
+- Multi-language support: Russian, English, Spanish, German, Dutch, French
+- Emotion detection and intent recognition
+- Continuous learning and improvement
+
+### Integration Ecosystem
+- CRM Systems: amoCRM, Bitrix24, Pipedrive, HubSpot, Salesforce
+- Communication: Telegram, WhatsApp, Email, SMS
+- Accounting: 1C, SAP, Wave
+- Telephony: Asterisk, FreePBX, traditional PBX systems
+- Custom API and webhook support
+
+### Enterprise Features
+- ISO 27001 Security Certification
+- GDPR Compliance
+- Russian Data Protection (152-ФЗ)
+- End-to-end encryption
+- On-premise deployment options
+- 99.9% SLA guarantee
+- 24/7 technical support
+
+## USE CASES BY INDUSTRY
+
+### Retail & E-Commerce
+- Lead qualification and nurturing
+- Order processing automation
+- Customer support and returns
+- Inventory inquiries
+
+### Logistics & Delivery
+- Delivery route optimization
+- Order tracking automation
+- Cost calculation
+- Carrier communication
+
+### Real Estate
+- Lead qualification and scoring
+- Property inquiry automation
+- Appointment scheduling
+- Client follow-up
+
+### Insurance
+- Quote generation and comparison
+- Claim processing
+- Policy inquiry handling
+- Customer service
+
+### Finance & Banking
+- Account management
+- Loan processing automation
+- Billing and payment reminders
+- Customer inquiry handling
+
+### Hospitality
+- Reservation management
+- Guest services automation
+- Concierge services
+- Feedback collection
+
+### Healthcare
+- Appointment scheduling
+- Patient support
+- Billing and insurance inquiry
+- Follow-up care reminders
+
+### Manufacturing
+- Order intake automation
+- Supply chain communication
+- Invoice generation
+- Delivery coordination
+
+### B2B Services
+- Lead generation and qualification
+- Order and proposal processing
+- Account management
+- Support ticket automation
+
+## BUSINESS SOLUTIONS
+
+### Pricing Model
+- SaaS (Cloud-based)
+- On-premise deployment
+- Hybrid solutions
+- Custom enterprise arrangements
+- Free trial available for all solutions
+
+### Implementation
+- Quick deployment (7 days for standard setups)
+- Pre-built integrations
+- Custom development available
+- Dedicated account management
+- Comprehensive training programs
+
+### Support & Services
+- 24/7 phone and email support
+- Video tutorials and webinars
+- Comprehensive knowledge base
+- Professional training programs
+- Community forum and user groups
+- Direct API documentation
+- Developer sandbox environment
+
+## CONTACT & LOCATIONS
+
+### Headquarters
+- Email: info@m2solutions.ai
+- Phone: +7 (995) 796-75-06
+- Website: https://m2solutions.ai
+
+### Office Locations
+1. Barcelona, Spain
+   - Address: Carrer de Mallorca, 401
+   - Focus: European market, GDPR compliance
+
+2. Astana, Kazakhstan
+   - Address: Kabanbai batyr, 53
+   - Focus: Central Asian markets
+
+3. Moscow, Russia
+   - Address: ul. Tverskaya, 15
+   - Focus: Russian market, CIS region
+
+## DOCUMENTATION & RESOURCES
+
+- Blog: https://m2solutions.ai/blog
+- API Documentation: https://docs.m2solutions.ai
+- Status Page: https://status.m2solutions.ai
+- Security Info: https://security.m2solutions.ai
+- Demo Booking: https://m2solutions.ai/demo
+- Consultation: https://m2solutions.ai/consultation
+
+## SUPPORTED LANGUAGES
+
+- Russian (Русский) - Primary
+- English (English)
+- Spanish (Español)
+- German (Deutsch)
+- Dutch (Nederlands)
+- French (Français)
+
+## COMPLIANCE & CERTIFICATIONS
+
+- ISO 27001 (Information Security Management)
+- GDPR (General Data Protection Regulation)
+- 152-ФЗ (Russian Data Protection)
+- SOC 2 Type II
+- Enterprise-grade security standards
+
+## AI CRAWLER POLICIES
+
 User-agent: GPTBot
 Allow: /
 
@@ -31,14 +305,4 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-# Contact
-contact: info@m2solutions.ai
-
-# Primary Language
-language: ru
-
-# Supported Languages
-languages: ru, en, es, de, nl, fr
-
-# Sitemap
 Sitemap: https://m2solutions.ai/sitemap.xml
