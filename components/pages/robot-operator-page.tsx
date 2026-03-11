@@ -155,7 +155,7 @@ const content = {
           icon: Building2,
           name: "Строительство",
           description: "Расчет материалов, консультации, запись на замер",
-          metrics: { value: "24/7", label: "до��тупность" },
+          metrics: { value: "24/7", label: "до����тупность" },
         },
         {
           icon: Truck,
@@ -195,26 +195,38 @@ const content = {
         {
           company: "СтройМаркет",
           industry: "Строительные материалы",
-          challenge: "5000+ пропущенных звонков в месяц, менеджеры не справлялись с потоком",
-          solution: "Внедрили робота оператора для приема всех входящих, квалификации и расчета стоимости",
+          task: "5000+ пропущенных звонков в месяц. Менеджеры не справлялись с потоком, клиенты уходили к конкурентам.",
+          connected: ["Робот оператор 24/7", "Интеграция с 1С и amoCRM", "Автоматический расчет по прайсу", "Перевод на менеджеров для сложных запросов"],
           results: [
             { value: "0", label: "пропущенных звонков" },
             { value: "+156%", label: "рост продаж" },
-            { value: "3 сек", label: "время ответа" },
+            { value: "80%", label: "звонков без менеджера" },
           ],
           quote: "Робот обрабатывает 80% звонков полностью самостоятельно. Менеджеры работают только с горячими лидами.",
         },
         {
           company: "ЛогистикПро",
           industry: "Грузоперевозки",
-          challenge: "Долгий расчет стоимости доставки, клиенты уходили к конкурентам",
-          solution: "AI-оператор мгновенно рассчитывает маршрут, подбирает транспорт и формирует КП",
+          task: "Расчет стоимости доставки занимал 30-40 минут. Клиенты не дожидались и уходили к конкурентам.",
+          connected: ["AI-оператор с расчетом маршрутов", "База тарифов всех ТК", "Автоформирование КП", "Интеграция с Bitrix24"],
           results: [
             { value: "3 мин", label: "на полную заявку" },
             { value: "+89%", label: "конверсия" },
             { value: "24/7", label: "прием заявок" },
           ],
           quote: "Раньше расчет занимал 30-40 минут. Теперь клиент получает КП за 3 минуты прямо во время звонка.",
+        },
+        {
+          company: "МедЦентр Плюс",
+          industry: "Медицина",
+          task: "Пиковые нагрузки в сезон ОРВИ. Пациенты не могли дозвониться для записи к врачу.",
+          connected: ["Робот для записи на прием", "Интеграция с МИС", "Напоминания о визитах", "Перевод на регистратуру для сложных случаев"],
+          results: [
+            { value: "100%", label: "дозвон" },
+            { value: "-40%", label: "нагрузка на регистратуру" },
+            { value: "2 мин", label: "запись на прием" },
+          ],
+          quote: "В сезон гриппа робот принял в 3 раза больше звонков, чем могла бы наша регистратура.",
         },
       ],
     },
@@ -246,6 +258,81 @@ const content = {
         { icon: Users, title: "Экспертная команда", description: "10+ лет опыта в AI и автоматизации. 50+ успешных внедрений." },
         { icon: TrendingUp, title: "Гарантия результата", description: "ROI рассчитываем до старта. Возврат инвестиций за 2-3 месяца." },
       ],
+    },
+    whenRobot: {
+      title: "Когда подходит робот оператор, а когда нужен человек",
+      robotTitle: "Робот оператор справится",
+      humanTitle: "Нужен живой менеджер",
+      robotItems: [
+        "Типовые вопросы: цены, наличие, условия доставки",
+        "Квалификация лида: бюджет, сроки, потребности",
+        "Прием заказа по стандартному каталогу",
+        "Расчет стоимости по прайсу или формуле",
+        "Запись на встречу, замер, консультацию",
+        "Информирование об акциях и статусе заказа",
+        "Сбор обратной связи и NPS",
+      ],
+      humanItems: [
+        "Сложные переговоры с ключевыми клиентами",
+        "Работа с претензиями и конфликтами",
+        "Нестандартные проекты с уникальными условиями",
+        "VIP-клиенты, требующие персонального подхода",
+        "Технические консультации высокой сложности",
+      ],
+      note: "Робот оператор автоматически определяет сложные ситуации и переводит звонок на менеджера. Вы не потеряете ни одного важного клиента.",
+    },
+    whatNeeded: {
+      title: "Что нужно от клиента для запуска",
+      subtitle: "Минимум усилий с вашей стороны — максимум результата",
+      items: [
+        { icon: Phone, title: "Телефонный номер", description: "Ваш существующий номер или мы выделим новый. Поддерживаем любую телефонию: SIP, Asterisk, Mango Office." },
+        { icon: FileText, title: "Сценарии диалогов", description: "Описание типовых ситуаций и ответов. Мы поможем составить, если нет готовых скриптов." },
+        { icon: MessageSquare, title: "FAQ и база знаний", description: "Частые вопросы клиентов и ответы на них. Чем больше информации — тем умнее робот." },
+        { icon: BarChart3, title: "Прайс-лист", description: "Таблица цен, формулы расчета, правила скидок. Робот озвучит точную стоимость." },
+        { icon: Database, title: "Доступ к CRM/телефонии", description: "API-ключи или учетные данные для интеграции. Поддерживаем amoCRM, Bitrix24, 1C и другие." },
+      ],
+      timeline: "Сбор информации занимает 1-2 дня. Мы проводим интервью и помогаем структурировать данные.",
+    },
+    howWorksDeep: {
+      title: "Как робот работает с прайсами, CRM и переводом на менеджера",
+      items: [
+        {
+          icon: BarChart3,
+          title: "Работа с прайсами",
+          description: "Робот загружает ваш прайс-лист и рассчитывает стоимость в реальном времени. Поддерживает сложные формулы: зависимость от объема, сезонные коэффициенты, накопительные скидки. Обновление прайса — за 5 минут через админку.",
+          features: ["Расчет по формулам любой сложности", "Автообновление цен из 1C/Excel", "Озвучивание точной стоимости", "Учет скидок и акций"],
+        },
+        {
+          icon: Database,
+          title: "Интеграция с CRM",
+          description: "Каждый звонок фиксируется в CRM автоматически. Робот создает сделку, заполняет карточку клиента, прикрепляет запись разговора и транскрипцию. Менеджер видит полную историю и готов продолжить диалог.",
+          features: ["Автосоздание сделок и контактов", "Заполнение полей из диалога", "Запись + транскрипция в карточке", "Постановка задач менеджерам"],
+        },
+        {
+          icon: Headphones,
+          title: "Перевод на менеджера",
+          description: "Робот переводит звонок в трех случаях: клиент просит, ситуация сложная, или это VIP-клиент. Перевод занимает 2-3 секунды. Менеджер получает карточку с контекстом: кто звонит, что обсуждали, какая потребность.",
+          features: ["Перевод по запросу клиента", "Автоопределение сложных кейсов", "Контекст разговора для менеджера", "Очередь и распределение звонков"],
+        },
+      ],
+    },
+    seoText: {
+      title: "Робот оператор для бизнеса: полное руководство",
+      content: `
+        <p><strong>Робот оператор</strong> — это AI-система для автоматизации входящих звонков, которая отвечает клиентам 24/7, квалифицирует лиды и создает заявки в CRM без участия человека. В отличие от IVR-меню с кнопками, робот оператор ведет полноценный голосовой диалог, понимает естественную речь и адаптируется к контексту разговора.</p>
+        
+        <h3>Чем робот оператор отличается от колл-центра</h3>
+        <p>Традиционный колл-центр — это люди, которые устают, болеют, уходят в отпуск и допускают ошибки. <strong>AI оператор для обработки звонков</strong> работает без перерывов, отвечает за 3 секунды и никогда не забывает скрипт. При этом стоимость обработки одного звонка в 5-10 раз ниже, чем у живого оператора.</p>
+        
+        <h3>Автоматизация входящих звонков: что можно автоматизировать</h3>
+        <p>Современный робот оператор закрывает до 80% типовых обращений: информирование о ценах и наличии, прием заказов, запись на услуги, квалификация лидов, сбор обратной связи. Сложные вопросы и VIP-клиенты автоматически переводятся на менеджеров с полным контекстом разговора.</p>
+        
+        <h3>Робот оператор для бизнеса: кому подходит</h3>
+        <p>Решение эффективно для компаний с потоком от 100 входящих звонков в месяц: интернет-магазины, строительные компании, логистика, медицинские центры, автосервисы, агентства недвижимости. Окупаемость — от 1 до 3 месяцев в зависимости от объема звонков.</p>
+        
+        <h3>Технологии робота оператора</h3>
+        <p>В основе работы — распознавание речи (ASR), синтез речи (TTS) и большие языковые модели (LLM) для понимания контекста. Робот обучается на ваших данных: прайсах, FAQ, записях звонков. Чем больше данных — тем точнее ответы и выше конверсия.</p>
+      `,
     },
     faq: {
       title: "Частые вопросы",
@@ -449,26 +536,38 @@ const content = {
         {
           company: "BuildMart",
           industry: "Construction Materials",
-          challenge: "5000+ missed calls per month, managers couldn't handle the flow",
-          solution: "Implemented robot operator to receive all incoming calls, qualify and calculate costs",
+          task: "5000+ missed calls per month. Managers couldn't handle the flow, customers were leaving to competitors.",
+          connected: ["24/7 Robot Operator", "Integration with 1C and amoCRM", "Automatic price calculation", "Transfer to managers for complex queries"],
           results: [
             { value: "0", label: "missed calls" },
             { value: "+156%", label: "sales growth" },
-            { value: "3 sec", label: "response time" },
+            { value: "80%", label: "calls without manager" },
           ],
           quote: "The robot handles 80% of calls completely independently. Managers only work with hot leads.",
         },
         {
           company: "LogisticsPro",
           industry: "Freight Transportation",
-          challenge: "Long delivery cost calculation, customers were leaving to competitors",
-          solution: "AI operator instantly calculates route, selects transport and generates quote",
+          task: "Delivery cost calculation took 30-40 minutes. Customers didn't wait and left to competitors.",
+          connected: ["AI operator with route calculation", "All carrier tariff database", "Auto quote generation", "Bitrix24 integration"],
           results: [
             { value: "3 min", label: "for full request" },
             { value: "+89%", label: "conversion" },
             { value: "24/7", label: "request intake" },
           ],
           quote: "Calculation used to take 30-40 minutes. Now the customer gets a quote in 3 minutes during the call.",
+        },
+        {
+          company: "MedCenter Plus",
+          industry: "Healthcare",
+          task: "Peak loads during flu season. Patients couldn't get through to book an appointment.",
+          connected: ["Robot for appointment booking", "MIS integration", "Visit reminders", "Transfer to reception for complex cases"],
+          results: [
+            { value: "100%", label: "reachability" },
+            { value: "-40%", label: "reception load" },
+            { value: "2 min", label: "appointment booking" },
+          ],
+          quote: "During flu season, the robot took 3x more calls than our reception could handle.",
         },
       ],
     },
@@ -500,6 +599,81 @@ const content = {
         { icon: Users, title: "Expert Team", description: "10+ years of experience in AI and automation. 50+ successful implementations." },
         { icon: TrendingUp, title: "Guaranteed Results", description: "ROI calculated before start. Return on investment in 2-3 months." },
       ],
+    },
+    whenRobot: {
+      title: "When Robot Operator Works vs When You Need a Human",
+      robotTitle: "Robot Operator Handles",
+      humanTitle: "Live Manager Needed",
+      robotItems: [
+        "Standard questions: prices, availability, delivery terms",
+        "Lead qualification: budget, timeline, needs",
+        "Order intake from standard catalog",
+        "Cost calculation by price list or formula",
+        "Booking meetings, measurements, consultations",
+        "Informing about promotions and order status",
+        "Collecting feedback and NPS",
+      ],
+      humanItems: [
+        "Complex negotiations with key clients",
+        "Handling complaints and conflicts",
+        "Non-standard projects with unique conditions",
+        "VIP clients requiring personal approach",
+        "High-complexity technical consultations",
+      ],
+      note: "Robot operator automatically detects complex situations and transfers the call to a manager. You won't lose a single important client.",
+    },
+    whatNeeded: {
+      title: "What's Needed From Client to Launch",
+      subtitle: "Minimum effort on your side — maximum results",
+      items: [
+        { icon: Phone, title: "Phone Number", description: "Your existing number or we'll allocate a new one. Support any telephony: SIP, Asterisk, Mango Office." },
+        { icon: FileText, title: "Dialogue Scenarios", description: "Description of typical situations and responses. We'll help create them if you don't have ready scripts." },
+        { icon: MessageSquare, title: "FAQ and Knowledge Base", description: "Frequent customer questions and answers. The more information — the smarter the robot." },
+        { icon: BarChart3, title: "Price List", description: "Price table, calculation formulas, discount rules. Robot will state exact cost." },
+        { icon: Database, title: "CRM/Telephony Access", description: "API keys or credentials for integration. Support amoCRM, Bitrix24, 1C and others." },
+      ],
+      timeline: "Information gathering takes 1-2 days. We conduct interviews and help structure the data.",
+    },
+    howWorksDeep: {
+      title: "How Robot Works with Prices, CRM and Manager Transfer",
+      items: [
+        {
+          icon: BarChart3,
+          title: "Working with Prices",
+          description: "Robot loads your price list and calculates cost in real-time. Supports complex formulas: volume dependency, seasonal coefficients, cumulative discounts. Price update — in 5 minutes via admin panel.",
+          features: ["Calculation by formulas of any complexity", "Auto-update prices from 1C/Excel", "Stating exact cost", "Accounting for discounts and promotions"],
+        },
+        {
+          icon: Database,
+          title: "CRM Integration",
+          description: "Every call is recorded in CRM automatically. Robot creates deal, fills customer card, attaches call recording and transcription. Manager sees full history and is ready to continue dialogue.",
+          features: ["Auto-creation of deals and contacts", "Filling fields from dialogue", "Recording + transcription in card", "Task assignment to managers"],
+        },
+        {
+          icon: Headphones,
+          title: "Transfer to Manager",
+          description: "Robot transfers call in three cases: client asks, situation is complex, or it's a VIP client. Transfer takes 2-3 seconds. Manager receives card with context: who's calling, what was discussed, what need.",
+          features: ["Transfer on client request", "Auto-detection of complex cases", "Conversation context for manager", "Queue and call distribution"],
+        },
+      ],
+    },
+    seoText: {
+      title: "Robot Operator for Business: Complete Guide",
+      content: `
+        <p><strong>Robot Operator</strong> is an AI system for automating incoming calls that answers customers 24/7, qualifies leads and creates CRM requests without human involvement. Unlike IVR menus with buttons, robot operator conducts full voice dialogue, understands natural speech and adapts to conversation context.</p>
+        
+        <h3>How Robot Operator Differs from Call Center</h3>
+        <p>Traditional call center means people who get tired, sick, go on vacation and make mistakes. <strong>AI operator for call processing</strong> works without breaks, answers in 3 seconds and never forgets the script. At the same time, cost per call is 5-10 times lower than a live operator.</p>
+        
+        <h3>Incoming Call Automation: What Can Be Automated</h3>
+        <p>Modern robot operator handles up to 80% of typical requests: informing about prices and availability, order intake, service booking, lead qualification, feedback collection. Complex questions and VIP clients are automatically transferred to managers with full conversation context.</p>
+        
+        <h3>Robot Operator for Business: Who It's For</h3>
+        <p>Solution is effective for companies with 100+ incoming calls per month: e-commerce, construction companies, logistics, medical centers, auto services, real estate agencies. Payback — 1 to 3 months depending on call volume.</p>
+        
+        <h3>Robot Operator Technologies</h3>
+        <p>Based on speech recognition (ASR), speech synthesis (TTS) and large language models (LLM) for context understanding. Robot learns from your data: prices, FAQ, call recordings. More data — more accurate answers and higher conversion.</p>
+      `,
     },
     faq: {
       title: "Frequently Asked Questions",
@@ -740,34 +914,44 @@ export function RobotOperatorPage({ locale }: RobotOperatorPageProps) {
             <p className="text-xl text-muted-foreground">{t.cases.subtitle}</p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-3 gap-6">
             {t.cases.items.map((caseItem, idx) => (
               <Card key={idx} className="overflow-hidden">
                 <CardContent className="p-0">
-                  <div className="p-6 bg-gradient-to-br from-blue-500 to-cyan-500">
+                  <div className="p-5 bg-gradient-to-br from-blue-500 to-cyan-500">
                     <div className="text-white/80 text-sm mb-1">{caseItem.industry}</div>
-                    <h3 className="text-2xl font-bold text-white">{caseItem.company}</h3>
+                    <h3 className="text-xl font-bold text-white">{caseItem.company}</h3>
                   </div>
-                  <div className="p-6">
-                    <div className="mb-6">
-                      <div className="text-sm font-semibold text-red-500 mb-2">Проблема:</div>
-                      <p className="text-muted-foreground">{caseItem.challenge}</p>
+                  <div className="p-5">
+                    <div className="mb-4">
+                      <div className="text-xs font-semibold text-red-500 uppercase tracking-wide mb-2">Задача</div>
+                      <p className="text-sm text-muted-foreground">{caseItem.task}</p>
                     </div>
-                    <div className="mb-6">
-                      <div className="text-sm font-semibold text-green-500 mb-2">Решение:</div>
-                      <p className="text-muted-foreground">{caseItem.solution}</p>
+                    <div className="mb-4">
+                      <div className="text-xs font-semibold text-blue-500 uppercase tracking-wide mb-2">Что подключили</div>
+                      <ul className="space-y-1">
+                        {caseItem.connected.map((item, i) => (
+                          <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                            <CheckCircle2 className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <div className="grid grid-cols-3 gap-4 mb-6 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
-                      {caseItem.results.map((result, i) => (
-                        <div key={i} className="text-center">
-                          <div className="text-2xl font-bold text-primary">{result.value}</div>
-                          <div className="text-xs text-muted-foreground">{result.label}</div>
-                        </div>
-                      ))}
+                    <div className="mb-4">
+                      <div className="text-xs font-semibold text-green-500 uppercase tracking-wide mb-2">Результат</div>
+                      <div className="grid grid-cols-3 gap-2 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
+                        {caseItem.results.map((result, i) => (
+                          <div key={i} className="text-center">
+                            <div className="text-lg font-bold text-primary">{result.value}</div>
+                            <div className="text-[10px] text-muted-foreground leading-tight">{result.label}</div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <div className="flex items-start gap-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
-                      <Quote className="w-6 h-6 text-blue-500 flex-shrink-0" />
-                      <p className="text-sm italic text-muted-foreground">{caseItem.quote}</p>
+                    <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                      <Quote className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
+                      <p className="text-xs italic text-muted-foreground">{caseItem.quote}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -893,6 +1077,133 @@ export function RobotOperatorPage({ locale }: RobotOperatorPageProps) {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* When Robot vs Human */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center">{t.whenRobot.title}</h2>
+          
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            <Card className="border-green-200 dark:border-green-900">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                    <Bot className="w-6 h-6 text-green-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-green-600">{t.whenRobot.robotTitle}</h3>
+                </div>
+                <ul className="space-y-3">
+                  {t.whenRobot.robotItems.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-orange-200 dark:border-orange-900">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+                    <Headphones className="w-6 h-6 text-orange-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-orange-600">{t.whenRobot.humanTitle}</h3>
+                </div>
+                <ul className="space-y-3">
+                  {t.whenRobot.humanItems.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <Users className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+          
+          <p className="text-center text-muted-foreground bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4">
+            {t.whenRobot.note}
+          </p>
+        </div>
+      </section>
+
+      {/* What Needed for Launch */}
+      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">{t.whatNeeded.title}</h2>
+            <p className="text-xl text-muted-foreground">{t.whatNeeded.subtitle}</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {t.whatNeeded.items.map((item, idx) => {
+              const Icon = item.icon
+              return (
+                <div key={idx} className="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-border/50">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <h3 className="font-semibold">{item.title}</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{item.description}</p>
+                </div>
+              )
+            })}
+          </div>
+          
+          <p className="text-center text-sm text-muted-foreground">{t.whatNeeded.timeline}</p>
+        </div>
+      </section>
+
+      {/* How Works Deep */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center">{t.howWorksDeep.title}</h2>
+          
+          <div className="space-y-8">
+            {t.howWorksDeep.items.map((item, idx) => {
+              const Icon = item.icon
+              return (
+                <Card key={idx} className="overflow-hidden">
+                  <CardContent className="p-0">
+                    <div className="grid md:grid-cols-3">
+                      <div className="p-6 bg-gradient-to-br from-blue-500 to-cyan-500 md:col-span-1 flex flex-col justify-center">
+                        <Icon className="w-12 h-12 text-white mb-4" />
+                        <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                      </div>
+                      <div className="p-6 md:col-span-2">
+                        <p className="text-muted-foreground mb-4">{item.description}</p>
+                        <div className="grid grid-cols-2 gap-3">
+                          {item.features.map((feature, i) => (
+                            <div key={i} className="flex items-center gap-2 text-sm">
+                              <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
+                              <span>{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* SEO Text */}
+      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">{t.seoText.title}</h2>
+          <div 
+            className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-h3:text-xl prose-h3:mt-8 prose-p:text-muted-foreground"
+            dangerouslySetInnerHTML={{ __html: t.seoText.content }}
+          />
         </div>
       </section>
 
