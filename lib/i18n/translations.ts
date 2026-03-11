@@ -614,6 +614,26 @@ export type TranslationKey =
   | "homepage.seoSol10"
   | "homepage.seoSol11"
   | "homepage.seoSol12"
+  | "homepage.aiAutomationLabel"
+  | "homepage.aiAutomationTitle"
+  | "homepage.aiAutomationDesc"
+  | "homepage.aiSolutions.robotOperator"
+  | "homepage.aiSolutions.robotOperatorDesc"
+  | "homepage.aiSolutions.salesAutomation"
+  | "homepage.aiSolutions.salesAutomationDesc"
+  | "homepage.aiSolutions.requestProcessing"
+  | "homepage.aiSolutions.requestProcessingDesc"
+  | "homepage.aiSolutions.invoiceGeneration"
+  | "homepage.aiSolutions.invoiceGenerationDesc"
+  | "homepage.aiSolutions.orderProcessing"
+  | "homepage.aiSolutions.orderProcessingDesc"
+  | "homepage.aiSolutions.deliveryCalculation"
+  | "homepage.aiSolutions.deliveryCalculationDesc"
+  | "homepage.aiSolutions.aiForBusiness"
+  | "homepage.aiSolutions.aiForBusinessDesc"
+  | "homepage.aiSolutions.viewAll"
+  | "homepage.aiSolutions.viewAllDesc"
+  | "homepage.aiSolutions.viewAllLink"
 
 const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
   ru: {
@@ -711,7 +731,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "about.values.partnershipDesc": "Долгосрочные отношения, основанные на взаимном успехе",
     "about.team.title": "Международная команда",
     "about.team.description":
-      "Наша команда объединяет талантливых специалистов из разных стран, каждый из которых привносит уникальный опыт и экспертизу в области искусственного интеллекта.",
+      "Наша команда объединяет талантливых специалистов из разных стран, каждый из которы�� привносит уникальный опыт и экспертизу в области искусственного интеллекта.",
     "about.offices.title": "Наши офисы",
     "about.offices.description":
       "Мы работаем из трёх ключевых локаций, обеспечивая круглосуточную поддержку клиентов по всему миру.",
@@ -961,7 +981,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "voiceSales.pricing.setupDesc": "Разовая стоимость внедрения",
     "voiceSales.pricing.perMinute": "За минуту",
     "voiceSales.pricing.perMinutePrice": "от $0.05",
-    "voiceSales.pricing.perMinuteDesc": "Стоимость разговора",
+    "voiceSales.pricing.perMinuteDesc": "Стоимость разгов��ра",
     "voiceSales.pricing.support": "Поддержка",
     "voiceSales.pricing.supportPrice": "от $500/мес",
     "voiceSales.pricing.supportDesc": "Техническая поддержка",
@@ -1126,7 +1146,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "hotelConcierge.case2.result3": "ROI 300% за год",
     "hotelConcierge.readFullCase": "Читать кейс полностью",
     "hotelConcierge.packagesTitle": "Пакеты для отелей",
-    "hotelConcierge.packagesSubtitle": "Выберите подходящий тариф",
+    "hotelConcierge.packagesSubtitle": "Выберите подходящий тар��ф",
     "hotelConcierge.package1.name": "Small",
     "hotelConcierge.package1.description": "До 50 номеров",
     "hotelConcierge.package1.price": "€299/мес",
@@ -1267,17 +1287,37 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "homepage.seoSol2": "Автоматический оператор",
     "homepage.seoSol3": "Виртуальный оператор",
     "homepage.seoSol4": "Автоматизация продаж",
-    "homepage.seoSol5": "Система автоматизации продаж",
+    "homepage.seoSol5": "Система автоматизации пр��даж",
     "homepage.seoSol6": "Робот для звонков",
     "homepage.seoSol7": "Робот для продаж",
     "homepage.seoSol8": "Обработка заявок",
     "homepage.seoSol9": "Обработка заказов",
     "homepage.seoSol10": "Выставление счетов",
     "homepage.seoSol11": "Расчет доставки",
-    "homepage.seoSol12": "AI для бизнеса",
+"homepage.seoSol12": "AI для бизнеса",
+    "homepage.aiAutomationLabel": "AI автоматизация",
+    "homepage.aiAutomationTitle": "Полный стек AI-автоматизации",
+    "homepage.aiAutomationDesc": "Все инструменты для автоматизации бизнес-процессов в одной платформе",
+    "homepage.aiSolutions.robotOperator": "Робот оператор",
+    "homepage.aiSolutions.robotOperatorDesc": "Отвечает на 100% входящих звонков 24/7",
+    "homepage.aiSolutions.salesAutomation": "Автоматизация продаж",
+    "homepage.aiSolutions.salesAutomationDesc": "Рост производительности в 3-5 раз",
+    "homepage.aiSolutions.requestProcessing": "Обработка заявок",
+    "homepage.aiSolutions.requestProcessingDesc": "Автоматическая квалификация лидов",
+    "homepage.aiSolutions.invoiceGeneration": "Выставление счетов",
+    "homepage.aiSolutions.invoiceGenerationDesc": "Автоматическая генерация и отправка",
+    "homepage.aiSolutions.orderProcessing": "Обработка заказов",
+    "homepage.aiSolutions.orderProcessingDesc": "Полный цикл автоматизации",
+    "homepage.aiSolutions.deliveryCalculation": "Расчет доставки",
+    "homepage.aiSolutions.deliveryCalculationDesc": "Оптимизация маршрутов и затрат",
+    "homepage.aiSolutions.aiForBusiness": "AI для бизнеса",
+    "homepage.aiSolutions.aiForBusinessDesc": "Комплексная автоматизация",
+    "homepage.aiSolutions.viewAll": "Все решения",
+    "homepage.aiSolutions.viewAllDesc": "12+ решений автоматизации",
+    "homepage.aiSolutions.viewAllLink": "Смотреть все решения",
   },
   en: {
-    // Navigation
+  // Navigation
     "nav.solutions": "Solutions",
     "nav.platform": "Platform",
     "nav.cases": "Cases",
@@ -1864,10 +1904,30 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "homepage.seoSol9": "Order Processing",
     "homepage.seoSol10": "Invoice Generation",
     "homepage.seoSol11": "Delivery Calculation",
-    "homepage.seoSol12": "AI for Business",
+"homepage.seoSol12": "AI for Business",
+    "homepage.aiAutomationLabel": "AI Automation",
+    "homepage.aiAutomationTitle": "Complete AI Automation Stack",
+    "homepage.aiAutomationDesc": "All tools for automating your business processes in one platform",
+    "homepage.aiSolutions.robotOperator": "Robot Operator",
+    "homepage.aiSolutions.robotOperatorDesc": "Answer 100% of inbound calls 24/7",
+    "homepage.aiSolutions.salesAutomation": "Sales Automation",
+    "homepage.aiSolutions.salesAutomationDesc": "Increase productivity 3-5x",
+    "homepage.aiSolutions.requestProcessing": "Request Processing",
+    "homepage.aiSolutions.requestProcessingDesc": "Automatic lead qualification",
+    "homepage.aiSolutions.invoiceGeneration": "Invoice Generation",
+    "homepage.aiSolutions.invoiceGenerationDesc": "Auto-generate and send invoices",
+    "homepage.aiSolutions.orderProcessing": "Order Processing",
+    "homepage.aiSolutions.orderProcessingDesc": "Full cycle automation",
+    "homepage.aiSolutions.deliveryCalculation": "Delivery Calculation",
+    "homepage.aiSolutions.deliveryCalculationDesc": "Optimize routes and costs",
+    "homepage.aiSolutions.aiForBusiness": "AI for Business",
+    "homepage.aiSolutions.aiForBusinessDesc": "Complete automation stack",
+    "homepage.aiSolutions.viewAll": "View All Solutions",
+    "homepage.aiSolutions.viewAllDesc": "12+ automation solutions",
+    "homepage.aiSolutions.viewAllLink": "View all solutions",
   },
   es: {
-    // Navigation
+  // Navigation
     "nav.solutions": "Soluciones",
     "nav.platform": "Plataforma",
     "nav.cases": "Casos",
@@ -2464,10 +2524,30 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "homepage.seoSol9": "Procesamiento de Pedidos",
     "homepage.seoSol10": "Generacion de Facturas",
     "homepage.seoSol11": "Calculo de Entrega",
-    "homepage.seoSol12": "IA para Negocios",
+"homepage.seoSol12": "IA para Negocios",
+    "homepage.aiAutomationLabel": "Automatizacion IA",
+    "homepage.aiAutomationTitle": "Stack completo de automatizacion IA",
+    "homepage.aiAutomationDesc": "Todas las herramientas para automatizar sus procesos de negocio en una plataforma",
+    "homepage.aiSolutions.robotOperator": "Robot Operador",
+    "homepage.aiSolutions.robotOperatorDesc": "Responde al 100% de las llamadas entrantes 24/7",
+    "homepage.aiSolutions.salesAutomation": "Automatizacion de Ventas",
+    "homepage.aiSolutions.salesAutomationDesc": "Aumenta la productividad 3-5x",
+    "homepage.aiSolutions.requestProcessing": "Procesamiento de Solicitudes",
+    "homepage.aiSolutions.requestProcessingDesc": "Calificacion automatica de leads",
+    "homepage.aiSolutions.invoiceGeneration": "Generacion de Facturas",
+    "homepage.aiSolutions.invoiceGenerationDesc": "Genera y envia facturas automaticamente",
+    "homepage.aiSolutions.orderProcessing": "Procesamiento de Pedidos",
+    "homepage.aiSolutions.orderProcessingDesc": "Ciclo completo de automatizacion",
+    "homepage.aiSolutions.deliveryCalculation": "Calculo de Entrega",
+    "homepage.aiSolutions.deliveryCalculationDesc": "Optimiza rutas y costos",
+    "homepage.aiSolutions.aiForBusiness": "IA para Negocios",
+    "homepage.aiSolutions.aiForBusinessDesc": "Automatizacion completa",
+    "homepage.aiSolutions.viewAll": "Ver Todas las Soluciones",
+    "homepage.aiSolutions.viewAllDesc": "12+ soluciones de automatizacion",
+    "homepage.aiSolutions.viewAllLink": "Ver todas las soluciones",
   },
   de: {
-    // Navigation
+  // Navigation
     "nav.solutions": "Lösungen",
     "nav.platform": "Plattform",
     "nav.cases": "Fälle",
@@ -3071,10 +3151,30 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "homepage.seoSol9": "Auftragsverarbeitung",
     "homepage.seoSol10": "Rechnungsgenerierung",
     "homepage.seoSol11": "Lieferungsberechnung",
-    "homepage.seoSol12": "KI fur Unternehmen",
+"homepage.seoSol12": "KI fur Unternehmen",
+    "homepage.aiAutomationLabel": "KI-Automatisierung",
+    "homepage.aiAutomationTitle": "Kompletter KI-Automatisierungs-Stack",
+    "homepage.aiAutomationDesc": "Alle Tools zur Automatisierung Ihrer Geschaftsprozesse auf einer Plattform",
+    "homepage.aiSolutions.robotOperator": "Roboter-Operator",
+    "homepage.aiSolutions.robotOperatorDesc": "Beantwortet 100% der eingehenden Anrufe 24/7",
+    "homepage.aiSolutions.salesAutomation": "Vertriebsautomatisierung",
+    "homepage.aiSolutions.salesAutomationDesc": "Produktivitat 3-5x steigern",
+    "homepage.aiSolutions.requestProcessing": "Anfrageverarbeitung",
+    "homepage.aiSolutions.requestProcessingDesc": "Automatische Lead-Qualifizierung",
+    "homepage.aiSolutions.invoiceGeneration": "Rechnungserstellung",
+    "homepage.aiSolutions.invoiceGenerationDesc": "Automatische Rechnungserstellung und -versand",
+    "homepage.aiSolutions.orderProcessing": "Auftragsverarbeitung",
+    "homepage.aiSolutions.orderProcessingDesc": "Vollstandiger Automatisierungszyklus",
+    "homepage.aiSolutions.deliveryCalculation": "Lieferberechnung",
+    "homepage.aiSolutions.deliveryCalculationDesc": "Routen und Kosten optimieren",
+    "homepage.aiSolutions.aiForBusiness": "KI fur Unternehmen",
+    "homepage.aiSolutions.aiForBusinessDesc": "Komplette Automatisierung",
+    "homepage.aiSolutions.viewAll": "Alle Losungen anzeigen",
+    "homepage.aiSolutions.viewAllDesc": "12+ Automatisierungslosungen",
+    "homepage.aiSolutions.viewAllLink": "Alle Losungen anzeigen",
   },
   nl: {
-    // Navigation
+  // Navigation
     "nav.solutions": "Oplossingen",
     "nav.platform": "Platform",
     "nav.cases": "Cases",
@@ -3669,10 +3769,30 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "homepage.seoSol9": "Orderverwerking",
     "homepage.seoSol10": "Factuurgeneratie",
     "homepage.seoSol11": "Bezorgingsberekening",
-    "homepage.seoSol12": "AI voor bedrijven",
+"homepage.seoSol12": "AI voor bedrijven",
+    "homepage.aiAutomationLabel": "AI-automatisering",
+    "homepage.aiAutomationTitle": "Complete AI-automatiserings-stack",
+    "homepage.aiAutomationDesc": "Alle tools om uw bedrijfsprocessen op een platform te automatiseren",
+    "homepage.aiSolutions.robotOperator": "Robot Operator",
+    "homepage.aiSolutions.robotOperatorDesc": "Beantwoordt 100% van de inkomende oproepen 24/7",
+    "homepage.aiSolutions.salesAutomation": "Verkoopautomatisering",
+    "homepage.aiSolutions.salesAutomationDesc": "Verhoog de productiviteit 3-5x",
+    "homepage.aiSolutions.requestProcessing": "Verzoekverwerking",
+    "homepage.aiSolutions.requestProcessingDesc": "Automatische leadkwalificatie",
+    "homepage.aiSolutions.invoiceGeneration": "Factuurgeneratie",
+    "homepage.aiSolutions.invoiceGenerationDesc": "Automatisch facturen genereren en verzenden",
+    "homepage.aiSolutions.orderProcessing": "Orderverwerking",
+    "homepage.aiSolutions.orderProcessingDesc": "Volledige automatiseringscyclus",
+    "homepage.aiSolutions.deliveryCalculation": "Leveringsberekening",
+    "homepage.aiSolutions.deliveryCalculationDesc": "Optimaliseer routes en kosten",
+    "homepage.aiSolutions.aiForBusiness": "AI voor bedrijven",
+    "homepage.aiSolutions.aiForBusinessDesc": "Complete automatisering",
+    "homepage.aiSolutions.viewAll": "Alle oplossingen bekijken",
+    "homepage.aiSolutions.viewAllDesc": "12+ automatiseringsoplossingen",
+    "homepage.aiSolutions.viewAllLink": "Alle oplossingen bekijken",
   },
   fr: {
-    // Navigation
+  // Navigation
     "nav.solutions": "Solutions",
     "nav.platform": "Plateforme",
     "nav.cases": "Cas",
@@ -4278,6 +4398,26 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "homepage.seoSol10": "Generation de Factures",
     "homepage.seoSol11": "Calcul de Livraison",
     "homepage.seoSol12": "IA pour Entreprises",
+    "homepage.aiAutomationLabel": "Automatisation IA",
+    "homepage.aiAutomationTitle": "Stack complet d'automatisation IA",
+    "homepage.aiAutomationDesc": "Tous les outils pour automatiser vos processus metier sur une seule plateforme",
+    "homepage.aiSolutions.robotOperator": "Operateur Robot",
+    "homepage.aiSolutions.robotOperatorDesc": "Repond a 100% des appels entrants 24/7",
+    "homepage.aiSolutions.salesAutomation": "Automatisation des Ventes",
+    "homepage.aiSolutions.salesAutomationDesc": "Augmentez la productivite de 3-5x",
+    "homepage.aiSolutions.requestProcessing": "Traitement des Demandes",
+    "homepage.aiSolutions.requestProcessingDesc": "Qualification automatique des leads",
+    "homepage.aiSolutions.invoiceGeneration": "Generation de Factures",
+    "homepage.aiSolutions.invoiceGenerationDesc": "Genere et envoie des factures automatiquement",
+    "homepage.aiSolutions.orderProcessing": "Traitement des Commandes",
+    "homepage.aiSolutions.orderProcessingDesc": "Cycle complet d'automatisation",
+    "homepage.aiSolutions.deliveryCalculation": "Calcul de Livraison",
+    "homepage.aiSolutions.deliveryCalculationDesc": "Optimisez les itineraires et les couts",
+    "homepage.aiSolutions.aiForBusiness": "IA pour Entreprises",
+    "homepage.aiSolutions.aiForBusinessDesc": "Automatisation complete",
+    "homepage.aiSolutions.viewAll": "Voir toutes les solutions",
+    "homepage.aiSolutions.viewAllDesc": "12+ solutions d'automatisation",
+    "homepage.aiSolutions.viewAllLink": "Voir toutes les solutions",
   },
   }
 
