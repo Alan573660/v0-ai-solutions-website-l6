@@ -67,8 +67,9 @@ export function Header({ locale }: HeaderProps) {
     { name: t("solutions.smartHome"), href: `/${locale}/solutions/smart-home` },
   ]
 
-  // 12 SEO-страниц AI автоматизации
+  // SEO-страницы AI автоматизации
   const aiAutomation = [
+    { name: locale === "ru" ? "AI автоматизация бизнеса" : "AI Business Automation", href: `/${locale}/automation-business`, highlight: true },
     { name: locale === "ru" ? "Робот оператор" : "Robot Operator", href: `/${locale}/solutions/robot-operator` },
     { name: locale === "ru" ? "Автоматический оператор" : "Automatic Operator", href: `/${locale}/solutions/automatic-operator` },
     { name: locale === "ru" ? "Виртуальный оператор" : "Virtual Operator", href: `/${locale}/solutions/virtual-operator` },

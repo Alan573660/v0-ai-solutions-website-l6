@@ -125,6 +125,17 @@ const allSolutions = {
     nl: "AI voor Bedrijven",
     fr: "IA pour Entreprises"
   },
+  // Hub страница
+  "automation-business": { 
+    group: "business", 
+    ru: "AI автоматизация бизнеса", 
+    en: "AI Business Automation",
+    es: "Automatización de Negocios con IA",
+    de: "KI-Geschäftsautomatisierung",
+    nl: "AI Bedrijfsautomatisering",
+    fr: "Automatisation d'Entreprise par IA",
+    isHub: true
+  },
 }
 
 const groupIcons = {
@@ -210,6 +221,9 @@ export function RelatedSolutions({ locale, currentSlug }: RelatedSolutionsProps)
             const Icon = groupIcons[data.group as keyof typeof groupIcons] || Phone
             const color = groupColors[data.group as keyof typeof groupColors] || "bg-blue-500"
             const name = data[locale as keyof typeof data] as string || data.ru
+            // Hub страницы находятся в корне, остальные в /solutions/
+            const isHub = (data as { isHub?: boolean }).isHub
+            const href = isHub ? `/${locale}/${slug}` : `/${locale}/solutions/${slug}`
             
             return (
               <Card key={slug} className="group hover:shadow-md transition-all duration-300">
@@ -221,7 +235,7 @@ export function RelatedSolutions({ locale, currentSlug }: RelatedSolutionsProps)
                 </CardHeader>
                 <CardContent className="pt-0">
                   <Button asChild variant="ghost" size="sm" className="w-full justify-start p-0 h-auto text-primary hover:text-primary/80">
-                    <Link href={`/${locale}/solutions/${slug}`}>
+                    <Link href={href}>
                       {t.learnMore}
                       <ArrowRight className="ml-1 h-4 w-4" />
                     </Link>
