@@ -91,13 +91,33 @@ export function ObrabotkZakazovPage() {
     },
   ]
 
+  const pricing = {
+    title: "Стоимость обработки заказов",
+    subtitle: "Прозрачное ценообразование",
+    plans: [
+      { name: "Старт", price: "от 25 000", period: "руб/мес", features: ["До 500 заказов", "Базовая обработка", "1 интеграция", "Email поддержка"], highlight: false },
+      { name: "Бизнес", price: "от 65 000", period: "руб/мес", features: ["До 2500 заказов", "Полный цикл", "5 интеграций", "Приоритетная поддержка"], highlight: true },
+      { name: "Enterprise", price: "Индивидуально", period: "", features: ["Неограниченно", "Кастомная логика", "Все интеграции", "24/7 поддержка", "SLA"], highlight: false },
+    ],
+    note: "ROI за 2-3 месяца. Первые 14 дней бесплатно.",
+  }
+
+  const m2Benefits = [
+    { title: "Собственная платформа", description: "Полный контроль над данными" },
+    { title: "Любые источники", description: "Сайт, маркетплейсы, CRM, ERP" },
+    { title: "Быстрое внедрение", description: "Запуск за 10-14 дней" },
+    { title: "Безопасность", description: "ISO 27001, GDPR, 152-ФЗ" },
+    { title: "Экспертная команда", description: "10+ лет опыта" },
+    { title: "Гарантия результата", description: "0 потерянных заказов" },
+  ]
+
   const faqs = [
     { question: "С какими системами интегрируется обработка заказов?", answer: "Интегрируемся с любыми CRM, складскими системами (1C, МойСклад, Odoo), маркетплейсами (Wildberries, Ozon, Яндекс.Маркет), службами доставки (СДЭК, Boxberry, Почта России) через API или готовые коннекторы." },
     { question: "Как обрабатываются заказы при отсутствии товара на складе?", answer: "Система может автоматически: поставить заказ в лист ожидания, предложить замену из аналогов, разбить заказ на частичные поставки или отменить и уведомить клиента. Логика настраивается под ваши правила." },
     { question: "Что происходит при ошибках в данных клиента?", answer: "Система валидирует данные при поступлении: адрес, телефон, ИНН компании. При ошибках автоматически запрашивает уточнение у клиента через удобный для него канал перед передачей в обработку." },
     { question: "Можно ли обрабатывать B2B-заказы с персональными ценами?", answer: "Да, система поддерживает персональные прайс-листы, договорные скидки, кредитные лимиты и специальные условия для корпоративных клиентов. Интегрируется с вашей системой ценообразования." },
     { question: "Как контролируется статус каждого заказа?", answer: "В едином дашборде видны все заказы, их статус на каждом этапе, SLA и исполнители. Клиент получает автоуведомления при смене статуса. Просроченные заказы эскалируются менеджерам." },
-    { question: "Как долго занимает запуск?", answer: "Стандартный запуск: 10-14 дней. Для простых случаев (1-2 канала, простая логика) — от 5-7 дней. Делаем поэтапно, не останавливая текущую работу." },
+    { question: "Как долго занимает запуск?", answer: "Стандартный запуск: 10-14 дней. Для простых случаев (1-2 канала, простая логика) — от 5-7 дней. Делаем поэтапно, н�� останавливая текущую работу." },
   ]
 
   return (
@@ -333,6 +353,41 @@ export function ObrabotkZakazovPage() {
         </div>
       </section>
 
+      {/* Pricing */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">{pricing.title}</h2>
+            <p className="text-xl text-muted-foreground">{pricing.subtitle}</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {pricing.plans.map((plan, idx) => (
+              <Card key={idx} className={`relative ${plan.highlight ? 'border-orange-500 shadow-lg ring-2 ring-orange-500' : ''}`}>
+                {plan.highlight && (<div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-orange-500 text-white text-xs font-medium rounded-full">Популярный</div>)}
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                  <div className="mb-6"><span className="text-3xl font-bold">{plan.price}</span><span className="text-muted-foreground">{plan.period}</span></div>
+                  <ul className="space-y-3">{plan.features.map((f, i) => (<li key={i} className="flex items-center gap-2 text-sm"><Check className="w-4 h-4 text-orange-500" />{f}</li>))}</ul>
+                  <Button className="w-full mt-6" variant={plan.highlight ? "default" : "outline"} onClick={() => openModal("consultation")}>Получить консультацию</Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <p className="text-center text-sm text-muted-foreground">{pricing.note}</p>
+        </div>
+      </section>
+
+      {/* M2 Benefits */}
+      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-16"><h2 className="text-3xl md:text-5xl font-bold mb-6">Почему M2 AI Solutions</h2><p className="text-xl text-muted-foreground">Технологическое лидерство</p></div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {m2Benefits.map((item, idx) => (<div key={idx} className="p-6 rounded-2xl bg-white dark:bg-slate-800 hover:shadow-lg transition-all"><h3 className="font-semibold text-lg mb-2">{item.title}</h3><p className="text-sm text-muted-foreground">{item.description}</p></div>))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-3xl md:text-5xl font-bold mb-12">Частые вопросы</h2>
@@ -350,6 +405,7 @@ export function ObrabotkZakazovPage() {
         </div>
       </section>
 
+      {/* Final CTA */}
       <section className="py-20 md:py-28 bg-gradient-to-br from-orange-600 to-amber-600 text-white">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Автоматизируйте обработку заказов</h2>

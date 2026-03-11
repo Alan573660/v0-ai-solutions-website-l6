@@ -8,7 +8,7 @@ import {
   Phone, Users, Target, BarChart3, Clock, Zap,
   Building2, ShoppingBag, Briefcase, Home,
   CheckCircle2, AlertCircle, Settings, Database,
-  LineChart, Lock,
+  LineChart, Lock, Brain, Globe, Shield,
 } from "lucide-react"
 import { useCTA } from "@/components/modals/cta-provider"
 
@@ -100,6 +100,26 @@ export function SalesAutomationSystemPage() {
     },
   ]
 
+  const pricing = {
+    title: "Стоимость системы автоматизации продаж",
+    subtitle: "Гибкое ценообразование под ваш объем",
+    plans: [
+      { name: "Старт", price: "от 50 000", period: "руб/мес", features: ["До 1000 контактов", "Базовые сценарии", "1 CRM интеграция", "Email поддержка"], highlight: false },
+      { name: "Бизнес", price: "от 120 000", period: "руб/мес", features: ["До 5000 контактов", "Сложные сценарии", "Все CRM", "Приоритетная поддержка", "Аналитика"], highlight: true },
+      { name: "Enterprise", price: "Индивидуально", period: "", features: ["Неограниченно", "Кастомные сценарии", "Выделенная линия", "24/7 поддержка", "SLA гарантии"], highlight: false },
+    ],
+    note: "Первые 14 дней бесплатно. Внедрение и обучение включены.",
+  }
+
+  const m2Benefits = [
+    { icon: Brain, title: "Собственная AI-платформа", description: "Полный контроль над технологией. Не зависим от сторонних решений." },
+    { icon: Globe, title: "Мультиязычность", description: "Робот говорит на 6+ языках. Автоопределение языка собеседника." },
+    { icon: Zap, title: "Быстрое внедрение", description: "Запуск за 7 дней. Готовые интеграции с популярными CRM." },
+    { icon: Shield, title: "Безопасность", description: "ISO 27001, GDPR, 152-ФЗ. Все данные защищены." },
+    { icon: Users, title: "Экспертная команда", description: "10+ лет в AI и продажах. 50+ успешных внедрений." },
+    { icon: TrendingUp, title: "Гарантия ROI", description: "Рассчитываем окупаемость до старта. Возврат за 1.5-2 месяца." },
+  ]
+
   const faqs = [
     { question: "Как робот выглядит с точки зрения клиента?", answer: "Клиент получает звонок — голос человека, вежливый, профессиональный. Робот может рассказать о товаре, ответить на простые вопросы, пригласить на встречу. Звонок ничем не отличается от звонка обычного менеджера." },
     { question: "Какую конверсию можно ожидать?", answer: "Обычно 15-30% в зависимости от товара и аудитории. На некоторых ниш доходит до 50%. Первый месяц тестируем, оптимизируем, ко второму месяцу выходим на стабильные цифры." },
@@ -159,7 +179,7 @@ export function SalesAutomationSystemPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { icon: Clock, title: "Неэффективность", desc: "Менеджер делает 30-50 звонков в день, из них 3-5 договариваются на встречу. Остальное — пустые разговоры" },
-              { icon: AlertCircle, title: "Выгорание", desc: "Постоянные отказы, агрессия, оскорбления. За год 50-70% менеджеров уходят из отдела продаж" },
+              { icon: AlertCircle, title: "Выгорание", desc: "Постоянные отказы, агрессия, оск��рбления. За год 50-70% менеджеров уходят из отдела продаж" },
               { icon: TrendingUp, title: "Непредсказуемость", desc: "Результат зависит от настроения менеджера, времени, погоды. Нет системы, нет стабильности" },
               { icon: BarChart3, title: "Отсутствие данных", desc: "Непонятно сколько звонков, какая конверсия, почему одни менеджеры лучше, почему нет результатов" },
             ].map((item) => {
@@ -368,6 +388,71 @@ export function SalesAutomationSystemPage() {
         </div>
       </section>
 
+      {/* Pricing */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">{pricing.title}</h2>
+            <p className="text-xl text-muted-foreground">{pricing.subtitle}</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {pricing.plans.map((plan, idx) => (
+              <Card key={idx} className={`relative ${plan.highlight ? 'border-primary shadow-lg ring-2 ring-primary' : ''}`}>
+                {plan.highlight && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full">
+                    Популярный
+                  </div>
+                )}
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                  <div className="mb-6">
+                    <span className="text-3xl font-bold">{plan.price}</span>
+                    <span className="text-muted-foreground">{plan.period}</span>
+                  </div>
+                  <ul className="space-y-3">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm">
+                        <Check className="w-4 h-4 text-green-500" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button className="w-full mt-6" variant={plan.highlight ? "default" : "outline"} onClick={() => openModal("consultation")}>
+                    Получить консультацию
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <p className="text-center text-sm text-muted-foreground">{pricing.note}</p>
+        </div>
+      </section>
+
+      {/* M2 Benefits */}
+      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Почему M2 AI Solutions</h2>
+            <p className="text-xl text-muted-foreground">Технологическое лидерство и экспертиза в продажах</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {m2Benefits.map((item, idx) => {
+              const Icon = item.icon
+              return (
+                <div key={idx} className="p-6 rounded-2xl bg-white dark:bg-slate-800 hover:shadow-lg transition-all">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-4">
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground">{item.description}</p>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-3xl md:text-5xl font-bold mb-12">Частые вопросы</h2>

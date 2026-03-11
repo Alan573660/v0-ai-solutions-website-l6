@@ -91,6 +91,26 @@ export function VystavlenieSchetovPage() {
     },
   ]
 
+  const pricing = {
+    title: "Стоимость выставления счётов",
+    subtitle: "Прозрачное ценообразование",
+    plans: [
+      { name: "Старт", price: "от 15 000", period: "руб/мес", features: ["До 200 счётов", "Базовые шаблоны", "Email отправка", "Email поддержка"], highlight: false },
+      { name: "Бизнес", price: "от 40 000", period: "руб/мес", features: ["До 1000 счётов", "Все шаблоны", "Все каналы отправки", "Приоритетная поддержка"], highlight: true },
+      { name: "Enterprise", price: "Индивидуально", period: "", features: ["Неограниченно", "Кастомные шаблоны", "Все интеграции", "24/7 поддержка", "SLA"], highlight: false },
+    ],
+    note: "Экономия 80% времени на счётах. Первые 14 дней бесплатно.",
+  }
+
+  const m2Benefits = [
+    { title: "Автоматизация 100%", description: "Все счета без участия менеджера" },
+    { title: "Все налоговые режимы", description: "ОСН, УСН, ЕНВД, патент" },
+    { title: "Быстрое внедрение", description: "Запуск за 3-5 дней" },
+    { title: "Безопасность", description: "ЭЦП, соответствие ФЗ-152" },
+    { title: "Интеграция 1С", description: "Полная синхронизация" },
+    { title: "Контроль оплаты", description: "Автонапоминания и трекинг" },
+  ]
+
   const faqs = [
     { question: "Какие налоговые системы поддерживаются?", answer: "Поддерживаем все: ОСН, УСН доходы, УСН доходы-расходы, ЕНВД, патент. Налоги рассчитываются автоматически в зависимости от системы налогообложения." },
     { question: "Как счёты интегрируются с 1С и бухгалтерией?", answer: "Интегрируемся с 1С-Бухгалтерией и 1С-УТ. Все счета автоматически передаются в 1С для учёта. Можно также использовать API для других бухсистем." },
@@ -333,6 +353,38 @@ export function VystavlenieSchetovPage() {
         </div>
       </section>
 
+      {/* Pricing */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12"><h2 className="text-3xl md:text-5xl font-bold mb-6">{pricing.title}</h2><p className="text-xl text-muted-foreground">{pricing.subtitle}</p></div>
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {pricing.plans.map((plan, idx) => (
+              <Card key={idx} className={`relative ${plan.highlight ? 'border-blue-500 shadow-lg ring-2 ring-blue-500' : ''}`}>
+                {plan.highlight && (<div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-blue-500 text-white text-xs font-medium rounded-full">Популярный</div>)}
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                  <div className="mb-6"><span className="text-3xl font-bold">{plan.price}</span><span className="text-muted-foreground">{plan.period}</span></div>
+                  <ul className="space-y-3">{plan.features.map((f, i) => (<li key={i} className="flex items-center gap-2 text-sm"><Check className="w-4 h-4 text-blue-500" />{f}</li>))}</ul>
+                  <Button className="w-full mt-6" variant={plan.highlight ? "default" : "outline"} onClick={() => openModal("consultation")}>Получить консультацию</Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <p className="text-center text-sm text-muted-foreground">{pricing.note}</p>
+        </div>
+      </section>
+
+      {/* M2 Benefits */}
+      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-16"><h2 className="text-3xl md:text-5xl font-bold mb-6">Почему M2 AI Solutions</h2><p className="text-xl text-muted-foreground">Технологическое лидерство</p></div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {m2Benefits.map((item, idx) => (<div key={idx} className="p-6 rounded-2xl bg-white dark:bg-slate-800 hover:shadow-lg transition-all"><h3 className="font-semibold text-lg mb-2">{item.title}</h3><p className="text-sm text-muted-foreground">{item.description}</p></div>))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-3xl md:text-5xl font-bold mb-12">Частые вопросы</h2>
@@ -350,6 +402,7 @@ export function VystavlenieSchetovPage() {
         </div>
       </section>
 
+      {/* Final CTA */}
       <section className="py-20 md:py-28 bg-gradient-to-br from-blue-600 to-cyan-600 text-white">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Выставляйте счета за одну секунду</h2>

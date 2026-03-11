@@ -7,7 +7,8 @@ import {
   ArrowRight, Check, Zap, ChevronRight, Quote,
   Layers, Target, BarChart3, Clock, Shield, TrendingUp,
   Building2, ShoppingBag, Briefcase, Home,
-  Cpu, Workflow, Database, LineChart,
+  Cpu, Workflow, Database, LineChart, Brain, Globe, Users,
+  Phone, FileText, Truck,
 } from "lucide-react"
 import { useCTA } from "@/components/modals/cta-provider"
 
@@ -81,7 +82,7 @@ export function AIDlyaBiznesaPage() {
 
   const testimonials = [
     {
-      quote: "Внедрили полный стек AI: продажи, заявки, заказы, счета. За 3 месяца выручка выросла на 180%, ФОТ снизился. Менеджеры перестали заниматься рутиной и сосредоточились на закрытии сделок. Это просто масло.",
+      quote: "Внедрили полный стек AI: продажи, заявки, заказы, счета. За 3 месяца выручка выросла на 180%, ФОТ снизился. Менеджеры перестали заниматься рутиной и сосредото��ились на закрытии сделок. Это просто масло.",
       author: "Виталий Гаврилов", position: "Генеральный директор", company: "БизнесГруппа",
       metric: { value: "+180%", label: "выручка за квартал" },
     },
@@ -90,6 +91,36 @@ export function AIDlyaBiznesaPage() {
       author: "Наталья Белова", position: "Финансовый директор", company: "ТехноПро",
       metric: { value: "2.5 мес", label: "окупаемость" },
     },
+  ]
+
+  const pricing = {
+    title: "Стоимость платформы AI для бизнеса",
+    subtitle: "Гибкое ценообразование под ваши задачи",
+    description: "Платите только за используемые модули. Начните с одного и масштабируйте по мере роста бизнеса.",
+    plans: [
+      { name: "Стартап", price: "от 25 000", period: "руб/мес", features: ["1-2 модуля", "До 1000 операций", "Email поддержка", "Базовые интеграции"], highlight: false },
+      { name: "Бизнес", price: "от 75 000", period: "руб/мес", features: ["3-4 модуля", "До 5000 операций", "Приоритетная поддержка", "Все интеграции", "Выделенный менеджер"], highlight: true },
+      { name: "Enterprise", price: "Индивидуально", period: "", features: ["Все модули", "Неограниченно", "24/7 поддержка", "Кастомные интеграции", "SLA гарантии", "On-premise опция"], highlight: false },
+    ],
+    note: "Первые 14 дней бесплатно. Внедрение и обучение включены во все тарифы.",
+  }
+
+  const m2Benefits = [
+    { icon: Brain, title: "Собственная AI-платформа", description: "Не зависим от сторонних решений. Полный контроль над технологией и данными." },
+    { icon: Globe, title: "Мультиязычность", description: "Поддержка 6+ языков из коробки. Автоопределение языка собеседника." },
+    { icon: Zap, title: "Быстрое внедрение", description: "Полный запуск за 20-30 дней. Готовые интеграции с популярными системами." },
+    { icon: Shield, title: "Безопасность данных", description: "ISO 27001, GDPR, 152-ФЗ. Данные на защищенных серверах в РФ и ЕС." },
+    { icon: Users, title: "Экспертная команда", description: "10+ лет опыта в AI и автоматизации. 50+ успешных внедрений." },
+    { icon: TrendingUp, title: "Гарантия результата", description: "ROI рассчитываем до старта. Возврат инвестиций за 2-3 месяца." },
+  ]
+
+  const relatedSolutions = [
+    { icon: Phone, title: "Робот оператор", href: "/solutions/robot-operator", description: "Автоматический прием всех входящих звонков" },
+    { icon: Target, title: "Робот для продаж", href: "/solutions/robot-dlya-prodazh", description: "Полный цикл продажи от звонка до счета" },
+    { icon: Workflow, title: "Обработка заявок", href: "/solutions/obrabotka-zayavok", description: "Автоматическая квалификация и распределение" },
+    { icon: FileText, title: "Выставление счетов", href: "/solutions/vystavlenie-schetov", description: "Генерация и отправка счетов автоматически" },
+    { icon: Truck, title: "Расчет доставки", href: "/solutions/raschet-dostavki", description: "Оптимизация маршрутов и стоимости" },
+    { icon: BarChart3, title: "Автоматизация продаж", href: "/solutions/sales-automation-system", description: "Полная система автоматизации продаж" },
   ]
 
   const faqs = [
@@ -287,7 +318,100 @@ export function AIDlyaBiznesaPage() {
         </div>
       </section>
 
+      {/* Pricing */}
       <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">{pricing.title}</h2>
+            <p className="text-xl text-muted-foreground mb-4">{pricing.subtitle}</p>
+            <p className="text-muted-foreground">{pricing.description}</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {pricing.plans.map((plan, idx) => (
+              <Card key={idx} className={`relative ${plan.highlight ? 'border-primary shadow-lg ring-2 ring-primary' : ''}`}>
+                {plan.highlight && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full">
+                    Популярный
+                  </div>
+                )}
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                  <div className="mb-6">
+                    <span className="text-3xl font-bold">{plan.price}</span>
+                    <span className="text-muted-foreground">{plan.period}</span>
+                  </div>
+                  <ul className="space-y-3">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm">
+                        <Check className="w-4 h-4 text-green-500" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button className="w-full mt-6" variant={plan.highlight ? "default" : "outline"} onClick={() => openModal("consultation")}>
+                    Получить консультацию
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <p className="text-center text-sm text-muted-foreground">{pricing.note}</p>
+        </div>
+      </section>
+
+      {/* M2 Benefits */}
+      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Почему M2 AI Solutions</h2>
+            <p className="text-xl text-muted-foreground">Технологическое лидерство и экспертиза</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {m2Benefits.map((item, idx) => {
+              const Icon = item.icon
+              return (
+                <div key={idx} className="p-6 rounded-2xl bg-white dark:bg-slate-800 hover:shadow-lg transition-all">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4">
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground">{item.description}</p>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Related Solutions */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Связанные решения</h2>
+            <p className="text-xl text-muted-foreground">Модули платформы для конкретных задач</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {relatedSolutions.map((solution, idx) => {
+              const Icon = solution.icon
+              return (
+                <Link key={idx} href={solution.href} className="group p-6 rounded-2xl border border-border bg-card hover:shadow-lg hover:border-primary/30 transition-all">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                    <Icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors">{solution.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-4">{solution.description}</p>
+                  <span className="inline-flex items-center text-sm text-primary font-medium">
+                    Подробнее <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </Link>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-3xl md:text-5xl font-bold mb-12">Частые вопросы</h2>
           <div className="space-y-4">
