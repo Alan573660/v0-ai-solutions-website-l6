@@ -46,7 +46,7 @@ import { getSolutions, getCallExamples } from "./home-data"
 import { useCTA } from "@/components/modals/cta-provider"
 
 /* ================================================================== */
-/*  Intersection Observer hook for reveal animations                  */
+/* Intersection Observer hook for reveal animations                   */
 /* ================================================================== */
 function useReveal(threshold = 0.15) {
   const ref = useRef<HTMLDivElement>(null)
