@@ -33,6 +33,7 @@ import {
   Globe,
   Lock,
   ArrowUpRight,
+  FileText,
   type LucideIcon,
 } from "lucide-react"
 import type { Locale } from "@/lib/i18n/config"
@@ -269,6 +270,51 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
                         ))}
                       </div>
                     </div>
+                  </Link>
+                </Reveal>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/*  ALL SOLUTIONS (Internal linking)                             */}
+      {/* ============================================================ */}
+      <section className="py-28 lg:py-36">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal className="mx-auto mb-20 max-w-3xl text-center">
+            <Label>{t("homepage.solutionsLabel")}</Label>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+              {t("homepage.allSolutionsTitle") || "Все решения для автоматизации"}
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted-foreground">
+              {t("homepage.allSolutionsDesc") || "Выберите решение, которое подходит для вашего бизнеса"}
+            </p>
+          </Reveal>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { title: t("homepage.seoSol1") || "Робот оператор", href: "/solutions/robot-operator", icon: Phone },
+              { title: t("homepage.seoSol2") || "Автоматический оператор", href: "/solutions/automatic-operator", icon: Phone },
+              { title: t("homepage.seoSol3") || "Виртуальный оператор", href: "/solutions/virtual-operator", icon: Phone },
+              { title: t("homepage.seoSol4") || "Автоматизация продаж", href: "/solutions/automation-sales", icon: TrendingUp },
+              { title: t("homepage.seoSol5") || "Система автоматизации продаж", href: "/solutions/sales-automation-system", icon: TrendingUp },
+              { title: t("homepage.seoSol6") || "Робот для звонков", href: "/solutions/robot-dlya-zvonkov", icon: Phone },
+              { title: t("homepage.seoSol7") || "Робот для продаж", href: "/solutions/robot-dlya-prodazh", icon: TrendingUp },
+              { title: t("homepage.seoSol8") || "Обработка заявок", href: "/solutions/obrabotka-zayavok", icon: Target },
+              { title: t("homepage.seoSol9") || "Обработка заказов", href: "/solutions/obrabotka-zakazov", icon: Target },
+              { title: t("homepage.seoSol10") || "Выставление счетов", href: "/solutions/vystavlenie-schetov", icon: FileText },
+              { title: t("homepage.seoSol11") || "Расчет доставки", href: "/solutions/raschet-dostavki", icon: Zap },
+              { title: t("homepage.seoSol12") || "AI для бизнеса", href: "/solutions/ai-dlya-biznesa", icon: Zap },
+            ].map((sol, idx) => {
+              const Icon = sol.icon
+              return (
+                <Reveal key={sol.href} delay={idx * 50}>
+                  <Link href={sol.href} className="group flex items-center gap-3 rounded-lg border border-border/50 bg-card px-4 py-3.5 transition-all duration-300 hover:border-primary/30 hover:bg-primary/5">
+                    <Icon className="h-4 w-4 text-primary/60 group-hover:text-primary transition-colors" />
+                    <span className="text-sm font-medium group-hover:text-primary transition-colors">{sol.title}</span>
+                    <ArrowRight className="ml-auto h-4 w-4 text-muted-foreground/30 group-hover:text-primary/60 transition-all duration-300 group-hover:translate-x-0.5" />
                   </Link>
                 </Reveal>
               )

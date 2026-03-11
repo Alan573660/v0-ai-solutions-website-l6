@@ -38,6 +38,78 @@ const pageTranslations = {
         href: "voice-sales-manager",
       },
       {
+        title: "Робот оператор",
+        description: "Отвечает на 100% входящих звонков 24/7. Квалифицирует клиентов, озвучивает цены, управляет заявками",
+        metrics: ["100% входящих", "24/7 без выходных", "60-80% без оператора"],
+        href: "robot-operator",
+      },
+      {
+        title: "Автоматический оператор",
+        description: "Обработка входящих звонков, квалификация клиентов, управление заявками 24/7",
+        metrics: ["Все звонки обработаны", "Квалификация лидов", "CRM интеграция"],
+        href: "automatic-operator",
+      },
+      {
+        title: "Виртуальный оператор",
+        description: "Работает 24/7, интеграция с CRM, поддержка всех языков, управление продажами и поддержкой",
+        metrics: ["24/7 работа", "Мультиязычность", "CRM интеграция"],
+        href: "virtual-operator",
+      },
+      {
+        title: "Автоматизация продаж",
+        description: "Увеличивает конверсию в 2-3 раза. AI принимает заявки, звонит клиентам, выставляет счета",
+        metrics: ["2-3x конверсия", "Автоматизация цикла", "CRM интеграция"],
+        href: "automation-sales",
+      },
+      {
+        title: "Система автоматизации продаж",
+        description: "Для МСБ. Автоматизирует работу менеджера по продажам, увеличивает продактивность в 3-5 раз",
+        metrics: ["3-5x продактивность", "Для МСБ", "Быстрый старт"],
+        href: "sales-automation-system",
+      },
+      {
+        title: "Робот для звонков",
+        description: "Входящие и исходящие звонки, квалификация, напоминания, обзвон. Экономия ФОТ до 70%",
+        metrics: ["Входящие и исходящие", "Квалификация", "70% экономия ФОТ"],
+        href: "robot-dlya-zvonkov",
+      },
+      {
+        title: "Робот для продаж",
+        description: "Ведёт клиента до сделки. Задаёт вопросы, считает стоимость, озвучивает предложение",
+        metrics: ["От контакта до сделки", "Автоматические расчёты", "Формирование счётов"],
+        href: "robot-dlya-prodazh",
+      },
+      {
+        title: "Обработка заявок",
+        description: "Автоматизирует приём, обработку и маршрутизацию входящих заявок. Анализирует и приоритизирует",
+        metrics: ["Автоматизация цикла", "Приоритизация", "Маршрутизация"],
+        href: "obrabotka-zayavok",
+      },
+      {
+        title: "Обработка заказов",
+        description: "Автоматизирует приём заказов, проверку данных, создание счётов и интеграцию с логистикой",
+        metrics: ["Полный цикл", "Проверка данных", "Логистика"],
+        href: "obrabotka-zakazov",
+      },
+      {
+        title: "Выставление счетов",
+        description: "Генерирует счёт из заявки или звонка, отправляет на email/CRM, проверяет реквизиты",
+        metrics: ["Автогенерация", "Email/CRM отправка", "Проверка реквизитов"],
+        href: "vystavlenie-schetov",
+      },
+      {
+        title: "Расчет доставки",
+        description: "AI автоматически рассчитывает доставку с учётом веса, размера, расстояния и типа транспорта",
+        metrics: ["Автоматизация", "Оптимизация цены", "Все параметры"],
+        href: "raschet-dostavki",
+      },
+      {
+        title: "AI для бизнеса",
+        description: "Общее решение для автоматизации продаж, звонков, заявок, счетов и логистики",
+        metrics: ["Полный стек", "Все решения", "Масштабирование"],
+        href: "ai-dlya-biznesa",
+      },
+      {
         title: "AI-консьерж для отелей",
         description: "AI-консьерж для отелей: заказы, бронирования и сервис без очередей",
         metrics: ["95% удовлетворенность", "60% экономия времени", "Мультиязычность"],
@@ -77,7 +149,7 @@ const pageTranslations = {
       { q: "Сколько времени занимает внедрение?", a: "Для готовых решений — от 7 дней. Для корпоративных проектов — от 4 недель в зависимости от сложности интеграций." },
       { q: "Какие языки поддерживает система?", a: "Поддерживаем русский, английский, испанский, немецкий, французский, голландский и другие языки по запросу." },
       { q: "Можно ли интегрировать с нашей системой?", a: "Да, мы интегрируемся с любыми системами, у которых есть API: CRM, ERP, телефония, склад, бухгалтерия." },
-      { q: "Как обеспечивается безопасность данных?", a: "Используем шифрование данных, соблюдаем GDPR, можем развернуть решение на ваших серверах для максимальной безопасности." },
+      { q: "Как обеспечивается безопасность данных?", a: "Используем шифр��вание данных, соблюдаем GDPR, можем развернуть решение на ваших серверах для максимальной безопасности." },
     ],
   },
   en: {
@@ -100,6 +172,78 @@ const pageTranslations = {
         description: "Increase sales by 40% with a voice AI manager that works 24/7",
         metrics: ["40% sales growth", "24/7 operation", "0 sec wait time"],
         href: "voice-sales-manager",
+      },
+      {
+        title: "Robot Operator",
+        description: "Answers 100% of incoming calls 24/7. Qualifies customers, states prices, manages requests",
+        metrics: ["100% inbound calls", "24/7 without breaks", "60-80% without operator"],
+        href: "robot-operator",
+      },
+      {
+        title: "Automatic Operator",
+        description: "Processes incoming calls, qualifies customers, manages requests 24/7",
+        metrics: ["All calls handled", "Lead qualification", "CRM integration"],
+        href: "automatic-operator",
+      },
+      {
+        title: "Virtual Operator",
+        description: "Works 24/7, integrates with CRM, supports all languages, manages sales and support",
+        metrics: ["24/7 operation", "Multilingual", "CRM integration"],
+        href: "virtual-operator",
+      },
+      {
+        title: "Sales Automation",
+        description: "Increases conversion 2-3x. AI takes requests, calls customers, issues invoices",
+        metrics: ["2-3x conversion", "Full cycle automation", "CRM integration"],
+        href: "automation-sales",
+      },
+      {
+        title: "Sales Automation System",
+        description: "For SMB. Automates sales manager work, increases productivity 3-5x",
+        metrics: ["3-5x productivity", "For SMB", "Quick start"],
+        href: "sales-automation-system",
+      },
+      {
+        title: "Robot for Calls",
+        description: "Inbound and outbound calls, qualification, reminders, outreach. Save up to 70% on payroll",
+        metrics: ["Inbound & outbound", "Qualification", "70% payroll savings"],
+        href: "robot-dlya-zvonkov",
+      },
+      {
+        title: "Sales Robot",
+        description: "Leads customer to deal. Asks questions, calculates cost, presents offer",
+        metrics: ["Contact to deal", "Auto calculations", "Invoice generation"],
+        href: "robot-dlya-prodazh",
+      },
+      {
+        title: "Request Processing",
+        description: "Automates receiving, processing and routing of incoming requests. Analyzes and prioritizes",
+        metrics: ["Full cycle automation", "Prioritization", "Routing"],
+        href: "obrabotka-zayavok",
+      },
+      {
+        title: "Order Processing",
+        description: "Automates order intake, data validation, invoice creation and logistics integration",
+        metrics: ["Full cycle", "Data validation", "Logistics"],
+        href: "obrabotka-zakazov",
+      },
+      {
+        title: "Invoice Generation",
+        description: "Generates invoice from request or call, sends to email/CRM, validates details",
+        metrics: ["Auto generation", "Email/CRM sending", "Details validation"],
+        href: "vystavlenie-schetov",
+      },
+      {
+        title: "Delivery Calculation",
+        description: "AI automatically calculates delivery considering weight, size, distance and transport type",
+        metrics: ["Automation", "Price optimization", "All parameters"],
+        href: "raschet-dostavki",
+      },
+      {
+        title: "AI for Business",
+        description: "Complete solution for sales, calls, requests, invoices and logistics automation",
+        metrics: ["Full stack", "All solutions", "Scaling"],
+        href: "ai-dlya-biznesa",
       },
       {
         title: "AI Hotel Concierge",
@@ -166,6 +310,78 @@ const pageTranslations = {
         href: "voice-sales-manager",
       },
       {
+        title: "Robot Operador",
+        description: "Responde el 100% de llamadas entrantes 24/7. Califica clientes, enuncia precios, gestiona solicitudes",
+        metrics: ["100% llamadas", "24/7 sin descansos", "60-80% sin operador"],
+        href: "robot-operator",
+      },
+      {
+        title: "Operador Automático",
+        description: "Procesa llamadas entrantes, califica clientes, gestiona solicitudes 24/7",
+        metrics: ["Todas las llamadas", "Calificación líderes", "Integración CRM"],
+        href: "automatic-operator",
+      },
+      {
+        title: "Operador Virtual",
+        description: "Funciona 24/7, integración CRM, soporta idiomas, gestiona ventas y soporte",
+        metrics: ["24/7 operación", "Multilingüe", "Integración CRM"],
+        href: "virtual-operator",
+      },
+      {
+        title: "Automatización de Ventas",
+        description: "Aumenta conversión 2-3x. IA toma pedidos, llama clientes, emite facturas",
+        metrics: ["2-3x conversión", "Automatización completa", "Integración CRM"],
+        href: "automation-sales",
+      },
+      {
+        title: "Sistema de Automatización de Ventas",
+        description: "Para PYMES. Automatiza trabajo del gerente, aumenta productividad 3-5x",
+        metrics: ["3-5x productividad", "Para PYMES", "Inicio rápido"],
+        href: "sales-automation-system",
+      },
+      {
+        title: "Robot para Llamadas",
+        description: "Llamadas entrantes y salientes, calificación, recordatorios, alcance. Ahorra hasta 70%",
+        metrics: ["Entrantes y salientes", "Calificación", "70% ahorro nómina"],
+        href: "robot-dlya-zvonkov",
+      },
+      {
+        title: "Robot de Ventas",
+        description: "Guía cliente a la venta. Hace preguntas, calcula costo, presenta oferta",
+        metrics: ["Contacto a venta", "Cálculos automáticos", "Generación facturas"],
+        href: "robot-dlya-prodazh",
+      },
+      {
+        title: "Procesamiento de Solicitudes",
+        description: "Automatiza recepción, procesamiento y enrutamiento de solicitudes. Analiza y prioriza",
+        metrics: ["Automatización ciclo", "Priorización", "Enrutamiento"],
+        href: "obrabotka-zayavok",
+      },
+      {
+        title: "Procesamiento de Pedidos",
+        description: "Automatiza recepción, validación, creación de facturas e integración logística",
+        metrics: ["Ciclo completo", "Validación datos", "Logística"],
+        href: "obrabotka-zakazov",
+      },
+      {
+        title: "Generación de Facturas",
+        description: "Genera factura desde solicitud o llamada, envía a email/CRM, valida detalles",
+        metrics: ["Generación automática", "Envío email/CRM", "Validación detalles"],
+        href: "vystavlenie-schetov",
+      },
+      {
+        title: "Cálculo de Entrega",
+        description: "IA calcula automáticamente entrega con peso, tamaño, distancia y tipo transporte",
+        metrics: ["Automatización", "Optimización precio", "Todos parámetros"],
+        href: "raschet-dostavki",
+      },
+      {
+        title: "IA para Negocios",
+        description: "Solución completa para automatización de ventas, llamadas, solicitudes, facturas y logística",
+        metrics: ["Stack completo", "Todas soluciones", "Escalabilidad"],
+        href: "ai-dlya-biznesa",
+      },
+      {
         title: "Conserje IA para Hoteles",
         description: "Conserje IA para hoteles: pedidos, reservas y servicio sin colas",
         metrics: ["95% satisfacción", "60% ahorro tiempo", "Multilingüe"],
@@ -230,6 +446,78 @@ const pageTranslations = {
         href: "voice-sales-manager",
       },
       {
+        title: "Roboter-Operator",
+        description: "Beantwortet 100% der eingehenden Anrufe 24/7. Qualifiziert Kunden, nennt Preise, verwaltet Anfragen",
+        metrics: ["100% eingehende Anrufe", "24/7 ohne Pause", "60-80% ohne Operator"],
+        href: "robot-operator",
+      },
+      {
+        title: "Automatischer Operator",
+        description: "Verarbeitet eingehende Anrufe, qualifiziert Kunden, verwaltet Anfragen 24/7",
+        metrics: ["Alle Anrufe bearbeitet", "Lead-Qualifizierung", "CRM-Integration"],
+        href: "automatic-operator",
+      },
+      {
+        title: "Virtueller Operator",
+        description: "Arbeitet 24/7, integriert mit CRM, unterstützt Sprachen, verwaltet Verkauf und Support",
+        metrics: ["24/7 Betrieb", "Mehrsprachig", "CRM-Integration"],
+        href: "virtual-operator",
+      },
+      {
+        title: "Vertriebsautomatisierung",
+        description: "Erhöht Konversion um 2-3x. KI nimmt Anfragen auf, ruft Kunden an, stellt Rechnungen aus",
+        metrics: ["2-3x Konversion", "Vollständige Automatisierung", "CRM-Integration"],
+        href: "automation-sales",
+      },
+      {
+        title: "Vertriebsautomatisierungssystem",
+        description: "Für KMU. Automatisiert Vertriebsmanagerarbeit, erhöht Produktivität 3-5x",
+        metrics: ["3-5x Produktivität", "Für KMU", "Schneller Start"],
+        href: "sales-automation-system",
+      },
+      {
+        title: "Roboter für Anrufe",
+        description: "Eingehende und ausgehende Anrufe, Qualifizierung, Erinnerungen, Outreach. Sparen bis 70%",
+        metrics: ["Ein- und ausgehend", "Qualifizierung", "70% Lohnersparnis"],
+        href: "robot-dlya-zvonkov",
+      },
+      {
+        title: "Verkaufsroboter",
+        description: "Führt Kunden zum Deal. Stellt Fragen, berechnet Kosten, präsentiert Angebot",
+        metrics: ["Kontakt zum Deal", "Auto-Berechnungen", "Rechnungsgenerierung"],
+        href: "robot-dlya-prodazh",
+      },
+      {
+        title: "Anfrageverarbeitung",
+        description: "Automatisiert Empfang, Verarbeitung und Weiterleitung von Anfragen. Analysiert und priorisiert",
+        metrics: ["Zyklus-Automatisierung", "Priorisierung", "Weiterleitung"],
+        href: "obrabotka-zayavok",
+      },
+      {
+        title: "Auftragsverarbeitung",
+        description: "Automatisiert Auftragsannahme, Validierung, Rechnungserstellung und Logistikintegration",
+        metrics: ["Voller Zyklus", "Datenvalidierung", "Logistik"],
+        href: "obrabotka-zakazov",
+      },
+      {
+        title: "Rechnungsgenerierung",
+        description: "Generiert Rechnung aus Anfrage oder Anruf, versendet per Email/CRM, validiert Details",
+        metrics: ["Auto-Generierung", "Email/CRM-Versand", "Detail-Validierung"],
+        href: "vystavlenie-schetov",
+      },
+      {
+        title: "Lieferungsberechnung",
+        description: "KI berechnet automatisch Lieferung unter Berücksichtigung von Gewicht, Größe, Entfernung und Transporttyp",
+        metrics: ["Automatisierung", "Preisoptimierung", "Alle Parameter"],
+        href: "raschet-dostavki",
+      },
+      {
+        title: "KI für Unternehmen",
+        description: "Vollständige Lösung für Verkaufs-, Anrufs-, Anfrage-, Rechnungs- und Logistikautomatisierung",
+        metrics: ["Vollständiger Stack", "Alle Lösungen", "Skalierbarkeit"],
+        href: "ai-dlya-biznesa",
+      },
+      {
         title: "KI-Hotelconcierge",
         description: "KI-Concierge für Hotels: Bestellungen, Buchungen und Service ohne Warteschlangen",
         metrics: ["95% Zufriedenheit", "60% Zeitersparnis", "Mehrsprachig"],
@@ -289,38 +577,110 @@ const pageTranslations = {
     solutions: [
       {
         title: "Stem AI Verkoopmanager",
-        description: "Verhoog de verkoop met 40% met een stem AI-manager die 24/7 werkt",
-        metrics: ["40% verkoopgroei", "24/7 operatie", "0 sec wachttijd"],
+        description: "Verhoog de verkoop met 40% met een stem-AI manager die 24/7 werkt",
+        metrics: ["40% groei", "24/7 werking", "0 sec wachttijd"],
         href: "voice-sales-manager",
       },
       {
-        title: "AI Hotelconciërge",
-        description: "AI-conciërge voor hotels: bestellingen, boekingen en service zonder wachtrijen",
-        metrics: ["95% tevredenheid", "60% tijdsbesparing", "Meertalig"],
+        title: "Robot-operator",
+        description: "Beantwoordt 100% inkomende oproepen 24/7. Kwalificeert klanten, noemt prijzen, beheert verzoeken",
+        metrics: ["100% inkomend", "24/7 zonder pauzes", "60-80% zonder operator"],
+        href: "robot-operator",
+      },
+      {
+        title: "Automatische operator",
+        description: "Verwerkt inkomende oproepen, kwalificeert klanten, beheert verzoeken 24/7",
+        metrics: ["Alle oproepen verwerkt", "Lead-kwalificatie", "CRM-integratie"],
+        href: "automatic-operator",
+      },
+      {
+        title: "Virtuele operator",
+        description: "Werkt 24/7, integreert met CRM, ondersteunt talen, beheert verkoop en ondersteuning",
+        metrics: ["24/7 werking", "Meertalig", "CRM-integratie"],
+        href: "virtual-operator",
+      },
+      {
+        title: "Verkoopautomatisering",
+        description: "Verhoogt conversie 2-3x. AI neemt verzoeken aan, belt klanten, geeft facturen uit",
+        metrics: ["2-3x conversie", "Volledige automatisering", "CRM-integratie"],
+        href: "automation-sales",
+      },
+      {
+        title: "Verkoopautomatiseringssysteem",
+        description: "Voor MKB. Automatiseert verkoopmanagerwerk, verhoogt productiviteit 3-5x",
+        metrics: ["3-5x productiviteit", "Voor MKB", "Snelle start"],
+        href: "sales-automation-system",
+      },
+      {
+        title: "Robot voor oproepen",
+        description: "Inkomende en uitgaande oproepen, kwalificatie, herinneringen, outreach. Bespaar tot 70%",
+        metrics: ["In- en uitgaand", "Kwalificatie", "70% loonbesparing"],
+        href: "robot-dlya-zvonkov",
+      },
+      {
+        title: "Verkoopbot",
+        description: "Leidt klant naar deal. Stelt vragen, berekent kosten, presenteert aanbod",
+        metrics: ["Contact naar deal", "Auto-berekeningen", "Factuurgeneratie"],
+        href: "robot-dlya-prodazh",
+      },
+      {
+        title: "Verzoekverwerking",
+        description: "Automatiseert ontvangst, verwerking en routering van verzoeken. Analyzeert en prioriseert",
+        metrics: ["Cyclus-automatisering", "Prioritering", "Routering"],
+        href: "obrabotka-zayavok",
+      },
+      {
+        title: "Orderverwerking",
+        description: "Automatiseert orderinname, validatie, factuurgeneratie en logistieke integratie",
+        metrics: ["Volledige cyclus", "Datavalidatie", "Logistiek"],
+        href: "obrabotka-zakazov",
+      },
+      {
+        title: "Factuurgeneratie",
+        description: "Genereert factuur uit verzoek of oproep, verzendt per email/CRM, valideert details",
+        metrics: ["Auto-generatie", "Email/CRM-verzending", "Detail-validatie"],
+        href: "vystavlenie-schetov",
+      },
+      {
+        title: "Bezorgingsberekening",
+        description: "AI berekent automatisch bezorging met gewicht, grootte, afstand en transporttype",
+        metrics: ["Automatisering", "Prijsoptimalisatie", "Alle parameters"],
+        href: "raschet-dostavki",
+      },
+      {
+        title: "AI voor bedrijven",
+        description: "Volledige oplossing voor verkoop-, oproep-, verzoek-, factuur- en logistiekautomatisering",
+        metrics: ["Volledige stack", "Alle oplossingen", "Schaalvergroting"],
+        href: "ai-dlya-biznesa",
+      },
+      {
+        title: "AI Hotelconcierge",
+        description: "AI concierge voor hotels: bestellingen, reserveringen en service zonder wachtrijen",
+        metrics: ["95% tevredenheid", "60% tijdbesparing", "Meertalig"],
         href: "hotel-concierge",
       },
       {
-        title: "Voor MKB",
-        description: "Kant-en-klare oplossingen voor het MKB met snelle lancering",
-        metrics: ["7 dagen lancering", "Geen integraties", "Vaste prijs"],
+        title: "Voor kleine en middelgrote bedrijven",
+        description: "Kant-en-klare oplossingen voor MKB met snelle lancering",
+        metrics: ["7 dagen lancering", "Geen integraties nodig", "Vaste prijs"],
         href: "smb",
       },
       {
-        title: "Enterprise Oplossingen",
-        description: "Enterprise oplossingen met hoge beveiliging en SLA",
-        metrics: ["99,9% SLA", "On-premise", "Volledige aanpassing"],
+        title: "Enterprise-oplossingen",
+        description: "Enterprise-oplossingen met hoge veiligheid en SLA",
+        metrics: ["99,9% SLA", "On-premise", "Volledige aanpasssing"],
         href: "enterprise",
       },
       {
-        title: "Maatwerkoplossingen",
-        description: "Maatwerkoplossingen voor elke zakelijke uitdaging",
+        title: "Aangepaste oplossingen",
+        description: "Aangepaste AI-oplossingen voor alle bedrijfsuitdagingen",
         metrics: ["Elke complexiteit", "RAG + LLM", "Volledige cyclus"],
         href: "custom",
       },
       {
         title: "AI Smart Home",
         description: "Smart home met AI: spraakbesturing, automatisering en mobiele app",
-        metrics: ["Spraakbesturing", "Auto-irrigatie", "Mobiele app"],
+        metrics: ["Spraakbesturing", "Automatische bewatering", "Mobiele app"],
         href: "smart-home",
       },
     ],
@@ -356,6 +716,78 @@ const pageTranslations = {
         description: "Augmentez les ventes de 40% avec un gestionnaire IA vocal qui travaille 24/7",
         metrics: ["40% croissance", "24/7 opération", "0 sec attente"],
         href: "voice-sales-manager",
+      },
+      {
+        title: "Robot-Opérateur",
+        description: "Répond à 100% des appels entrants 24/7. Qualifie les clients, énonce les prix, gère les demandes",
+        metrics: ["100% appels entrants", "24/7 sans pause", "60-80% sans opérateur"],
+        href: "robot-operator",
+      },
+      {
+        title: "Opérateur Automatique",
+        description: "Traite les appels entrants, qualifie les clients, gère les demandes 24/7",
+        metrics: ["Tous les appels traités", "Qualification prospects", "Intégration CRM"],
+        href: "automatic-operator",
+      },
+      {
+        title: "Opérateur Virtuel",
+        description: "Fonctionne 24/7, intégration CRM, supporte les langues, gère ventes et support",
+        metrics: ["24/7 opération", "Multilingue", "Intégration CRM"],
+        href: "virtual-operator",
+      },
+      {
+        title: "Automatisation des Ventes",
+        description: "Augmente la conversion 2-3x. L'IA prend les demandes, appelle les clients, émet les factures",
+        metrics: ["2-3x conversion", "Automatisation complète", "Intégration CRM"],
+        href: "automation-sales",
+      },
+      {
+        title: "Système d'Automatisation des Ventes",
+        description: "Pour les PME. Automatise le travail du gestionnaire de ventes, augmente productivité 3-5x",
+        metrics: ["3-5x productivité", "Pour PME", "Démarrage rapide"],
+        href: "sales-automation-system",
+      },
+      {
+        title: "Robot pour Appels",
+        description: "Appels entrants et sortants, qualification, rappels, prospection. Économies jusqu'à 70%",
+        metrics: ["Entrants et sortants", "Qualification", "70% économie masse salariale"],
+        href: "robot-dlya-zvonkov",
+      },
+      {
+        title: "Robot de Vente",
+        description: "Guide le client vers la vente. Pose des questions, calcule le coût, présente l'offre",
+        metrics: ["Contact à vente", "Calculs automatiques", "Génération factures"],
+        href: "robot-dlya-prodazh",
+      },
+      {
+        title: "Traitement des Demandes",
+        description: "Automatise la réception, le traitement et l'acheminement des demandes. Analyse et priorise",
+        metrics: ["Automatisation cycle", "Priorisation", "Acheminement"],
+        href: "obrabotka-zayavok",
+      },
+      {
+        title: "Traitement des Commandes",
+        description: "Automatise la réception, la validation, la création de factures et l'intégration logistique",
+        metrics: ["Cycle complet", "Validation données", "Logistique"],
+        href: "obrabotka-zakazov",
+      },
+      {
+        title: "Génération de Factures",
+        description: "Génère les factures à partir des demandes ou appels, envoie par email/CRM, valide les détails",
+        metrics: ["Génération automatique", "Envoi email/CRM", "Validation détails"],
+        href: "vystavlenie-schetov",
+      },
+      {
+        title: "Calcul de Livraison",
+        description: "L'IA calcule automatiquement la livraison en tenant compte du poids, taille, distance et type de transport",
+        metrics: ["Automatisation", "Optimisation prix", "Tous paramètres"],
+        href: "raschet-dostavki",
+      },
+      {
+        title: "IA pour Entreprises",
+        description: "Solution complète pour l'automatisation des ventes, appels, demandes, factures et logistique",
+        metrics: ["Stack complet", "Toutes solutions", "Scalabilité"],
+        href: "ai-dlya-biznesa",
       },
       {
         title: "Concierge IA pour Hôtels",
@@ -402,8 +834,35 @@ const pageTranslations = {
   },
 }
 
-const icons = [Phone, Building2, Users, Target, Zap, Home]
-const colors = ["bg-blue-500", "bg-purple-500", "bg-green-500", "bg-orange-500", "bg-red-500", "bg-indigo-500"]
+// 18 icons for 18 solutions (expanded to match all solutions)
+const icons = [
+  Phone, // Voice Sales Manager
+  Phone, // Robot Operator
+  Phone, // Automatic Operator
+  Phone, // Virtual Operator
+  Target, // Automation Sales
+  Target, // Sales Automation System
+  Phone, // Robot dlya Zvonkov
+  Target, // Robot dlya Prodazh
+  Zap, // Obrabotka Zayavok
+  Zap, // Obrabotka Zakazov
+  Zap, // Vystavlenie Schetov
+  Zap, // Raschet Dostavki
+  Target, // AI dlya Biznesa
+  Building2, // Hotel Concierge
+  Users, // SMB
+  Building2, // Enterprise
+  Target, // Custom
+  Home, // Smart Home
+]
+const colors = [
+  "bg-blue-500", "bg-blue-600", "bg-blue-700", "bg-indigo-500",
+  "bg-green-500", "bg-green-600",
+  "bg-purple-500", "bg-purple-600",
+  "bg-orange-500", "bg-orange-600", "bg-orange-700", "bg-amber-500",
+  "bg-emerald-500",
+  "bg-pink-500", "bg-teal-500", "bg-slate-700", "bg-violet-500", "bg-cyan-500"
+]
 
 export default function SolutionsPage({ params }: SolutionsPageProps) {
   const { locale } = params
@@ -444,11 +903,12 @@ export default function SolutionsPage({ params }: SolutionsPageProps) {
             <h2 className="text-3xl font-bold text-center mb-12">{pt.ourSolutions}</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {pt.solutions.map((solution, index) => {
-                const Icon = icons[index]
+                const Icon = icons[index % icons.length] || Phone
+                const color = colors[index % colors.length] || "bg-blue-500"
                 return (
                   <Card key={solution.href} className="group hover:shadow-lg transition-all duration-300">
                     <CardHeader>
-                      <div className={`w-12 h-12 rounded-lg ${colors[index]} flex items-center justify-center mb-4`}>
+                      <div className={`w-12 h-12 rounded-lg ${color} flex items-center justify-center mb-4`}>
                         <Icon className="h-6 w-6 text-white" />
                       </div>
                       <CardTitle className="text-xl">{solution.title}</CardTitle>
