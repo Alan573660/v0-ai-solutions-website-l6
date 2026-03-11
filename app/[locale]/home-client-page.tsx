@@ -214,9 +214,9 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
 
               <Reveal delay={100}>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold tracking-tight mb-6 text-white leading-tight">
-                  Голосовые AI-роботы для
+                  AI-ассистенты для звонков,
                   <span className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
-                    звонков и продаж
+                    продаж и автоматизации бизнеса
                   </span>
                 </h1>
               </Reveal>
