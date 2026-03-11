@@ -834,8 +834,35 @@ const pageTranslations = {
   },
 }
 
-const icons = [Phone, Building2, Users, Target, Zap, Home]
-const colors = ["bg-blue-500", "bg-purple-500", "bg-green-500", "bg-orange-500", "bg-red-500", "bg-indigo-500"]
+// 18 icons for 18 solutions (expanded to match all solutions)
+const icons = [
+  Phone, // Voice Sales Manager
+  Phone, // Robot Operator
+  Phone, // Automatic Operator
+  Phone, // Virtual Operator
+  Target, // Automation Sales
+  Target, // Sales Automation System
+  Phone, // Robot dlya Zvonkov
+  Target, // Robot dlya Prodazh
+  Zap, // Obrabotka Zayavok
+  Zap, // Obrabotka Zakazov
+  Zap, // Vystavlenie Schetov
+  Zap, // Raschet Dostavki
+  Target, // AI dlya Biznesa
+  Building2, // Hotel Concierge
+  Users, // SMB
+  Building2, // Enterprise
+  Target, // Custom
+  Home, // Smart Home
+]
+const colors = [
+  "bg-blue-500", "bg-blue-600", "bg-blue-700", "bg-indigo-500",
+  "bg-green-500", "bg-green-600",
+  "bg-purple-500", "bg-purple-600",
+  "bg-orange-500", "bg-orange-600", "bg-orange-700", "bg-amber-500",
+  "bg-emerald-500",
+  "bg-pink-500", "bg-teal-500", "bg-slate-700", "bg-violet-500", "bg-cyan-500"
+]
 
 export default function SolutionsPage({ params }: SolutionsPageProps) {
   const { locale } = params
@@ -876,11 +903,12 @@ export default function SolutionsPage({ params }: SolutionsPageProps) {
             <h2 className="text-3xl font-bold text-center mb-12">{pt.ourSolutions}</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {pt.solutions.map((solution, index) => {
-                const Icon = icons[index]
+                const Icon = icons[index % icons.length] || Phone
+                const color = colors[index % colors.length] || "bg-blue-500"
                 return (
                   <Card key={solution.href} className="group hover:shadow-lg transition-all duration-300">
                     <CardHeader>
-                      <div className={`w-12 h-12 rounded-lg ${colors[index]} flex items-center justify-center mb-4`}>
+                      <div className={`w-12 h-12 rounded-lg ${color} flex items-center justify-center mb-4`}>
                         <Icon className="h-6 w-6 text-white" />
                       </div>
                       <CardTitle className="text-xl">{solution.title}</CardTitle>
