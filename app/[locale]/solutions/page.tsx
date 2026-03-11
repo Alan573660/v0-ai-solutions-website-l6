@@ -554,7 +554,7 @@ const pageTranslations = {
       { step: "03", title: "Test und Start", description: "Wir führen Pilottests durch, verfeinern basierend auf Ergebnissen und starten in die Produktion" },
     ],
     faq: [
-      { q: "Wie lange dauert die Implementierung?", a: "Für fertige Lösungen — ab 7 Tagen. Für Enterprise-Projekte — ab 4 Wochen je nach Integrationskomplexität." },
+      { q: "Wie lange dauert die Implementierung?", a: "Für fertige L��sungen — ab 7 Tagen. Für Enterprise-Projekte — ab 4 Wochen je nach Integrationskomplexität." },
       { q: "Welche Sprachen unterstützt das System?", a: "Wir unterstützen Russisch, Englisch, Spanisch, Deutsch, Französisch, Niederländisch und andere Sprachen auf Anfrage." },
       { q: "Kann es mit unserem System integriert werden?", a: "Ja, wir integrieren mit allen Systemen, die eine API haben: CRM, ERP, Telefonie, Lager, Buchhaltung." },
       { q: "Wie wird die Datensicherheit gewährleistet?", a: "Wir verwenden Datenverschlüsselung, halten GDPR ein und können die Lösung auf Ihren Servern für maximale Sicherheit bereitstellen." },
@@ -897,41 +897,199 @@ export default function SolutionsPage({ params }: SolutionsPageProps) {
           </div>
         </section>
 
-        {/* Solutions Grid */}
+        {/* Solutions Grid - Grouped by Category */}
         <section className="py-20 px-4 bg-muted/50">
           <div className="container mx-auto max-w-6xl">
             <h2 className="text-3xl font-bold text-center mb-12">{pt.ourSolutions}</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {pt.solutions.map((solution, index) => {
-                const Icon = icons[index % icons.length] || Phone
-                const color = colors[index % colors.length] || "bg-blue-500"
-                return (
-                  <Card key={solution.href} className="group hover:shadow-lg transition-all duration-300">
-                    <CardHeader>
-                      <div className={`w-12 h-12 rounded-lg ${color} flex items-center justify-center mb-4`}>
-                        <Icon className="h-6 w-6 text-white" />
-                      </div>
-                      <CardTitle className="text-xl">{solution.title}</CardTitle>
-                      <CardDescription className="text-base">{solution.description}</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-2 mb-6">
-                        {solution.metrics.map((metric, i) => (
-                          <Badge key={i} variant="secondary" className="mr-2">
-                            {metric}
-                          </Badge>
-                        ))}
-                      </div>
-                      <Button asChild className="w-full group-hover:bg-primary/90">
-                        <Link href={`/${locale}/solutions/${solution.href}`}>
-                          {pt.learnMore}
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                      </Button>
-                    </CardContent>
-                  </Card>
-                )
-              })}
+            
+            {/* AI для звонков */}
+            <div className="mb-16">
+              <h3 className="text-2xl font-semibold mb-6 text-primary">
+                {locale === "ru" ? "AI для звонков" : locale === "en" ? "AI for Calls" : locale === "es" ? "IA para Llamadas" : locale === "de" ? "KI für Anrufe" : locale === "nl" ? "AI voor Gesprekken" : "IA pour Appels"}
+              </h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {pt.solutions.filter(s => ["robot-operator", "automatic-operator", "virtual-operator", "robot-dlya-zvonkov"].includes(s.href)).map((solution, index) => {
+                  const Icon = Phone
+                  return (
+                    <Card key={solution.href} className="group hover:shadow-lg transition-all duration-300 border-blue-200 dark:border-blue-900">
+                      <CardHeader className="pb-3">
+                        <div className="w-10 h-10 rounded-lg bg-blue-500 flex items-center justify-center mb-3">
+                          <Icon className="h-5 w-5 text-white" />
+                        </div>
+                        <CardTitle className="text-lg">{solution.title}</CardTitle>
+                        <CardDescription className="text-sm">{solution.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="pt-0">
+                        <div className="flex flex-wrap gap-1 mb-4">
+                          {solution.metrics.slice(0, 2).map((metric, i) => (
+                            <Badge key={i} variant="secondary" className="text-xs">
+                              {metric}
+                            </Badge>
+                          ))}
+                        </div>
+                        <Button asChild size="sm" className="w-full">
+                          <Link href={`/${locale}/solutions/${solution.href}`}>
+                            {pt.learnMore}
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* AI для продаж */}
+            <div className="mb-16">
+              <h3 className="text-2xl font-semibold mb-6 text-green-600 dark:text-green-400">
+                {locale === "ru" ? "AI для продаж" : locale === "en" ? "AI for Sales" : locale === "es" ? "IA para Ventas" : locale === "de" ? "KI für Vertrieb" : locale === "nl" ? "AI voor Verkoop" : "IA pour Ventes"}
+              </h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {pt.solutions.filter(s => ["automation-sales", "sales-automation-system", "robot-dlya-prodazh", "voice-sales-manager"].includes(s.href)).map((solution, index) => {
+                  const Icon = Target
+                  return (
+                    <Card key={solution.href} className="group hover:shadow-lg transition-all duration-300 border-green-200 dark:border-green-900">
+                      <CardHeader className="pb-3">
+                        <div className="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center mb-3">
+                          <Icon className="h-5 w-5 text-white" />
+                        </div>
+                        <CardTitle className="text-lg">{solution.title}</CardTitle>
+                        <CardDescription className="text-sm">{solution.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="pt-0">
+                        <div className="flex flex-wrap gap-1 mb-4">
+                          {solution.metrics.slice(0, 2).map((metric, i) => (
+                            <Badge key={i} variant="secondary" className="text-xs">
+                              {metric}
+                            </Badge>
+                          ))}
+                        </div>
+                        <Button asChild size="sm" className="w-full">
+                          <Link href={`/${locale}/solutions/${solution.href}`}>
+                            {pt.learnMore}
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* AI для бизнес-процессов */}
+            <div className="mb-16">
+              <h3 className="text-2xl font-semibold mb-6 text-orange-600 dark:text-orange-400">
+                {locale === "ru" ? "AI для бизнес-процессов" : locale === "en" ? "AI for Business Processes" : locale === "es" ? "IA para Procesos de Negocio" : locale === "de" ? "KI für Geschäftsprozesse" : locale === "nl" ? "AI voor Bedrijfsprocessen" : "IA pour Processus Métier"}
+              </h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {pt.solutions.filter(s => ["obrabotka-zayavok", "obrabotka-zakazov", "vystavlenie-schetov", "raschet-dostavki"].includes(s.href)).map((solution, index) => {
+                  const Icon = Zap
+                  return (
+                    <Card key={solution.href} className="group hover:shadow-lg transition-all duration-300 border-orange-200 dark:border-orange-900">
+                      <CardHeader className="pb-3">
+                        <div className="w-10 h-10 rounded-lg bg-orange-500 flex items-center justify-center mb-3">
+                          <Icon className="h-5 w-5 text-white" />
+                        </div>
+                        <CardTitle className="text-lg">{solution.title}</CardTitle>
+                        <CardDescription className="text-sm">{solution.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="pt-0">
+                        <div className="flex flex-wrap gap-1 mb-4">
+                          {solution.metrics.slice(0, 2).map((metric, i) => (
+                            <Badge key={i} variant="secondary" className="text-xs">
+                              {metric}
+                            </Badge>
+                          ))}
+                        </div>
+                        <Button asChild size="sm" className="w-full">
+                          <Link href={`/${locale}/solutions/${solution.href}`}>
+                            {pt.learnMore}
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* AI для бизнеса */}
+            <div className="mb-16">
+              <h3 className="text-2xl font-semibold mb-6 text-purple-600 dark:text-purple-400">
+                {locale === "ru" ? "AI для бизнеса" : locale === "en" ? "AI for Business" : locale === "es" ? "IA para Negocios" : locale === "de" ? "KI für Unternehmen" : locale === "nl" ? "AI voor Bedrijven" : "IA pour Entreprises"}
+              </h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {pt.solutions.filter(s => ["ai-dlya-biznesa", "smb", "enterprise", "custom"].includes(s.href)).map((solution, index) => {
+                  const Icon = Building2
+                  return (
+                    <Card key={solution.href} className="group hover:shadow-lg transition-all duration-300 border-purple-200 dark:border-purple-900">
+                      <CardHeader className="pb-3">
+                        <div className="w-10 h-10 rounded-lg bg-purple-500 flex items-center justify-center mb-3">
+                          <Icon className="h-5 w-5 text-white" />
+                        </div>
+                        <CardTitle className="text-lg">{solution.title}</CardTitle>
+                        <CardDescription className="text-sm">{solution.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="pt-0">
+                        <div className="flex flex-wrap gap-1 mb-4">
+                          {solution.metrics.slice(0, 2).map((metric, i) => (
+                            <Badge key={i} variant="secondary" className="text-xs">
+                              {metric}
+                            </Badge>
+                          ))}
+                        </div>
+                        <Button asChild size="sm" className="w-full">
+                          <Link href={`/${locale}/solutions/${solution.href}`}>
+                            {pt.learnMore}
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* Специализированные решения */}
+            <div>
+              <h3 className="text-2xl font-semibold mb-6 text-pink-600 dark:text-pink-400">
+                {locale === "ru" ? "Специализированные решения" : locale === "en" ? "Specialized Solutions" : locale === "es" ? "Soluciones Especializadas" : locale === "de" ? "Spezialisierte Lösungen" : locale === "nl" ? "Gespecialiseerde Oplossingen" : "Solutions Spécialisées"}
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                {pt.solutions.filter(s => ["hotel-concierge", "smart-home"].includes(s.href)).map((solution, index) => {
+                  const Icon = solution.href === "hotel-concierge" ? Building2 : Home
+                  return (
+                    <Card key={solution.href} className="group hover:shadow-lg transition-all duration-300 border-pink-200 dark:border-pink-900">
+                      <CardHeader className="pb-3">
+                        <div className="w-10 h-10 rounded-lg bg-pink-500 flex items-center justify-center mb-3">
+                          <Icon className="h-5 w-5 text-white" />
+                        </div>
+                        <CardTitle className="text-lg">{solution.title}</CardTitle>
+                        <CardDescription className="text-sm">{solution.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="pt-0">
+                        <div className="flex flex-wrap gap-1 mb-4">
+                          {solution.metrics.map((metric, i) => (
+                            <Badge key={i} variant="secondary" className="text-xs">
+                              {metric}
+                            </Badge>
+                          ))}
+                        </div>
+                        <Button asChild size="sm" className="w-full">
+                          <Link href={`/${locale}/solutions/${solution.href}`}>
+                            {pt.learnMore}
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  )
+                })}
+              </div>
             </div>
           </div>
         </section>

@@ -15,6 +15,12 @@ import {
   Factory, Stethoscope, ShoppingCart, Warehouse, HardHat, Building,
 } from "lucide-react"
 import { useCTA } from "@/components/modals/cta-provider"
+import { RelatedSolutions } from "@/components/related-solutions"
+import type { Locale } from "@/lib/i18n/config"
+
+interface AIDlyaBiznesaPageProps {
+  locale: Locale
+}
 
 // Animated counter hook
 function useCountUp(end: number, duration: number = 2000, startOnView: boolean = true) {
@@ -61,7 +67,7 @@ function useCountUp(end: number, duration: number = 2000, startOnView: boolean =
   return { count, ref }
 }
 
-export function AIDlyaBiznesaPage() {
+export function AIDlyaBiznesaPage({ locale }: AIDlyaBiznesaPageProps) {
   const { openModal } = useCTA()
   const [activeProcess, setActiveProcess] = useState(0)
   const [activeIndustry, setActiveIndustry] = useState(0)
@@ -114,7 +120,7 @@ export function AIDlyaBiznesaPage() {
       description: "Автоматический сбор заявок из всех каналов: сайт, телефон, мессенджеры, email. AI анализирует, приоритизирует по вероятности конверсии и распределяет на нужных менеджеров.",
       automation: "95-100%",
       savings: "0 потерянных лидов",
-      examples: ["Сбор из всех каналов", "Дедупликация", "Скоринг и приоритизация", "Автораспределение", "Уведомления"],
+      examples: ["Сбор из всех каналов", "Дед��пликация", "Скоринг и приоритизация", "Автораспределение", "Уведомления"],
     },
     { 
       icon: Package, 
@@ -209,7 +215,7 @@ export function AIDlyaBiznesaPage() {
   const faqs = [
     { 
       question: "Что такое AI для бизнеса и чем отличается от обычной автоматизации?", 
-      answer: "AI для бизнеса — это системы на базе машинного обучения и больших языковых моделей (LLM), которые понимают естественный язык, контекст и могут принимать решения. В отличие от обычных скриптов, AI адаптируется к новым ситуациям, учится на данных и ведет полноценные диалоги. Например, робот-оператор не просто проигрывает записанные фразы, а понимает вопрос клиента и формирует релевантный ответ." 
+      answer: "AI для бизнеса — это системы на базе машинного обучения и больших языковых моделей (LLM), которые понимают естественный язык, контекст и могут принимать решения. В отличие от обычных скриптов, AI адаптируется к новым ситуациям, учится на данных и ведет полноценные диалоги. Например, робот-оператор не просто п��оигрывает записанные фразы, а понимает вопрос клиента и формирует релевантный ответ." 
     },
     { 
       question: "Сколько времени занимает внедрение AI-платформы?", 
@@ -323,7 +329,7 @@ export function AIDlyaBiznesaPage() {
             <div>
               <Badge variant="outline" className="mb-6">Определение</Badge>
               <h2 className="text-3xl md:text-5xl font-bold mb-8 text-balance">
-                Что такое искусственный интеллект для бизнеса
+                Что та��ое искусственный интеллект для бизнеса
               </h2>
               <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                 <p>
@@ -805,6 +811,9 @@ export function AIDlyaBiznesaPage() {
           </p>
         </div>
       </section>
+
+      {/* Related Solutions */}
+      <RelatedSolutions locale={locale} currentSlug="ai-dlya-biznesa" />
     </div>
   )
 }

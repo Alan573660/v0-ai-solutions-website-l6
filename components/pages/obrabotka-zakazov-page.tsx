@@ -11,8 +11,14 @@ import {
   Bell, Route, Warehouse, MapPin,
 } from "lucide-react"
 import { useCTA } from "@/components/modals/cta-provider"
+import { RelatedSolutions } from "@/components/related-solutions"
+import type { Locale } from "@/lib/i18n/config"
 
-export function ObrabotkZakazovPage() {
+interface ObrabotkZakazovPageProps {
+  locale: Locale
+}
+
+export function ObrabotkZakazovPage({ locale }: ObrabotkZakazovPageProps) {
   const { openModal } = useCTA()
   const [activeStep, setActiveStep] = useState(0)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
@@ -80,7 +86,7 @@ export function ObrabotkZakazovPage() {
 
   const testimonials = [
     {
-      quote: "Раньше менеджеры тратили по 40 минут на каждый крупный заказ: проверить наличие, выставить счёт, передать на склад. Теперь система делает это за 4 минуты. Обрабатываем в 8 раз больше заказов тем же штатом.",
+      quote: "Раньше менеджеры тратили по 40 минут на каждый крупный заказ: проверить наличие, выставить счёт, передать на склад. Теперь система делает это за 4 минуты. О��рабатываем в 8 раз больше заказов тем же штатом.",
       author: "Сергей Белов", position: "Директор по операциям", company: "ОптТрейд",
       metric: { value: "8x", label: "больше заказов" },
     },
@@ -165,14 +171,14 @@ export function ObrabotkZakazovPage() {
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="max-w-3xl mb-12">
             <h2 className="text-3xl md:text-5xl font-bold mb-6">Где теряются деньги при ручной обработке</h2>
-            <p className="text-xl text-muted-foreground">Каждый ручной шаг — это задержка, ошибка и недовольный клиент.</p>
+            <p className="text-xl text-muted-foreground">Каждый ручной ��аг — это задержка, ошибка и недовольный клиент.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { icon: Clock, title: "Медленная обработка", desc: "Ручная обработка одного заказа занимает 20-60 минут. Клиент ждёт и злится" },
               { icon: AlertCircle, title: "Ошибки в данных", desc: "До 15% заказов содержат ошибки в адресах, реквизитах или составе — приводят к возвратам" },
               { icon: RefreshCw, title: "Дубли и перепутанные заказы", desc: "Один заказ приходит из разных каналов, создаётся дубль и отгружается дважды" },
-              { icon: BarChart3, title: "Нет видимости", desc: "Невозможно понять: сколько заказов в очереди, где каждый из них и когда будет доставлен" },
+              { icon: BarChart3, title: "Нет видимости", desc: "Невозможно понять: сколько заказов в очереди, где кажд��й из них и когда будет доставлен" },
             ].map((item) => {
               const Icon = item.icon
               return (
@@ -408,7 +414,7 @@ export function ObrabotkZakazovPage() {
       {/* Final CTA */}
       <section className="py-20 md:py-28 bg-gradient-to-br from-orange-600 to-amber-600 text-white">
         <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">Автоматизируйте обработку заказов</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">Автоматизируй��е обработку заказов</h2>
           <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">Запустите систему за 10-14 дней. Бесплатная консультация и демо.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" onClick={() => openModal("consultation")} className="h-14 px-8 bg-white text-orange-600 hover:bg-slate-100">
@@ -421,6 +427,9 @@ export function ObrabotkZakazovPage() {
           <p className="mt-6 text-sm text-white/60">Без обязательств · Запуск за 10-14 дней · NDA по запросу</p>
         </div>
       </section>
+
+      {/* Related Solutions */}
+      <RelatedSolutions locale={locale} currentSlug="obrabotka-zakazov" />
     </div>
   )
 }

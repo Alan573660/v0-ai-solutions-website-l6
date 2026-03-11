@@ -51,5 +51,5 @@ export async function generateMetadata({ params }: RaschetDostavkiPageProps): Pr
 
 export default async function RaschetDostavkiPageWrapper({ params }: RaschetDostavkiPageProps) {
   const { locale } = await params
-  return <RaschetDostavkiPage />
+  return <RaschetDostavkiPage locale={locale} />
 }

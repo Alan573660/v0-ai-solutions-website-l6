@@ -11,8 +11,14 @@ import {
   Layers, Gauge, TrendingDown, ShieldAlert,
 } from "lucide-react"
 import { useCTA } from "@/components/modals/cta-provider"
+import { RelatedSolutions } from "@/components/related-solutions"
+import type { Locale } from "@/lib/i18n/config"
 
-export function RaschetDostavkiPage() {
+interface RaschetDostavkiPageProps {
+  locale: Locale
+}
+
+export function RaschetDostavkiPage({ locale }: RaschetDostavkiPageProps) {
   const { openModal } = useCTA()
   const [activeFeature, setActiveFeature] = useState(0)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
@@ -406,7 +412,7 @@ export function RaschetDostavkiPage() {
       <section className="py-20 md:py-28 bg-gradient-to-br from-orange-600 to-amber-600 text-white">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Экономьте на доставке уже сегодня</h2>
-          <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">Запустите оптимизацию за 7-10 дней. Бесплатная консультация и демо.</p>
+          <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">Запустите оптимизацию за 7-10 дней. Бе��платная консультация и демо.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" onClick={() => openModal("consultation")} className="h-14 px-8 bg-white text-orange-600 hover:bg-slate-100">
               Получить бесплатную консультацию <ArrowRight className="ml-2 h-5 w-5" />
@@ -418,6 +424,9 @@ export function RaschetDostavkiPage() {
           <p className="mt-6 text-sm text-white/60">Без обязательств · Запуск за 7-10 дней · NDA по запросу</p>
         </div>
       </section>
+
+      {/* Related Solutions */}
+      <RelatedSolutions locale={locale} currentSlug="raschet-dostavki" />
     </div>
   )
 }

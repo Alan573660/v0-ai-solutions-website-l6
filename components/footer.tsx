@@ -398,6 +398,7 @@ export function Footer({ locale }: FooterProps) {
     { name: t.aiAutomationList.deliveryCalculation, href: `/${locale}/solutions/raschet-dostavki` },
     { name: t.aiAutomationList.salesAutomation, href: `/${locale}/solutions/sales-automation-system` },
     { name: t.aiAutomationList.aiForBusiness, href: `/${locale}/solutions/ai-dlya-biznesa` },
+    { name: t.aiAutomationList.automationSales || (locale === "ru" ? "Автоматизация продаж" : "Sales Automation"), href: `/${locale}/solutions/automation-sales` },
   ]
 
   const company = [
@@ -493,11 +494,11 @@ export function Footer({ locale }: FooterProps) {
               </ul>
             </div>
 
-            {/* AI Automation */}
-            <div>
+            {/* AI Automation - все 12 SEO-страниц */}
+            <div className="lg:col-span-2">
               <h3 className="font-semibold mb-4">{t.aiAutomation}</h3>
-              <ul className="space-y-2">
-                {aiAutomation.slice(0, 6).map((item) => (
+              <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
+                {aiAutomation.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}

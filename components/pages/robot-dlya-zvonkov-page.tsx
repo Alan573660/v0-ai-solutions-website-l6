@@ -33,8 +33,14 @@ import {
   RefreshCw,
 } from "lucide-react"
 import { useCTA } from "@/components/modals/cta-provider"
+import { RelatedSolutions } from "@/components/related-solutions"
+import type { Locale } from "@/lib/i18n/config"
 
-export function RobotDlyaZvonkovPage() {
+interface RobotDlyaZvonkovPageProps {
+  locale: Locale
+}
+
+export function RobotDlyaZvonkovPage({ locale }: RobotDlyaZvonkovPageProps) {
   const { openModal } = useCTA()
   const [activeFeature, setActiveFeature] = useState(0)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
@@ -217,7 +223,7 @@ export function RobotDlyaZvonkovPage() {
       answer: "В отличие от IVR, робот ведет полноценный разговор голосом, понимает свободную речь, задает уточняющие вопросы и адаптирует диалог в реальном времени. Клиент не нажимает кнопки — он просто разговаривает как с живым оператором.",
     },
     {
-      question: "Сколько звонков одновременно может обрабатывать робот?",
+      question: "Сколько звонков одновременно может обраб��тывать робот?",
       answer: "Система масштабируется горизонтально и обрабатывает неограниченное количество одновременных звонков. Типичные клиенты обрабатывают от 50 до 5000 звонков в день.",
     },
     {
@@ -557,7 +563,7 @@ export function RobotDlyaZvonkovPage() {
                     ))}
                   </ul>
                   <Button className="w-full mt-6" variant={plan.highlight ? "default" : "outline"} onClick={() => openModal("consultation")}>
-                    Получить консультацию
+                    Получить консуль��ацию
                   </Button>
                 </CardContent>
               </Card>
@@ -627,6 +633,9 @@ export function RobotDlyaZvonkovPage() {
           <p className="mt-6 text-sm text-white/60">Без обязательств · Демо за 7 дней · NDA по запросу</p>
         </div>
       </section>
+
+      {/* Related Solutions */}
+      <RelatedSolutions locale={locale} currentSlug="robot-dlya-zvonkov" />
     </div>
   )
 }

@@ -51,5 +51,5 @@ export async function generateMetadata({ params }: SalesAutomationSystemPageProp
 
 export default async function SalesAutomationSystemPageWrapper({ params }: SalesAutomationSystemPageProps) {
   const { locale } = await params
-  return <SalesAutomationSystemPage />
+  return <SalesAutomationSystemPage locale={locale} />
 }

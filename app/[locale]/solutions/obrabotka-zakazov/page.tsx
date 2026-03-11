@@ -51,5 +51,5 @@ export async function generateMetadata({ params }: ObrabotkZakazovPageProps): Pr
 
 export default async function ObrabotkZakazovPageWrapper({ params }: ObrabotkZakazovPageProps) {
   const { locale } = await params
-  return <ObrabotkZakazovPage />
+  return <ObrabotkZakazovPage locale={locale} />
 }

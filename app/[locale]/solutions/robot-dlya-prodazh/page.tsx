@@ -51,5 +51,5 @@ export async function generateMetadata({ params }: RobotDlyaProdazhPageProps): P
 
 export default async function RobotDlyaProdazhPageWrapper({ params }: RobotDlyaProdazhPageProps) {
   const { locale } = await params
-  return <RobotDlyaProdazhPage />
+  return <RobotDlyaProdazhPage locale={locale} />
 }

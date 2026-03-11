@@ -11,8 +11,14 @@ import {
   LineChart, Lock, Brain, Globe, Shield,
 } from "lucide-react"
 import { useCTA } from "@/components/modals/cta-provider"
+import { RelatedSolutions } from "@/components/related-solutions"
+import type { Locale } from "@/lib/i18n/config"
 
-export function SalesAutomationSystemPage() {
+interface SalesAutomationSystemPageProps {
+  locale: Locale
+}
+
+export function SalesAutomationSystemPage({ locale }: SalesAutomationSystemPageProps) {
   const { openModal } = useCTA()
   const [activeFeature, setActiveFeature] = useState(0)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
@@ -114,7 +120,7 @@ export function SalesAutomationSystemPage() {
   const m2Benefits = [
     { icon: Brain, title: "Собственная AI-платформа", description: "Полный контроль над технологией. Не зависим от сторонних решений." },
     { icon: Globe, title: "Мультиязычность", description: "Робот говорит на 6+ языках. Автоопределение языка собеседника." },
-    { icon: Zap, title: "Быстрое внедрение", description: "Запуск за 7 дней. Готовые интеграции с популярными CRM." },
+    { icon: Zap, title: "Быстрое внедрение", description: "��апуск за 7 дней. Готовые интеграции с популярными CRM." },
     { icon: Shield, title: "Безопасность", description: "ISO 27001, GDPR, 152-ФЗ. Все данные защищены." },
     { icon: Users, title: "Экспертная команда", description: "10+ лет в AI и продажах. 50+ успешных внедрений." },
     { icon: TrendingUp, title: "Гарантия ROI", description: "Рассчитываем окупаемость до старта. Возврат за 1.5-2 месяца." },
@@ -485,6 +491,9 @@ export function SalesAutomationSystemPage() {
           <p className="mt-6 text-sm text-white/60">Без обязательств · Запуск за 7 дней · NDA по запросу</p>
         </div>
       </section>
+
+      {/* Related Solutions */}
+      <RelatedSolutions locale={locale} currentSlug="sales-automation-system" />
     </div>
   )
 }
