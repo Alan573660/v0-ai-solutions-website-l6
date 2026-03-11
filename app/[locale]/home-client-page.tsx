@@ -27,20 +27,15 @@ import {
   CheckCircle2,
   ArrowRight,
   Play,
-  Pause,
   Users,
   Building2,
   Headphones,
   Settings,
   Globe,
   Home,
-  Building,
-  ChevronRight
+  Building
 } from "lucide-react"
 
-/* ============================================================= */
-/* Reveal Animation Component                                     */
-/* ============================================================= */
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
@@ -69,9 +64,6 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
   )
 }
 
-/* ============================================================= */
-/* Animated Counter Component                                     */
-/* ============================================================= */
 function AnimatedCounter({ value, suffix = "", prefix = "" }: { value: number; suffix?: string; prefix?: string }) {
   const [count, setCount] = useState(0)
   const ref = useRef<HTMLSpanElement>(null)
@@ -106,15 +98,9 @@ function AnimatedCounter({ value, suffix = "", prefix = "" }: { value: number; s
   return <span ref={ref}>{prefix}{count}{suffix}</span>
 }
 
-/* ============================================================= */
-/* Main Homepage Component                                        */
-/* ============================================================= */
 export default function HomeClientPage({ locale }: { locale: Locale }) {
   const { openCTA } = useCTA()
-  const [playingAudio, setPlayingAudio] = useState<string | null>(null)
-  const audioRef = useRef<HTMLAudioElement | null>(null)
 
-  // ===== DATA =====
   const automationTypes = [
     { icon: PhoneIncoming, title: "Входящие звонки", desc: "Приём, квалификация лидов, создание заявок в CRM", color: "from-blue-500 to-cyan-500" },
     { icon: PhoneOutgoing, title: "Исходящие звонки", desc: "Обзвон, напоминания, follow-up и реактивация", color: "from-cyan-500 to-teal-500" },
@@ -151,12 +137,12 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
     { id: "automatic-operator", title: "Автоматический оператор", desc: "IVR нового поколения с AI-обработкой", href: "/solutions/automatic-operator", icon: Settings, gradient: "from-orange-600 to-red-600" },
     { id: "ai-business", title: "AI для бизнеса", desc: "Комплексная автоматизация процессов", href: "/solutions/ai-dlya-biznesa", icon: Building2, gradient: "from-indigo-600 to-purple-600" },
     { id: "automation-sales", title: "Автоматизация продаж", desc: "Увеличение конверсии и выручки", href: "/solutions/automation-sales", icon: BarChart3, gradient: "from-cyan-600 to-blue-600" },
-    { id: "invoice-automation", title: "Автоматизация счетов", desc: "Выставление и контроль оплаты", href: "/solutions/invoice-automation", icon: Receipt, gradient: "from-amber-600 to-orange-600" },
-    { id: "delivery-automation", title: "Автоматизация доставки", desc: "Логистика и уведомления клиентов", href: "/solutions/delivery-automation", icon: Truck, gradient: "from-teal-600 to-cyan-600" },
-    { id: "smart-home", title: "Умный дом", desc: "Голосовое управление домом", href: "/solutions/smart-home", icon: Home, gradient: "from-pink-600 to-rose-600" },
-    { id: "smb", title: "Для малого бизнеса", desc: "Быстрый старт за 1-2 недели", href: "/solutions/smb", icon: Building2, gradient: "from-lime-600 to-green-600" },
-    { id: "enterprise", title: "Enterprise", desc: "Корпоративные решения и госсектор", href: "/solutions/enterprise", icon: Building, gradient: "from-slate-600 to-gray-600" },
-    { id: "integrations", title: "Интеграции", desc: "CRM, телефония, учётные системы", href: "/integrations", icon: Database, gradient: "from-violet-600 to-purple-600" },
+    { id: "invoice-automation", title: "Автоматизация счетов", desc: "Выставление и контроль оплаты", href: "/solutions/vystavlenie-schetov", icon: Receipt, gradient: "from-amber-600 to-orange-600" },
+    { id: "delivery-automation", title: "Автоматизация доставки", desc: "Логистика и уведомления клиентов", href: "/solutions/raschet-dostavki", icon: Truck, gradient: "from-teal-600 to-cyan-600" },
+    { id: "request-processing", title: "Обработка заявок", desc: "Автоматический приём и распределение", href: "/solutions/obrabotka-zayavok", icon: FileText, gradient: "from-pink-600 to-rose-600" },
+    { id: "order-processing", title: "Обработка заказов", desc: "Полный цикл от заказа до доставки", href: "/solutions/obrabotka-zakazov", icon: CheckCircle2, gradient: "from-lime-600 to-green-600" },
+    { id: "robot-calls", title: "Робот для звонков", desc: "Массовый обзвон и уведомления", href: "/solutions/robot-dlya-zvonkov", icon: Phone, gradient: "from-slate-600 to-gray-600" },
+    { id: "robot-sales", title: "Робот для продаж", desc: "AI-продавец для холодных звонков", href: "/solutions/robot-dlya-prodazh", icon: TrendingUp, gradient: "from-violet-600 to-purple-600" },
   ]
 
   const cases = [
@@ -192,16 +178,10 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
   const faqItems = [
     { q: "Как быстро можно запустить AI?", a: "Типовое внедрение занимает 7-14 дней. Это включает интеграцию с вашими системами, настройку сценариев и тестовый период. Для стандартных сценариев срок можно сократить до 3-5 дней." },
     { q: "Какие системы поддерживаются?", a: "Мы интегрируемся с amoCRM, Bitrix24, Leadvertex, 1С, Контур, Мегаплан. Телефония: Asterisk, Mango Office, Sipuni, Zadarma, любой SIP. Если вашей системы нет — разработаем интеграцию." },
-    { q: "Сколько стоит?", a: "Цена зависит от объёма звонков и нужных интеграций. Стартовый пакет от 15 000 ₽/месяц за 500 минут. Для точного расчёта оставьте заявку — подготовим предложение за 24 часа." },
+    { q: "Сколько стоит?", a: "Цена зависит от объёма звонков и нужных интеграций. Стартовый пакет от 15 000 руб/месяц за 500 минут. Для точного расчёта оставьте заявку — подготовим предложение за 24 часа." },
     { q: "Может ли AI общаться на разных языках?", a: "Да, поддерживается 15+ языков включая русский, английский, испанский, немецкий, французский. AI может переключаться между языками в одном разговоре." },
     { q: "Что если AI не поймёт клиента?", a: "При низком уровне уверенности AI переспрашивает или предлагает перевести на менеджера. Вероятность непонимания менее 2%. Все сложные кейсы автоматически передаются людям." },
     { q: "Есть ли тестовый период?", a: "Да, предоставляем 7 дней бесплатного тестирования с полным функционалом. Вы сможете оценить качество распознавания, интеграции и работу AI на реальных звонках." },
-  ]
-
-  const audioExamples = [
-    { id: "construction", title: "Расчёт кровли", desc: "AI рассчитал стоимость и создал сделку", duration: "2:15", category: "Строительство" },
-    { id: "logistics", title: "Заказ доставки", desc: "Оформление с расчётом логистики", duration: "1:45", category: "Логистика" },
-    { id: "medical", title: "Запись к врачу", desc: "Запись пациента с учётом предпочтений", duration: "1:30", category: "Медицина" },
   ]
 
   const stats = [
@@ -213,9 +193,8 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
 
   return (
     <main className="min-h-screen bg-background">
-      {/* ========== HERO SECTION ========== */}
+      {/* HERO */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-        {/* Background Effects */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
@@ -270,13 +249,12 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
 
             <Reveal delay={400}>
               <p className="text-sm text-slate-500">
-                Бесплатная консультация • Расчёт ROI за 15 минут • Без обязательств
+                Бесплатная консультация - Расчёт ROI за 15 минут - Без обязательств
               </p>
             </Reveal>
           </div>
         </div>
 
-        {/* Stats Bar */}
         <div className="absolute bottom-0 left-0 right-0 border-t border-slate-800 bg-slate-900/80 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-8">
@@ -293,7 +271,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* ========== WHAT AI AUTOMATES ========== */}
+      {/* WHAT AI AUTOMATES */}
       <section className="py-24 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4 max-w-6xl">
           <Reveal className="text-center mb-16">
@@ -324,7 +302,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* ========== HOW AI WORKS ========== */}
+      {/* HOW AI WORKS */}
       <section className="py-24">
         <div className="container mx-auto px-4 max-w-6xl">
           <Reveal className="text-center mb-16">
@@ -358,7 +336,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* ========== AI CAPABILITIES ========== */}
+      {/* AI CAPABILITIES */}
       <section className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
         <div className="container mx-auto px-4 max-w-6xl">
           <Reveal className="text-center mb-16">
@@ -385,13 +363,13 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* ========== SOLUTIONS ========== */}
+      {/* SOLUTIONS */}
       <section className="py-24">
         <div className="container mx-auto px-4 max-w-6xl">
           <Reveal className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4">12 решений для вашего бизнеса</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Готовые модули для любых задач автоматизации
+              Выберите подходящее решение или получите персональную консультацию
             </p>
           </Reveal>
 
@@ -399,19 +377,17 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
             {solutions.map((solution, idx) => {
               const Icon = solution.icon
               return (
-                <Reveal key={solution.id} delay={idx * 40}>
+                <Reveal key={solution.id} delay={idx * 50}>
                   <Link href={`/${locale}${solution.href}`}>
-                    <Card className="group h-full hover:shadow-xl transition-all duration-300 border border-border/50 hover:border-primary/50 cursor-pointer overflow-hidden">
+                    <Card className="group hover:shadow-xl transition-all duration-300 border border-border/50 hover:border-primary/50 h-full cursor-pointer">
                       <CardContent className="p-6">
                         <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${solution.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                           <Icon className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
-                          {solution.title}
-                        </h3>
+                        <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{solution.title}</h3>
                         <p className="text-muted-foreground text-sm mb-4">{solution.desc}</p>
-                        <div className="flex items-center text-primary text-sm font-medium">
-                          Подробнее <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                        <div className="flex items-center gap-2 text-primary text-sm font-medium">
+                          Подробнее <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </div>
                       </CardContent>
                     </Card>
@@ -423,7 +399,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* ========== CASES ========== */}
+      {/* CASES */}
       <section className="py-24 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4 max-w-6xl">
           <Reveal className="text-center mb-16">
@@ -433,30 +409,28 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
             </p>
           </Reveal>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {cases.map((caseItem, idx) => (
+          <div className="grid md:grid-cols-3 gap-8">
+            {cases.map((item, idx) => (
               <Reveal key={idx} delay={idx * 100}>
-                <Card className="h-full overflow-hidden">
-                  <div className="h-2 bg-gradient-to-r from-blue-500 to-cyan-500" />
+                <Card className="overflow-hidden h-full">
+                  <div className="p-4 bg-gradient-to-r from-blue-600 to-cyan-600">
+                    <p className="text-white/80 text-sm">{item.industry}</p>
+                    <h3 className="text-xl font-bold text-white">{item.company}</h3>
+                  </div>
                   <CardContent className="p-6">
-                    <div className="text-sm text-muted-foreground mb-1">{caseItem.industry}</div>
-                    <h3 className="text-xl font-bold mb-4">{caseItem.company}</h3>
-                    
                     <div className="mb-4">
-                      <div className="text-xs font-semibold text-red-500 uppercase tracking-wide mb-1">Проблема</div>
-                      <p className="text-sm text-muted-foreground">{caseItem.task}</p>
+                      <p className="text-xs text-red-500 font-medium uppercase mb-1">Задача</p>
+                      <p className="text-sm text-muted-foreground">{item.task}</p>
                     </div>
-                    
                     <div className="mb-6">
-                      <div className="text-xs font-semibold text-green-500 uppercase tracking-wide mb-1">Результат</div>
-                      <p className="text-sm font-medium">{caseItem.result}</p>
+                      <p className="text-xs text-green-500 font-medium uppercase mb-1">Результат</p>
+                      <p className="text-sm font-medium">{item.result}</p>
                     </div>
-                    
-                    <div className="grid grid-cols-3 gap-2 p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
-                      {caseItem.metrics.map((metric, i) => (
-                        <div key={i} className="text-center">
-                          <div className="text-lg font-bold text-primary">{metric.value}</div>
-                          <div className="text-xs text-muted-foreground">{metric.label}</div>
+                    <div className="grid grid-cols-3 gap-2">
+                      {item.metrics.map((m, i) => (
+                        <div key={i} className="text-center p-2 bg-slate-100 dark:bg-slate-800 rounded-lg">
+                          <div className="text-lg font-bold text-primary">{m.value}</div>
+                          <div className="text-xs text-muted-foreground">{m.label}</div>
                         </div>
                       ))}
                     </div>
@@ -468,23 +442,20 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* ========== INTEGRATIONS ========== */}
+      {/* INTEGRATIONS */}
       <section className="py-24">
         <div className="container mx-auto px-4 max-w-6xl">
           <Reveal className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-bold mb-4">Интеграции</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Подключаем к вашим CRM, телефонии и мессенджерам
+              CRM, телефония, мессенджеры — всё работает вместе
             </p>
           </Reveal>
 
           <Reveal>
             <div className="flex flex-wrap justify-center gap-3">
-              {integrations.map((item, idx) => (
-                <div 
-                  key={idx} 
-                  className="px-5 py-2.5 rounded-full bg-white dark:bg-slate-800 border border-border/50 text-sm font-medium hover:border-primary/50 hover:shadow-md transition-all"
-                >
+              {integrations.map((item) => (
+                <div key={item} className="px-5 py-2.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-border/50 text-sm font-medium">
                   {item}
                 </div>
               ))}
@@ -493,145 +464,61 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* ========== PRICING ========== */}
+      {/* FAQ */}
       <section className="py-24 bg-slate-50 dark:bg-slate-900/50">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <Reveal className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">Тарифы</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Прозрачное ценообразование без скрытых платежей
-            </p>
-          </Reveal>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { name: "Старт", price: "15 000", minutes: "500", features: ["1 AI-агент", "Базовые интеграции", "Email поддержка", "Аналитика звонков"] },
-              { name: "Бизнес", price: "45 000", minutes: "2000", popular: true, features: ["3 AI-агента", "Все интеграции", "Приоритетная поддержка", "Расширенная аналитика", "Кастомные сценарии"] },
-              { name: "Enterprise", price: "По запросу", minutes: "Безлимит", features: ["Неограниченно агентов", "Выделенная инфраструктура", "SLA 99.9%", "Персональный менеджер", "On-premise опция"] },
-            ].map((plan, idx) => (
-              <Reveal key={idx} delay={idx * 100}>
-                <Card className={`relative h-full ${plan.popular ? "border-2 border-primary shadow-xl" : ""}`}>
-                  {plan.popular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full">
-                      Популярный
-                    </div>
-                  )}
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-                    <div className="mb-4">
-                      <span className="text-4xl font-bold">{plan.price}</span>
-                      {plan.price !== "По запросу" && <span className="text-muted-foreground"> ₽/мес</span>}
-                    </div>
-                    <div className="text-sm text-muted-foreground mb-6">{plan.minutes} минут/месяц</div>
-                    <ul className="space-y-3 mb-6">
-                      {plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm">
-                          <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    <Button 
-                      className={`w-full ${plan.popular ? "bg-primary" : ""}`}
-                      variant={plan.popular ? "default" : "outline"}
-                      onClick={() => openCTA()}
-                    >
-                      Выбрать тариф
-                    </Button>
-                  </CardContent>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========== FAQ ========== */}
-      <section className="py-24">
         <div className="container mx-auto px-4 max-w-3xl">
-          <Reveal className="text-center mb-16">
+          <Reveal className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-bold mb-4">Частые вопросы</h2>
-            <p className="text-xl text-muted-foreground">
-              Ответы на популярные вопросы о платформе
-            </p>
           </Reveal>
 
           <Reveal>
             <Accordion type="single" collapsible className="space-y-4">
               {faqItems.map((item, idx) => (
-                <AccordionItem 
-                  key={idx} 
-                  value={`faq-${idx}`}
-                  className="bg-white dark:bg-slate-800 rounded-xl px-6 border border-border/50"
-                >
-                  <AccordionTrigger className="text-left font-semibold hover:no-underline">
+                <AccordionItem key={idx} value={`faq-${idx}`} className="bg-white dark:bg-slate-800 rounded-xl px-6 border-0 shadow-sm">
+                  <AccordionTrigger className="text-left font-semibold hover:no-underline py-5">
                     {item.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
+                  <AccordionContent className="text-muted-foreground pb-5">
                     {item.a}
                   </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
           </Reveal>
-
-          <Reveal className="mt-8 text-center">
-            <p className="text-muted-foreground">
-              Остались вопросы?{" "}
-              <span 
-                className="text-primary font-semibold cursor-pointer hover:underline"
-                onClick={() => openCTA()}
-              >
-                Напишите нам
-              </span>
-            </p>
-          </Reveal>
         </div>
       </section>
 
-      {/* ========== FINAL CTA ========== */}
-      <section className="py-24 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
+      {/* FINAL CTA */}
+      <section className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <Reveal>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Готовы автоматизировать
-              <span className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
-                ваш бизнес?
-              </span>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              Готовы автоматизировать бизнес?
             </h2>
-          </Reveal>
-
-          <Reveal delay={100}>
             <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto">
-              Присоединяйтесь к 500+ компаниям, которые уже автоматизировали свои процессы. 
-              Получите бесплатную консультацию и расчёт ROI.
+              Получите бесплатную консультацию и расчёт ROI для вашей компании. 
+              Начните с 7-дневного тестового периода.
             </p>
-          </Reveal>
-
-          <Reveal delay={200}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
-                size="lg"
+                size="lg" 
                 onClick={() => openCTA()}
-                className="bg-white text-slate-900 hover:bg-slate-100 px-8 py-6 text-lg rounded-xl font-semibold"
+                className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-6 text-lg rounded-xl"
               >
-                Получить консультацию
+                Получить бесплатный аудит
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
               <Button 
-                size="lg"
+                size="lg" 
                 variant="outline"
-                className="border-slate-500 text-white hover:bg-white/10 px-8 py-6 text-lg rounded-xl"
+                className="border-slate-500 text-white hover:bg-slate-800 px-8 py-6 text-lg rounded-xl"
               >
                 <Phone className="mr-2 w-5 h-5" />
-                +7 (495) 123-45-67
+                +7 (499) 123-45-67
               </Button>
             </div>
-          </Reveal>
-
-          <Reveal delay={300}>
-            <p className="text-sm text-slate-400">
-              Первый месяц скидка 30% для новых клиентов. 7 дней бесплатного тестирования.
+            <p className="text-sm text-slate-500 mt-8">
+              Первый месяц со скидкой 30% для новых клиентов
             </p>
           </Reveal>
         </div>
