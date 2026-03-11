@@ -387,6 +387,7 @@ export function Footer({ locale }: FooterProps) {
   ]
 
   const aiAutomation = [
+    { name: locale === "ru" ? "AI автоматизация бизнеса" : "AI Business Automation", href: `/${locale}/automation-business`, highlight: true },
     { name: t.aiAutomationList.robotOperator, href: `/${locale}/solutions/robot-operator` },
     { name: t.aiAutomationList.automaticOperator, href: `/${locale}/solutions/automatic-operator` },
     { name: t.aiAutomationList.virtualOperator, href: `/${locale}/solutions/virtual-operator` },
