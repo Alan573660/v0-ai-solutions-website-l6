@@ -67,6 +67,22 @@ export function Header({ locale }: HeaderProps) {
     { name: t("solutions.smartHome"), href: `/${locale}/solutions/smart-home` },
   ]
 
+  // 12 SEO-страниц AI автоматизации
+  const aiAutomation = [
+    { name: locale === "ru" ? "Робот оператор" : "Robot Operator", href: `/${locale}/solutions/robot-operator` },
+    { name: locale === "ru" ? "Автоматический оператор" : "Automatic Operator", href: `/${locale}/solutions/automatic-operator` },
+    { name: locale === "ru" ? "Виртуальный оператор" : "Virtual Operator", href: `/${locale}/solutions/virtual-operator` },
+    { name: locale === "ru" ? "Робот для звонков" : "Robot for Calls", href: `/${locale}/solutions/robot-dlya-zvonkov` },
+    { name: locale === "ru" ? "Робот для продаж" : "Sales Robot", href: `/${locale}/solutions/robot-dlya-prodazh` },
+    { name: locale === "ru" ? "Обработка заявок" : "Request Processing", href: `/${locale}/solutions/obrabotka-zayavok` },
+    { name: locale === "ru" ? "Обработка заказов" : "Order Processing", href: `/${locale}/solutions/obrabotka-zakazov` },
+    { name: locale === "ru" ? "Выставление счётов" : "Invoice Generation", href: `/${locale}/solutions/vystavlenie-schetov` },
+    { name: locale === "ru" ? "Расчёт доставки" : "Delivery Calculation", href: `/${locale}/solutions/raschet-dostavki` },
+    { name: locale === "ru" ? "AI для бизнеса" : "AI for Business", href: `/${locale}/solutions/ai-dlya-biznesa` },
+    { name: locale === "ru" ? "Система автоматизации продаж" : "Sales Automation System", href: `/${locale}/solutions/sales-automation-system` },
+    { name: locale === "ru" ? "Автоматизация продаж" : "Sales Automation", href: `/${locale}/solutions/automation-sales` },
+  ]
+
   const platform = [
     { name: t("platform.architecture"), href: `/${locale}/platform/architecture` },
     { name: t("platform.demo"), href: `/${locale}/platform/demo` },
@@ -223,6 +239,27 @@ export function Header({ locale }: HeaderProps) {
                 </h3>
                 <div className="space-y-0.5" role="group" aria-labelledby="solutions-heading">
                   {solutions.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="block text-sm hover:text-primary hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-3 py-2"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3
+                  className="font-semibold text-xs uppercase tracking-wider text-muted-foreground mb-1.5 px-2"
+                  id="ai-automation-heading"
+                >
+                  {locale === "ru" ? "AI автоматизация" : "AI Automation"}
+                </h3>
+                <div className="space-y-0.5" role="group" aria-labelledby="ai-automation-heading">
+                  {aiAutomation.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}

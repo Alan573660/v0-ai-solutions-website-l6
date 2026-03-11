@@ -51,5 +51,5 @@ export async function generateMetadata({ params }: VystavlenieSchetovPageProps):
 
 export default async function VystavlenieSchetovPageWrapper({ params }: VystavlenieSchetovPageProps) {
   const { locale } = await params
-  return <VystavlenieSchetovPage />
+  return <VystavlenieSchetovPage locale={locale} />
 }

@@ -11,8 +11,14 @@ import {
   Send, Receipt, Copy, Lock,
 } from "lucide-react"
 import { useCTA } from "@/components/modals/cta-provider"
+import { RelatedSolutions } from "@/components/related-solutions"
+import type { Locale } from "@/lib/i18n/config"
 
-export function VystavlenieSchetovPage() {
+interface VystavlenieSchetovPageProps {
+  locale: Locale
+}
+
+export function VystavlenieSchetovPage({ locale }: VystavlenieSchetovPageProps) {
   const { openModal } = useCTA()
   const [activeFeature, setActiveFeature] = useState(0)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
@@ -171,7 +177,7 @@ export function VystavlenieSchetovPage() {
             {[
               { icon: Clock, title: "Медленно", desc: "Каждый счёт — 20-40 минут. По 50-100 счетов в день — это целый рабочий день на одного менеджера" },
               { icon: AlertCircle, title: "Ошибки", desc: "Неправильные суммы, реквизиты, налоги. Клиент не платит, потому что сумма не совпадает" },
-              { icon: Zap, title: "Медленная оплата", desc: "Счета отправляют с опозданием. Клиент забывает, платит позже или не платит вообще" },
+              { icon: Zap, title: "Медленная оплата", desc: "Счета отправляют с оп��зданием. Клиент забывает, платит позже или не платит вообще" },
               { icon: BarChart3, title: "Нет видимости", desc: "Непонятно сколько счетов выставлено, сколько оплачено, кто просрочивает платёж" },
             ].map((item) => {
               const Icon = item.icon
@@ -418,6 +424,9 @@ export function VystavlenieSchetovPage() {
           <p className="mt-6 text-sm text-white/60">Без обязательств · Запуск за 3-5 дней · NDA по запросу</p>
         </div>
       </section>
+
+      {/* Related Solutions */}
+      <RelatedSolutions locale={locale} currentSlug="vystavlenie-schetov" />
     </div>
   )
 }

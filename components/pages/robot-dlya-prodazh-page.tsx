@@ -10,8 +10,14 @@ import {
   Home, AlertCircle, X, DollarSign,
 } from "lucide-react"
 import { useCTA } from "@/components/modals/cta-provider"
+import { RelatedSolutions } from "@/components/related-solutions"
+import type { Locale } from "@/lib/i18n/config"
 
-export function RobotDlyaProdazhPage() {
+interface RobotDlyaProdazhPageProps {
+  locale: Locale
+}
+
+export function RobotDlyaProdazhPage({ locale }: RobotDlyaProdazhPageProps) {
   const { openModal } = useCTA()
   const [activeStep, setActiveStep] = useState(0)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
@@ -112,7 +118,7 @@ export function RobotDlyaProdazhPage() {
 
   const faqs = [
     { question: "Чем робот для продаж отличается от обычного call-бота?", answer: "Робот для продаж — это полноценный AI-агент, который ведёт естественный диалог, задаёт уточняющие вопросы, работает с возражениями, рассчитывает стоимость по сложным прайс-листам и формирует КП. Он обучен на лучших скриптах продаж и работает по методологиям SPIN, BANT." },
-    { question: "Может ли робот работать со сложным прайс-листом?", answer: "Да, робот работает с каталогами до 10 000+ SKU. Он мгновенно находит нужный товар по характеристикам, рассчитывает цену с учётом скидок, акций, объёма заказа и персональных условий. Интегрируется с 1C, МойСклад, внутренними базами." },
+    { question: "Может ли робот работать со сложным прайс-листом?", answer: "Да, робот работает с ��аталогами до 10 000+ SKU. Он мгновенно находит нужный товар по характеристикам, рассчитывает цену с учётом скидок, акций, объёма заказа и персональных условий. Интегрируется с 1C, МойСклад, внутренними базами." },
     { question: "Как робот обрабатывает возражения?", answer: "Робот обучен на базе знаний ваших лучших менеджеров. Распознаёт типовые возражения (дорого, нужно подумать, есть дешевле) и отвечает по проработанным скриптам. В сложных случаях переключает на живого менеджера с полным контекстом разговора." },
     { question: "Как быстро окупается внедрение?", answer: "Типичная окупаемость — 2-4 месяца за счёт роста конверсии на 30-40% и снижения ФОТ отдела продаж на 50-70%. Считаем экономику индивидуально на первой консультации." },
     { question: "Можно ли протестировать перед запуском?", answer: "Да, мы обязательно делаем пилотный запуск на 50-100 реальных лидах. Вы слушаете записи, оцениваете качество, вносим правки. Переходим к полному запуску только после вашего одобрения." },
@@ -163,7 +169,7 @@ export function RobotDlyaProdazhPage() {
       <section className="py-20 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="max-w-3xl mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">Почему падает конверсия продаж</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Почему па��ает конверсия продаж</h2>
             <p className="text-xl text-muted-foreground">Менеджеры перегружены, лиды теряются, скрипты не соблюдаются — всё это убивает продажи.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -446,6 +452,9 @@ export function RobotDlyaProdazhPage() {
           <p className="mt-6 text-sm text-white/60">Без обязательств · Тестовый запуск за 14 дней · NDA по запросу</p>
         </div>
       </section>
+
+      {/* Related Solutions */}
+      <RelatedSolutions locale={locale} currentSlug="robot-dlya-prodazh" />
     </div>
   )
 }

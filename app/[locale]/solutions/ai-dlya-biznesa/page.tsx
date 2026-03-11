@@ -51,5 +51,5 @@ export async function generateMetadata({ params }: AIDlyaBiznesaPageProps): Prom
 
 export default async function AIDlyaBiznesaPageWrapper({ params }: AIDlyaBiznesaPageProps) {
   const { locale } = await params
-  return <AIDlyaBiznesaPage />
+  return <AIDlyaBiznesaPage locale={locale} />
 }

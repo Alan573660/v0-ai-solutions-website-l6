@@ -11,8 +11,14 @@ import {
   Filter, Route, Bell, FileCheck,
 } from "lucide-react"
 import { useCTA } from "@/components/modals/cta-provider"
+import { RelatedSolutions } from "@/components/related-solutions"
+import type { Locale } from "@/lib/i18n/config"
 
-export function ObrabotkZayavokPage() {
+interface ObrabotkZayavokPageProps {
+  locale: Locale
+}
+
+export function ObrabotkZayavokPage({ locale }: ObrabotkZayavokPageProps) {
   const { openModal } = useCTA()
   const [activeFeature, setActiveFeature] = useState(0)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
@@ -454,6 +460,9 @@ export function ObrabotkZayavokPage() {
           <p className="mt-6 text-sm text-white/60">Без обязательств · Запуск за 7-14 дней · NDA по запросу</p>
         </div>
       </section>
+
+      {/* Related Solutions */}
+      <RelatedSolutions locale={locale} currentSlug="obrabotka-zayavok" />
     </div>
   )
 }
