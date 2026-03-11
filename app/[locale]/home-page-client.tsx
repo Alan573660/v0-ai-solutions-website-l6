@@ -238,29 +238,31 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
           </Reveal>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {solutions.slice(0, 12).map((solution) => (
-              <Reveal key={solution.id}>
-                <a href={`/${locale}/solutions/${solution.slug}`}>
-                  <Card className="bg-slate-900 border-slate-700 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/20 h-full cursor-pointer">
-                    <CardContent className="p-6">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
-                          <span className="text-white text-xl">→</span>
+            {solutions.slice(0, 12).map((solution) => {
+              const Icon = solution.icon
+              return (
+                <Reveal key={solution.id}>
+                  <a href={`/${locale}${solution.href}`}>
+                    <Card className="bg-slate-900 border-slate-700 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/20 h-full cursor-pointer">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${solution.gradient} flex items-center justify-center`}>
+                            <Icon className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <h3 className="font-semibold text-lg">{solution.title}</h3>
+                          </div>
                         </div>
-                        <div>
-                          <h3 className="font-semibold text-lg">{solution.name}</h3>
-                          <p className="text-sm text-slate-400">{solution.category}</p>
+                        <p className="text-slate-400 text-sm mb-4">{solution.description}</p>
+                        <div className="flex items-center gap-2 text-cyan-400 text-sm font-medium">
+                          Подробнее <ArrowRight className="w-4 h-4" />
                         </div>
-                      </div>
-                      <p className="text-slate-400 text-sm mb-4">{solution.description}</p>
-                      <div className="flex items-center gap-2 text-cyan-400 text-sm font-medium">
-                        Подробнее <ArrowRight className="w-4 h-4" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </a>
-              </Reveal>
-            ))}
+                      </CardContent>
+                    </Card>
+                  </a>
+                </Reveal>
+              )
+            })}
           </div>
         </div>
       </section>
