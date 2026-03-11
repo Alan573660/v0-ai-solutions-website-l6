@@ -599,6 +599,21 @@ export type TranslationKey =
   | "homepage.finalCtaDesc"
   | "homepage.finalCtaButton"
   | "homepage.finalCtaTrust"
+  // SEO Solutions block
+  | "homepage.allSolutionsTitle"
+  | "homepage.allSolutionsDesc"
+  | "homepage.seoSol1"
+  | "homepage.seoSol2"
+  | "homepage.seoSol3"
+  | "homepage.seoSol4"
+  | "homepage.seoSol5"
+  | "homepage.seoSol6"
+  | "homepage.seoSol7"
+  | "homepage.seoSol8"
+  | "homepage.seoSol9"
+  | "homepage.seoSol10"
+  | "homepage.seoSol11"
+  | "homepage.seoSol12"
 
 const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
   ru: {
@@ -763,7 +778,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
       "Отсутствие человеческого фактора обеспечивает стабильно высокие показатели продаж.",
     "benefits.conversion.stats": "Конверсия выше на 35%",
     "benefits.security.title": "Безопасность данных",
-    "benefits.security.description": "Полное соответствие GDPR, шифрование всех данных и детальное логирование.",
+    "benefits.security.description": "Полное соотве��ствие GDPR, шифрование всех данных и детальное логирование.",
     "benefits.security.stats": "Сертификация ISO 27001",
     "benefits.calculations.title": "Мгновенные расчёты",
     "benefits.calculations.description":
@@ -1245,6 +1260,21 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "homepage.finalCtaDesc": "Получите бесплатный аудит бизнес-процессов и расчет ROI за 15 минут",
     "homepage.finalCtaButton": "Получить бесплатную консультацию",
     "homepage.finalCtaTrust": "Без обязательств · Консультация 30 минут · NDA по запросу",
+    // SEO Solutions
+    "homepage.allSolutionsTitle": "Все решения для автоматизации бизнеса",
+    "homepage.allSolutionsDesc": "Выберите решение, которое подходит для вашего бизнеса. AI-автоматизация продаж, звонков, заявок и логистики.",
+    "homepage.seoSol1": "Робот оператор",
+    "homepage.seoSol2": "Автоматический оператор",
+    "homepage.seoSol3": "Виртуальный оператор",
+    "homepage.seoSol4": "Автоматизация продаж",
+    "homepage.seoSol5": "Система автоматизации продаж",
+    "homepage.seoSol6": "Робот для звонков",
+    "homepage.seoSol7": "Робот для продаж",
+    "homepage.seoSol8": "Обработка заявок",
+    "homepage.seoSol9": "Обработка заказов",
+    "homepage.seoSol10": "Выставление счетов",
+    "homepage.seoSol11": "Расчет доставки",
+    "homepage.seoSol12": "AI для бизнеса",
   },
   en: {
     // Navigation
@@ -1820,6 +1850,21 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "homepage.finalCtaDesc": "Get free business process audit and ROI calculation in 15 minutes",
     "homepage.finalCtaButton": "Get free consultation",
     "homepage.finalCtaTrust": "No obligations · 30 min consultation · NDA on request",
+    // SEO Solutions
+    "homepage.allSolutionsTitle": "All Business Automation Solutions",
+    "homepage.allSolutionsDesc": "Choose the solution that fits your business. AI automation for sales, calls, requests, and logistics.",
+    "homepage.seoSol1": "Robot Operator",
+    "homepage.seoSol2": "Automatic Operator",
+    "homepage.seoSol3": "Virtual Operator",
+    "homepage.seoSol4": "Sales Automation",
+    "homepage.seoSol5": "Sales Automation System",
+    "homepage.seoSol6": "Robot for Calls",
+    "homepage.seoSol7": "Sales Robot",
+    "homepage.seoSol8": "Request Processing",
+    "homepage.seoSol9": "Order Processing",
+    "homepage.seoSol10": "Invoice Generation",
+    "homepage.seoSol11": "Delivery Calculation",
+    "homepage.seoSol12": "AI for Business",
   },
   es: {
     // Navigation
@@ -2405,6 +2450,21 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "homepage.finalCtaDesc": "Obtén auditoría gratuita de procesos y cálculo ROI en 15 minutos",
     "homepage.finalCtaButton": "Obtener consulta gratuita",
     "homepage.finalCtaTrust": "Sin compromiso · Consulta 30 min · NDA bajo solicitud",
+    // SEO Solutions
+    "homepage.allSolutionsTitle": "Todas las soluciones de automatizacion empresarial",
+    "homepage.allSolutionsDesc": "Elija la solucion que se adapte a su negocio. Automatizacion con IA para ventas, llamadas, solicitudes y logistica.",
+    "homepage.seoSol1": "Robot Operador",
+    "homepage.seoSol2": "Operador Automatico",
+    "homepage.seoSol3": "Operador Virtual",
+    "homepage.seoSol4": "Automatizacion de Ventas",
+    "homepage.seoSol5": "Sistema de Automatizacion de Ventas",
+    "homepage.seoSol6": "Robot para Llamadas",
+    "homepage.seoSol7": "Robot de Ventas",
+    "homepage.seoSol8": "Procesamiento de Solicitudes",
+    "homepage.seoSol9": "Procesamiento de Pedidos",
+    "homepage.seoSol10": "Generacion de Facturas",
+    "homepage.seoSol11": "Calculo de Entrega",
+    "homepage.seoSol12": "IA para Negocios",
   },
   de: {
     // Navigation
@@ -2997,6 +3057,21 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "homepage.finalCtaDesc": "Erhalten Sie kostenloses Geschäftsprozess-Audit und ROI-Berechnung in 15 Minuten",
     "homepage.finalCtaButton": "Kostenlose Beratung erhalten",
     "homepage.finalCtaTrust": "Ohne Verpflichtungen · 30 Min Beratung · NDA auf Anfrage",
+    // SEO Solutions
+    "homepage.allSolutionsTitle": "Alle Losungen fur Geschaftsautomatisierung",
+    "homepage.allSolutionsDesc": "Wahlen Sie die Losung, die zu Ihrem Unternehmen passt. KI-Automatisierung fur Vertrieb, Anrufe, Anfragen und Logistik.",
+    "homepage.seoSol1": "Roboter-Operator",
+    "homepage.seoSol2": "Automatischer Operator",
+    "homepage.seoSol3": "Virtueller Operator",
+    "homepage.seoSol4": "Vertriebsautomatisierung",
+    "homepage.seoSol5": "Vertriebsautomatisierungssystem",
+    "homepage.seoSol6": "Roboter fur Anrufe",
+    "homepage.seoSol7": "Verkaufsroboter",
+    "homepage.seoSol8": "Anfrageverarbeitung",
+    "homepage.seoSol9": "Auftragsverarbeitung",
+    "homepage.seoSol10": "Rechnungsgenerierung",
+    "homepage.seoSol11": "Lieferungsberechnung",
+    "homepage.seoSol12": "KI fur Unternehmen",
   },
   nl: {
     // Navigation
@@ -3580,6 +3655,21 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "homepage.finalCtaDesc": "Krijg gratis bedrijfsprocesaudit en ROI-berekening in 15 minuten",
     "homepage.finalCtaButton": "Gratis advies krijgen",
     "homepage.finalCtaTrust": "Zonder verplichtingen · 30 min advies · NDA op verzoek",
+    // SEO Solutions
+    "homepage.allSolutionsTitle": "Alle oplossingen voor bedrijfsautomatisering",
+    "homepage.allSolutionsDesc": "Kies de oplossing die bij uw bedrijf past. AI-automatisering voor verkoop, oproepen, aanvragen en logistiek.",
+    "homepage.seoSol1": "Robot-operator",
+    "homepage.seoSol2": "Automatische operator",
+    "homepage.seoSol3": "Virtuele operator",
+    "homepage.seoSol4": "Verkoopautomatisering",
+    "homepage.seoSol5": "Verkoopautomatiseringssysteem",
+    "homepage.seoSol6": "Robot voor oproepen",
+    "homepage.seoSol7": "Verkoopbot",
+    "homepage.seoSol8": "Verzoekverwerking",
+    "homepage.seoSol9": "Orderverwerking",
+    "homepage.seoSol10": "Factuurgeneratie",
+    "homepage.seoSol11": "Bezorgingsberekening",
+    "homepage.seoSol12": "AI voor bedrijven",
   },
   fr: {
     // Navigation
@@ -4172,9 +4262,24 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "homepage.finalCtaTitle": "Prêt à automatiser les ventes ?",
     "homepage.finalCtaDesc": "Obtenez un audit gratuit des processus et un calcul ROI en 15 minutes",
     "homepage.finalCtaButton": "Obtenir une consultation gratuite",
-    "homepage.finalCtaTrust": "Sans engagement · Consultation 30 min · NDA sur demande",
+"homepage.finalCtaTrust": "Sans engagement · Consultation 30 min · NDA sur demande",
+    // SEO Solutions
+    "homepage.allSolutionsTitle": "Toutes les solutions d'automatisation d'entreprise",
+    "homepage.allSolutionsDesc": "Choisissez la solution qui correspond a votre entreprise. Automatisation IA pour les ventes, appels, demandes et logistique.",
+    "homepage.seoSol1": "Robot-Operateur",
+    "homepage.seoSol2": "Operateur Automatique",
+    "homepage.seoSol3": "Operateur Virtuel",
+    "homepage.seoSol4": "Automatisation des Ventes",
+    "homepage.seoSol5": "Systeme d'Automatisation des Ventes",
+    "homepage.seoSol6": "Robot pour Appels",
+    "homepage.seoSol7": "Robot de Vente",
+    "homepage.seoSol8": "Traitement des Demandes",
+    "homepage.seoSol9": "Traitement des Commandes",
+    "homepage.seoSol10": "Generation de Factures",
+    "homepage.seoSol11": "Calcul de Livraison",
+    "homepage.seoSol12": "IA pour Entreprises",
   },
-}
+  }
 
 export function getTranslation(locale: Locale, key: TranslationKey): string {
   try {

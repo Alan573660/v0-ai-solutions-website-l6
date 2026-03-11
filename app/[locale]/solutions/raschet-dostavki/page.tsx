@@ -1,4 +1,4 @@
-import { RaschetDostavkiClientPage } from "./RaschetDostavkiClientPage"
+import { RaschetDostavkiPage } from "@/components/pages/raschet-dostavki-page"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: RaschetDostavkiPageProps): Pr
   }
 }
 
-export default async function RaschetDostavkiPage({ params }: RaschetDostavkiPageProps) {
+export default async function RaschetDostavkiPageWrapper({ params }: RaschetDostavkiPageProps) {
   const { locale } = await params
-  return <RaschetDostavkiClientPage locale={locale} />
+  return <RaschetDostavkiPage />
 }

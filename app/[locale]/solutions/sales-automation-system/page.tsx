@@ -1,4 +1,4 @@
-import { SalesAutomationSystemClientPage } from "./SalesAutomationSystemClientPage"
+import { SalesAutomationSystemPage } from "@/components/pages/sales-automation-system-page"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: SalesAutomationSystemPageProp
   }
 }
 
-export default async function SalesAutomationSystemPage({ params }: SalesAutomationSystemPageProps) {
+export default async function SalesAutomationSystemPageWrapper({ params }: SalesAutomationSystemPageProps) {
   const { locale } = await params
-  return <SalesAutomationSystemClientPage locale={locale} />
+  return <SalesAutomationSystemPage />
 }

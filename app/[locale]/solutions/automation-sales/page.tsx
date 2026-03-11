@@ -1,4 +1,4 @@
-import { AutomationSalesClientPage } from "./AutomationSalesClientPage"
+import { AutomationSalesPage } from "@/components/pages/automation-sales-page"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 
@@ -50,12 +50,7 @@ export async function generateMetadata({ params }: AutomationSalesPageProps): Pr
   }
 }
 
-export default async function AutomationSalesPage({ params }: AutomationSalesPageProps) {
+export default async function AutomationSalesPageWrapper({ params }: AutomationSalesPageProps) {
   const { locale } = await params
-  return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({"@context":"https://schema.org","@type":"Product","name":"Sales Automation"}) }} />
-      <AutomationSalesClientPage locale={locale} />
-    </>
-  )
+  return <AutomationSalesPage />
 }

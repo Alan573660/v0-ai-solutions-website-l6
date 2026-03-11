@@ -687,6 +687,61 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
       </section>
 
       {/* ============================================================ */}
+      {/*  AI AUTOMATION SOLUTIONS                                      */}
+      {/* ============================================================ */}
+      <section className="relative py-16 lg:py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal>
+            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-border px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em]">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+              {t("homepage.aiAutomationLabel") || "AI Automation"}
+            </div>
+
+            <h2 className="text-balance text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl mb-4">
+              {t("homepage.aiAutomationTitle") || "Complete AI Automation Stack"}
+            </h2>
+
+            <p className="text-lg text-muted-foreground max-w-2xl mb-12">
+              {t("homepage.aiAutomationDesc") || "All tools for automating your business processes in one platform"}
+            </p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { icon: Phone, title: "Robot Operator", href: "/solutions/robot-operator", desc: "Answer 100% of inbound calls 24/7" },
+              { icon: Target, title: "Sales Automation", href: "/solutions/sales-automation-system", desc: "Increase productivity 3-5x" },
+              { icon: Users, title: "Request Processing", href: "/solutions/obrabotka-zayavok", desc: "Automatic lead qualification" },
+              { icon: FileText, title: "Invoice Generation", href: "/solutions/vystavlenie-schetov", desc: "Auto-generate and send invoices" },
+              { icon: Zap, title: "Order Processing", href: "/solutions/obrabotka-zakazov", desc: "Full cycle automation" },
+              { icon: Globe, title: "Delivery Calculation", href: "/solutions/raschet-dostavki", desc: "Optimize routes and costs" },
+              { icon: TrendingUp, title: "AI for Business", href: "/solutions/ai-dlya-biznesa", desc: "Complete automation stack" },
+              { icon: BarChart3, title: "View All Solutions", href: "/solutions", desc: "12+ automation solutions" },
+            ].map((item, idx) => {
+              const Icon = item.icon
+              return (
+                <Reveal key={idx} delay={idx * 50} className="h-full">
+                  <Link href={item.href} className="group relative flex flex-col h-full p-6 rounded-2xl border border-border bg-muted/30 hover:bg-muted/60 hover:border-primary/30 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <Icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground flex-1">{item.desc}</p>
+                    <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors mt-4" />
+                  </Link>
+                </Reveal>
+              )
+            })}
+          </div>
+
+          <Reveal delay={400} className="mt-12 text-center">
+            <Link href="/solutions" className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all font-semibold">
+              View all solutions <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
       {/*  FINAL CTA                                                    */}
       {/* ============================================================ */}
       <section className="relative overflow-hidden bg-[#060a16]">

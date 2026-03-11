@@ -1,4 +1,4 @@
-import { AIDlyaBiznesaClientPage } from "./AIDlyaBiznesaClientPage"
+import { AIDlyaBiznesaPage } from "@/components/pages/ai-dlya-biznesa-page"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: AIDlyaBiznesaPageProps): Prom
   }
 }
 
-export default async function AIDlyaBiznesaPage({ params }: AIDlyaBiznesaPageProps) {
+export default async function AIDlyaBiznesaPageWrapper({ params }: AIDlyaBiznesaPageProps) {
   const { locale } = await params
-  return <AIDlyaBiznesaClientPage locale={locale} />
+  return <AIDlyaBiznesaPage />
 }
