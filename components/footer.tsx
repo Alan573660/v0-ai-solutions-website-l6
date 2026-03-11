@@ -17,6 +17,7 @@ const footerTranslations = {
     description: "Автоматизация продаж и обслуживания клиентов с помощью голосовых AI-ассистентов. Международная команда с офисами в Барселоне, Москве и Астане.",
     workWorldwide: "Работаем по всему миру",
     solutions: "Решения",
+    aiAutomation: "AI автоматизация",
     company: "Компания",
     resources: "Ресурсы",
     legal: "Правовая информация",
@@ -28,6 +29,19 @@ const footerTranslations = {
       enterprise: "Enterprise решения",
       custom: "Индивидуальные решения",
       smartHome: "Умный дом на базе ИИ",
+    },
+    aiAutomationList: {
+      robotOperator: "Робот оператор",
+      automaticOperator: "Автоматический оператор",
+      virtualOperator: "Виртуальный оператор",
+      robotForCalls: "Робот для звонков",
+      robotForSales: "Робот для продаж",
+      requestProcessing: "Обработка заявок",
+      orderProcessing: "Обработка заказов",
+      invoiceGeneration: "Выставление счётов",
+      deliveryCalculation: "Расчёт доставки",
+      salesAutomation: "Система автоматизации продаж",
+      aiForBusiness: "AI для бизнеса",
     },
     companyList: {
       about: "О компании",
@@ -63,6 +77,7 @@ const footerTranslations = {
     description: "Sales and customer service automation with voice AI assistants. International team with offices in Barcelona, Moscow and Astana.",
     workWorldwide: "We work worldwide",
     solutions: "Solutions",
+    aiAutomation: "AI Automation",
     company: "Company",
     resources: "Resources",
     legal: "Legal",
@@ -74,6 +89,19 @@ const footerTranslations = {
       enterprise: "Enterprise Solutions",
       custom: "Custom Solutions",
       smartHome: "AI Smart Home",
+    },
+    aiAutomationList: {
+      robotOperator: "Robot Operator",
+      automaticOperator: "Automatic Operator",
+      virtualOperator: "Virtual Operator",
+      robotForCalls: "Robot for Calls",
+      robotForSales: "Robot for Sales",
+      requestProcessing: "Request Processing",
+      orderProcessing: "Order Processing",
+      invoiceGeneration: "Invoice Generation",
+      deliveryCalculation: "Delivery Calculation",
+      salesAutomation: "Sales Automation System",
+      aiForBusiness: "AI for Business",
     },
     companyList: {
       about: "About Us",
@@ -109,6 +137,7 @@ const footerTranslations = {
     description: "Automatización de ventas y atención al cliente con asistentes de IA de voz. Equipo internacional con oficinas en Barcelona, Moscú y Astaná.",
     workWorldwide: "Trabajamos en todo el mundo",
     solutions: "Soluciones",
+    aiAutomation: "Automatización IA",
     company: "Empresa",
     resources: "Recursos",
     legal: "Legal",
@@ -120,6 +149,19 @@ const footerTranslations = {
       enterprise: "Soluciones Enterprise",
       custom: "Soluciones Personalizadas",
       smartHome: "Casa Inteligente con IA",
+    },
+    aiAutomationList: {
+      robotOperator: "Robot Operador",
+      automaticOperator: "Operador Automático",
+      virtualOperator: "Operador Virtual",
+      robotForCalls: "Robot para Llamadas",
+      robotForSales: "Robot de Ventas",
+      requestProcessing: "Procesamiento de Solicitudes",
+      orderProcessing: "Procesamiento de Pedidos",
+      invoiceGeneration: "Generación de Facturas",
+      deliveryCalculation: "Cálculo de Entrega",
+      salesAutomation: "Sistema de Automatización de Ventas",
+      aiForBusiness: "IA para Negocios",
     },
     companyList: {
       about: "Sobre Nosotros",
@@ -155,6 +197,7 @@ const footerTranslations = {
     description: "Vertriebs- und Kundenservice-Automatisierung mit Sprach-KI-Assistenten. Internationales Team mit Büros in Barcelona, Moskau und Astana.",
     workWorldwide: "Wir arbeiten weltweit",
     solutions: "Lösungen",
+    aiAutomation: "KI-Automatisierung",
     company: "Unternehmen",
     resources: "Ressourcen",
     legal: "Rechtliches",
@@ -166,6 +209,19 @@ const footerTranslations = {
       enterprise: "Enterprise-Lösungen",
       custom: "Individuelle Lösungen",
       smartHome: "KI Smart Home",
+    },
+    aiAutomationList: {
+      robotOperator: "Roboter-Operator",
+      automaticOperator: "Automatischer Operator",
+      virtualOperator: "Virtueller Operator",
+      robotForCalls: "Roboter für Anrufe",
+      robotForSales: "Vertriebsroboter",
+      requestProcessing: "Anfrageverarbeitung",
+      orderProcessing: "Auftragsverarbeitung",
+      invoiceGeneration: "Rechnungsgenerierung",
+      deliveryCalculation: "Lieferberechnung",
+      salesAutomation: "Vertriebsautomatisierungssystem",
+      aiForBusiness: "KI für Unternehmen",
     },
     companyList: {
       about: "Über uns",
@@ -201,6 +257,7 @@ const footerTranslations = {
     description: "Verkoop- en klantenservice-automatisering met stem AI-assistenten. Internationaal team met kantoren in Barcelona, Moskou en Astana.",
     workWorldwide: "We werken wereldwijd",
     solutions: "Oplossingen",
+    aiAutomation: "AI-automatisering",
     company: "Bedrijf",
     resources: "Bronnen",
     legal: "Juridisch",
@@ -212,6 +269,19 @@ const footerTranslations = {
       enterprise: "Enterprise Oplossingen",
       custom: "Maatwerkoplossingen",
       smartHome: "AI Smart Home",
+    },
+    aiAutomationList: {
+      robotOperator: "Robot Operator",
+      automaticOperator: "Automatische Operator",
+      virtualOperator: "Virtuele Operator",
+      robotForCalls: "Robot voor Telefoontjes",
+      robotForSales: "Verkoopbot",
+      requestProcessing: "Verzoekverwerking",
+      orderProcessing: "Orderverwerking",
+      invoiceGeneration: "Factuurgeneratie",
+      deliveryCalculation: "Leveringsberekening",
+      salesAutomation: "Verkoopautomatiseringssysteem",
+      aiForBusiness: "AI voor Bedrijven",
     },
     companyList: {
       about: "Over Ons",
@@ -247,6 +317,7 @@ const footerTranslations = {
     description: "Automatisation des ventes et du service client avec des assistants IA vocaux. Équipe internationale avec des bureaux à Barcelone, Moscou et Astana.",
     workWorldwide: "Nous travaillons dans le monde entier",
     solutions: "Solutions",
+    aiAutomation: "Automatisation IA",
     company: "Entreprise",
     resources: "Ressources",
     legal: "Mentions légales",
@@ -258,6 +329,19 @@ const footerTranslations = {
       enterprise: "Solutions Enterprise",
       custom: "Solutions Personnalisées",
       smartHome: "Maison Intelligente IA",
+    },
+    aiAutomationList: {
+      robotOperator: "Opérateur Robot",
+      automaticOperator: "Opérateur Automatique",
+      virtualOperator: "Opérateur Virtuel",
+      robotForCalls: "Robot pour Appels",
+      robotForSales: "Robot de Ventes",
+      requestProcessing: "Traitement des Demandes",
+      orderProcessing: "Traitement des Commandes",
+      invoiceGeneration: "Génération de Factures",
+      deliveryCalculation: "Calcul de Livraison",
+      salesAutomation: "Système d'Automatisation des Ventes",
+      aiForBusiness: "IA pour les Affaires",
     },
     companyList: {
       about: "À propos",
@@ -300,6 +384,20 @@ export function Footer({ locale }: FooterProps) {
     { name: t.solutionsList.enterprise, href: `/${locale}/solutions/enterprise` },
     { name: t.solutionsList.custom, href: `/${locale}/solutions/custom` },
     { name: t.solutionsList.smartHome, href: `/${locale}/solutions/smart-home` },
+  ]
+
+  const aiAutomation = [
+    { name: t.aiAutomationList.robotOperator, href: `/${locale}/solutions/robot-operator` },
+    { name: t.aiAutomationList.automaticOperator, href: `/${locale}/solutions/automatic-operator` },
+    { name: t.aiAutomationList.virtualOperator, href: `/${locale}/solutions/virtual-operator` },
+    { name: t.aiAutomationList.robotForCalls, href: `/${locale}/solutions/robot-dlya-zvonkov` },
+    { name: t.aiAutomationList.robotForSales, href: `/${locale}/solutions/robot-dlya-prodazh` },
+    { name: t.aiAutomationList.requestProcessing, href: `/${locale}/solutions/obrabotka-zayavok` },
+    { name: t.aiAutomationList.orderProcessing, href: `/${locale}/solutions/obrabotka-zakazov` },
+    { name: t.aiAutomationList.invoiceGeneration, href: `/${locale}/solutions/vystavlenie-schetov` },
+    { name: t.aiAutomationList.deliveryCalculation, href: `/${locale}/solutions/raschet-dostavki` },
+    { name: t.aiAutomationList.salesAutomation, href: `/${locale}/solutions/sales-automation-system` },
+    { name: t.aiAutomationList.aiForBusiness, href: `/${locale}/solutions/ai-dlya-biznesa` },
   ]
 
   const company = [
@@ -383,6 +481,23 @@ export function Footer({ locale }: FooterProps) {
               <h3 className="font-semibold mb-4">{t.solutions}</h3>
               <ul className="space-y-2">
                 {solutions.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* AI Automation */}
+            <div>
+              <h3 className="font-semibold mb-4">{t.aiAutomation}</h3>
+              <ul className="space-y-2">
+                {aiAutomation.slice(0, 6).map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
