@@ -202,56 +202,152 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-5xl mx-auto text-center">
-            <Reveal>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-8">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                AI-платформа для автоматизации бизнеса
-              </div>
-            </Reveal>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left side - Text */}
+            <div className="text-center lg:text-left">
+              <Reveal>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-8">
+                  <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                  AI-платформа для автоматизации бизнеса
+                </div>
+              </Reveal>
 
-            <Reveal delay={100}>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-white leading-tight">
-                AI-агенты, которые
-                <span className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
-                  работают за вас
-                </span>
-              </h1>
-            </Reveal>
+              <Reveal delay={100}>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold tracking-tight mb-6 text-white leading-tight">
+                  Голосовые AI-роботы для
+                  <span className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
+                    звонков и продаж
+                  </span>
+                </h1>
+              </Reveal>
 
-            <Reveal delay={200}>
-              <p className="text-lg sm:text-xl md:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-                Автоматизируем входящие и исходящие звонки, продажи, заявки, счета и логистику. 
-                24/7 без выходных. Интеграция с вашими системами за 7 дней.
-              </p>
-            </Reveal>
+              <Reveal delay={200}>
+                <p className="text-lg sm:text-xl text-slate-300 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                  Автоматизируем входящие и исходящие звонки, продажи, заявки, счета и логистику. 
+                  24/7 без выходных. Интеграция с вашими системами за 7 дней.
+                </p>
+              </Reveal>
 
-            <Reveal delay={300}>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                <Button 
-                  size="lg" 
-                  onClick={() => openCTA()}
-                  className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg shadow-blue-500/25"
-                >
-                  Получить бесплатный аудит
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  className="border-slate-600 text-slate-200 hover:bg-slate-800 px-8 py-6 text-lg rounded-xl"
-                >
-                  <Play className="mr-2 w-5 h-5" />
-                  Послушать AI в деле
-                </Button>
-              </div>
-            </Reveal>
+              <Reveal delay={300}>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+                  <Button 
+                    size="lg" 
+                    onClick={() => openCTA()}
+                    className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-6 text-lg rounded-xl shadow-lg shadow-blue-500/25"
+                  >
+                    Получить бесплатный аудит
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="border-slate-600 text-slate-200 hover:bg-slate-800 px-8 py-6 text-lg rounded-xl"
+                  >
+                    <Play className="mr-2 w-5 h-5" />
+                    Послушать AI в деле
+                  </Button>
+                </div>
+              </Reveal>
 
-            <Reveal delay={400}>
-              <p className="text-sm text-slate-500">
-                Бесплатная консультация - Расчёт ROI за 15 минут - Без обязательств
-              </p>
-            </Reveal>
+              <Reveal delay={400}>
+                <p className="text-sm text-slate-500">
+                  Бесплатная консультация - Расчёт ROI за 15 минут - Без обязательств
+                </p>
+              </Reveal>
+            </div>
+
+            {/* Right side - Animated AI Agent Visualization */}
+            <div className="hidden lg:block">
+              <Reveal delay={200}>
+                <div className="relative">
+                  {/* Main AI Agent Circle */}
+                  <div className="relative w-80 h-80 mx-auto">
+                    {/* Outer rotating ring */}
+                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-blue-500/30 animate-[spin_20s_linear_infinite]" />
+                    
+                    {/* Middle pulsing ring */}
+                    <div className="absolute inset-4 rounded-full border border-cyan-500/40 animate-[ping_3s_ease-in-out_infinite]" />
+                    
+                    {/* Inner glowing circle */}
+                    <div className="absolute inset-8 rounded-full bg-gradient-to-br from-blue-600/20 to-cyan-600/20 backdrop-blur-sm border border-blue-500/30 flex items-center justify-center">
+                      {/* AI Brain Icon with pulse */}
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-blue-500/30 rounded-full blur-xl animate-pulse" />
+                        <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center shadow-lg shadow-blue-500/50">
+                          <Bot className="w-12 h-12 text-white" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Sound wave visualization */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="flex items-center gap-1">
+                        {[...Array(7)].map((_, i) => (
+                          <div
+                            key={i}
+                            className="w-1 bg-gradient-to-t from-blue-500 to-cyan-400 rounded-full"
+                            style={{
+                              height: `${20 + Math.sin(i * 0.8) * 15}px`,
+                              animation: `soundWave 1.2s ease-in-out infinite`,
+                              animationDelay: `${i * 0.1}s`,
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Orbiting feature icons */}
+                    <div className="absolute inset-0 animate-[spin_15s_linear_infinite_reverse]">
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg animate-[spin_15s_linear_infinite]">
+                          <Phone className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shadow-lg animate-[spin_15s_linear_infinite]">
+                          <TrendingUp className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                      <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center shadow-lg animate-[spin_15s_linear_infinite]">
+                          <FileText className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                      <div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg animate-[spin_15s_linear_infinite]">
+                          <Database className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Floating status cards */}
+                  <div className="absolute -top-4 -right-4 bg-slate-800/90 backdrop-blur-sm border border-slate-700 rounded-xl p-3 shadow-xl animate-[float_3s_ease-in-out_infinite]">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                      <span className="text-sm text-slate-300">Звонок принят</span>
+                    </div>
+                    <div className="text-xs text-slate-500 mt-1">+7 (999) ***-**-12</div>
+                  </div>
+
+                  <div className="absolute -bottom-4 -left-4 bg-slate-800/90 backdrop-blur-sm border border-slate-700 rounded-xl p-3 shadow-xl animate-[float_3s_ease-in-out_infinite]" style={{ animationDelay: "1.5s" }}>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-green-400" />
+                      <span className="text-sm text-slate-300">Заявка создана</span>
+                    </div>
+                    <div className="text-xs text-slate-500 mt-1">CRM: amoCRM #4521</div>
+                  </div>
+
+                  <div className="absolute top-1/2 -right-16 bg-slate-800/90 backdrop-blur-sm border border-slate-700 rounded-xl p-3 shadow-xl animate-[float_3s_ease-in-out_infinite]" style={{ animationDelay: "0.75s" }}>
+                    <div className="flex items-center gap-2">
+                      <BarChart3 className="w-4 h-4 text-blue-400" />
+                      <span className="text-sm text-slate-300">Конверсия</span>
+                    </div>
+                    <div className="text-lg font-bold text-white">+87%</div>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
           </div>
         </div>
 
