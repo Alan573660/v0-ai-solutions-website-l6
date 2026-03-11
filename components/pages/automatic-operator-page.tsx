@@ -10,7 +10,6 @@ import {
   Building2,
   ShoppingBag,
   Briefcase,
-  Truck,
   Phone,
   Shield,
   Zap,
@@ -26,6 +25,26 @@ import {
   Headphones,
   Settings,
   TrendingUp,
+  GitBranch,
+  Layers,
+  Network,
+  Split,
+  Timer,
+  PhoneCall,
+  PhoneForwarded,
+  PhoneIncoming,
+  PhoneMissed,
+  PhoneOff,
+  Workflow,
+  CheckCircle2,
+  XCircle,
+  ArrowDown,
+  Calendar,
+  Package,
+  HelpCircle,
+  Building,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react"
 import type { Locale } from "@/lib/i18n/config"
 import { useCTA } from "@/components/modals/cta-provider"
@@ -36,436 +55,616 @@ interface AutomaticOperatorPageProps {
 
 const content = {
   ru: {
-    badge: "Автоматизация входящих звонков",
+    badge: "Инфраструктура обработки звонков",
     title: "Автоматический оператор",
-    titleHighlight: "для бизнеса",
-    subtitle: "AI-система, которая автоматически принимает и обрабатывает все входящие звонки. Квалифицирует клиентов, отвечает на вопросы, создает заявки в CRM и переводит на менеджера при необходимости.",
-    cta1: "Получить демо",
-    cta2: "Послушать примеры",
+    titleHighlight: "система маршрутизации",
+    subtitle: "Умная система автоматической обработки и распределения входящих звонков. Очереди, маршрутизация по отделам, пиковые нагрузки, автоответы — все работает без участия человека.",
+    cta1: "Запросить демо",
+    cta2: "Как это работает",
     stats: [
+      { value: "∞", label: "Параллельных линий" },
+      { value: "0 сек", label: "Время ожидания" },
+      { value: "99.9%", label: "Аптайм системы" },
       { value: "100%", label: "Звонков обработано" },
-      { value: "24/7", label: "Доступность" },
-      { value: "<5 сек", label: "Время ответа" },
-      { value: "60-80%", label: "Без оператора" },
     ],
-    whatIs: {
-      title: "Что такое автоматический оператор?",
-      description: "Автоматический оператор — это AI-решение на базе голосовых технологий и машинного обучения, которое полностью автоматизирует прием входящих звонков. Система понимает естественную речь, ведет диалог по сценарию и выполняет действия: создает заявки, озвучивает информацию, переводит на специалиста.",
-      benefits: [
-        "Мгновенный ответ без ожидания на линии",
-        "Понимание естественной речи клиентов",
-        "Автоматическое создание заявок в CRM",
-        "Квалификация и приоритизация лидов",
-        "Озвучивание цен, условий, статусов заказов",
-        "Интеллектуальный перевод на специалиста",
+    difference: {
+      title: "Чем автоматический оператор отличается от робота оператора",
+      subtitle: "Два решения для разных задач",
+      automatic: {
+        title: "Автоматический оператор",
+        subtitle: "Инфраструктура и потоки",
+        description: "Система маршрутизации и распределения звонков. Фокус на телефонной инфраструктуре, очередях, правилах переадресации и работе в пиковые нагрузки.",
+        items: [
+          "Умная маршрутизация по правилам",
+          "Очереди с приоритетами",
+          "Распределение по отделам",
+          "Пиковые нагрузки и overflow",
+          "Автоответы по расписанию",
+          "IVR нового поколения",
+        ],
+        useCases: "Колл-центры, службы поддержки, многоканальные номера",
+      },
+      robot: {
+        title: "Робот оператор",
+        subtitle: "AI-сотрудник",
+        description: "Человекоподобный AI-ассистент для ведения диалогов. Фокус на понимании речи, квалификации клиентов и автоматизации продаж.",
+        items: [
+          "Естественные диалоги с клиентами",
+          "Квалификация и скоринг лидов",
+          "Расчет стоимости по прайсу",
+          "Создание заявок и счетов",
+          "Ответы на вопросы из FAQ",
+          "Перевод на менеджера",
+        ],
+        useCases: "Продажи, консультации, прием заказов",
+      },
+      note: "Решения дополняют друг друга: автоматический оператор распределяет поток, робот оператор ведет диалоги.",
+    },
+    callFlow: {
+      title: "Как система обрабатывает звонки",
+      subtitle: "Визуализация потока входящего звонка",
+      steps: [
+        { icon: PhoneIncoming, title: "Входящий звонок", description: "Клиент звонит на ваш номер" },
+        { icon: Target, title: "Определение темы", description: "Система определяет цель обращения" },
+        { icon: GitBranch, title: "Маршрутизация", description: "Выбор правила переадресации" },
+        { icon: Layers, title: "Очередь", description: "Если все заняты — очередь с приоритетом" },
+        { icon: PhoneForwarded, title: "Соединение", description: "Перевод на нужного специалиста" },
       ],
     },
-    features: {
-      title: "Возможности автоматического оператора",
-      subtitle: "Полный цикл обработки входящих обращений без участия человека",
+    scenarios: {
+      title: "Типовые сценарии обработки",
+      subtitle: "Автоматический оператор закрывает 80% входящих без участия человека",
       items: [
         {
-          icon: Phone,
-          title: "Автоответ 24/7",
-          description: "Мгновенно отвечает на все звонки в любое время суток без очередей и ожидания.",
+          icon: Calendar,
+          title: "Запись на услугу",
+          description: "Система принимает запись, проверяет слоты, отправляет подтверждение. Интеграция с календарем.",
+          auto: true,
+          flow: ["Приветствие", "Выбор услуги", "Выбор времени", "Подтверждение", "SMS-напоминание"],
         },
         {
-          icon: MessageSquare,
-          title: "Распознавание речи",
-          description: "Понимает естественную речь, акценты, диалекты. Точность распознавания 95%+.",
+          icon: Package,
+          title: "Статус заказа",
+          description: "Клиент называет номер заказа, система озвучивает статус из базы. Без ожидания оператора.",
+          auto: true,
+          flow: ["Приветствие", "Запрос номера", "Проверка в базе", "Озвучивание статуса"],
         },
         {
-          icon: Target,
-          title: "Умная маршрутизация",
-          description: "Направляет звонок нужному специалисту на основе темы обращения и загрузки.",
+          icon: Building,
+          title: "Распределение по отделам",
+          description: "Система определяет тему и переводит на нужный отдел. Продажи, поддержка, бухгалтерия.",
+          auto: false,
+          flow: ["Приветствие", "Определение темы", "Выбор отдела", "Перевод"],
         },
         {
-          icon: FileText,
-          title: "Создание заявок",
-          description: "Автоматически фиксирует обращение в CRM с полной информацией о клиенте.",
+          icon: Clock,
+          title: "Прием обращений 24/7",
+          description: "В нерабочее время система принимает заявку и создает тикет. Утром менеджер перезвонит.",
+          auto: true,
+          flow: ["Приветствие", "Информирование", "Сбор данных", "Создание тикета"],
         },
         {
-          icon: Database,
-          title: "База знаний",
-          description: "Отвечает на типовые вопросы из базы знаний: цены, условия, статусы заказов.",
+          icon: HelpCircle,
+          title: "Ответы на FAQ",
+          description: "Типовые вопросы: режим работы, адрес, условия доставки. Ответ без участия оператора.",
+          auto: true,
+          flow: ["Приветствие", "Распознавание вопроса", "Ответ из базы"],
+        },
+        {
+          icon: PhoneForwarded,
+          title: "Перевод по правилам",
+          description: "VIP-клиент? Персональный менеджер. Новый лид? Отдел продаж. Жалоба? Руководитель.",
+          auto: false,
+          flow: ["Определение клиента", "Проверка правил", "Маршрутизация"],
+        },
+      ],
+    },
+    routing: {
+      title: "Маршрутизация и распределение",
+      subtitle: "Умные правила для каждого сценария",
+      items: [
+        {
+          title: "По теме обращения",
+          description: "Система определяет тему звонка и направляет в соответствующий отдел",
+          rules: ["Продажи → Отдел продаж", "Поддержка → Служба поддержки", "Оплата → Бухгалтерия", "Жалоба → Руководитель"],
+        },
+        {
+          title: "По загрузке операторов",
+          description: "Автоматическое распределение по наименее загруженным сотрудникам",
+          rules: ["Равномерная нагрузка", "Учет компетенций", "Приоритет по скиллам", "Overflow на резерв"],
+        },
+        {
+          title: "По времени и расписанию",
+          description: "Разные правила для рабочего времени, обеда, выходных и праздников",
+          rules: ["Рабочее время → Операторы", "Обед → Дежурный", "Выходные → Автоответ", "Праздники → Запись"],
+        },
+        {
+          title: "По статусу клиента",
+          description: "VIP-клиенты получают приоритет и персонального менеджера",
+          rules: ["VIP → Персональный менеджер", "Новый → Отдел продаж", "Постоянный → История звонков", "Должник → Юридический"],
+        },
+      ],
+    },
+    queues: {
+      title: "Очереди и пиковые нагрузки",
+      subtitle: "Ни один звонок не будет потерян",
+      features: [
+        {
+          icon: Layers,
+          title: "Умные очереди",
+          description: "Приоритизация по важности клиента, теме обращения и времени ожидания",
+        },
+        {
+          icon: Timer,
+          title: "Время ожидания",
+          description: "Озвучивание позиции в очереди и примерного времени ответа",
+        },
+        {
+          icon: PhoneForwarded,
+          title: "Callback",
+          description: "Предложение перезвонить, когда оператор освободится. Без ожидания на линии",
+        },
+        {
+          icon: Network,
+          title: "Overflow",
+          description: "При перегрузке — автоматический перевод на резервную группу или аутсорс",
         },
         {
           icon: BarChart3,
-          title: "Аналитика в реальном времени",
-          description: "Детальная статистика по звонкам, темам обращений, конверсии, времени обработки.",
+          title: "Прогнозирование",
+          description: "AI предсказывает пиковые часы и заранее масштабирует ресурсы",
         },
         {
-          icon: Globe,
-          title: "Мультиязычная поддержка",
-          description: "Работа на русском, английском и других языках с автоопределением.",
-        },
-        {
-          icon: Shield,
-          title: "Запись и транскрипция",
-          description: "Все разговоры записываются и преобразуются в текст для анализа.",
+          icon: Zap,
+          title: "Мгновенное масштабирование",
+          description: "Автоматическое увеличение каналов при росте нагрузки",
         },
       ],
     },
-    howWorks: {
-      title: "Как работает автоматический оператор",
-      subtitle: "Простое внедрение с быстрым результатом",
-      steps: [
-        {
-          number: "01",
-          title: "Анализ процессов",
-          duration: "1-2 дня",
-          description: "Изучаем ваши бизнес-процессы, типы обращений, сценарии диалогов.",
-        },
-        {
-          number: "02",
-          title: "Настройка системы",
-          duration: "3-5 дней",
-          description: "Создаем сценарии, загружаем базу знаний, настраиваем интеграции.",
-        },
-        {
-          number: "03",
-          title: "Подключение номера",
-          duration: "1 день",
-          description: "Подключаем ваш номер или выделяем новый. Настраиваем переадресацию.",
-        },
-        {
-          number: "04",
-          title: "Тестирование и запуск",
-          duration: "3-5 дней",
-          description: "Тестируем на реальных звонках, корректируем сценарии, запускаем в работу.",
-        },
+    closedVsTransfer: {
+      title: "Какие звонки закрываются автоматически, а какие переводятся",
+      autoTitle: "Закрываются автоматически",
+      transferTitle: "Переводятся на оператора",
+      autoItems: [
+        "Статус заказа / доставки",
+        "Режим работы, адрес, контакты",
+        "Запись на услугу по расписанию",
+        "Ответы на типовые вопросы (FAQ)",
+        "Прием заявки в нерабочее время",
+        "Информирование об акциях",
+        "Напоминания и подтверждения",
       ],
-    },
-    industries: {
-      title: "Отрасли применения",
-      subtitle: "Автоматический оператор эффективен везде, где есть входящие звонки",
-      items: [
-        {
-          icon: ShoppingBag,
-          name: "Розничная торговля",
-          description: "Прием заказов, консультации, статус доставки, возвраты",
-          metrics: { value: "+35%", label: "продуктивность" },
-        },
-        {
-          icon: Building2,
-          name: "Недвижимость",
-          description: "Запись на просмотр, информация об объектах, квалификация",
-          metrics: { value: "24/7", label: "доступность" },
-        },
-        {
-          icon: Headphones,
-          name: "Служба поддержки",
-          description: "Первая линия поддержки, маршрутизация, создание тикетов",
-          metrics: { value: "-50%", label: "нагрузка" },
-        },
-        {
-          icon: Briefcase,
-          name: "Услуги B2B",
-          description: "Квалификация лидов, запись на встречи, информация о услугах",
-          metrics: { value: "2x", label: "конверсия" },
-        },
+      transferItems: [
+        "Сложные технические вопросы",
+        "Жалобы и претензии",
+        "VIP-клиенты",
+        "Нестандартные запросы",
+        "Финансовые вопросы",
+        "Срочные случаи",
       ],
-    },
-    benefits: {
-      title: "Преимущества автоматического оператора",
-      subtitle: "Измеримый результат для вашего бизнеса",
-      items: [
-        { value: "0", label: "Пропущенных звонков", description: "Каждый звонок будет обработан" },
-        { value: "24/7/365", label: "Работа без перерывов", description: "Круглосуточно, без выходных" },
-        { value: "60-80%", label: "Автоматизация", description: "Звонков без участия оператора" },
-        { value: "-40%", label: "Снижение затрат", description: "На обработку звонков" },
-        { value: "+35%", label: "Рост продуктивности", description: "Менеджеров отдела продаж" },
-        { value: "95%+", label: "Точность распознавания", description: "Речи клиентов" },
-      ],
+      stats: { auto: "80%", transfer: "20%" },
     },
     integrations: {
-      title: "Интеграции",
-      subtitle: "Работает с вашими системами",
-      items: ["amoCRM", "Bitrix24", "1C", "Salesforce", "HubSpot", "Мегафон", "Билайн", "МТС", "Asterisk", "FreePBX"],
+      title: "Интеграции с телефонией",
+      subtitle: "Работает с любой инфраструктурой",
+      categories: [
+        {
+          title: "Виртуальные АТС",
+          items: ["Asterisk", "FreePBX", "3CX", "Mango Office", "Zadarma", "UIS"],
+        },
+        {
+          title: "Операторы связи",
+          items: ["Мегафон", "Билайн", "МТС", "Ростелеком", "Tele2"],
+        },
+        {
+          title: "CRM системы",
+          items: ["amoCRM", "Bitrix24", "1C", "Salesforce", "HubSpot"],
+        },
+        {
+          title: "Helpdesk",
+          items: ["Zendesk", "Freshdesk", "Jira Service", "UseDesk"],
+        },
+      ],
     },
     pricing: {
-      title: "Стоимость автоматического оператора",
-      subtitle: "Прозрачное ценообразование",
+      title: "Тарифы",
+      subtitle: "Прозрачное ценообразование без скрытых платежей",
       plans: [
-        { name: "Старт", price: "от 20 000", period: "руб/мес", features: ["До 500 звонков", "Базовые сценарии", "1 интеграция", "Email поддержка"], highlight: false },
-        { name: "Бизнес", price: "от 50 000", period: "руб/мес", features: ["До 2000 звонков", "Сложные сценарии", "5 интеграций", "Приоритетная поддержка"], highlight: true },
-        { name: "Enterprise", price: "Индивидуально", period: "", features: ["Неограниченно", "Кастомные сценарии", "Все интеграции", "24/7 поддержка", "SLA"], highlight: false },
+        {
+          name: "Старт",
+          price: "15 000",
+          period: "руб/мес",
+          description: "Для малого бизнеса",
+          features: [
+            "До 500 звонков/мес",
+            "3 правила маршрутизации",
+            "1 очередь",
+            "Базовая аналитика",
+            "Email поддержка",
+          ],
+          highlight: false,
+        },
+        {
+          name: "Бизнес",
+          price: "40 000",
+          period: "руб/мес",
+          description: "Для растущих компаний",
+          features: [
+            "До 3000 звонков/мес",
+            "Неограниченные правила",
+            "5 очередей с приоритетами",
+            "Расширенная аналитика",
+            "Callback и overflow",
+            "Приоритетная поддержка",
+          ],
+          highlight: true,
+        },
+        {
+          name: "Enterprise",
+          price: "Индивидуально",
+          period: "",
+          description: "Для крупного бизнеса",
+          features: [
+            "Неограниченные звонки",
+            "Кастомные сценарии",
+            "Выделенная инфраструктура",
+            "SLA 99.9%",
+            "24/7 поддержка",
+            "Персональный менеджер",
+          ],
+          highlight: false,
+        },
       ],
-      note: "Первые 14 дней бесплатно. Внедрение и обучение включены.",
-    },
-    m2Benefits: {
-      title: "Почему M2 AI Solutions",
-      subtitle: "Технологическое лидерство",
-      items: [
-        { title: "Собственная AI-платформа", description: "Полный контроль над технологией" },
-        { title: "Мультиязычность", description: "6+ языков из коробки" },
-        { title: "Быстрое внедрение", description: "Запуск за 7-14 дней" },
-        { title: "Безопасность данных", description: "ISO 27001, GDPR, 152-ФЗ" },
-        { title: "Экспертная команда", description: "10+ лет в AI, 50+ внедрений" },
-        { title: "Гарантия ROI", description: "Окупаемость за 2-3 месяца" },
-      ],
+      note: "Первые 14 дней бесплатно. Внедрение и настройка включены в стоимость.",
     },
     faq: {
       title: "Частые вопросы",
       items: [
         {
-          q: "Чем автоматический оператор отличается от голосового меню (IVR)?",
-          a: "IVR требует от клиента нажимать кнопки. Автоматический оператор понимает естественную речь и ведет полноценный диалог, как живой человек.",
+          q: "Чем автоматический оператор отличается от обычного IVR?",
+          a: "Классический IVR требует нажатия кнопок (1 — продажи, 2 — поддержка). Автоматический оператор понимает естественную речь, определяет тему автоматически и может решать вопросы без перевода на человека.",
         },
         {
-          q: "Какой процент звонков система может обработать самостоятельно?",
-          a: "В среднем 60-80% звонков обрабатываются полностью автоматически. Сложные случаи переводятся на живого оператора.",
+          q: "Можно ли использовать вместе с роботом оператором?",
+          a: "Да, решения дополняют друг друга. Автоматический оператор распределяет поток звонков, а робот оператор ведет диалоги в тех сценариях, где это эффективнее.",
         },
         {
-          q: "Как быстро можно внедрить систему?",
-          a: "Типовое внедрение занимает 7-14 дней включая настройку, интеграцию и тестирование.",
+          q: "Как быстро можно запустить систему?",
+          a: "Базовая настройка занимает 3-5 дней. Сложные сценарии с множеством правил и интеграций — до 2 недель.",
         },
         {
-          q: "Можно ли настроить под специфику нашего бизнеса?",
-          a: "Да, система полностью настраивается под ваши сценарии, терминологию и бизнес-процессы.",
+          q: "Что происходит при пиковых нагрузках?",
+          a: "Система автоматически масштабируется, клиенты ставятся в очередь с озвучиванием времени ожидания, при необходимости предлагается callback или overflow на резервную группу.",
         },
         {
-          q: "Как происходит интеграция с CRM?",
-          a: "Мы поддерживаем интеграцию с популярными CRM через API. Заявки создаются автоматически.",
+          q: "Какие данные фиксируются по каждому звонку?",
+          a: "Запись разговора, транскрипция, тема обращения, маршрут звонка, время в очереди, результат (решен/переведен), оценка качества.",
         },
         {
-          q: "Записываются ли разговоры?",
-          a: "Да, все разговоры записываются и транскрибируются для контроля качества и анализа.",
+          q: "Работает ли система с несколькими номерами?",
+          a: "Да, поддерживается неограниченное количество входящих номеров с разными правилами маршрутизации для каждого.",
         },
       ],
     },
     cta: {
-      title: "Готовы автоматизировать обработку звонков?",
-      subtitle: "Получите персональную демонстрацию и расчет экономии для вашего бизнеса",
+      title: "Готовы оптимизировать обработку звонков?",
+      subtitle: "Получите персональную демонстрацию системы и расчет стоимости под ваши задачи",
       button: "Запросить демо",
       trust: "Бесплатная консультация · Расчет ROI · Без обязательств",
     },
     relatedLinks: {
       title: "Смотрите также",
       items: [
-        { title: "Робот оператор", href: "/solutions/robot-operator" },
-        { title: "Виртуальный оператор", href: "/solutions/virtual-operator" },
-        { title: "Робот для звонков", href: "/solutions/robot-dlya-zvonkov" },
-        { title: "Автоматизация продаж", href: "/solutions/automation-sales" },
-        { title: "Все решения", href: "/solutions" },
-        { title: "Кейсы", href: "/cases" },
+        { title: "Робот оператор", href: "/solutions/robot-operator", description: "AI-сотрудник для ведения диалогов" },
+        { title: "Виртуальный оператор", href: "/solutions/virtual-operator", description: "Облачное решение для звонков" },
+        { title: "Все решения", href: "/solutions", description: "Полный каталог продуктов" },
       ],
     },
   },
   en: {
-    badge: "Incoming Call Automation",
+    badge: "Call Processing Infrastructure",
     title: "Automatic Operator",
-    titleHighlight: "for business",
-    subtitle: "AI system that automatically receives and processes all incoming calls. Qualifies customers, answers questions, creates CRM requests and transfers to manager when needed.",
-    cta1: "Get Demo",
-    cta2: "Listen to Examples",
+    titleHighlight: "routing system",
+    subtitle: "Smart system for automatic processing and distribution of incoming calls. Queues, department routing, peak loads, auto-responses — everything works without human involvement.",
+    cta1: "Request Demo",
+    cta2: "How It Works",
     stats: [
+      { value: "∞", label: "Parallel Lines" },
+      { value: "0 sec", label: "Wait Time" },
+      { value: "99.9%", label: "System Uptime" },
       { value: "100%", label: "Calls Handled" },
-      { value: "24/7", label: "Availability" },
-      { value: "<5 sec", label: "Response Time" },
-      { value: "60-80%", label: "Without Operator" },
     ],
-    whatIs: {
-      title: "What is Automatic Operator?",
-      description: "Automatic Operator is an AI solution based on voice technologies and machine learning that fully automates incoming call reception. The system understands natural speech, conducts dialogue according to scenario and performs actions: creates requests, voices information, transfers to specialist.",
-      benefits: [
-        "Instant response without waiting on the line",
-        "Understanding natural customer speech",
-        "Automatic CRM request creation",
-        "Lead qualification and prioritization",
-        "Voicing prices, terms, order statuses",
-        "Intelligent specialist transfer",
+    difference: {
+      title: "How Automatic Operator Differs from Robot Operator",
+      subtitle: "Two solutions for different tasks",
+      automatic: {
+        title: "Automatic Operator",
+        subtitle: "Infrastructure & Flows",
+        description: "Call routing and distribution system. Focus on telephony infrastructure, queues, forwarding rules and peak load handling.",
+        items: [
+          "Smart rule-based routing",
+          "Priority queues",
+          "Department distribution",
+          "Peak loads and overflow",
+          "Scheduled auto-responses",
+          "Next-gen IVR",
+        ],
+        useCases: "Call centers, support services, multi-channel numbers",
+      },
+      robot: {
+        title: "Robot Operator",
+        subtitle: "AI Employee",
+        description: "Human-like AI assistant for conversations. Focus on speech understanding, customer qualification and sales automation.",
+        items: [
+          "Natural customer dialogues",
+          "Lead qualification and scoring",
+          "Price calculation",
+          "Request and invoice creation",
+          "FAQ answers",
+          "Manager transfer",
+        ],
+        useCases: "Sales, consultations, order intake",
+      },
+      note: "Solutions complement each other: automatic operator distributes flow, robot operator handles dialogues.",
+    },
+    callFlow: {
+      title: "How System Processes Calls",
+      subtitle: "Incoming call flow visualization",
+      steps: [
+        { icon: PhoneIncoming, title: "Incoming Call", description: "Customer calls your number" },
+        { icon: Target, title: "Topic Detection", description: "System identifies call purpose" },
+        { icon: GitBranch, title: "Routing", description: "Forwarding rule selection" },
+        { icon: Layers, title: "Queue", description: "If all busy — priority queue" },
+        { icon: PhoneForwarded, title: "Connection", description: "Transfer to right specialist" },
       ],
     },
-    features: {
-      title: "Automatic Operator Capabilities",
-      subtitle: "Complete incoming request processing cycle without human involvement",
+    scenarios: {
+      title: "Typical Processing Scenarios",
+      subtitle: "Automatic operator handles 80% of incoming calls without human involvement",
       items: [
         {
-          icon: Phone,
-          title: "24/7 Auto-answer",
-          description: "Instantly answers all calls at any time without queues or waiting.",
+          icon: Calendar,
+          title: "Service Booking",
+          description: "System accepts booking, checks slots, sends confirmation. Calendar integration.",
+          auto: true,
+          flow: ["Greeting", "Service selection", "Time selection", "Confirmation", "SMS reminder"],
         },
         {
-          icon: MessageSquare,
-          title: "Speech Recognition",
-          description: "Understands natural speech, accents, dialects. 95%+ recognition accuracy.",
+          icon: Package,
+          title: "Order Status",
+          description: "Customer provides order number, system voices status from database. No operator wait.",
+          auto: true,
+          flow: ["Greeting", "Number request", "Database check", "Status voicing"],
         },
         {
-          icon: Target,
-          title: "Smart Routing",
-          description: "Routes call to right specialist based on topic and workload.",
+          icon: Building,
+          title: "Department Distribution",
+          description: "System detects topic and transfers to right department. Sales, support, accounting.",
+          auto: false,
+          flow: ["Greeting", "Topic detection", "Department selection", "Transfer"],
         },
         {
-          icon: FileText,
-          title: "Request Creation",
-          description: "Automatically logs inquiry in CRM with full customer information.",
+          icon: Clock,
+          title: "24/7 Request Intake",
+          description: "After hours, system takes request and creates ticket. Manager calls back in morning.",
+          auto: true,
+          flow: ["Greeting", "Information", "Data collection", "Ticket creation"],
         },
         {
-          icon: Database,
-          title: "Knowledge Base",
-          description: "Answers typical questions from knowledge base: prices, terms, order statuses.",
+          icon: HelpCircle,
+          title: "FAQ Answers",
+          description: "Common questions: hours, address, delivery terms. Response without operator.",
+          auto: true,
+          flow: ["Greeting", "Question recognition", "Database answer"],
+        },
+        {
+          icon: PhoneForwarded,
+          title: "Rule-based Transfer",
+          description: "VIP client? Personal manager. New lead? Sales. Complaint? Supervisor.",
+          auto: false,
+          flow: ["Customer identification", "Rule check", "Routing"],
+        },
+      ],
+    },
+    routing: {
+      title: "Routing and Distribution",
+      subtitle: "Smart rules for every scenario",
+      items: [
+        {
+          title: "By Topic",
+          description: "System detects call topic and routes to corresponding department",
+          rules: ["Sales → Sales Dept", "Support → Support Service", "Payment → Accounting", "Complaint → Supervisor"],
+        },
+        {
+          title: "By Operator Load",
+          description: "Automatic distribution to least busy employees",
+          rules: ["Even load", "Skill consideration", "Skill priority", "Reserve overflow"],
+        },
+        {
+          title: "By Time & Schedule",
+          description: "Different rules for work hours, lunch, weekends and holidays",
+          rules: ["Work hours → Operators", "Lunch → On-duty", "Weekends → Auto-response", "Holidays → Recording"],
+        },
+        {
+          title: "By Customer Status",
+          description: "VIP customers get priority and personal manager",
+          rules: ["VIP → Personal manager", "New → Sales", "Regular → Call history", "Debtor → Legal"],
+        },
+      ],
+    },
+    queues: {
+      title: "Queues and Peak Loads",
+      subtitle: "No call will be lost",
+      features: [
+        {
+          icon: Layers,
+          title: "Smart Queues",
+          description: "Prioritization by customer importance, topic and wait time",
+        },
+        {
+          icon: Timer,
+          title: "Wait Time",
+          description: "Voicing queue position and estimated response time",
+        },
+        {
+          icon: PhoneForwarded,
+          title: "Callback",
+          description: "Offer to call back when operator is free. No waiting on line",
+        },
+        {
+          icon: Network,
+          title: "Overflow",
+          description: "When overloaded — automatic transfer to reserve group or outsource",
         },
         {
           icon: BarChart3,
-          title: "Real-time Analytics",
-          description: "Detailed statistics on calls, topics, conversion, processing time.",
+          title: "Forecasting",
+          description: "AI predicts peak hours and scales resources in advance",
         },
         {
-          icon: Globe,
-          title: "Multilingual Support",
-          description: "Works in Russian, English and other languages with auto-detection.",
-        },
-        {
-          icon: Shield,
-          title: "Recording & Transcription",
-          description: "All conversations are recorded and converted to text for analysis.",
+          icon: Zap,
+          title: "Instant Scaling",
+          description: "Automatic channel increase with load growth",
         },
       ],
     },
-    howWorks: {
-      title: "How Automatic Operator Works",
-      subtitle: "Simple implementation with quick results",
-      steps: [
-        {
-          number: "01",
-          title: "Process Analysis",
-          duration: "1-2 days",
-          description: "We study your business processes, inquiry types, dialogue scenarios.",
-        },
-        {
-          number: "02",
-          title: "System Setup",
-          duration: "3-5 days",
-          description: "Create scenarios, load knowledge base, configure integrations.",
-        },
-        {
-          number: "03",
-          title: "Number Connection",
-          duration: "1 day",
-          description: "Connect your number or allocate new one. Set up forwarding.",
-        },
-        {
-          number: "04",
-          title: "Testing & Launch",
-          duration: "3-5 days",
-          description: "Test on real calls, adjust scenarios, launch into production.",
-        },
+    closedVsTransfer: {
+      title: "Which Calls Close Automatically vs Transfer",
+      autoTitle: "Close Automatically",
+      transferTitle: "Transfer to Operator",
+      autoItems: [
+        "Order / delivery status",
+        "Hours, address, contacts",
+        "Scheduled service booking",
+        "FAQ answers",
+        "After-hours request intake",
+        "Promotion information",
+        "Reminders and confirmations",
       ],
-    },
-    industries: {
-      title: "Application Industries",
-      subtitle: "Automatic operator is effective wherever there are incoming calls",
-      items: [
-        {
-          icon: ShoppingBag,
-          name: "Retail",
-          description: "Order intake, consultations, delivery status, returns",
-          metrics: { value: "+35%", label: "productivity" },
-        },
-        {
-          icon: Building2,
-          name: "Real Estate",
-          description: "Viewing appointments, property info, qualification",
-          metrics: { value: "24/7", label: "availability" },
-        },
-        {
-          icon: Headphones,
-          name: "Support Service",
-          description: "First line support, routing, ticket creation",
-          metrics: { value: "-50%", label: "workload" },
-        },
-        {
-          icon: Briefcase,
-          name: "B2B Services",
-          description: "Lead qualification, meeting scheduling, service info",
-          metrics: { value: "2x", label: "conversion" },
-        },
+      transferItems: [
+        "Complex technical questions",
+        "Complaints and claims",
+        "VIP customers",
+        "Non-standard requests",
+        "Financial questions",
+        "Urgent cases",
       ],
-    },
-    benefits: {
-      title: "Automatic Operator Benefits",
-      subtitle: "Measurable results for your business",
-      items: [
-        { value: "0", label: "Missed Calls", description: "Every call will be handled" },
-        { value: "24/7/365", label: "Non-stop Operation", description: "Round the clock, no weekends" },
-        { value: "60-80%", label: "Automation", description: "Calls without operator" },
-        { value: "-40%", label: "Cost Reduction", description: "For call processing" },
-        { value: "+35%", label: "Productivity Growth", description: "Of sales team" },
-        { value: "95%+", label: "Recognition Accuracy", description: "Of customer speech" },
-      ],
+      stats: { auto: "80%", transfer: "20%" },
     },
     integrations: {
-      title: "Integrations",
-      subtitle: "Works with your systems",
-      items: ["amoCRM", "Bitrix24", "1C", "Salesforce", "HubSpot", "Twilio", "Vonage", "RingCentral", "Asterisk", "FreePBX"],
+      title: "Telephony Integrations",
+      subtitle: "Works with any infrastructure",
+      categories: [
+        {
+          title: "Virtual PBX",
+          items: ["Asterisk", "FreePBX", "3CX", "RingCentral", "Vonage", "Twilio"],
+        },
+        {
+          title: "Telecom Providers",
+          items: ["AT&T", "Verizon", "T-Mobile", "BT", "Orange"],
+        },
+        {
+          title: "CRM Systems",
+          items: ["amoCRM", "Bitrix24", "1C", "Salesforce", "HubSpot"],
+        },
+        {
+          title: "Helpdesk",
+          items: ["Zendesk", "Freshdesk", "Jira Service", "UseDesk"],
+        },
+      ],
     },
     pricing: {
-      title: "Automatic Operator Pricing",
-      subtitle: "Transparent pricing",
+      title: "Pricing",
+      subtitle: "Transparent pricing with no hidden fees",
       plans: [
-        { name: "Start", price: "from $250", period: "/month", features: ["Up to 500 calls", "Basic scenarios", "1 integration", "Email support"], highlight: false },
-        { name: "Business", price: "from $600", period: "/month", features: ["Up to 2000 calls", "Complex scenarios", "5 integrations", "Priority support"], highlight: true },
-        { name: "Enterprise", price: "Custom", period: "", features: ["Unlimited", "Custom scenarios", "All integrations", "24/7 support", "SLA"], highlight: false },
+        {
+          name: "Start",
+          price: "$200",
+          period: "/month",
+          description: "For small business",
+          features: [
+            "Up to 500 calls/month",
+            "3 routing rules",
+            "1 queue",
+            "Basic analytics",
+            "Email support",
+          ],
+          highlight: false,
+        },
+        {
+          name: "Business",
+          price: "$500",
+          period: "/month",
+          description: "For growing companies",
+          features: [
+            "Up to 3000 calls/month",
+            "Unlimited rules",
+            "5 priority queues",
+            "Advanced analytics",
+            "Callback and overflow",
+            "Priority support",
+          ],
+          highlight: true,
+        },
+        {
+          name: "Enterprise",
+          price: "Custom",
+          period: "",
+          description: "For large business",
+          features: [
+            "Unlimited calls",
+            "Custom scenarios",
+            "Dedicated infrastructure",
+            "99.9% SLA",
+            "24/7 support",
+            "Personal manager",
+          ],
+          highlight: false,
+        },
       ],
-      note: "First 14 days free. Implementation and training included.",
-    },
-    m2Benefits: {
-      title: "Why M2 AI Solutions",
-      subtitle: "Technology leadership",
-      items: [
-        { title: "Proprietary AI Platform", description: "Full control over technology" },
-        { title: "Multilingual", description: "6+ languages out of the box" },
-        { title: "Fast Implementation", description: "Launch in 7-14 days" },
-        { title: "Data Security", description: "ISO 27001, GDPR compliant" },
-        { title: "Expert Team", description: "10+ years in AI, 50+ deployments" },
-        { title: "ROI Guarantee", description: "Payback in 2-3 months" },
-      ],
+      note: "First 14 days free. Implementation and setup included.",
     },
     faq: {
       title: "Frequently Asked Questions",
       items: [
         {
-          q: "How is automatic operator different from voice menu (IVR)?",
-          a: "IVR requires customer to press buttons. Automatic operator understands natural speech and conducts full dialogue like a real person.",
+          q: "How is automatic operator different from regular IVR?",
+          a: "Classic IVR requires button presses (1 — sales, 2 — support). Automatic operator understands natural speech, detects topics automatically and can resolve issues without human transfer.",
         },
         {
-          q: "What percentage of calls can the system handle on its own?",
-          a: "On average 60-80% of calls are processed fully automatically. Complex cases are transferred to live operator.",
+          q: "Can it be used together with robot operator?",
+          a: "Yes, solutions complement each other. Automatic operator distributes call flow, robot operator handles dialogues where it's more effective.",
         },
         {
-          q: "How quickly can the system be implemented?",
-          a: "Typical implementation takes 7-14 days including setup, integration and testing.",
+          q: "How quickly can the system be launched?",
+          a: "Basic setup takes 3-5 days. Complex scenarios with multiple rules and integrations — up to 2 weeks.",
         },
         {
-          q: "Can it be customized for our business specifics?",
-          a: "Yes, the system is fully customized to your scenarios, terminology and business processes.",
+          q: "What happens during peak loads?",
+          a: "System scales automatically, customers are queued with wait time announcement, callback or overflow to reserve group offered if needed.",
         },
         {
-          q: "How does CRM integration work?",
-          a: "We support integration with popular CRMs via API. Requests are created automatically.",
+          q: "What data is recorded for each call?",
+          a: "Call recording, transcription, topic, call route, queue time, result (resolved/transferred), quality rating.",
         },
         {
-          q: "Are conversations recorded?",
-          a: "Yes, all conversations are recorded and transcribed for quality control and analysis.",
+          q: "Does system work with multiple numbers?",
+          a: "Yes, unlimited incoming numbers supported with different routing rules for each.",
         },
       ],
     },
     cta: {
-      title: "Ready to automate call processing?",
-      subtitle: "Get a personalized demo and savings calculation for your business",
+      title: "Ready to optimize call processing?",
+      subtitle: "Get a personalized system demo and cost calculation for your needs",
       button: "Request Demo",
       trust: "Free consultation · ROI calculation · No obligations",
     },
     relatedLinks: {
       title: "See Also",
       items: [
-        { title: "Robot Operator", href: "/solutions/robot-operator" },
-        { title: "Virtual Operator", href: "/solutions/virtual-operator" },
-        { title: "Robot for Calls", href: "/solutions/robot-dlya-zvonkov" },
-        { title: "Sales Automation", href: "/solutions/automation-sales" },
-        { title: "All Solutions", href: "/solutions" },
-        { title: "Cases", href: "/cases" },
+        { title: "Robot Operator", href: "/solutions/robot-operator", description: "AI employee for dialogues" },
+        { title: "Virtual Operator", href: "/solutions/virtual-operator", description: "Cloud solution for calls" },
+        { title: "All Solutions", href: "/solutions", description: "Full product catalog" },
       ],
     },
   },
@@ -473,61 +672,65 @@ const content = {
 
 export function AutomaticOperatorPage({ locale }: AutomaticOperatorPageProps) {
   const { openModal } = useCTA()
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
   const t = content[locale as keyof typeof content] || content.ru
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
+      {/* Hero Section - Unique Cyan/Teal Gradient */}
       <section className="relative pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
-          <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-green-500/20 to-transparent" />
-          <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-emerald-500/20 to-transparent" />
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-green-500/10 rounded-full blur-3xl" />
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
+        <div className="absolute inset-0 bg-[#0a1628]" />
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }} />
         </div>
-
-        <div className="container relative mx-auto px-4 max-w-6xl">
+        {/* Glow Effects */}
+        <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-cyan-500/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-teal-500/15 rounded-full blur-[100px]" />
+        
+        <div className="container mx-auto px-4 max-w-6xl relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 mb-8">
-              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-sm text-white/80">{t.badge}</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-medium mb-6">
+              <Network className="w-4 h-4" />
+              {t.badge}
             </div>
-
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-white">
+            
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">
               {t.title}
-              <span className="block bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                {t.titleHighlight}
-              </span>
+              <span className="block text-cyan-400">{t.titleHighlight}</span>
             </h1>
-
-            <p className="text-xl md:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed">
+            
+            <p className="text-lg md:text-xl text-slate-400 mb-8 max-w-3xl mx-auto leading-relaxed">
               {t.subtitle}
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Button
-                size="lg"
-                onClick={() => openModal("consultation")}
-                className="h-14 px-8 text-base bg-white text-slate-900 hover:bg-slate-100"
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+              <Button 
+                size="lg" 
+                onClick={() => openModal('demo')}
+                className="bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold px-8 h-14 text-lg"
               >
                 {t.cta1}
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="h-14 px-8 text-base border-white/20 text-white hover:bg-white/10 bg-transparent"
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-slate-600 text-white hover:bg-slate-800 h-14 text-lg"
               >
-                <Play className="mr-2 h-5 w-5" />
+                <Play className="mr-2 w-5 h-5" />
                 {t.cta2}
               </Button>
             </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 border-t border-white/10">
-              {t.stats.map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-white mb-1">{stat.value}</div>
+            
+            {/* Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {t.stats.map((stat, idx) => (
+                <div key={idx} className="p-4 rounded-2xl bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
+                  <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">{stat.value}</div>
                   <div className="text-sm text-slate-400">{stat.label}</div>
                 </div>
               ))}
@@ -536,136 +739,250 @@ export function AutomaticOperatorPage({ locale }: AutomaticOperatorPageProps) {
         </div>
       </section>
 
-      {/* What Is Section */}
+      {/* Difference Section - Key Differentiator */}
+      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">{t.difference.title}</h2>
+            <p className="text-xl text-muted-foreground">{t.difference.subtitle}</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            {/* Automatic Operator */}
+            <Card className="border-2 border-cyan-500/50 bg-gradient-to-br from-cyan-50 to-teal-50 dark:from-cyan-950/30 dark:to-teal-950/30">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-cyan-500 flex items-center justify-center">
+                    <Network className="w-7 h-7 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-cyan-700 dark:text-cyan-400">{t.difference.automatic.title}</h3>
+                    <p className="text-sm text-cyan-600 dark:text-cyan-500">{t.difference.automatic.subtitle}</p>
+                  </div>
+                </div>
+                <p className="text-muted-foreground mb-6">{t.difference.automatic.description}</p>
+                <ul className="space-y-3 mb-6">
+                  {t.difference.automatic.items.map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-cyan-500 flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="p-4 rounded-xl bg-cyan-100 dark:bg-cyan-900/30">
+                  <span className="text-sm font-medium text-cyan-700 dark:text-cyan-400">Для кого: </span>
+                  <span className="text-sm text-cyan-600 dark:text-cyan-300">{t.difference.automatic.useCases}</span>
+                </div>
+              </CardContent>
+            </Card>
+            
+            {/* Robot Operator */}
+            <Card className="border-2 border-slate-300 dark:border-slate-700">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-slate-600 flex items-center justify-center">
+                    <Bot className="w-7 h-7 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold">{t.difference.robot.title}</h3>
+                    <p className="text-sm text-muted-foreground">{t.difference.robot.subtitle}</p>
+                  </div>
+                </div>
+                <p className="text-muted-foreground mb-6">{t.difference.robot.description}</p>
+                <ul className="space-y-3 mb-6">
+                  {t.difference.robot.items.map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-3">
+                      <Check className="w-5 h-5 text-slate-500 flex-shrink-0" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="p-4 rounded-xl bg-slate-100 dark:bg-slate-800">
+                  <span className="text-sm font-medium">Для кого: </span>
+                  <span className="text-sm text-muted-foreground">{t.difference.robot.useCases}</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+          
+          <p className="text-center text-muted-foreground bg-cyan-50 dark:bg-cyan-900/20 rounded-xl p-4 border border-cyan-200 dark:border-cyan-800">
+            {t.difference.note}
+          </p>
+        </div>
+      </section>
+
+      {/* Call Flow Visualization */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">{t.whatIs.title}</h2>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                {t.whatIs.description}
-              </p>
-              <ul className="space-y-4">
-                {t.whatIs.benefits.map((benefit) => (
-                  <li key={benefit} className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-4 h-4 text-green-500" />
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">{t.callFlow.title}</h2>
+            <p className="text-xl text-muted-foreground">{t.callFlow.subtitle}</p>
+          </div>
+          
+          <div className="relative">
+            {/* Connection Line */}
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-teal-500 to-cyan-500 -translate-y-1/2 rounded-full" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+              {t.callFlow.steps.map((step, idx) => {
+                const Icon = step.icon
+                return (
+                  <div key={idx} className="relative flex flex-col items-center text-center">
+                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center mb-4 relative z-10 shadow-lg shadow-cyan-500/20">
+                      <Icon className="w-10 h-10 text-white" />
                     </div>
-                    <span>{benefit}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="relative">
-              <div className="aspect-video rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 p-1">
-                <div className="w-full h-full rounded-xl bg-slate-900 flex items-center justify-center">
-                  <Settings className="w-24 h-24 text-green-400/50" />
-                </div>
-              </div>
+                    <h3 className="font-semibold mb-2">{step.title}</h3>
+                    <p className="text-sm text-muted-foreground">{step.description}</p>
+                    {idx < t.callFlow.steps.length - 1 && (
+                      <ArrowDown className="w-6 h-6 text-cyan-500 mt-4 md:hidden" />
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Scenarios */}
       <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="max-w-3xl mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">{t.features.title}</h2>
-            <p className="text-xl text-muted-foreground">{t.features.subtitle}</p>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">{t.scenarios.title}</h2>
+            <p className="text-xl text-muted-foreground">{t.scenarios.subtitle}</p>
           </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {t.scenarios.items.map((scenario, idx) => {
+              const Icon = scenario.icon
+              return (
+                <Card key={idx} className="overflow-hidden group hover:shadow-lg transition-shadow">
+                  <CardContent className="p-0">
+                    <div className={`p-4 ${scenario.auto ? 'bg-gradient-to-r from-cyan-500 to-teal-500' : 'bg-gradient-to-r from-slate-600 to-slate-700'}`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Icon className="w-6 h-6 text-white" />
+                          <h3 className="font-semibold text-white">{scenario.title}</h3>
+                        </div>
+                        <span className={`text-xs px-2 py-1 rounded-full ${scenario.auto ? 'bg-white/20 text-white' : 'bg-white/10 text-white'}`}>
+                          {scenario.auto ? 'Авто' : 'Перевод'}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-5">
+                      <p className="text-sm text-muted-foreground mb-4">{scenario.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {scenario.flow.map((step, i) => (
+                          <span key={i} className="inline-flex items-center gap-1 text-xs px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-full">
+                            {i > 0 && <ArrowRight className="w-3 h-3 text-cyan-500" />}
+                            {step}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {t.features.items.map((feature) => {
+      {/* Closed vs Transfer */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center">{t.closedVsTransfer.title}</h2>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Auto Close */}
+            <Card className="border-2 border-cyan-500/30">
+              <CardContent className="p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-xl font-bold text-cyan-600 dark:text-cyan-400">{t.closedVsTransfer.autoTitle}</h3>
+                  <span className="text-4xl font-bold text-cyan-500">{t.closedVsTransfer.stats.auto}</span>
+                </div>
+                <ul className="space-y-3">
+                  {t.closedVsTransfer.autoItems.map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-cyan-500 flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+            
+            {/* Transfer */}
+            <Card className="border-2 border-slate-300 dark:border-slate-700">
+              <CardContent className="p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-xl font-bold">{t.closedVsTransfer.transferTitle}</h3>
+                  <span className="text-4xl font-bold text-slate-500">{t.closedVsTransfer.stats.transfer}</span>
+                </div>
+                <ul className="space-y-3">
+                  {t.closedVsTransfer.transferItems.map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-3">
+                      <PhoneForwarded className="w-5 h-5 text-slate-500 flex-shrink-0" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Routing Rules */}
+      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">{t.routing.title}</h2>
+            <p className="text-xl text-muted-foreground">{t.routing.subtitle}</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {t.routing.items.map((item, idx) => (
+              <Card key={idx} className="overflow-hidden">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground mb-4">{item.description}</p>
+                  <div className="space-y-2">
+                    {item.rules.map((rule, i) => (
+                      <div key={i} className="flex items-center gap-2 text-sm">
+                        <GitBranch className="w-4 h-4 text-cyan-500 flex-shrink-0" />
+                        <span>{rule}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Queues */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">{t.queues.title}</h2>
+            <p className="text-xl text-muted-foreground">{t.queues.subtitle}</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {t.queues.features.map((feature, idx) => {
               const Icon = feature.icon
               return (
-                <Card key={feature.title} className="group hover:shadow-lg transition-all">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground">{feature.description}</p>
-                  </CardContent>
-                </Card>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="py-20 md:py-28">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="max-w-3xl mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">{t.howWorks.title}</h2>
-            <p className="text-xl text-muted-foreground">{t.howWorks.subtitle}</p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-6">
-            {t.howWorks.steps.map((step) => (
-              <div key={step.number} className="relative">
-                <div className="text-5xl font-bold text-slate-200 dark:text-slate-800 mb-3">{step.number}</div>
-                <div className="inline-block px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-medium mb-3">
-                  {step.duration}
+                <div key={idx} className="p-6 rounded-2xl border border-border/50 bg-card hover:shadow-lg transition-shadow">
+                  <div className="w-12 h-12 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center mb-4">
+                    <Icon className="w-6 h-6 text-cyan-600 dark:text-cyan-400" />
+                  </div>
+                  <h3 className="font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-sm text-muted-foreground">{feature.description}</p>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-                <p className="text-sm text-muted-foreground">{step.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Industries */}
-      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="max-w-3xl mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">{t.industries.title}</h2>
-            <p className="text-xl text-muted-foreground">{t.industries.subtitle}</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {t.industries.items.map((industry) => {
-              const Icon = industry.icon
-              return (
-                <Card key={industry.name} className="group hover:shadow-lg transition-all">
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center">
-                        <Icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="text-right">
-                        <div className="text-xl font-bold">{industry.metrics.value}</div>
-                        <div className="text-xs text-muted-foreground">{industry.metrics.label}</div>
-                      </div>
-                    </div>
-                    <h3 className="font-semibold mb-2">{industry.name}</h3>
-                    <p className="text-sm text-muted-foreground">{industry.description}</p>
-                  </CardContent>
-                </Card>
               )
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="py-20 md:py-28">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="max-w-3xl mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">{t.benefits.title}</h2>
-            <p className="text-xl text-muted-foreground">{t.benefits.subtitle}</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {t.benefits.items.map((benefit) => (
-              <div key={benefit.label} className="p-6 rounded-2xl border border-border/50 bg-card">
-                <div className="text-4xl font-bold text-green-500 mb-2">{benefit.value}</div>
-                <div className="font-semibold mb-1">{benefit.label}</div>
-                <p className="text-sm text-muted-foreground">{benefit.description}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -673,15 +990,23 @@ export function AutomaticOperatorPage({ locale }: AutomaticOperatorPageProps) {
       {/* Integrations */}
       <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.integrations.title}</h2>
-            <p className="text-lg text-muted-foreground">{t.integrations.subtitle}</p>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">{t.integrations.title}</h2>
+            <p className="text-xl text-muted-foreground">{t.integrations.subtitle}</p>
           </div>
-
-          <div className="flex flex-wrap justify-center gap-4">
-            {t.integrations.items.map((item) => (
-              <div key={item} className="px-6 py-3 rounded-full bg-white dark:bg-slate-800 border border-border/50 text-sm font-medium">
-                {item}
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {t.integrations.categories.map((category, idx) => (
+              <div key={idx} className="p-6 rounded-2xl bg-card border border-border/50">
+                <h3 className="font-semibold mb-4 text-cyan-600 dark:text-cyan-400">{category.title}</h3>
+                <div className="space-y-2">
+                  {category.items.map((item, i) => (
+                    <div key={i} className="flex items-center gap-2 text-sm">
+                      <Check className="w-4 h-4 text-cyan-500" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
@@ -691,111 +1016,112 @@ export function AutomaticOperatorPage({ locale }: AutomaticOperatorPageProps) {
       {/* Pricing */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="max-w-3xl mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">{t.pricing.title}</h2>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">{t.pricing.title}</h2>
             <p className="text-xl text-muted-foreground">{t.pricing.subtitle}</p>
           </div>
+          
           <div className="grid md:grid-cols-3 gap-6 mb-8">
             {t.pricing.plans.map((plan, idx) => (
-              <Card key={idx} className={`relative ${plan.highlight ? 'border-green-500 shadow-lg ring-2 ring-green-500' : ''}`}>
+              <Card key={idx} className={`relative overflow-hidden ${plan.highlight ? 'border-2 border-cyan-500 shadow-lg shadow-cyan-500/10' : ''}`}>
                 {plan.highlight && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-green-500 text-white text-xs font-medium rounded-full">
-                    Популярный
-                  </div>
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-teal-500" />
                 )}
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                <CardContent className="p-8">
+                  <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
+                  <p className="text-sm text-muted-foreground mb-4">{plan.description}</p>
                   <div className="mb-6">
-                    <span className="text-3xl font-bold">{plan.price}</span>
+                    <span className="text-4xl font-bold">{plan.price}</span>
                     <span className="text-muted-foreground">{plan.period}</span>
                   </div>
-                  <ul className="space-y-3">
+                  <ul className="space-y-3 mb-6">
                     {plan.features.map((feature, i) => (
                       <li key={i} className="flex items-center gap-2 text-sm">
-                        <Check className="w-4 h-4 text-green-500" />
-                        {feature}
+                        <Check className="w-4 h-4 text-cyan-500" />
+                        <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
-                  <Button className="w-full mt-6" variant={plan.highlight ? "default" : "outline"} onClick={() => openModal("consultation")}>
+                  <Button 
+                    className={`w-full ${plan.highlight ? 'bg-cyan-500 hover:bg-cyan-600 text-white' : ''}`}
+                    variant={plan.highlight ? 'default' : 'outline'}
+                    onClick={() => openModal('demo')}
+                  >
                     {t.cta1}
                   </Button>
                 </CardContent>
               </Card>
             ))}
           </div>
-          <p className="text-center text-sm text-muted-foreground">{t.pricing.note}</p>
-        </div>
-      </section>
-
-      {/* M2 Benefits */}
-      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="max-w-3xl mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">{t.m2Benefits.title}</h2>
-            <p className="text-xl text-muted-foreground">{t.m2Benefits.subtitle}</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {t.m2Benefits.items.map((item, idx) => (
-              <div key={idx} className="p-6 rounded-2xl bg-white dark:bg-slate-800 hover:shadow-lg transition-all">
-                <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
-              </div>
-            ))}
-          </div>
+          
+          <p className="text-center text-muted-foreground">{t.pricing.note}</p>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-20 md:py-28">
+      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">{t.faq.title}</h2>
-
+          <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center">{t.faq.title}</h2>
+          
           <div className="space-y-4">
             {t.faq.items.map((item, idx) => (
-              <div key={idx} className="p-6 rounded-2xl border border-border/50 bg-card">
-                <h3 className="font-semibold mb-2">{item.q}</h3>
-                <p className="text-muted-foreground">{item.a}</p>
-              </div>
+              <Card key={idx} className="overflow-hidden">
+                <button
+                  className="w-full p-6 text-left flex items-center justify-between"
+                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                >
+                  <span className="font-semibold pr-4">{item.q}</span>
+                  {openFaq === idx ? (
+                    <ChevronUp className="w-5 h-5 text-cyan-500 flex-shrink-0" />
+                  ) : (
+                    <ChevronDown className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                  )}
+                </button>
+                {openFaq === idx && (
+                  <div className="px-6 pb-6">
+                    <p className="text-muted-foreground">{item.a}</p>
+                  </div>
+                )}
+              </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 md:py-28 bg-gradient-to-br from-cyan-600 to-teal-600">
+        <div className="container mx-auto px-4 max-w-4xl text-center">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{t.cta.title}</h2>
+          <p className="text-xl text-cyan-100 mb-8">{t.cta.subtitle}</p>
+          <Button 
+            size="lg" 
+            onClick={() => openModal('demo')}
+            className="bg-white text-cyan-600 hover:bg-cyan-50 font-semibold px-8 h-14 text-lg"
+          >
+            {t.cta.button}
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
+          <p className="text-cyan-200 mt-6">{t.cta.trust}</p>
         </div>
       </section>
 
       {/* Related Links */}
       <section className="py-16 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4 max-w-6xl">
-          <h3 className="text-xl font-semibold mb-6">{t.relatedLinks.title}</h3>
-          <div className="flex flex-wrap gap-3">
-            {t.relatedLinks.items.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-border/50 text-sm hover:border-primary/50 transition-colors"
-              >
-                {link.title}
+          <h2 className="text-2xl font-bold mb-8">{t.relatedLinks.title}</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {t.relatedLinks.items.map((item, idx) => (
+              <Link key={idx} href={`/${locale}${item.href}`} className="group">
+                <Card className="h-full hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <h3 className="font-semibold mb-2 group-hover:text-cyan-600 transition-colors">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground">{item.description}</p>
+                    <ArrowRight className="w-5 h-5 text-cyan-500 mt-4 group-hover:translate-x-1 transition-transform" />
+                  </CardContent>
+                </Card>
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-20 md:py-28 bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 text-white">
-        <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">{t.cta.title}</h2>
-          <p className="text-xl text-slate-300 mb-10">{t.cta.subtitle}</p>
-
-          <Button
-            size="lg"
-            onClick={() => openModal("consultation")}
-            className="h-14 px-10 text-base bg-white text-slate-900 hover:bg-slate-100"
-          >
-            {t.cta.button}
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-
-          <p className="mt-6 text-sm text-slate-400">{t.cta.trust}</p>
         </div>
       </section>
     </div>
