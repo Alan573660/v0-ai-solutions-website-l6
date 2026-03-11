@@ -194,7 +194,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
   return (
     <main className="min-h-screen bg-background">
       {/* HERO */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+      <section className="relative min-h-screen pb-40 sm:pb-32 md:min-h-[90vh] md:pb-0 flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
@@ -229,7 +229,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
               </Reveal>
 
               <Reveal delay={300}>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-6">
                   <Button 
                     size="lg" 
                     onClick={() => openCTA()}
@@ -240,8 +240,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
                   </Button>
                   <Button 
                     size="lg" 
-                    variant="outline"
-                    className="border-slate-600 text-slate-200 hover:bg-slate-800 px-8 py-6 text-lg rounded-xl"
+                    className="bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 px-8 py-6 text-lg rounded-xl"
                   >
                     <Play className="mr-2 w-5 h-5" />
                     Послушать AI в деле
@@ -250,7 +249,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
               </Reveal>
 
               <Reveal delay={400}>
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-slate-400 mb-32 sm:mb-0">
                   Бесплатная консультация - Расчёт ROI за 15 минут - Без обязательств
                 </p>
               </Reveal>
