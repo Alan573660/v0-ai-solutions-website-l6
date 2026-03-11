@@ -91,6 +91,26 @@ export function RaschetDostavkiPage() {
     },
   ]
 
+  const pricing = {
+    title: "Стоимость расчёта доставки",
+    subtitle: "Гибкое ценообразование",
+    plans: [
+      { name: "Старт", price: "от 20 000", period: "руб/мес", features: ["До 1000 расчётов", "3 службы доставки", "Базовая оптимизация", "Email поддержка"], highlight: false },
+      { name: "Бизнес", price: "от 55 000", period: "руб/мес", features: ["До 5000 расчётов", "Все службы", "AI-оптимизация маршрутов", "Приоритетная поддержка"], highlight: true },
+      { name: "Enterprise", price: "Индивидуально", period: "", features: ["Неограниченно", "Свои курьеры + внешние", "Все интеграции", "24/7 поддержка", "SLA"], highlight: false },
+    ],
+    note: "Экономия 30-40% на доставке. Первые 14 дней бесплатно.",
+  }
+
+  const m2Benefits = [
+    { title: "Экономия 30-40%", description: "Оптимизация всех маршрутов" },
+    { title: "Все службы доставки", description: "СДЭК, Boxberry, Почта и др." },
+    { title: "Быстрое внедрение", description: "Запуск за 7-10 дней" },
+    { title: "Свои курьеры", description: "GPS-трекинг и балансировка" },
+    { title: "Маркетплейсы", description: "WB, Ozon, Яндекс.Маркет" },
+    { title: "Гарантия результата", description: "ROI за 1-2 месяца" },
+  ]
+
   const faqs = [
     { question: "Какие службы доставки поддерживаются?", answer: "СДЭК, Boxberry, Почта России, Яндекс.Доставка, DPD, Деловые линии, региональные курьеры, собственная логистика. Можно добавить свои таможные тарифы." },
     { question: "Как система выбирает оптимальную доставку?", answer: "По алгоритму учитываются: стоимость, время доставки, вес/объём посылки, текущая нагрузка курьера, приоритет клиента. Вы задаёте веса для каждого фактора." },
@@ -333,6 +353,38 @@ export function RaschetDostavkiPage() {
         </div>
       </section>
 
+      {/* Pricing */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12"><h2 className="text-3xl md:text-5xl font-bold mb-6">{pricing.title}</h2><p className="text-xl text-muted-foreground">{pricing.subtitle}</p></div>
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {pricing.plans.map((plan, idx) => (
+              <Card key={idx} className={`relative ${plan.highlight ? 'border-orange-500 shadow-lg ring-2 ring-orange-500' : ''}`}>
+                {plan.highlight && (<div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-orange-500 text-white text-xs font-medium rounded-full">Популярный</div>)}
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                  <div className="mb-6"><span className="text-3xl font-bold">{plan.price}</span><span className="text-muted-foreground">{plan.period}</span></div>
+                  <ul className="space-y-3">{plan.features.map((f, i) => (<li key={i} className="flex items-center gap-2 text-sm"><Check className="w-4 h-4 text-orange-500" />{f}</li>))}</ul>
+                  <Button className="w-full mt-6" variant={plan.highlight ? "default" : "outline"} onClick={() => openModal("consultation")}>Получить консультацию</Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <p className="text-center text-sm text-muted-foreground">{pricing.note}</p>
+        </div>
+      </section>
+
+      {/* M2 Benefits */}
+      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-16"><h2 className="text-3xl md:text-5xl font-bold mb-6">Почему M2 AI Solutions</h2><p className="text-xl text-muted-foreground">Технологическое лидерство</p></div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {m2Benefits.map((item, idx) => (<div key={idx} className="p-6 rounded-2xl bg-white dark:bg-slate-800 hover:shadow-lg transition-all"><h3 className="font-semibold text-lg mb-2">{item.title}</h3><p className="text-sm text-muted-foreground">{item.description}</p></div>))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-3xl md:text-5xl font-bold mb-12">Частые вопросы</h2>
@@ -350,6 +402,7 @@ export function RaschetDostavkiPage() {
         </div>
       </section>
 
+      {/* Final CTA */}
       <section className="py-20 md:py-28 bg-gradient-to-br from-orange-600 to-amber-600 text-white">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Экономьте на доставке уже сегодня</h2>

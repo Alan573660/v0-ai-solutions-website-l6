@@ -155,7 +155,7 @@ const content = {
           icon: Building2,
           name: "Строительство",
           description: "Расчет материалов, консультации, запись на замер",
-          metrics: { value: "24/7", label: "доступность" },
+          metrics: { value: "24/7", label: "до��тупность" },
         },
         {
           icon: Truck,
@@ -187,6 +187,65 @@ const content = {
       title: "Интеграции",
       subtitle: "Робот оператор работает с вашими системами",
       items: ["amoCRM", "Bitrix24", "1C", "Salesforce", "HubSpot", "Telegram", "WhatsApp", "Email", "Asterisk", "Mango Office"],
+    },
+    cases: {
+      title: "Кейсы внедрения",
+      subtitle: "Реальные результаты наших клиентов",
+      items: [
+        {
+          company: "СтройМаркет",
+          industry: "Строительные материалы",
+          challenge: "5000+ пропущенных звонков в месяц, менеджеры не справлялись с потоком",
+          solution: "Внедрили робота оператора для приема всех входящих, квалификации и расчета стоимости",
+          results: [
+            { value: "0", label: "пропущенных звонков" },
+            { value: "+156%", label: "рост продаж" },
+            { value: "3 сек", label: "время ответа" },
+          ],
+          quote: "Робот обрабатывает 80% звонков полностью самостоятельно. Менеджеры работают только с горячими лидами.",
+        },
+        {
+          company: "ЛогистикПро",
+          industry: "Грузоперевозки",
+          challenge: "Долгий расчет стоимости доставки, клиенты уходили к конкурентам",
+          solution: "AI-оператор мгновенно рассчитывает маршрут, подбирает транспорт и формирует КП",
+          results: [
+            { value: "3 мин", label: "на полную заявку" },
+            { value: "+89%", label: "конверсия" },
+            { value: "24/7", label: "прием заявок" },
+          ],
+          quote: "Раньше расчет занимал 30-40 минут. Теперь клиент получает КП за 3 минуты прямо во время звонка.",
+        },
+      ],
+    },
+    pricing: {
+      title: "Сколько стоит робот оператор",
+      subtitle: "Прозрачное ценообразование без скрытых платежей",
+      description: "Стоимость внедрения робота оператора зависит от объема звонков, сложности сценариев и необходимых интеграций. Мы предлагаем гибкие тарифы для бизнеса любого размера.",
+      factors: [
+        { title: "Объем звонков", description: "От 100 до 10 000+ звонков в месяц" },
+        { title: "Сложность сценариев", description: "Простые FAQ или сложная квалификация с расчетами" },
+        { title: "Интеграции", description: "CRM, 1C, телефония, мессенджеры" },
+        { title: "Кастомизация", description: "Обучение на ваших данных и специфике" },
+      ],
+      plans: [
+        { name: "Старт", price: "от 15 000", period: "руб/мес", features: ["До 500 звонков", "Базовые сценарии", "1 интеграция", "Email поддержка"] },
+        { name: "Бизнес", price: "от 45 000", period: "руб/мес", features: ["До 2000 звонков", "Сложные сценарии", "5 интеграций", "Приоритетная поддержка"], popular: true },
+        { name: "Enterprise", price: "Индивидуально", period: "", features: ["Неограниченно", "Любая сложность", "Все интеграции", "Выделенный менеджер"] },
+      ],
+      note: "Все тарифы включают настройку, обучение и техническую поддержку. Первые 14 дней — бесплатный тестовый период.",
+    },
+    m2Benefits: {
+      title: "Почему M2 AI Solutions",
+      subtitle: "Технологическое лидерство и экспертиза",
+      items: [
+        { icon: Brain, title: "Собственная AI-платформа", description: "Не зависим от сторонних решений. Полный контроль над технологией и данными клиентов." },
+        { icon: Globe, title: "Мультиязычность", description: "Поддержка 6+ языков из коробки. Автоопределение языка собеседника." },
+        { icon: Zap, title: "Быстрое внедрение", description: "Запуск за 7-14 дней. Готовые интеграции с популярными CRM и телефонией." },
+        { icon: Shield, title: "Безопасность данных", description: "Соответствие GDPR и 152-ФЗ. Данные хранятся на защищенных серверах." },
+        { icon: Users, title: "Экспертная команда", description: "10+ лет опыта в AI и автоматизации. 50+ успешных внедрений." },
+        { icon: TrendingUp, title: "Гарантия результата", description: "ROI рассчитываем до старта. Возврат инвестиций за 2-3 месяца." },
+      ],
     },
     faq: {
       title: "Частые вопросы",
@@ -382,6 +441,65 @@ const content = {
       title: "Integrations",
       subtitle: "Robot Operator works with your systems",
       items: ["amoCRM", "Bitrix24", "1C", "Salesforce", "HubSpot", "Telegram", "WhatsApp", "Email", "Asterisk", "Mango Office"],
+    },
+    cases: {
+      title: "Implementation Cases",
+      subtitle: "Real results from our clients",
+      items: [
+        {
+          company: "BuildMart",
+          industry: "Construction Materials",
+          challenge: "5000+ missed calls per month, managers couldn't handle the flow",
+          solution: "Implemented robot operator to receive all incoming calls, qualify and calculate costs",
+          results: [
+            { value: "0", label: "missed calls" },
+            { value: "+156%", label: "sales growth" },
+            { value: "3 sec", label: "response time" },
+          ],
+          quote: "The robot handles 80% of calls completely independently. Managers only work with hot leads.",
+        },
+        {
+          company: "LogisticsPro",
+          industry: "Freight Transportation",
+          challenge: "Long delivery cost calculation, customers were leaving to competitors",
+          solution: "AI operator instantly calculates route, selects transport and generates quote",
+          results: [
+            { value: "3 min", label: "for full request" },
+            { value: "+89%", label: "conversion" },
+            { value: "24/7", label: "request intake" },
+          ],
+          quote: "Calculation used to take 30-40 minutes. Now the customer gets a quote in 3 minutes during the call.",
+        },
+      ],
+    },
+    pricing: {
+      title: "How Much Does Robot Operator Cost",
+      subtitle: "Transparent pricing with no hidden fees",
+      description: "The cost of implementing a robot operator depends on call volume, scenario complexity and required integrations. We offer flexible rates for businesses of any size.",
+      factors: [
+        { title: "Call Volume", description: "From 100 to 10,000+ calls per month" },
+        { title: "Scenario Complexity", description: "Simple FAQ or complex qualification with calculations" },
+        { title: "Integrations", description: "CRM, 1C, telephony, messengers" },
+        { title: "Customization", description: "Training on your data and specifics" },
+      ],
+      plans: [
+        { name: "Start", price: "from $200", period: "/month", features: ["Up to 500 calls", "Basic scenarios", "1 integration", "Email support"] },
+        { name: "Business", price: "from $500", period: "/month", features: ["Up to 2000 calls", "Complex scenarios", "5 integrations", "Priority support"], popular: true },
+        { name: "Enterprise", price: "Custom", period: "", features: ["Unlimited", "Any complexity", "All integrations", "Dedicated manager"] },
+      ],
+      note: "All plans include setup, training and technical support. First 14 days — free trial period.",
+    },
+    m2Benefits: {
+      title: "Why M2 AI Solutions",
+      subtitle: "Technology leadership and expertise",
+      items: [
+        { icon: Brain, title: "Proprietary AI Platform", description: "No dependence on third-party solutions. Full control over technology and customer data." },
+        { icon: Globe, title: "Multilingual", description: "Support for 6+ languages out of the box. Auto-detection of speaker language." },
+        { icon: Zap, title: "Fast Implementation", description: "Launch in 7-14 days. Ready integrations with popular CRMs and telephony." },
+        { icon: Shield, title: "Data Security", description: "GDPR and SOC 2 compliant. Data stored on secure servers." },
+        { icon: Users, title: "Expert Team", description: "10+ years of experience in AI and automation. 50+ successful implementations." },
+        { icon: TrendingUp, title: "Guaranteed Results", description: "ROI calculated before start. Return on investment in 2-3 months." },
+      ],
     },
     faq: {
       title: "Frequently Asked Questions",
@@ -614,6 +732,51 @@ export function RobotOperatorPage({ locale }: RobotOperatorPageProps) {
         </div>
       </section>
 
+      {/* Cases */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">{t.cases.title}</h2>
+            <p className="text-xl text-muted-foreground">{t.cases.subtitle}</p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            {t.cases.items.map((caseItem, idx) => (
+              <Card key={idx} className="overflow-hidden">
+                <CardContent className="p-0">
+                  <div className="p-6 bg-gradient-to-br from-blue-500 to-cyan-500">
+                    <div className="text-white/80 text-sm mb-1">{caseItem.industry}</div>
+                    <h3 className="text-2xl font-bold text-white">{caseItem.company}</h3>
+                  </div>
+                  <div className="p-6">
+                    <div className="mb-6">
+                      <div className="text-sm font-semibold text-red-500 mb-2">Проблема:</div>
+                      <p className="text-muted-foreground">{caseItem.challenge}</p>
+                    </div>
+                    <div className="mb-6">
+                      <div className="text-sm font-semibold text-green-500 mb-2">Решение:</div>
+                      <p className="text-muted-foreground">{caseItem.solution}</p>
+                    </div>
+                    <div className="grid grid-cols-3 gap-4 mb-6 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+                      {caseItem.results.map((result, i) => (
+                        <div key={i} className="text-center">
+                          <div className="text-2xl font-bold text-primary">{result.value}</div>
+                          <div className="text-xs text-muted-foreground">{result.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex items-start gap-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+                      <Quote className="w-6 h-6 text-blue-500 flex-shrink-0" />
+                      <p className="text-sm italic text-muted-foreground">{caseItem.quote}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Benefits */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-6xl">
@@ -630,6 +793,87 @@ export function RobotOperatorPage({ locale }: RobotOperatorPageProps) {
                 <p className="text-sm text-muted-foreground">{benefit.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">{t.pricing.title}</h2>
+            <p className="text-xl text-muted-foreground mb-4">{t.pricing.subtitle}</p>
+            <p className="text-muted-foreground">{t.pricing.description}</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {t.pricing.factors.map((factor, idx) => (
+              <div key={idx} className="p-4 rounded-xl bg-white dark:bg-slate-800 border border-border/50">
+                <h4 className="font-semibold mb-1">{factor.title}</h4>
+                <p className="text-sm text-muted-foreground">{factor.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {t.pricing.plans.map((plan, idx) => (
+              <Card key={idx} className={`relative ${plan.popular ? 'border-primary shadow-lg ring-2 ring-primary' : ''}`}>
+                {plan.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full">
+                    Популярный
+                  </div>
+                )}
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                  <div className="mb-6">
+                    <span className="text-3xl font-bold">{plan.price}</span>
+                    <span className="text-muted-foreground">{plan.period}</span>
+                  </div>
+                  <ul className="space-y-3">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm">
+                        <Check className="w-4 h-4 text-green-500" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button
+                    className="w-full mt-6"
+                    variant={plan.popular ? "default" : "outline"}
+                    onClick={() => openModal("consultation")}
+                  >
+                    {t.cta1}
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <p className="text-center text-sm text-muted-foreground">{t.pricing.note}</p>
+        </div>
+      </section>
+
+      {/* M2 Benefits */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">{t.m2Benefits.title}</h2>
+            <p className="text-xl text-muted-foreground">{t.m2Benefits.subtitle}</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {t.m2Benefits.items.map((item, idx) => {
+              const Icon = item.icon
+              return (
+                <div key={idx} className="p-6 rounded-2xl border border-border/50 bg-card hover:shadow-lg transition-all">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center mb-4">
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground">{item.description}</p>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>

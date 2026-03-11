@@ -183,6 +183,28 @@ const content = {
       subtitle: "Работает с вашими системами",
       items: ["amoCRM", "Bitrix24", "1C", "Salesforce", "HubSpot", "Мегафон", "Билайн", "МТС", "Asterisk", "FreePBX"],
     },
+    pricing: {
+      title: "Стоимость автоматического оператора",
+      subtitle: "Прозрачное ценообразование",
+      plans: [
+        { name: "Старт", price: "от 20 000", period: "руб/мес", features: ["До 500 звонков", "Базовые сценарии", "1 интеграция", "Email поддержка"], highlight: false },
+        { name: "Бизнес", price: "от 50 000", period: "руб/мес", features: ["До 2000 звонков", "Сложные сценарии", "5 интеграций", "Приоритетная поддержка"], highlight: true },
+        { name: "Enterprise", price: "Индивидуально", period: "", features: ["Неограниченно", "Кастомные сценарии", "Все интеграции", "24/7 поддержка", "SLA"], highlight: false },
+      ],
+      note: "Первые 14 дней бесплатно. Внедрение и обучение включены.",
+    },
+    m2Benefits: {
+      title: "Почему M2 AI Solutions",
+      subtitle: "Технологическое лидерство",
+      items: [
+        { title: "Собственная AI-платформа", description: "Полный контроль над технологией" },
+        { title: "Мультиязычность", description: "6+ языков из коробки" },
+        { title: "Быстрое внедрение", description: "Запуск за 7-14 дней" },
+        { title: "Безопасность данных", description: "ISO 27001, GDPR, 152-ФЗ" },
+        { title: "Экспертная команда", description: "10+ лет в AI, 50+ внедрений" },
+        { title: "Гарантия ROI", description: "Окупаемость за 2-3 месяца" },
+      ],
+    },
     faq: {
       title: "Частые вопросы",
       items: [
@@ -377,6 +399,28 @@ const content = {
       title: "Integrations",
       subtitle: "Works with your systems",
       items: ["amoCRM", "Bitrix24", "1C", "Salesforce", "HubSpot", "Twilio", "Vonage", "RingCentral", "Asterisk", "FreePBX"],
+    },
+    pricing: {
+      title: "Automatic Operator Pricing",
+      subtitle: "Transparent pricing",
+      plans: [
+        { name: "Start", price: "from $250", period: "/month", features: ["Up to 500 calls", "Basic scenarios", "1 integration", "Email support"], highlight: false },
+        { name: "Business", price: "from $600", period: "/month", features: ["Up to 2000 calls", "Complex scenarios", "5 integrations", "Priority support"], highlight: true },
+        { name: "Enterprise", price: "Custom", period: "", features: ["Unlimited", "Custom scenarios", "All integrations", "24/7 support", "SLA"], highlight: false },
+      ],
+      note: "First 14 days free. Implementation and training included.",
+    },
+    m2Benefits: {
+      title: "Why M2 AI Solutions",
+      subtitle: "Technology leadership",
+      items: [
+        { title: "Proprietary AI Platform", description: "Full control over technology" },
+        { title: "Multilingual", description: "6+ languages out of the box" },
+        { title: "Fast Implementation", description: "Launch in 7-14 days" },
+        { title: "Data Security", description: "ISO 27001, GDPR compliant" },
+        { title: "Expert Team", description: "10+ years in AI, 50+ deployments" },
+        { title: "ROI Guarantee", description: "Payback in 2-3 months" },
+      ],
     },
     faq: {
       title: "Frequently Asked Questions",
@@ -638,6 +682,64 @@ export function AutomaticOperatorPage({ locale }: AutomaticOperatorPageProps) {
             {t.integrations.items.map((item) => (
               <div key={item} className="px-6 py-3 rounded-full bg-white dark:bg-slate-800 border border-border/50 text-sm font-medium">
                 {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">{t.pricing.title}</h2>
+            <p className="text-xl text-muted-foreground">{t.pricing.subtitle}</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {t.pricing.plans.map((plan, idx) => (
+              <Card key={idx} className={`relative ${plan.highlight ? 'border-green-500 shadow-lg ring-2 ring-green-500' : ''}`}>
+                {plan.highlight && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-green-500 text-white text-xs font-medium rounded-full">
+                    Популярный
+                  </div>
+                )}
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                  <div className="mb-6">
+                    <span className="text-3xl font-bold">{plan.price}</span>
+                    <span className="text-muted-foreground">{plan.period}</span>
+                  </div>
+                  <ul className="space-y-3">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm">
+                        <Check className="w-4 h-4 text-green-500" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button className="w-full mt-6" variant={plan.highlight ? "default" : "outline"} onClick={() => openModal("consultation")}>
+                    {t.cta1}
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <p className="text-center text-sm text-muted-foreground">{t.pricing.note}</p>
+        </div>
+      </section>
+
+      {/* M2 Benefits */}
+      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">{t.m2Benefits.title}</h2>
+            <p className="text-xl text-muted-foreground">{t.m2Benefits.subtitle}</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {t.m2Benefits.items.map((item, idx) => (
+              <div key={idx} className="p-6 rounded-2xl bg-white dark:bg-slate-800 hover:shadow-lg transition-all">
+                <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.description}</p>
               </div>
             ))}
           </div>

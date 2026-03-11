@@ -708,14 +708,14 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { icon: Phone, title: "Robot Operator", href: "/solutions/robot-operator", desc: "Answer 100% of inbound calls 24/7" },
-              { icon: Target, title: "Sales Automation", href: "/solutions/sales-automation-system", desc: "Increase productivity 3-5x" },
-              { icon: Users, title: "Request Processing", href: "/solutions/obrabotka-zayavok", desc: "Automatic lead qualification" },
-              { icon: FileText, title: "Invoice Generation", href: "/solutions/vystavlenie-schetov", desc: "Auto-generate and send invoices" },
-              { icon: Zap, title: "Order Processing", href: "/solutions/obrabotka-zakazov", desc: "Full cycle automation" },
-              { icon: Globe, title: "Delivery Calculation", href: "/solutions/raschet-dostavki", desc: "Optimize routes and costs" },
-              { icon: TrendingUp, title: "AI for Business", href: "/solutions/ai-dlya-biznesa", desc: "Complete automation stack" },
-              { icon: BarChart3, title: "View All Solutions", href: "/solutions", desc: "12+ automation solutions" },
+              { icon: Phone, title: t("homepage.aiSolutions.robotOperator") || "Robot Operator", href: `/${locale}/solutions/robot-operator`, desc: t("homepage.aiSolutions.robotOperatorDesc") || "Answer 100% of inbound calls 24/7" },
+              { icon: Target, title: t("homepage.aiSolutions.salesAutomation") || "Sales Automation", href: `/${locale}/solutions/sales-automation-system`, desc: t("homepage.aiSolutions.salesAutomationDesc") || "Increase productivity 3-5x" },
+              { icon: Users, title: t("homepage.aiSolutions.requestProcessing") || "Request Processing", href: `/${locale}/solutions/obrabotka-zayavok`, desc: t("homepage.aiSolutions.requestProcessingDesc") || "Automatic lead qualification" },
+              { icon: FileText, title: t("homepage.aiSolutions.invoiceGeneration") || "Invoice Generation", href: `/${locale}/solutions/vystavlenie-schetov`, desc: t("homepage.aiSolutions.invoiceGenerationDesc") || "Auto-generate and send invoices" },
+              { icon: Zap, title: t("homepage.aiSolutions.orderProcessing") || "Order Processing", href: `/${locale}/solutions/obrabotka-zakazov`, desc: t("homepage.aiSolutions.orderProcessingDesc") || "Full cycle automation" },
+              { icon: Globe, title: t("homepage.aiSolutions.deliveryCalculation") || "Delivery Calculation", href: `/${locale}/solutions/raschet-dostavki`, desc: t("homepage.aiSolutions.deliveryCalculationDesc") || "Optimize routes and costs" },
+              { icon: TrendingUp, title: t("homepage.aiSolutions.aiForBusiness") || "AI for Business", href: `/${locale}/solutions/ai-dlya-biznesa`, desc: t("homepage.aiSolutions.aiForBusinessDesc") || "Complete automation stack" },
+              { icon: BarChart3, title: t("homepage.aiSolutions.viewAll") || "View All Solutions", href: `/${locale}/solutions`, desc: t("homepage.aiSolutions.viewAllDesc") || "12+ automation solutions" },
             ].map((item, idx) => {
               const Icon = item.icon
               return (
@@ -734,8 +734,8 @@ function HomeClientPage({ locale }: HomeClientPageProps) {
           </div>
 
           <Reveal delay={400} className="mt-12 text-center">
-            <Link href="/solutions" className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all font-semibold">
-              View all solutions <ArrowRight className="w-4 h-4" />
+            <Link href={`/${locale}/solutions`} className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all font-semibold">
+              {t("homepage.aiSolutions.viewAllLink") || "View all solutions"} <ArrowRight className="w-4 h-4" />
             </Link>
           </Reveal>
         </div>

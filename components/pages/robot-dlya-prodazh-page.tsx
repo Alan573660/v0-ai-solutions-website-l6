@@ -81,13 +81,33 @@ export function RobotDlyaProdazhPage() {
     {
       quote: "Робот обрабатывает 200+ лидов в день, квалифицирует их по 7 критериям и передаёт менеджерам только тёплые. Наши продавцы теперь занимаются только закрытием, конверсия выросла с 12% до 34%.",
       author: "Алексей Морозов", position: "Руководитель отдела продаж", company: "ТехноСервис",
-      metric: { value: "+183%", label: "рост конверсии" },
+      metric: { value: "+183%", label: "��ост конверсии" },
     },
     {
       quote: "За первый месяц робот продал на 4.2 млн руб. При этом стоимость привлечения клиента снизилась на 40%, а средний чек вырос благодаря правильному up-sell.",
       author: "Мария Соколова", position: "Коммерческий директор", company: "ОфисМебель Плюс",
       metric: { value: "4.2M₽", label: "выручка за месяц" },
     },
+  ]
+
+  const pricing = {
+    title: "Стоимость робота для продаж",
+    subtitle: "Гибкое ценообразование под ваш объем",
+    plans: [
+      { name: "Старт", price: "от 45 000", period: "руб/мес", features: ["До 500 лидов", "Базовые продажи", "1 интеграция", "Email поддержка"], highlight: false },
+      { name: "Бизнес", price: "от 95 000", period: "руб/мес", features: ["До 2000 лидов", "Сложные продажи + КП", "5 интеграций", "Приоритетная поддержка"], highlight: true },
+      { name: "Enterprise", price: "Индивидуально", period: "", features: ["Неограниченно", "Кастомные сценарии", "Все интеграции", "24/7 поддержка", "SLA"], highlight: false },
+    ],
+    note: "Окупаемость за 2-4 месяца. Первые 14 дней бесплатно.",
+  }
+
+  const m2Benefits = [
+    { title: "Собственная AI-платформа", description: "Полный контроль над технологией" },
+    { title: "Обучение на ваших данных", description: "Знает ваши продукты и скрипты" },
+    { title: "Быстрое внедрение", description: "Запуск за 10-14 дней" },
+    { title: "Безопасность данных", description: "ISO 27001, GDPR, 152-ФЗ" },
+    { title: "Экспертная команда", description: "10+ лет в AI и продажах" },
+    { title: "Гарантия ROI", description: "Рассчитываем до старта" },
   ]
 
   const faqs = [
@@ -334,6 +354,65 @@ export function RobotDlyaProdazhPage() {
         </div>
       </section>
 
+      {/* Pricing */}
+      <section className="py-20 md:py-28">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">{pricing.title}</h2>
+            <p className="text-xl text-muted-foreground">{pricing.subtitle}</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {pricing.plans.map((plan, idx) => (
+              <Card key={idx} className={`relative ${plan.highlight ? 'border-purple-500 shadow-lg ring-2 ring-purple-500' : ''}`}>
+                {plan.highlight && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-purple-500 text-white text-xs font-medium rounded-full">
+                    Популярный
+                  </div>
+                )}
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                  <div className="mb-6">
+                    <span className="text-3xl font-bold">{plan.price}</span>
+                    <span className="text-muted-foreground">{plan.period}</span>
+                  </div>
+                  <ul className="space-y-3">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm">
+                        <Check className="w-4 h-4 text-purple-500" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button className="w-full mt-6" variant={plan.highlight ? "default" : "outline"} onClick={() => openModal("consultation")}>
+                    Получить консультацию
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <p className="text-center text-sm text-muted-foreground">{pricing.note}</p>
+        </div>
+      </section>
+
+      {/* M2 Benefits */}
+      <section className="py-20 md:py-28 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="max-w-3xl mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Почему M2 AI Solutions</h2>
+            <p className="text-xl text-muted-foreground">Технологическое лидерство в AI-продажах</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {m2Benefits.map((item, idx) => (
+              <div key={idx} className="p-6 rounded-2xl bg-white dark:bg-slate-800 hover:shadow-lg transition-all">
+                <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="text-3xl md:text-5xl font-bold mb-12">Частые вопросы</h2>
@@ -351,6 +430,7 @@ export function RobotDlyaProdazhPage() {
         </div>
       </section>
 
+      {/* Final CTA */}
       <section className="py-20 md:py-28 bg-gradient-to-br from-purple-600 to-pink-600 text-white">
         <div className="container mx-auto px-4 max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Запустите робота для продаж за 14 дней</h2>
