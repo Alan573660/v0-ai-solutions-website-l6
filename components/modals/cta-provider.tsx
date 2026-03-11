@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, type ReactNode } from "react"
 import dynamic from "next/dynamic"
+import type { Locale } from "@/lib/i18n/config"
 
 const CTAModal = dynamic(() => import("./cta-modal"), {
   ssr: false, // Модальное окно не нужно для SSR
@@ -19,7 +20,7 @@ interface CTAContextType {
 
 const CTAContext = createContext<CTAContextType | undefined>(undefined)
 
-export function CTAProvider({ children }: { children: ReactNode }) {
+export function CTAProvider({ children, locale = "ru" }: { children: ReactNode; locale?: Locale }) {
   const [isOpen, setIsOpen] = useState(false)
   const [modalType, setModalType] = useState<CTAType>("trial")
   const [modalTitle, setModalTitle] = useState<string | undefined>()
@@ -38,7 +39,7 @@ export function CTAProvider({ children }: { children: ReactNode }) {
   return (
     <CTAContext.Provider value={{ openModal, openConsultation, openDemo, openTrial, openCall }}>
       {children}
-      {isOpen && <CTAModal isOpen={isOpen} onClose={() => setIsOpen(false)} type={modalType} title={modalTitle} />}
+      {isOpen && <CTAModal isOpen={isOpen} onClose={() => setIsOpen(false)} type={modalType} title={modalTitle} locale={locale} />}
     </CTAContext.Provider>
   )
 }

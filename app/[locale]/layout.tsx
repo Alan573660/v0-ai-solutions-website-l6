@@ -57,7 +57,7 @@ export default async function LocaleLayout({
 
   return (
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-      <CTAProvider>
+      <CTAProvider locale={locale}>
         <div className="flex min-h-screen flex-col">
           <Header locale={locale} />
           <main className="flex-1">{children}</main>
