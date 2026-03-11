@@ -1,4 +1,4 @@
-import { HomeClientPage } from "./home-client-page"
+import HomeClientPage from "./home-client-page"
 import type { Locale } from "@/lib/i18n/config"
 import type { Metadata } from "next"
 
