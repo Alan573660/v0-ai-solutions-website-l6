@@ -425,6 +425,23 @@ export function RaschetDostavkiPage({ locale }: RaschetDostavkiPageProps) {
         </div>
       </section>
 
+      {/* AI Automation Hub Link */}
+      <section className="py-12 bg-gradient-to-r from-indigo-50/20 to-blue-50/20 dark:from-indigo-950/20 dark:to-blue-950/20 border-t border-slate-200 dark:border-slate-800">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Смотрите также</p>
+              <h3 className="text-lg font-semibold text-white">AI автоматизация бизнеса</h3>
+            </div>
+            <Button asChild variant="ghost" className="text-indigo-400 hover:text-indigo-300 shrink-0">
+              <Link href={`/${locale}/automation-business`}>
+                Подробнее <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Related Solutions */}
       <RelatedSolutions locale={locale} currentSlug="raschet-dostavki" />
     </div>

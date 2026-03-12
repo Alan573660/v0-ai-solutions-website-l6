@@ -1105,6 +1105,23 @@ export function AutomaticOperatorPage({ locale }: AutomaticOperatorPageProps) {
         </div>
       </section>
 
+      {/* AI Automation Hub Link */}
+      <section className="py-12 bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-950/20 dark:to-blue-950/20">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-muted-foreground mb-2">Дополнительно</p>
+              <h3 className="text-xl font-semibold">AI автоматизация бизнеса</h3>
+            </div>
+            <Button asChild variant="ghost" className="text-cyan-600 hover:text-cyan-700">
+              <Link href={`/${locale}/automation-business`}>
+                Подробнее <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Related Links */}
       <section className="py-16 bg-slate-50 dark:bg-slate-900/50">
         <div className="container mx-auto px-4 max-w-6xl">

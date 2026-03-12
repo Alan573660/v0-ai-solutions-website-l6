@@ -397,6 +397,33 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
+      {/* AI BUSINESS AUTOMATION HUB */}
+      <section className="py-20 px-4 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20">
+        <div className="container mx-auto max-w-6xl">
+          <Reveal className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">AI автоматизация бизнеса</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Комплексная автоматизация бизнес-процессов: звонки, заявки, продажи, выставление счетов и логистика с использованием AI-агентов.
+            </p>
+          </Reveal>
+          
+          <Reveal delay={100}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg"
+                className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-6 text-base rounded-xl"
+                asChild
+              >
+                <Link href={`/${locale}/automation-business`}>
+                  Подробнее
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Link>
+              </Button>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* HOW AI WORKS */}
       <section className="py-24">
         <div className="container mx-auto px-4 max-w-6xl">

@@ -74,7 +74,7 @@ export function VystavlenieSchetovPage({ locale }: VystavlenieSchetovPageProps) 
     { icon: Building2, name: "B2B и консалтинг", description: "Выставление счётов за проекты, консультации, услуги с контролем оплаты", metrics: { value: "-80%", label: "просроченных счётов" }, gradient: "from-blue-500 to-indigo-600" },
     { icon: ShoppingBag, name: "E-commerce", description: "Автоматические счёта при заказе, интеграция со складом, напоминания об оплате", metrics: { value: "+65%", label: "скорость оплаты" }, gradient: "from-green-500 to-teal-600" },
     { icon: Briefcase, name: "Фриланс и агентства", description: "Счета за проекты и услуги, автоматический расчёт налогов, отправка клиентам", metrics: { value: "1 мин", label: "на счёт" }, gradient: "from-purple-500 to-violet-600" },
-    { icon: Home, name: "SaaS и подписки", description: "Рекуррентные счета, автооплата подписок, контроль просрочек, автоматический дебит", metrics: { value: "24/7", label: "выставление счётов" }, gradient: "from-orange-500 to-amber-600" },
+    { icon: Home, name: "SaaS и подписки", description: "��екуррентные счета, автооплата подписок, контроль просрочек, автоматический дебит", metrics: { value: "24/7", label: "выставление счётов" }, gradient: "from-orange-500 to-amber-600" },
   ]
 
   const processSteps = [
@@ -176,7 +176,7 @@ export function VystavlenieSchetovPage({ locale }: VystavlenieSchetovPageProps) 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { icon: Clock, title: "Медленно", desc: "Каждый счёт — 20-40 минут. По 50-100 счетов в день — это целый рабочий день на одного менеджера" },
-              { icon: AlertCircle, title: "Ошибки", desc: "Неправильные суммы, реквизиты, налоги. Клиент не платит, потому что сумма не совпадает" },
+              { icon: AlertCircle, title: "Ошибки", desc: "Неправильные суммы, реквизиты, н��логи. Клиент не платит, потому что сумма не совпадает" },
               { icon: Zap, title: "Медленная оплата", desc: "Счета отправляют с оп��зданием. Клиент забывает, платит позже или не платит вообще" },
               { icon: BarChart3, title: "Нет видимости", desc: "Непонятно сколько счетов выставлено, сколько оплачено, кто просрочивает платёж" },
             ].map((item) => {
@@ -422,6 +422,23 @@ export function VystavlenieSchetovPage({ locale }: VystavlenieSchetovPageProps) 
             </Button>
           </div>
           <p className="mt-6 text-sm text-white/60">Без обязательств · Запуск за 3-5 дней · NDA по запросу</p>
+        </div>
+      </section>
+
+      {/* AI Automation Hub Link */}
+      <section className="py-12 bg-gradient-to-r from-cyan-50/20 to-teal-50/20 dark:from-cyan-950/20 dark:to-teal-950/20 border-t border-slate-200 dark:border-slate-800">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">Смотрите также</p>
+              <h3 className="text-lg font-semibold text-white">AI автоматизация бизнеса</h3>
+            </div>
+            <Button asChild variant="ghost" className="text-cyan-400 hover:text-cyan-300 shrink-0">
+              <Link href={`/${locale}/automation-business`}>
+                Подробнее <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
