@@ -148,6 +148,26 @@ export function Header({ locale }: HeaderProps) {
                 aria-expanded={false}
                 aria-haspopup="true"
               >
+                <span>{locale === "ru" ? "AI автоматизация" : "AI Automation"}</span>
+                <ChevronDown className="h-4 w-4" aria-hidden="true" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-72">
+                {aiAutomation.slice(0, 6).map((item) => (
+                  <DropdownMenuItem key={item.href} asChild>
+                    <Link href={item.href} className="w-full focus:bg-accent focus:text-accent-foreground">
+                      {item.name}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                className="flex items-center space-x-1 text-sm font-medium hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"
+                aria-expanded={false}
+                aria-haspopup="true"
+              >
                 <span>{t("nav.platform")}</span>
                 <ChevronDown className="h-4 w-4" aria-hidden="true" />
               </DropdownMenuTrigger>
