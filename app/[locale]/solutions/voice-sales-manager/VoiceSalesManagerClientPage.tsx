@@ -137,7 +137,7 @@ const translations = {
 
     faqTitle: "Частые вопросы",
     faqItems: [
-      { q: "Чем это отличается от обычного бота?", a: "Обычные боты читают скрипты. Наша система думает, анализирует, считает и принимает решения как умный продавец." },
+      { q: "Чем это отличается от обычного бота?", a: "Обычные боты чи��ают скрипты. Наша система думает, анализирует, считает и принимает решения как умный продавец." },
       { q: "Сколько времени занимает внедрение?", a: "Зависит от сложности: стандартные проекты 1-2 месяца, сложные с индивидуальной логикой 4-6 месяцев." },
       { q: "Может ли закрыть сделку полностью?", a: "Да, в многих случаях система ведёт диалог, делает расчёты, выставляет счёт, получает оплату - всё автоматически." },
       { q: "Как интегрируется с нашей системой?", a: "Интегрируется с любой системой, у которой есть API: CRM, ERP, телефония, платёжные системы, бухгалтерия." },
@@ -607,6 +607,116 @@ export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
               )
             })}
           </div>
+        </div>
+      </section>
+
+      {/* SEO: INTRO TEXT SECTION */}
+      <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900/30 dark:to-slate-800/30">
+        <div className="mx-auto max-w-4xl px-6">
+          <Reveal>
+            <h2 className="text-2xl lg:text-3xl font-bold mb-6">
+              {locale === "ru" ? "Что такое голосовой AI-менеджер продаж" : locale === "en" ? "What is a Voice AI Sales Manager" : locale === "es" ? "¿Qué es un Gerente de Ventas AI por Voz" : locale === "de" ? "Was ist ein Sprach-KI-Vertriebsmanager" : locale === "nl" ? "Wat is een Stem AI Verkoopmanager" : "Qu'est-ce qu'un Gestionnaire des Ventes IA Vocal"}
+            </h2>
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                {locale === "ru" ? "Голосовой AI-менеджер продаж — это интеллектуальная система автоматизации звонков, которая заменяет операторов колл-центра. Система работает круглосуточно и способна обрабатывать тысячи звонков одновременно. В отличие от обычных голосовых ботов, которые читают скрипты, наш AI-менеджер ведет динамический диалог, анализирует потребности клиента и принимает решения как опытный продавец." : locale === "en" ? "A voice AI sales manager is an intelligent call automation system that replaces call center operators. The system works around the clock and can handle thousands of calls simultaneously. Unlike regular voice bots that read scripts, our AI manager conducts dynamic dialogues, analyzes customer needs, and makes decisions like an experienced sales professional." : locale === "es" ? "Un gerente de ventas AI por voz es un sistema inteligente de automatización de llamadas que reemplaza a los operadores del centro de llamadas. El sistema funciona las 24 horas y puede manejar miles de llamadas simultáneamente. A diferencia de los bots de voz normales que leen guiones, nuestro gerente IA conduce diálogos dinámicos, analiza las necesidades del cliente y toma decisiones como un profesional experimentado." : locale === "de" ? "Ein Sprach-KI-Vertriebsmanager ist ein intelligentes Call-Automatisierungssystem, das Call-Center-Operatoren ersetzt. Das System arbeitet rund um die Uhr und kann Tausende von Anrufen gleichzeitig bearbeiten. Im Gegensatz zu normalen Sprachbots, die Skripte lesen, führt unser KI-Manager dynamische Dialoge, analysiert Kundenbedürfnisse und trifft Entscheidungen wie ein erfahrener Vertriebsprofi." : locale === "nl" ? "Een stem AI verkoopmanager is een intelligent callautomatiseringssysteem dat callcenter-operators vervangt. Het systeem werkt rond de klok en kan duizenden oproepen tegelijk verwerken. In tegenstelling tot normale stembots die scripts lezen, voert onze AI-manager dynamische dialogen, analyseert klantbehoeften en neemt beslissingen als een ervaren verkoopprof." : "Un gestionnaire des ventes IA vocal est un système intelligent d'automatisation des appels qui remplace les opérateurs des centres d'appels. Le système fonctionne 24h/24 et peut gérer des milliers d'appels simultanément. Contrairement aux bots vocaux ordinaires qui lisent des scripts, notre gestionnaire IA mène des dialogues dynamiques, analyse les besoins des clients et prend des décisions comme un professionnel des ventes expérimenté."}
+              </p>
+              <p>
+                {locale === "ru" ? "Система может полностью закрыть сделку: от первого звонка до выставления счета и получения оплаты. AI выполняет сложные расчеты, работает с каталогами и ценами, интегрируется с CRM и другими системами, помнит историю клиента и переводит квалифицированные заявки нужному менеджеру." : locale === "en" ? "The system can completely close a deal: from the first call to invoice issuance and payment receipt. AI performs complex calculations, works with catalogs and pricing, integrates with CRM and other systems, remembers customer history, and routes qualified leads to the right manager." : locale === "es" ? "El sistema puede cerrar completamente una venta: desde la primera llamada hasta la emisión de factura y recepción de pago. La IA realiza cálculos complejos, trabaja con catálogos y precios, se integra con CRM y otros sistemas, recuerda el historial del cliente y dirige leads calificados al gerente correcto." : locale === "de" ? "Das System kann ein Geschäft vollständig abschließen: vom ersten Anruf bis zur Rechnungsstellung und Zahlungsempfang. KI führt komplexe Berechnungen durch, arbeitet mit Katalogen und Preisen, integriert sich mit CRM und anderen Systemen, merkt sich die Kundenhistorie und leitet qualifizierte Leads an den richtigen Manager weiter." : locale === "nl" ? "Het systeem kan een deal volledig afsluiten: van het eerste gesprek tot factuuruitgave en betalingsontvangst. AI voert complexe berekeningen uit, werkt met catalogi en prijzen, integreert zich met CRM en andere systemen, onthoudt klantgeschiedenis en stuurt gekwalificeerde leads naar de juiste manager." : "Le système peut conclure complètement une affaire : du premier appel à l'émission de facture et la réception du paiement. L'IA effectue des calculs complexes, travaille avec les catalogues et les prix, s'intègre avec le CRM et d'autres systèmes, mémorise l'historique des clients et dirige les prospects qualifiés vers le bon manager."}
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* SEO: CAPABILITIES TABLE */}
+      <section className="py-16 lg:py-24">
+        <div className="mx-auto max-w-4xl px-6">
+          <Reveal>
+            <h2 className="text-2xl lg:text-3xl font-bold mb-10">
+              {locale === "ru" ? "Что умеет AI менеджер продаж" : locale === "en" ? "What a Sales AI Manager Can Do" : locale === "es" ? "¿Qué Puede Hacer un Gerente de Ventas IA" : locale === "de" ? "Was Ein KI-Vertriebsmanager Kann" : locale === "nl" ? "Wat Een AI Verkoopmanager Kan Doen" : "Ce que Peut Faire un Gestionnaire de Ventes IA"}
+            </h2>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm md:text-base">
+                <thead>
+                  <tr className="border-b-2 border-primary/20">
+                    <th className="text-left py-4 px-4 font-bold">{locale === "ru" ? "Функция" : locale === "en" ? "Feature" : locale === "es" ? "Función" : locale === "de" ? "Funktion" : locale === "nl" ? "Functie" : "Caractéristique"}</th>
+                    <th className="text-left py-4 px-4 font-bold">{locale === "ru" ? "Описание" : locale === "en" ? "Description" : locale === "es" ? "Descripción" : locale === "de" ? "Beschreibung" : locale === "nl" ? "Beschrijving" : "Description"}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { feature: locale === "ru" ? "Прием входящих звонков" : "Incoming Calls", desc: locale === "ru" ? "AI отвечает за 3 секунды, автоматически определяет тему звонка" : "AI answers in 3 seconds, automatically identifies call topic" },
+                    { feature: locale === "ru" ? "Исходящие звонки" : "Outgoing Calls", desc: locale === "ru" ? "Напоминания, подтверждения, рассылка по базе клиентов" : "Reminders, confirmations, client base broadcast" },
+                    { feature: locale === "ru" ? "Квалификация лидов" : "Lead Qualification", desc: locale === "ru" ? "Задает уточняющие вопросы, оценивает интерес и готовность купить" : "Asks clarifying questions, evaluates interest and purchase intent" },
+                    { feature: locale === "ru" ? "Расчет стоимости" : "Cost Calculation", desc: locale === "ru" ? "Вычисляет площадь, объем, применяет коэффициенты и скидки" : "Calculates area, volume, applies coefficients and discounts" },
+                    { feature: locale === "ru" ? "Выставление счетов" : "Invoice Generation", desc: locale === "ru" ? "Автоматическое создание счетов, актов, накладных" : "Automatic creation of invoices, acts, bills of lading" },
+                    { feature: locale === "ru" ? "Интеграция с CRM" : "CRM Integration", desc: locale === "ru" ? "Синхронизация данных с Bitrix24, Salesforce, HubSpot и др." : "Data sync with Bitrix24, Salesforce, HubSpot, etc." },
+                    { feature: locale === "ru" ? "Работа с каталогом" : "Catalog Management", desc: locale === "ru" ? "Знает все товары, услуги, размеры, цены, сроки доставки" : "Knows all products, services, sizes, prices, delivery times" },
+                    { feature: locale === "ru" ? "История клиента" : "Customer History", desc: locale === "ru" ? "Помнит предыдущие звонки, покупки, предпочтения" : "Remembers previous calls, purchases, preferences" },
+                  ].map((item, idx) => (
+                    <tr key={idx} className="border-b border-border/30 hover:bg-muted/20 transition-colors">
+                      <td className="py-4 px-4 font-semibold text-primary">{item.feature}</td>
+                      <td className="py-4 px-4 text-muted-foreground">{item.desc}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* SEO: INTERNAL LINKS BLOCK */}
+      <section className="py-16 lg:py-24 bg-muted/30">
+        <div className="mx-auto max-w-4xl px-6">
+          <Reveal>
+            <h2 className="text-2xl lg:text-3xl font-bold mb-10">
+              {locale === "ru" ? "Связанные решения" : locale === "en" ? "Related Solutions" : locale === "es" ? "Soluciones Relacionadas" : locale === "de" ? "Verwandte Lösungen" : locale === "nl" ? "Verwante Oplossingen" : "Solutions Connexes"}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                { name: locale === "ru" ? "AI робот оператор" : "AI Robot Operator", href: "/solutions/robot-operator" },
+                { name: locale === "ru" ? "Автоматизация продаж" : "Sales Automation", href: "/solutions/automation-sales" },
+                { name: locale === "ru" ? "AI для бизнеса" : "AI for Business", href: "/solutions/ai-dlya-biznesa" },
+                { name: locale === "ru" ? "Обработка заявок" : "Request Processing", href: "/solutions/obrabotka-zayavok" },
+                { name: locale === "ru" ? "Обработка заказов" : "Order Processing", href: "/solutions/obrabotka-zakazov" },
+                { name: locale === "ru" ? "Выставление счетов" : "Invoice Issuance", href: "/solutions/vystavlenie-schetov" },
+              ].map((link, idx) => (
+                <Reveal key={idx} delay={idx * 50}>
+                  <Link href={`/${locale}${link.href}`} className="block p-4 rounded-lg border border-border/50 bg-background hover:border-primary/50 hover:bg-muted/50 transition-all group">
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold group-hover:text-primary transition-colors">{link.name}</span>
+                      <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                    </div>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* HTML FAQ IN DOM FOR SEO */}
+      <section className="py-20 lg:py-28 bg-gradient-to-b from-background to-muted/20">
+        <div className="mx-auto max-w-4xl px-6">
+          <Reveal>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-center">
+              {t.faqTitle}
+            </h2>
+            <div className="mt-12 space-y-8">
+              {t.faqItems.map((item, idx) => (
+                <div key={idx} className="group border-b border-border/30 pb-8 last:border-b-0">
+                  <h3 className="text-lg md:text-xl font-bold mb-4 group-hover:text-primary transition-colors">
+                    {item.q}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {item.a}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
