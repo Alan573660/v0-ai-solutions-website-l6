@@ -596,6 +596,77 @@ export default async function AboutPage({ params }: AboutPageProps) {
             </div>
           </section>
 
+          {/* Company Requisites Section */}
+          <section className="py-12 sm:py-16 bg-muted/30">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <div className="text-center mb-8">
+                  <h2 className="text-2xl sm:text-3xl font-bold mb-2">
+                    {locale === "ru" ? "Реквизиты компании" : "Company Details"}
+                  </h2>
+                  <p className="text-muted-foreground">
+                    {locale === "ru" ? "Юридическая информация" : "Legal information"}
+                  </p>
+                </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Card className="border-purple-200">
+                    <CardHeader>
+                      <CardTitle className="text-lg flex items-center gap-2">
+                        <Building2 className="h-5 w-5 text-purple-600" />
+                        {locale === "ru" ? "Юридическое лицо" : "Legal Entity"}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3 text-sm">
+                      <div>
+                        <p className="font-semibold text-base">ООО «М2 Решения»</p>
+                      </div>
+                      <div>
+                        <p className="text-muted-foreground">{locale === "ru" ? "Адрес:" : "Address:"}</p>
+                        <p>г. Москва, пр-кт Ленинский, д. 111, к. 1</p>
+                      </div>
+                      <div className="flex flex-wrap gap-4">
+                        <div>
+                          <p className="text-muted-foreground">ИНН:</p>
+                          <p className="font-mono">9728153344</p>
+                        </div>
+                        <div>
+                          <p className="text-muted-foreground">КПП:</p>
+                          <p className="font-mono">772801001</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                  <Card className="border-purple-200">
+                    <CardHeader>
+                      <CardTitle className="text-lg flex items-center gap-2">
+                        <MapPin className="h-5 w-5 text-purple-600" />
+                        {locale === "ru" ? "Контакты" : "Contacts"}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3 text-sm">
+                      <div>
+                        <p className="text-muted-foreground">Email:</p>
+                        <a href="mailto:info@m2solutions.ai" className="text-purple-600 hover:underline">
+                          info@m2solutions.ai
+                        </a>
+                      </div>
+                      <div>
+                        <p className="text-muted-foreground">{locale === "ru" ? "Телефон:" : "Phone:"}</p>
+                        <a href="tel:+79957967506" className="text-purple-600 hover:underline">
+                          +7 995 796 75 06
+                        </a>
+                      </div>
+                      <div>
+                        <p className="text-muted-foreground">{locale === "ru" ? "Режим работы:" : "Working hours:"}</p>
+                        <p>{locale === "ru" ? "Пн-Пт: 9:00 - 18:00 (МСК)" : "Mon-Fri: 9:00 AM - 6:00 PM (MSK)"}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 text-white relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20"></div>
             <div className="container mx-auto px-4 relative z-10">
