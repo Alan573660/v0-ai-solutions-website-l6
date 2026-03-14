@@ -330,6 +330,77 @@ export default async function ContactsPage({ params }: ContactsPageProps) {
         </div>
       </section>
 
+      {/* Company Requisites Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Реквизиты компании
+              </h2>
+              <p className="text-lg text-gray-600">Юридическая информация для договоров и оплаты</p>
+            </div>
+            <Card className="border-purple-200 shadow-lg">
+              <CardContent className="p-8">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+                      <div className="h-8 w-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center">
+                        <Globe className="h-4 w-4 text-white" />
+                      </div>
+                      Юридическое лицо
+                    </h3>
+                    <div className="space-y-3 text-gray-700">
+                      <p className="text-lg font-semibold">ООО «М2 Решения»</p>
+                      <div>
+                        <p className="text-sm text-gray-500">Адрес:</p>
+                        <p>г. Москва, пр-кт Ленинский, д. 111, к. 1</p>
+                      </div>
+                      <div className="flex flex-wrap gap-6">
+                        <div>
+                          <p className="text-sm text-gray-500">ИНН:</p>
+                          <p className="font-mono font-medium">9728153344</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-500">КПП:</p>
+                          <p className="font-mono font-medium">772801001</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+                      <div className="h-8 w-8 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center">
+                        <Mail className="h-4 w-4 text-white" />
+                      </div>
+                      Контактные данные
+                    </h3>
+                    <div className="space-y-3 text-gray-700">
+                      <div>
+                        <p className="text-sm text-gray-500">Email:</p>
+                        <a href="mailto:info@m2solutions.ai" className="text-purple-600 hover:text-purple-800 font-medium">
+                          info@m2solutions.ai
+                        </a>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-500">Телефон:</p>
+                        <a href="tel:+79957967506" className="text-purple-600 hover:text-purple-800 font-medium">
+                          +7 995 796 75 06
+                        </a>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-500">Режим работы:</p>
+                        <p>Пн-Пт: 9:00 - 18:00 (МСК)</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
