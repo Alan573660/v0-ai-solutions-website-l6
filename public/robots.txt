@@ -4,9 +4,9 @@
 # Main rules for all crawlers
 User-agent: *
 Allow: /
+Allow: /_next/static/
 Disallow: /admin/
 Disallow: /api/private/
-Disallow: /_next/static/
 
 # Sitemap location
 Sitemap: https://m2solutions.ai/sitemap.xml
