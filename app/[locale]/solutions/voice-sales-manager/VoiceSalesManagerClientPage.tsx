@@ -121,56 +121,56 @@ function LiveDialog() {
   const start = () => { reset(); setTimeout(() => { setStep(0); setRunning(true) }, 50) }
 
   return (
-    <div className="rounded-2xl border border-white/[0.08] bg-[#0d1117] overflow-hidden shadow-2xl">
+    <div className="rounded-2xl overflow-hidden shadow-[0_0_0_1px_rgba(124,58,237,0.2),0_20px_60px_rgba(0,0,0,0.4)] bg-[#111827]"
+      style={{ background: "linear-gradient(145deg, #1e1b4b 0%, #1e293b 100%)" }}>
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.06] bg-white/[0.02]">
+      <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.08]"
+        style={{ background: "rgba(124,58,237,0.08)" }}>
         <div className="flex items-center gap-3">
           <div className="relative">
-            <div className="h-9 w-9 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center">
-              <Mic className="h-4 w-4 text-white" />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-violet-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-violet-500/30">
+              <Mic className="h-4.5 w-4.5 text-white" />
             </div>
-            <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-[#0d1117] bg-emerald-400" />
+            <span className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-[#1e1b4b] bg-emerald-400 shadow shadow-emerald-400/60" />
           </div>
           <div>
-            <div className="text-sm font-semibold text-white">AI Голосовой менеджер</div>
-            <div className="text-[11px] text-emerald-400">Онлайн · обрабатывает звонки</div>
+            <div className="text-sm font-bold text-white">AI Голосовой менеджер</div>
+            <div className="text-[11px] text-emerald-400 font-medium">● Онлайн · обрабатывает звонки</div>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <button onClick={start} className="flex items-center gap-1.5 rounded-full bg-primary/20 border border-primary/30 px-3 py-1.5 text-[12px] font-medium text-primary hover:bg-primary/30 transition-colors">
-            <RefreshCw className="h-3 w-3" /> Запустить
-          </button>
-        </div>
+        <button onClick={start} className="flex items-center gap-1.5 rounded-full bg-violet-500/20 border border-violet-400/30 px-4 py-2 text-[12px] font-semibold text-violet-300 hover:bg-violet-500/30 hover:text-white transition-all">
+          <Play className="h-3 w-3" /> Запустить
+        </button>
       </div>
 
       {/* Messages */}
       <div ref={containerRef} className="h-72 overflow-y-auto p-5 space-y-4 scroll-smooth">
         {step === 0 && !running && (
           <div className="flex flex-col items-center justify-center h-full gap-4">
-            <div className="h-16 w-16 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
-              <Play className="h-7 w-7 text-primary ml-0.5" />
+            <div className="h-16 w-16 rounded-full bg-gradient-to-br from-violet-500/20 to-cyan-500/20 border border-violet-400/30 flex items-center justify-center shadow-lg shadow-violet-500/20">
+              <Play className="h-7 w-7 text-violet-400 ml-0.5" />
             </div>
-            <p className="text-white/40 text-sm text-center">Нажмите «Запустить» чтобы увидеть<br/>как AI ведёт реальный диалог</p>
+            <p className="text-slate-400 text-sm text-center">Нажмите «Запустить» чтобы увидеть<br/>как AI ведёт реальный диалог</p>
           </div>
         )}
         {dialogScript.slice(0, step).map((msg, i) => (
           <div key={i} className={`flex gap-3 ${msg.role === "client" ? "flex-row-reverse" : ""}`}>
-            <div className={`flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold ${msg.role === "ai" ? "bg-gradient-to-br from-blue-500 to-cyan-400 text-white" : "bg-white/10 text-white/60"}`}>
+            <div className={`flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold shadow-md ${msg.role === "ai" ? "bg-gradient-to-br from-violet-500 to-cyan-400 text-white shadow-violet-500/30" : "bg-slate-600/60 text-slate-300"}`}>
               {msg.role === "ai" ? <Mic className="h-3.5 w-3.5" /> : "К"}
             </div>
-            <div className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${msg.role === "ai" ? "bg-white/[0.06] text-white/85 rounded-tl-none" : "bg-primary/20 text-white rounded-tr-none"}`}>
+            <div className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${msg.role === "ai" ? "bg-white/[0.08] text-white rounded-tl-none border border-white/[0.06]" : "bg-gradient-to-br from-violet-600/30 to-purple-500/20 text-white border border-violet-400/20 rounded-tr-none"}`}>
               {msg.text}
             </div>
           </div>
         ))}
         {running && step < dialogScript.length && (
           <div className={`flex gap-3 ${dialogScript[step]?.role === "client" ? "flex-row-reverse" : ""}`}>
-            <div className={`flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center text-xs ${dialogScript[step]?.role === "ai" ? "bg-gradient-to-br from-blue-500 to-cyan-400 text-white" : "bg-white/10 text-white/60"}`}>
+            <div className={`flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center text-xs ${dialogScript[step]?.role === "ai" ? "bg-gradient-to-br from-violet-500 to-cyan-400 text-white" : "bg-slate-600/60 text-slate-300"}`}>
               {dialogScript[step]?.role === "ai" ? <Mic className="h-3.5 w-3.5" /> : "К"}
             </div>
-            <div className="flex items-center gap-1 px-4 py-3 rounded-2xl bg-white/[0.04]">
+            <div className="flex items-center gap-1 px-4 py-3 rounded-2xl bg-white/[0.06] border border-white/[0.06]">
               {[0, 1, 2].map(i => (
-                <span key={i} className="h-1.5 w-1.5 rounded-full bg-white/40 animate-bounce" style={{ animationDelay: `${i * 150}ms` }} />
+                <span key={i} className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-bounce" style={{ animationDelay: `${i * 150}ms` }} />
               ))}
             </div>
           </div>
@@ -178,12 +178,13 @@ function LiveDialog() {
       </div>
 
       {/* Footer */}
-      <div className="px-5 py-3 border-t border-white/[0.06] bg-white/[0.01] flex items-center justify-between">
-        <div className="flex items-center gap-4 text-[11px] text-white/40">
-          <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> 47 сек</span>
-          <span className="flex items-center gap-1"><CheckCircle2 className="h-3 w-3 text-emerald-400" /> Счёт выставлен</span>
+      <div className="px-5 py-3.5 border-t border-white/[0.06] flex items-center justify-between"
+        style={{ background: "rgba(0,0,0,0.2)" }}>
+        <div className="flex items-center gap-4 text-[11px] text-slate-400">
+          <span className="flex items-center gap-1.5"><Clock className="h-3 w-3 text-violet-400" /> 47 сек</span>
+          <span className="flex items-center gap-1.5 text-emerald-400 font-medium"><CheckCircle2 className="h-3 w-3" /> Счёт выставлен</span>
         </div>
-        <span className="text-[11px] text-white/30">Без участия человека</span>
+        <span className="text-[11px] text-slate-500">Без участия человека</span>
       </div>
     </div>
   )
@@ -295,7 +296,7 @@ const t = {
     { icon: Package, title: "Работа с каталогом", desc: "Знает все товары, цены, наличие, сроки доставки в реальном времени", color: "from-orange-500 to-amber-400" },
     { icon: Truck, title: "Расчёт доставки", desc: "Определяет вес, габариты, подбирает транспорт, озвучивает стоимость", color: "from-green-500 to-emerald-400" },
     { icon: FileText, title: "Выставление счётов", desc: "Формирует счёт, акт, накладную автоматически и отправляет на почту", color: "from-teal-500 to-cyan-400" },
-    { icon: PhoneForwarded, title: "Умная маршрутизация", desc: "Передаёт квалифицированных клиентов нужному менеджеру с контекстом", color: "from-red-500 to-rose-400" },
+    { icon: PhoneForwarded, title: "Умная маршрутизация", desc: "Передаёт квалифицированных клиентов нужному менеджеру с контексто��", color: "from-red-500 to-rose-400" },
     { icon: UserCheck, title: "Помнит клиента", desc: "Хранит историю звонков, предпочтения и прошлые покупки", color: "from-violet-500 to-purple-400" },
     { icon: ShoppingCart, title: "Закрывает сделку", desc: "От первого звонка до получения оплаты — без участия человека", color: "from-sky-500 to-blue-400" },
   ],
@@ -451,12 +452,14 @@ export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
     <div className="bg-background overflow-x-hidden">
 
       {/* ── HERO ── */}
-      <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden bg-[#060a16]">
+      <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden" style={{ background: "linear-gradient(135deg, #0f0c29 0%, #1a1060 30%, #24243e 60%, #0d1b4b 100%)" }}>
         {/* Grid bg */}
-        <div className="pointer-events-none absolute inset-0 opacity-[0.025] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:64px_64px]" />
-        {/* Glow */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[800px] rounded-full bg-blue-600/[0.06] blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 h-[300px] w-[400px] rounded-full bg-purple-600/[0.05] blur-[100px] pointer-events-none" />
+        <div className="pointer-events-none absolute inset-0 opacity-[0.06] bg-[linear-gradient(to_right,#7c3aed_1px,transparent_1px),linear-gradient(to_bottom,#7c3aed_1px,transparent_1px)] bg-[size:64px_64px]" />
+        {/* Strong glows */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 h-[700px] w-[900px] rounded-full bg-violet-600/25 blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/4 h-[400px] w-[500px] rounded-full bg-blue-500/20 blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 h-[350px] w-[450px] rounded-full bg-cyan-500/15 blur-[110px] pointer-events-none" />
+        <div className="absolute top-0 right-0 h-[300px] w-[300px] rounded-full bg-purple-500/20 blur-[80px] pointer-events-none" />
 
         <div className="relative mx-auto w-full max-w-7xl px-6 pt-36 pb-20 lg:pt-48 lg:pb-28">
           {/* Badge */}
@@ -514,14 +517,21 @@ export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
       </section>
 
       {/* ── HOW IT WORKS (Live Dialog) ── */}
-      <section id="how-it-works" className="py-28 lg:py-36 bg-[#0a0f1e]">
-        <div className="mx-auto max-w-6xl px-6">
+      <section id="how-it-works" className="py-28 lg:py-36 relative overflow-hidden bg-slate-950">
+        {/* Subtle gradient top */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(124,58,237,0.15),transparent)]" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/40 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
+
+        <div className="relative mx-auto max-w-6xl px-6">
           <Reveal className="mx-auto mb-16 max-w-3xl text-center">
-            <SectionBadge light>Демо</SectionBadge>
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-violet-300 mb-6">
+              Демо
+            </div>
             <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
               {t.howTitle}
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-white/50">
+            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-slate-400">
               {t.howDesc}
             </p>
           </Reveal>
@@ -531,22 +541,22 @@ export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
               <LiveDialog />
             </Reveal>
             <Reveal delay={150}>
-              <div className="space-y-5">
+              <div className="space-y-4">
                 {[
-                  { icon: Mic, title: "Распознавание речи 98%", desc: "Понимает акценты, сленг, технические термины вашей отрасли" },
-                  { icon: Cpu, title: "Решения в реальном времени", desc: "Обращается к базам данных, каталогу и CRM прямо во время разговора" },
-                  { icon: FileText, title: "Документы за 3 секунды", desc: "Счёт, накладная или акт — формируются и отправляются на почту моментально" },
-                  { icon: PhoneCall, title: "Работает параллельно", desc: "Принимает тысячи звонков одновременно, без очереди и ожидания" },
+                  { icon: Mic, title: "Распознавание речи 98%", desc: "Понимает акценты, сленг, технические термины вашей отрасли", color: "from-violet-500 to-purple-400" },
+                  { icon: Cpu, title: "Решения в реальном времени", desc: "Обращается к базам данных, каталогу и CRM прямо во время разговора", color: "from-blue-500 to-cyan-400" },
+                  { icon: FileText, title: "Документы за 3 секунды", desc: "Счёт, накладная или акт — формируются и отправляются на почту моментально", color: "from-emerald-500 to-teal-400" },
+                  { icon: PhoneCall, title: "Работает параллельно", desc: "Принимает тысячи звонков одновременно, без очереди и ожидания", color: "from-orange-500 to-amber-400" },
                 ].map((item, idx) => {
                   const Icon = item.icon
                   return (
-                    <div key={idx} className="flex gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                      <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/20 flex items-center justify-center">
-                        <Icon className="h-5 w-5 text-blue-400" />
+                    <div key={idx} className="flex gap-4 p-5 rounded-2xl bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all">
+                      <div className={`flex-shrink-0 h-11 w-11 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-lg`}>
+                        <Icon className="h-5 w-5 text-white" />
                       </div>
                       <div>
-                        <div className="font-semibold text-white text-sm">{item.title}</div>
-                        <div className="text-sm text-white/50 mt-0.5">{item.desc}</div>
+                        <div className="font-bold text-white text-sm mb-0.5">{item.title}</div>
+                        <div className="text-sm text-slate-400 leading-relaxed">{item.desc}</div>
                       </div>
                     </div>
                   )
@@ -729,14 +739,17 @@ export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
       </section>
 
       {/* ── CASES ── */}
-      <section className="py-28 lg:py-36 bg-[#0a0a0a] text-white overflow-hidden">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="py-28 lg:py-36 text-white overflow-hidden relative" style={{ background: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)" }}>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_80%_20%,rgba(124,58,237,0.2),transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_20%_80%,rgba(59,130,246,0.15),transparent)]" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/50 to-transparent" />
+        <div className="mx-auto max-w-7xl px-6 relative">
           <Reveal className="mx-auto mb-16 max-w-3xl text-center">
-            <SectionBadge light>Кейсы</SectionBadge>
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-violet-400/30 bg-violet-500/10 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-violet-300 mb-6">Кейсы</div>
             <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
               {t.casesTitle}
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-white/50">
+            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-slate-400">
               {t.casesDesc}
             </p>
           </Reveal>
@@ -759,42 +772,45 @@ export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
             {(() => {
               const c = t.cases[activeCase]
               return (
-                <div className="rounded-2xl border border-white/[0.08] bg-white/[0.025] p-8 lg:p-12">
+                <div className="rounded-2xl border border-white/[0.12] p-8 lg:p-12"
+                  style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(20px)" }}>
                   <div className="grid lg:grid-cols-2 gap-10">
                     <div>
-                      <div className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">{c.industry}</div>
+                      <div className="inline-flex items-center gap-1.5 rounded-full bg-violet-500/15 border border-violet-400/25 px-3 py-1 text-[11px] font-semibold text-violet-300 uppercase tracking-wider mb-4">{c.industry}</div>
                       <h3 className="text-2xl font-bold text-white mb-8">{c.company}</h3>
 
                       <div className="grid grid-cols-2 gap-4 mb-8">
-                        <div className="rounded-xl bg-red-500/10 border border-red-500/20 p-4">
-                          <div className="text-xs text-white/40 mb-2 flex items-center gap-1.5"><X className="h-3 w-3 text-red-400" /> Было</div>
-                          <p className="text-sm text-white/70">{c.before}</p>
+                        <div className="rounded-xl p-4" style={{ background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.2)" }}>
+                          <div className="text-xs text-slate-400 mb-2 flex items-center gap-1.5"><X className="h-3 w-3 text-red-400" /> Было</div>
+                          <p className="text-sm text-slate-300">{c.before}</p>
                         </div>
-                        <div className="rounded-xl bg-green-500/10 border border-green-500/20 p-4">
-                          <div className="text-xs text-white/40 mb-2 flex items-center gap-1.5"><Check className="h-3 w-3 text-green-400" /> Стало</div>
-                          <p className="text-sm text-white/70">{c.after}</p>
+                        <div className="rounded-xl p-4" style={{ background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.2)" }}>
+                          <div className="text-xs text-slate-400 mb-2 flex items-center gap-1.5"><Check className="h-3 w-3 text-emerald-400" /> Стало</div>
+                          <p className="text-sm text-slate-300">{c.after}</p>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-3 gap-4">
                         {c.metrics.map((m, i) => (
-                          <div key={i} className="text-center p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                            <div className="text-xl font-black text-primary">{m.v}</div>
-                            <div className="text-[11px] text-white/40 mt-1">{m.l}</div>
+                          <div key={i} className="text-center p-4 rounded-xl"
+                            style={{ background: "rgba(124,58,237,0.12)", border: "1px solid rgba(124,58,237,0.25)" }}>
+                            <div className="text-xl font-black text-violet-300">{m.v}</div>
+                            <div className="text-[11px] text-slate-400 mt-1">{m.l}</div>
                           </div>
                         ))}
                       </div>
                     </div>
 
                     <div className="flex items-center">
-                      <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] p-8">
+                      <div className="rounded-2xl p-8 w-full"
+                        style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}>
                         <div className="flex gap-1 mb-5">
-                          {[1,2,3,4,5].map(i => <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />)}
+                          {[1,2,3,4,5].map(i => <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />)}
                         </div>
-                        <blockquote className="text-lg text-white/80 leading-relaxed italic mb-6">
-                          "{c.quote}"
+                        <blockquote className="text-lg text-slate-200 leading-relaxed italic mb-6">
+                          &ldquo;{c.quote}&rdquo;
                         </blockquote>
-                        <div className="text-sm font-semibold text-white/50">{c.company}</div>
+                        <div className="text-sm font-semibold text-slate-400">{c.company}</div>
                       </div>
                     </div>
                   </div>
