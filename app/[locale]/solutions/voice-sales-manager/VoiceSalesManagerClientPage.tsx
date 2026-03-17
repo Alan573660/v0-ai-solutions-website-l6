@@ -3,10 +3,12 @@
 import { useState, useRef, useEffect, type ReactNode } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+import Link from "next/link"
 import {
   ArrowRight,
   Play,
-  CheckCircle2,
   Brain,
   Calculator,
   Package,
@@ -15,38 +17,44 @@ import {
   PhoneForwarded,
   UserCheck,
   ShoppingCart,
-  Settings,
-  Database,
-  BarChart3,
   Building2,
-  Clock,
   Zap,
   Shield,
   Globe,
   ArrowUpRight,
-  ChevronRight,
-  Cpu,
-  Network,
-  Layers,
-  Calendar,
+  Check,
+  ChevronDown,
+  Phone,
+  Clock,
   TrendingUp,
-  Headphones,
+  Users,
+  BarChart3,
   MessageSquare,
+  Mic,
+  Cpu,
+  Database,
+  GitMerge,
+  Headphones,
+  Star,
+  CheckCircle2,
+  X,
+  Minus,
+  PhoneCall,
+  RefreshCw,
 } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
 import { useCTA } from "@/components/modals/cta-provider"
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
-import type { Locale } from "@/lib/i18n/config"
 
-function useReveal(threshold = 0.15) {
+type Locale = "ru" | "en" | "es" | "de" | "nl" | "fr"
+
+// ─── Reveal animation ───────────────────────────────────────────────────────
+function useReveal(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
   useEffect(() => {
     const el = ref.current
     if (!el) return
     const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.unobserve(el) } },
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect() } },
       { threshold }
     )
     obs.observe(el)
@@ -60,477 +68,399 @@ function Reveal({ children, className = "", delay = 0 }: { children: ReactNode; 
   return (
     <div
       ref={ref}
-      className={`${className} transition-all duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
-      style={{ transitionDelay: `${delay}ms` }}
+      className={className}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(28px)",
+        transition: `opacity 0.62s ease ${delay}ms, transform 0.62s ease ${delay}ms`,
+      }}
     >
       {children}
     </div>
   )
 }
 
-function Label({ children, light = false }: { children: ReactNode; light?: boolean }) {
+function SectionBadge({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return (
-    <div className={`mb-5 inline-flex items-center gap-2.5 rounded-full border px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] ${light ? "border-white/10 text-white/60" : "border-border text-muted-foreground"}`}>
-      <span className={`h-1.5 w-1.5 rounded-full ${light ? "bg-sky-400" : "bg-primary"}`} />
+    <div className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest mb-6 ${light ? "border-white/20 text-white/60 bg-white/5" : "border-primary/20 text-primary bg-primary/5"}`}>
       {children}
     </div>
   )
 }
 
-const translations = {
-  ru: {
-    badge: "AI-решение для продаж",
-    title: "Голосовой менеджер",
-    titleHighlight: " по продажам",
-    subtitle: "Полностью автоматизированная система продаж. От первого звонка до счёта за 30 секунд. Интеллектуальная система, которая думает, считает и закрывает сделки.",
-    cta: "Запросить демонстрацию",
-    ctaSecondary: "Послушать пример",
-    stat1Value: "50+",
-    stat1Label: "компаний доверяют",
-    stat2Value: "98%",
-    stat2Label: "успешных звонков",
-    stat3Value: "24/7",
-    stat3Label: "без выходных",
-    stat4Value: "30 сек",
-    stat4Label: "до счёта",
-    
-    benefitsTitle: "Почему это работает",
-    benefitsDesc: "Система, которая не просто болтает, а реально думает и выполняет работу продавца",
-    benefits: [
-      { icon: "brain", title: "Естественный диалог", desc: "Ведёт беседу как опытный менеджер, не по скриптам" },
-      { icon: "calculator", title: "Сложные расчёты", desc: "Моментально вычисляет площадь, объём, стоимость с коэффициентами" },
-      { icon: "package", title: "Работает с каталогом", desc: "Знает все позиции, размеры, цены, сроки доставки" },
-      { icon: "truck", title: "Рассчитывает доставку", desc: "Определяет вес, размеры, подбирает нужный транспорт" },
-      { icon: "filetext", title: "Формирует документы", desc: "Создаёт счёта, договоры, спецификации автоматически" },
-      { icon: "phoneforwarded", title: "Переадресует умно", desc: "Передаёт квалифицированного клиента в нужный отдел" },
-      { icon: "usercheck", title: "Помнит клиента", desc: "Помнит предыдущие звонки и истории взаимодействия" },
-      { icon: "shoppingcart", title: "Закрывает сделку", desc: "От момента звонка до получения денег - полностью автоматически" },
-    ],
+// ─── Live dialog demo ────────────────────────────────────────────────────────
+const dialogScript = [
+  { role: "client", text: "Добрый день! Мне нужно заказать 50 квадратных метров ламината, артикул ЛМ-2024, и доставку в Подмосковье." },
+  { role: "ai", text: "Здравствуйте! Нашёл артикул ЛМ-2024 — ламинат 32 класса, цена 890 руб/м². 50 м² = 44 500 руб. Доставка в Подмосковье — 2 500 руб. Итого 47 000 руб. Оформить счёт?" },
+  { role: "client", text: "Да, выставьте счёт на ООО Стройторг, ИНН 7712345678." },
+  { role: "ai", text: "Счёт сформирован и отправлен на почту. Номер заказа #4821. Доставка через 2 рабочих дня. Что-то ещё?" },
+  { role: "client", text: "Всё отлично, спасибо!" },
+  { role: "ai", text: "Отлично! Ваш заказ принят в работу. Хорошего дня!" },
+]
 
-    timelineTitle: "Процесс внедрения",
-    timelineDesc: "Каждый проект уникален. Сроки рассчитываются индивидуально",
-    phases: [
-      { title: "Анализ (1-2 недели)", desc: "Понимаем ваш процесс продаж, каталог, расценки, исключения" },
-      { title: "Проектирование (1-2 недели)", desc: "Создаём сценарии диалогов, логику расчётов, интеграции" },
-      { title: "Разработка (2-6 недель)", desc: "Обучаем AI на ваших данных, настраиваем интеграции" },
-      { title: "Запуск (1 неделя)", desc: "Тестирование, обучение команды, запуск в production" },
-    ],
+function LiveDialog() {
+  const [step, setStep] = useState(0)
+  const [running, setRunning] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
 
-    industryTitle: "Где это работает",
-    industryDesc: "AI-менеджер применим практически в любой индустрии",
-    industries: [
-      { icon: "building2", name: "B2B оптовая торговля", desc: "Автоматизация входящих заказов" },
-      { icon: "warehouse", name: "Производство", desc: "Расчёт сложных комплектаций" },
-      { icon: "hardhat", name: "Строительство", desc: "Консультации и смета работ" },
-      { icon: "building2", name: "Логистика", desc: "Расчёт доставки и сроков" },
-      { icon: "barChart3", name: "Консалтинг", desc: "Квалификация и запись на встречи" },
-      { icon: "globe", name: "E-commerce", desc: "Поддержка и доп. продажи" },
-    ],
+  useEffect(() => {
+    if (!running) return
+    if (step >= dialogScript.length) { setRunning(false); return }
+    const delay = step === 0 ? 400 : dialogScript[step - 1].role === "client" ? 1200 : 1800
+    const t = setTimeout(() => setStep(s => s + 1), delay)
+    return () => clearTimeout(t)
+  }, [running, step])
 
-    casesTitle: "Кейсы",
-    casesDesc: "Реальные результаты внедрения",
-    cases: [
-      { title: "Оптовая компания", subtitle: "Текстиль и ткани", metrics: "500+ звонков/день", result: "Экономия $50k/месяц на операторов" },
-      { title: "Производство", subtitle: "Комплектующие", metrics: "1000+ расчётов/день", result: "Скорость обработки +300%" },
-      { title: "Логистическая фирма", subtitle: "Доставка грузов", metrics: "200+ смет/день", result: "Конверсия звонков +45%" },
-    ],
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight
+    }
+  }, [step])
 
-    faqTitle: "Частые вопросы",
-    faqItems: [
-      { q: "Чем это отличается от обычного бота?", a: "Обычные боты чи��ают скрипты. Наша система думает, анализирует, считает и принимает решения как умный продавец." },
-      { q: "Сколько времени занимает внедрение?", a: "Зависит от сложности: стандартные проекты 1-2 месяца, сложные с индивидуальной логикой 4-6 месяцев." },
-      { q: "Может ли закрыть сделку полностью?", a: "Да, в многих случаях система ведёт диалог, делает расчёты, выставляет счёт, получает оплату - всё автоматически." },
-      { q: "Как интегрируется с нашей системой?", a: "Интегрируется с любой системой, у которой есть API: CRM, ERP, телефония, платёжные системы, бухгалтерия." },
-      { q: "Это дорого?", a: "Стоимость зависит от сложности и объёма обработки. Обычно окупается за 1-2 месяца экономией на операторов." },
-    ],
+  const reset = () => { setStep(0); setRunning(false) }
+  const start = () => { reset(); setTimeout(() => { setStep(0); setRunning(true) }, 50) }
 
-    ctaTitle: "Готовы трансформировать продажи?",
-    ctaDesc: "Запустим AI-менеджера под ваш бизнес. Первая консультация — бесплатно.",
-  },
+  return (
+    <div className="rounded-2xl border border-white/[0.08] bg-[#0d1117] overflow-hidden shadow-2xl">
+      {/* Header */}
+      <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.06] bg-white/[0.02]">
+        <div className="flex items-center gap-3">
+          <div className="relative">
+            <div className="h-9 w-9 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center">
+              <Mic className="h-4 w-4 text-white" />
+            </div>
+            <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-[#0d1117] bg-emerald-400" />
+          </div>
+          <div>
+            <div className="text-sm font-semibold text-white">AI Голосовой менеджер</div>
+            <div className="text-[11px] text-emerald-400">Онлайн · обрабатывает звонки</div>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <button onClick={start} className="flex items-center gap-1.5 rounded-full bg-primary/20 border border-primary/30 px-3 py-1.5 text-[12px] font-medium text-primary hover:bg-primary/30 transition-colors">
+            <RefreshCw className="h-3 w-3" /> Запустить
+          </button>
+        </div>
+      </div>
 
-  en: {
-    badge: "AI sales solution",
-    title: "Voice Sales",
-    titleHighlight: " Manager",
-    subtitle: "Fully automated sales system. From first call to invoice in 30 seconds. An intelligent system that thinks, calculates, and closes deals.",
-    cta: "Request Demo",
-    ctaSecondary: "Hear Example",
-    stat1Value: "50+",
-    stat1Label: "companies trust us",
-    stat2Value: "98%",
-    stat2Label: "successful calls",
-    stat3Value: "24/7",
-    stat3Label: "always working",
-    stat4Value: "30 sec",
-    stat4Label: "to invoice",
-    
-    benefitsTitle: "Why It Works",
-    benefitsDesc: "A system that doesn't just chat, but actually thinks and does the sales job",
-    benefits: [
-      { icon: "brain", title: "Natural Dialogue", desc: "Converses like experienced sales manager, not following scripts" },
-      { icon: "calculator", title: "Complex Calculations", desc: "Instantly calculates area, volume, cost with coefficients" },
-      { icon: "package", title: "Works with Catalog", desc: "Knows all products, sizes, prices, delivery times" },
-      { icon: "truck", title: "Calculates Shipping", desc: "Determines weight, dimensions, selects right transport" },
-      { icon: "filetext", title: "Generates Documents", desc: "Creates invoices, contracts, specifications automatically" },
-      { icon: "phoneforwarded", title: "Smart Routing", desc: "Routes qualified customers to right department" },
-      { icon: "usercheck", title: "Remembers Customer", desc: "Recalls previous calls and interaction history" },
-      { icon: "shoppingcart", title: "Closes Deal", desc: "From first call to payment - completely automated" },
-    ],
+      {/* Messages */}
+      <div ref={containerRef} className="h-72 overflow-y-auto p-5 space-y-4 scroll-smooth">
+        {step === 0 && !running && (
+          <div className="flex flex-col items-center justify-center h-full gap-4">
+            <div className="h-16 w-16 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+              <Play className="h-7 w-7 text-primary ml-0.5" />
+            </div>
+            <p className="text-white/40 text-sm text-center">Нажмите «Запустить» чтобы увидеть<br/>как AI ведёт реальный диалог</p>
+          </div>
+        )}
+        {dialogScript.slice(0, step).map((msg, i) => (
+          <div key={i} className={`flex gap-3 ${msg.role === "client" ? "flex-row-reverse" : ""}`}>
+            <div className={`flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold ${msg.role === "ai" ? "bg-gradient-to-br from-blue-500 to-cyan-400 text-white" : "bg-white/10 text-white/60"}`}>
+              {msg.role === "ai" ? <Mic className="h-3.5 w-3.5" /> : "К"}
+            </div>
+            <div className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${msg.role === "ai" ? "bg-white/[0.06] text-white/85 rounded-tl-none" : "bg-primary/20 text-white rounded-tr-none"}`}>
+              {msg.text}
+            </div>
+          </div>
+        ))}
+        {running && step < dialogScript.length && (
+          <div className={`flex gap-3 ${dialogScript[step]?.role === "client" ? "flex-row-reverse" : ""}`}>
+            <div className={`flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center text-xs ${dialogScript[step]?.role === "ai" ? "bg-gradient-to-br from-blue-500 to-cyan-400 text-white" : "bg-white/10 text-white/60"}`}>
+              {dialogScript[step]?.role === "ai" ? <Mic className="h-3.5 w-3.5" /> : "К"}
+            </div>
+            <div className="flex items-center gap-1 px-4 py-3 rounded-2xl bg-white/[0.04]">
+              {[0, 1, 2].map(i => (
+                <span key={i} className="h-1.5 w-1.5 rounded-full bg-white/40 animate-bounce" style={{ animationDelay: `${i * 150}ms` }} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
 
-    timelineTitle: "Implementation Process",
-    timelineDesc: "Each project is unique. Timeline calculated individually",
-    phases: [
-      { title: "Analysis (1-2 weeks)", desc: "Understand sales process, catalog, pricing, exceptions" },
-      { title: "Design (1-2 weeks)", desc: "Create dialogue scenarios, calculation logic, integrations" },
-      { title: "Development (2-6 weeks)", desc: "Train AI on your data, configure integrations" },
-      { title: "Launch (1 week)", desc: "Testing, team training, production deployment" },
-    ],
-
-    industryTitle: "Where It Works",
-    industryDesc: "AI manager applies to virtually any industry",
-    industries: [
-      { icon: "building2", name: "B2B Wholesale", desc: "Automate incoming orders" },
-      { icon: "warehouse", name: "Manufacturing", desc: "Calculate complex configurations" },
-      { icon: "hardhat", name: "Construction", desc: "Consultations and estimates" },
-      { icon: "building2", name: "Logistics", desc: "Calculate shipping and timeline" },
-      { icon: "barChart3", name: "Consulting", desc: "Qualify and schedule meetings" },
-      { icon: "globe", name: "E-commerce", desc: "Support and upselling" },
-    ],
-
-    casesTitle: "Cases",
-    casesDesc: "Real implementation results",
-    cases: [
-      { title: "Wholesale Company", subtitle: "Textiles", metrics: "500+ calls/day", result: "Save $50k/month on operators" },
-      { title: "Manufacturing", subtitle: "Components", metrics: "1000+ calculations/day", result: "Processing speed +300%" },
-      { title: "Logistics Firm", subtitle: "Cargo delivery", metrics: "200+ quotes/day", result: "Call conversion +45%" },
-    ],
-
-    faqTitle: "FAQ",
-    faqItems: [
-      { q: "How is this different from a regular bot?", a: "Regular bots read scripts. Our system thinks, analyzes, calculates, and makes decisions like a smart sales manager." },
-      { q: "How long does implementation take?", a: "Depends on complexity: standard projects 1-2 months, complex with custom logic 4-6 months." },
-      { q: "Can it close a deal completely?", a: "Yes, in many cases the system conducts dialogue, does calculations, generates invoice, receives payment - all automatically." },
-      { q: "How does it integrate with our system?", a: "Integrates with any system with API: CRM, ERP, telephony, payment systems, accounting." },
-      { q: "Is it expensive?", a: "Cost depends on complexity and volume. Usually pays for itself in 1-2 months from operator savings." },
-    ],
-
-    ctaTitle: "Ready to Transform Sales?",
-    ctaDesc: "Launch AI manager for your business. First consultation is free.",
-  },
-
-  es: {
-    badge: "Solución IA de ventas",
-    title: "Gerente de Ventas",
-    titleHighlight: " por Voz",
-    subtitle: "Sistema de ventas completamente automatizado. Del primer llamada a factura en 30 segundos. Un sistema inteligente que piensa, calcula y cierra ventas.",
-    cta: "Solicitar Demo",
-    ctaSecondary: "Escuchar Ejemplo",
-    stat1Value: "50+",
-    stat1Label: "empresas nos confían",
-    stat2Value: "98%",
-    stat2Label: "llamadas exitosas",
-    stat3Value: "24/7",
-    stat3Label: "siempre activo",
-    stat4Value: "30 seg",
-    stat4Label: "a factura",
-    
-    benefitsTitle: "Por Qué Funciona",
-    benefitsDesc: "Un sistema que no solo charla, sino que realmente piensa y hace el trabajo de ventas",
-    benefits: [
-      { icon: "brain", title: "Diálogo Natural", desc: "Conversa como gerente experimentado, sin seguir guiones" },
-      { icon: "calculator", title: "Cálculos Complejos", desc: "Calcula instantáneamente área, volumen, costo con coeficientes" },
-      { icon: "package", title: "Trabaja con Catálogo", desc: "Conoce todos los productos, tamaños, precios, plazos" },
-      { icon: "truck", title: "Calcula Envíos", desc: "Determina peso, dimensiones, selecciona transporte adecuado" },
-      { icon: "filetext", title: "Genera Documentos", desc: "Crea facturas, contratos, especificaciones automáticamente" },
-      { icon: "phoneforwarded", title: "Enrutamiento Inteligente", desc: "Dirige clientes calificados al departamento correcto" },
-      { icon: "usercheck", title: "Recuerda Cliente", desc: "Recuerda llamadas anteriores e historial de interacción" },
-      { icon: "shoppingcart", title: "Cierra Venta", desc: "Desde primer llamada hasta pago - completamente automatizado" },
-    ],
-
-    timelineTitle: "Proceso de Implementación",
-    timelineDesc: "Cada proyecto es único. Cronograma calculado individualmente",
-    phases: [
-      { title: "Análisis (1-2 semanas)", desc: "Entender proceso de ventas, catálogo, precios, excepciones" },
-      { title: "Diseño (1-2 semanas)", desc: "Crear escenarios de diálogo, lógica de cálculo, integraciones" },
-      { title: "Desarrollo (2-6 semanas)", desc: "Entrenar IA con sus datos, configurar integraciones" },
-      { title: "Lanzamiento (1 semana)", desc: "Pruebas, capacitación del equipo, despliegue en producción" },
-    ],
-
-    industryTitle: "Dónde Funciona",
-    industryDesc: "El gerente IA se aplica a prácticamente cualquier industria",
-    industries: [
-      { icon: "building2", name: "B2B Mayorista", desc: "Automatizar pedidos entrantes" },
-      { icon: "warehouse", name: "Fabricación", desc: "Calcular configuraciones complejas" },
-      { icon: "hardhat", name: "Construcción", desc: "Consultas y presupuestos" },
-      { icon: "building2", name: "Logística", desc: "Calcular envío y plazos" },
-      { icon: "barChart3", name: "Consultoría", desc: "Calificar y agendar reuniones" },
-      { icon: "globe", name: "E-commerce", desc: "Soporte y ventas adicionales" },
-    ],
-
-    casesTitle: "Casos",
-    casesDesc: "Resultados reales de implementación",
-    cases: [
-      { title: "Empresa Mayorista", subtitle: "Textiles", metrics: "500+ llamadas/día", result: "Ahorrar $50k/mes en operadores" },
-      { title: "Fabricación", subtitle: "Componentes", metrics: "1000+ cálculos/día", result: "Velocidad de procesamiento +300%" },
-      { title: "Empresa Logística", subtitle: "Entrega de carga", metrics: "200+ cotizaciones/día", result: "Conversión de llamadas +45%" },
-    ],
-
-    faqTitle: "Preguntas Frecuentes",
-    faqItems: [
-      { q: "¿Cómo es diferente de un bot regular?", a: "Los bots regulares leen guiones. Nuestro sistema piensa, analiza, calcula y toma decisiones como un gerente de ventas inteligente." },
-      { q: "¿Cuánto tiempo toma la implementación?", a: "Depende de la complejidad: proyectos estándar 1-2 meses, complejos con lógica personalizada 4-6 meses." },
-      { q: "¿Puede cerrar una venta completamente?", a: "Sí, en muchos casos el sistema conduce diálogo, hace cálculos, genera factura, recibe pago - todo automáticamente." },
-      { q: "¿Cómo se integra con nuestro sistema?", a: "Se integra con cualquier sistema con API: CRM, ERP, telefonía, sistemas de pago, contabilidad." },
-      { q: "¿Es caro?", a: "El costo depende de la complejidad y volumen. Generalmente se paga en 1-2 meses con ahorros en operadores." },
-    ],
-
-    ctaTitle: "¿Listo para Transformar Ventas?",
-    ctaDesc: "Lanza gerente IA para tu negocio. Primera consulta es gratis.",
-  },
-
-  de: {
-    badge: "KI-Vertriebslösung",
-    title: "Sprach-Vertriebs",
-    titleHighlight: "manager",
-    subtitle: "Vollständig automatisiertes Verkaufssystem. Vom ersten Anruf zur Rechnung in 30 Sekunden. Ein intelligentes System, das denkt, berechnet und Geschäfte abschließt.",
-    cta: "Demo anfordern",
-    ctaSecondary: "Beispiel anhören",
-    stat1Value: "50+",
-    stat1Label: "Unternehmen vertrauen uns",
-    stat2Value: "98%",
-    stat2Label: "erfolgreiche Anrufe",
-    stat3Value: "24/7",
-    stat3Label: "immer aktiv",
-    stat4Value: "30 Sek",
-    stat4Label: "zur Rechnung",
-    
-    benefitsTitle: "Warum es funktioniert",
-    benefitsDesc: "Ein System, das nicht nur redet, sondern tatsächlich denkt und Verkaufsarbeit leistet",
-    benefits: [
-      { icon: "brain", title: "Natürlicher Dialog", desc: "Spricht wie erfahrener Verkäufer, nicht nach Skript" },
-      { icon: "calculator", title: "Komplexe Berechnungen", desc: "Berechnet sofort Fläche, Volumen, Kosten mit Koeffizienten" },
-      { icon: "package", title: "Arbeitet mit Katalog", desc: "Kennt alle Produkte, Größen, Preise, Lieferzeiten" },
-      { icon: "truck", title: "Berechnet Versand", desc: "Bestimmt Gewicht, Dimensionen, wählt richtigen Transport" },
-      { icon: "filetext", title: "Erstellt Dokumente", desc: "Erstellt Rechnungen, Verträge, Spezifikationen automatisch" },
-      { icon: "phoneforwarded", title: "Intelligentes Routing", desc: "Leitet qualifizierte Kunden an richtige Abteilung weiter" },
-      { icon: "usercheck", title: "Erinnert sich an Kunde", desc: "Merkt sich frühere Anrufe und Interaktionsverlauf" },
-      { icon: "shoppingcart", title: "Schließt Geschäft", desc: "Vom ersten Anruf bis Zahlung - vollständig automatisiert" },
-    ],
-
-    timelineTitle: "Implementierungsprozess",
-    timelineDesc: "Jedes Projekt ist einzigartig. Zeitrahmen wird individuell berechnet",
-    phases: [
-      { title: "Analyse (1-2 Wochen)", desc: "Verstehen Sie Verkaufsprozess, Katalog, Preise, Ausnahmen" },
-      { title: "Design (1-2 Wochen)", desc: "Erstellen Sie Dialogszenarien, Berechnungslogik, Integrationen" },
-      { title: "Entwicklung (2-6 Wochen)", desc: "Trainieren Sie KI mit Ihren Daten, konfigurieren Sie Integrationen" },
-      { title: "Start (1 Woche)", desc: "Tests, Teamschulung, Produktionsbereitstellung" },
-    ],
-
-    industryTitle: "Wo es funktioniert",
-    industryDesc: "KI-Manager gilt praktisch für jede Branche",
-    industries: [
-      { icon: "building2", name: "B2B Großhandel", desc: "Automatisieren Sie Eingangbestellungen" },
-      { icon: "warehouse", name: "Fertigung", desc: "Berechnen Sie komplexe Konfigurationen" },
-      { icon: "hardhat", name: "Konstruktion", desc: "Beratungen und Kostenvoranschläge" },
-      { icon: "building2", name: "Logistik", desc: "Berechnen Sie Versand und Zeitrahmen" },
-      { icon: "barChart3", name: "Beratung", desc: "Qualifizieren und Meetings planen" },
-      { icon: "globe", name: "E-Commerce", desc: "Unterstützung und Zusatzverkäufe" },
-    ],
-
-    casesTitle: "Fälle",
-    casesDesc: "Echte Implementierungsergebnisse",
-    cases: [
-      { title: "Großhandelsunternehmen", subtitle: "Textilien", metrics: "500+ Anrufe/Tag", result: "$50k/Monat bei Operatoren sparen" },
-      { title: "Fertigung", subtitle: "Komponenten", metrics: "1000+ Berechnungen/Tag", result: "Verarbeitungsgeschwindigkeit +300%" },
-      { title: "Logistikfirma", subtitle: "Frachtlieferung", metrics: "200+ Angebote/Tag", result: "Anrufkonvertierung +45%" },
-    ],
-
-    faqTitle: "Häufig gestellte Fragen",
-    faqItems: [
-      { q: "Wie ist das anders als ein normaler Bot?", a: "Normale Bots lesen Skripte. Unser System denkt, analysiert, berechnet und trifft Entscheidungen wie ein intelligenter Verkäufer." },
-      { q: "Wie lange dauert die Implementierung?", a: "Hängt von der Komplexität ab: Standardprojekte 1-2 Monate, Komplexe mit benutzerdefinierter Logik 4-6 Monate." },
-      { q: "Kann es einen Deal ganz abschließen?", a: "Ja, in vielen Fällen führt das System Dialoge, macht Berechnungen, erstellt Rechnung, erhält Zahlung - alles automatisch." },
-      { q: "Wie wird es mit unserem System integriert?", a: "Integriert sich mit jedem System mit API: CRM, ERP, Telefonie, Zahlungssysteme, Buchhaltung." },
-      { q: "Ist es teuer?", a: "Die Kosten hängen von Komplexität und Volumen ab. Amortisiert sich normalerweise in 1-2 Monaten durch Operator-Einsparungen." },
-    ],
-
-    ctaTitle: "Bereit, Vertrieb zu transformieren?",
-    ctaDesc: "Starten Sie KI-Manager für Ihr Unternehmen. Erste Konsultation ist kostenlos.",
-  },
-
-  nl: {
-    badge: "AI-verkoopoplossing",
-    title: "Stem Verkoop",
-    titleHighlight: "manager",
-    subtitle: "Volledig geautomatiseerd verkoopsysteem. Van eerste gesprek tot factuur in 30 seconden. Een intelligent systeem dat denkt, berekent en deals sluit.",
-    cta: "Demo aanvragen",
-    ctaSecondary: "Voorbeeld beluisteren",
-    stat1Value: "50+",
-    stat1Label: "bedrijven vertrouwen ons",
-    stat2Value: "98%",
-    stat2Label: "succesvolle gesprekken",
-    stat3Value: "24/7",
-    stat3Label: "altijd actief",
-    stat4Value: "30 sec",
-    stat4Label: "naar factuur",
-    
-    benefitsTitle: "Waarom het werkt",
-    benefitsDesc: "Een systeem dat niet alleen praat, maar echt denkt en verkoopswerk doet",
-    benefits: [
-      { icon: "brain", title: "Natuurlijke Dialoog", desc: "Spreekt als ervaren verkoper, niet volgens script" },
-      { icon: "calculator", title: "Complexe Berekeningen", desc: "Berekent instant oppervlakte, volume, kosten met coëfficiënten" },
-      { icon: "package", title: "Werkt met Catalogus", desc: "Kent alle producten, maten, prijzen, levertijden" },
-      { icon: "truck", title: "Berekent Verzending", desc: "Bepaalt gewicht, afmetingen, selecteert juist transport" },
-      { icon: "filetext", title: "Genereert Documenten", desc: "Maakt facturen, contracten, specificaties automatisch" },
-      { icon: "phoneforwarded", title: "Slim Routering", desc: "Stuurt gekwalificeerde klanten naar juiste afdeling" },
-      { icon: "usercheck", title: "Herinnert Klant", desc: "Onthoud vorige oproepen en interactiegeschiedenis" },
-      { icon: "shoppingcart", title: "Sluit Deal", desc: "Van eerste oproep tot betaling - volledig geautomatiseerd" },
-    ],
-
-    timelineTitle: "Implementatieproces",
-    timelineDesc: "Elk project is uniek. Tijdlijn individueel berekend",
-    phases: [
-      { title: "Analyse (1-2 weken)", desc: "Begrijp verkoopproces, catalogus, prijzen, uitzonderingen" },
-      { title: "Design (1-2 weken)", desc: "Creëer dialoogscenario's, berekeningslogica, integraties" },
-      { title: "Ontwikkeling (2-6 weken)", desc: "Train AI op uw gegevens, configureer integraties" },
-      { title: "Launch (1 week)", desc: "Tests, teamtraining, productiedeploy" },
-    ],
-
-    industryTitle: "Waar het werkt",
-    industryDesc: "AI-manager is toepasbaar op vrijwel elke branche",
-    industries: [
-      { icon: "building2", name: "B2B Groothandel", desc: "Automatiseer inkomende bestellingen" },
-      { icon: "warehouse", name: "Fabricage", desc: "Bereken complexe configuraties" },
-      { icon: "hardhat", name: "Constructie", desc: "Adviezen en offertes" },
-      { icon: "building2", name: "Logistiek", desc: "Bereken verzending en timings" },
-      { icon: "barChart3", name: "Advies", desc: "Kwalificeer en plan vergaderingen" },
-      { icon: "globe", name: "E-commerce", desc: "Ondersteuning en upselling" },
-    ],
-
-    casesTitle: "Cases",
-    casesDesc: "Echte implementatieresultaten",
-    cases: [
-      { title: "Groothandelsbedrijf", subtitle: "Textiel", metrics: "500+ gesprekken/dag", result: "Bespaar $50k/maand op operators" },
-      { title: "Fabricage", subtitle: "Onderdelen", metrics: "1000+ berekeningen/dag", result: "Verwerkingssnelheid +300%" },
-      { title: "Logistiekbedrijf", subtitle: "Vrachtlevering", metrics: "200+ offertes/dag", result: "Gesprekconversie +45%" },
-    ],
-
-    faqTitle: "Veelgestelde Vragen",
-    faqItems: [
-      { q: "Hoe is dit anders dan een normale bot?", a: "Normale bots lezen scripts. Ons systeem denkt, analyseert, berekent en neemt beslissingen als een slimme verkoper." },
-      { q: "Hoe lang duurt implementatie?", a: "Hangt af van complexiteit: standaardprojecten 1-2 maanden, complexe met aangepaste logica 4-6 maanden." },
-      { q: "Kan het een deal helemaal sluiten?", a: "Ja, in veel gevallen voert het systeem dialogen, doet berekeningen, genereert factuur, ontvangt betaling - allemaal automatisch." },
-      { q: "Hoe integreert het met ons systeem?", a: "Integreert met elk systeem met API: CRM, ERP, telefonie, betalingssystemen, boekhoudkunde." },
-      { q: "Is het duur?", a: "Kosten hangen af van complexiteit en volume. Betaalt zich meestal in 1-2 maanden terug via besparing op operators." },
-    ],
-
-    ctaTitle: "Klaar om Verkoop te Transformeren?",
-    ctaDesc: "Start AI-manager voor uw bedrijf. Eerste consultatie is gratis.",
-  },
-
-  fr: {
-    badge: "Solution IA de vente",
-    title: "Gestionnaire des Ventes",
-    titleHighlight: " par Voix",
-    subtitle: "Système de vente entièrement automatisé. Du premier appel à la facture en 30 secondes. Un système intelligent qui pense, calcule et conclut les ventes.",
-    cta: "Demander une Démo",
-    ctaSecondary: "Écouter Exemple",
-    stat1Value: "50+",
-    stat1Label: "entreprises nous font confiance",
-    stat2Value: "98%",
-    stat2Label: "appels réussis",
-    stat3Value: "24/7",
-    stat3Label: "toujours actif",
-    stat4Value: "30 sec",
-    stat4Label: "à facturation",
-    
-    benefitsTitle: "Pourquoi Cela Fonctionne",
-    benefitsDesc: "Un système qui ne se contente pas de discuter, mais pense réellement et fait le travail de vente",
-    benefits: [
-      { icon: "brain", title: "Dialogue Naturel", desc: "Conversa comme un vendeur expérimenté, pas selon le scénario" },
-      { icon: "calculator", title: "Calculs Complexes", desc: "Calcule instantanément la surface, le volume, le coût avec coefficients" },
-      { icon: "package", title: "Fonctionne avec Catalogue", desc: "Connaît tous les produits, tailles, prix, délais de livraison" },
-      { icon: "truck", title: "Calcule l'Expédition", desc: "Détermine le poids, les dimensions, sélectionne le bon transport" },
-      { icon: "filetext", title: "Génère Documents", desc: "Crée des factures, contrats, spécifications automatiquement" },
-      { icon: "phoneforwarded", title: "Routage Intelligent", desc: "Oriente les clients qualifiés vers le bon service" },
-      { icon: "usercheck", title: "Mémorise Client", desc: "Se souvient des appels précédents et de l'historique d'interaction" },
-      { icon: "shoppingcart", title: "Conclut Vente", desc: "Du premier appel au paiement - entièrement automatisé" },
-    ],
-
-    timelineTitle: "Processus d'Implémentation",
-    timelineDesc: "Chaque projet est unique. Calendrier calculé individuellement",
-    phases: [
-      { title: "Analyse (1-2 semaines)", desc: "Comprenez le processus de vente, le catalogue, les prix, les exceptions" },
-      { title: "Conception (1-2 semaines)", desc: "Créez des scénarios de dialogue, la logique de calcul, les intégrations" },
-      { title: "Développement (2-6 semaines)", desc: "Entraînez l'IA sur vos données, configurez les intégrations" },
-      { title: "Lancement (1 semaine)", desc: "Tests, formation d'équipe, déploiement en production" },
-    ],
-
-    industryTitle: "Où Cela Fonctionne",
-    industryDesc: "Le gestionnaire IA s'applique à pratiquement toute industrie",
-    industries: [
-      { icon: "building2", name: "B2B Commerce de Gros", desc: "Automatisez les commandes entrantes" },
-      { icon: "warehouse", name: "Fabrication", desc: "Calculez les configurations complexes" },
-      { icon: "hardhat", name: "Construction", desc: "Consultations et devis" },
-      { icon: "building2", name: "Logistique", desc: "Calculez l'expédition et les délais" },
-      { icon: "barChart3", name: "Conseil", desc: "Qualifiez et planifiez les réunions" },
-      { icon: "globe", name: "E-commerce", desc: "Support et ventes additionnelles" },
-    ],
-
-    casesTitle: "Cas",
-    casesDesc: "Résultats réels de mise en œuvre",
-    cases: [
-      { title: "Entreprise en Gros", subtitle: "Textiles", metrics: "500+ appels/jour", result: "Économisez $50k/mois sur les opérateurs" },
-      { title: "Fabrication", subtitle: "Composants", metrics: "1000+ calculs/jour", result: "Vitesse de traitement +300%" },
-      { title: "Entreprise Logistique", subtitle: "Livraison de cargaison", metrics: "200+ devis/jour", result: "Conversion d'appels +45%" },
-    ],
-
-    faqTitle: "Questions Fréquemment Posées",
-    faqItems: [
-      { q: "Comment c'est différent d'un bot normal?", a: "Les bots normaux lisent des scénarios. Notre système pense, analyse, calcule et prend des décisions comme un vendeur intelligent." },
-      { q: "Combien de temps prend la mise en œuvre?", a: "Dépend de la complexité: projets standards 1-2 mois, complexes avec logique personnalisée 4-6 mois." },
-      { q: "Peut-il conclure une vente complètement?", a: "Oui, dans la plupart des cas le système mène le dialogue, effectue les calculs, génère la facture, reçoit le paiement - tout automatiquement." },
-      { q: "Comment s'intègre-t-il avec notre système?", a: "S'intègre avec tout système disposant d'une API: CRM, ERP, téléphonie, systèmes de paiement, comptabilité." },
-      { q: "C'est cher?", a: "Le coût dépend de la complexité et du volume. Rentabilisé généralement en 1-2 mois grâce aux économies d'opérateurs." },
-    ],
-
-    ctaTitle: "Prêt à Transformer les Ventes?",
-    ctaDesc: "Lancez le gestionnaire IA pour votre entreprise. Première consultation gratuite.",
-  },
+      {/* Footer */}
+      <div className="px-5 py-3 border-t border-white/[0.06] bg-white/[0.01] flex items-center justify-between">
+        <div className="flex items-center gap-4 text-[11px] text-white/40">
+          <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> 47 сек</span>
+          <span className="flex items-center gap-1"><CheckCircle2 className="h-3 w-3 text-emerald-400" /> Счёт выставлен</span>
+        </div>
+        <span className="text-[11px] text-white/30">Без участия человека</span>
+      </div>
+    </div>
+  )
 }
 
-export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
-  const t = translations[locale] || translations.ru
-  const { openConsultation } = useCTA()
+// ─── ROI Calculator ──────────────────────────────────────────────────────────
+function ROICalculator() {
+  const [operators, setOperators] = useState(5)
+  const [callsPerDay, setCallsPerDay] = useState(100)
 
-  const iconMap: Record<string, any> = {
-    brain: Brain,
-    calculator: Calculator,
-    package: Package,
-    truck: Truck,
-    filetext: FileText,
-    phoneforwarded: PhoneForwarded,
-    usercheck: UserCheck,
-    shoppingcart: ShoppingCart,
-    building2: Building2,
-    warehouse: Package,
-    hardhat: Building2,
-    barChart3: BarChart3,
-    globe: Globe,
-  }
+  const operatorCostPerMonth = 65000
+  const operatorCalls = 60
+  const aiCostBase = 45000
+  const aiCostPerCall = 12
+
+  const currentCost = operators * operatorCostPerMonth
+  const aiCost = aiCostBase + callsPerDay * 30 * aiCostPerCall
+  const savings = currentCost - aiCost
+  const roiMonths = savings > 0 ? Math.ceil(aiCostBase / savings) : 0
+  const missedCalls = Math.max(0, callsPerDay - operators * operatorCalls)
+
+  return (
+    <div className="rounded-2xl border border-border/50 bg-card overflow-hidden">
+      <div className="p-6 border-b border-border/50">
+        <h3 className="text-lg font-bold mb-1">Калькулятор экономии</h3>
+        <p className="text-sm text-muted-foreground">Рассчитайте выгоду для вашего бизнеса</p>
+      </div>
+      <div className="p-6 space-y-6">
+        <div>
+          <div className="flex justify-between mb-3">
+            <label className="text-sm font-medium">Количество операторов</label>
+            <span className="text-sm font-bold text-primary">{operators}</span>
+          </div>
+          <input type="range" min={1} max={50} value={operators} onChange={e => setOperators(+e.target.value)}
+            className="w-full accent-primary h-2 rounded-full" />
+          <div className="flex justify-between text-xs text-muted-foreground mt-1"><span>1</span><span>50</span></div>
+        </div>
+        <div>
+          <div className="flex justify-between mb-3">
+            <label className="text-sm font-medium">Звонков в день</label>
+            <span className="text-sm font-bold text-primary">{callsPerDay}</span>
+          </div>
+          <input type="range" min={10} max={1000} step={10} value={callsPerDay} onChange={e => setCallsPerDay(+e.target.value)}
+            className="w-full accent-primary h-2 rounded-full" />
+          <div className="flex justify-between text-xs text-muted-foreground mt-1"><span>10</span><span>1000</span></div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div className="rounded-xl bg-red-500/5 border border-red-500/20 p-4">
+            <div className="text-xs text-muted-foreground mb-1">Сейчас (операторы)</div>
+            <div className="text-xl font-bold text-red-500">{(currentCost / 1000).toFixed(0)}к ₽/мес</div>
+          </div>
+          <div className="rounded-xl bg-green-500/5 border border-green-500/20 p-4">
+            <div className="text-xs text-muted-foreground mb-1">С AI менеджером</div>
+            <div className="text-xl font-bold text-green-500">{(aiCost / 1000).toFixed(0)}к ₽/мес</div>
+          </div>
+        </div>
+
+        {missedCalls > 0 && (
+          <div className="rounded-xl bg-orange-500/5 border border-orange-500/20 p-3 text-sm">
+            <span className="text-orange-500 font-semibold">{missedCalls} звонков/день</span>
+            <span className="text-muted-foreground"> теряется из-за нехватки операторов</span>
+          </div>
+        )}
+
+        <div className="rounded-xl bg-primary/5 border border-primary/20 p-4">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-semibold">Ежемесячная экономия</span>
+            <span className={`text-2xl font-black ${savings > 0 ? "text-primary" : "text-muted-foreground"}`}>
+              {savings > 0 ? `+${(savings / 1000).toFixed(0)}к ₽` : "Рассчитываем..."}
+            </span>
+          </div>
+          {savings > 0 && roiMonths > 0 && (
+            <div className="text-xs text-muted-foreground">Окупаемость: <span className="text-primary font-semibold">{roiMonths} мес.</span></div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─── Translations (RU focused, other locales minimal) ────────────────────────
+const t = {
+  badge: "Голосовой AI · Автоматизация продаж",
+  heroTitle: "Голосовой AI-менеджер,",
+  heroHighlight: " который продаёт",
+  heroSubtitle: "Полностью автоматизированная система продаж. Принимает звонки, ведёт диалог, рассчитывает стоимость и выставляет счёт — за 30 секунд, без единого оператора.",
+  heroCta: "Получить демо",
+  heroCtaSecondary: "Смотреть пример диалога",
+
+  // Stats
+  stats: [
+    { value: "50+", label: "компаний используют" },
+    { value: "98%", label: "успешных звонков" },
+    { value: "24/7", label: "без выходных" },
+    { value: "30 сек", label: "от звонка до счёта" },
+  ],
+
+  // How it works - dialog steps
+  howTitle: "Как это выглядит в реальности",
+  howDesc: "Нажмите «Запустить» и посмотрите, как AI ведёт реальный диалог о продаже стройматериалов",
+
+  // Features
+  featuresTitle: "Что умеет AI-менеджер",
+  featuresDesc: "Система не читает скрипты — она думает, считает и принимает решения как опытный продавец",
+  features: [
+    { icon: Brain, title: "Естественный диалог", desc: "Понимает суть разговора, задаёт уточняющие вопросы, отрабатывает возражения", color: "from-blue-500 to-cyan-400" },
+    { icon: Calculator, title: "Сложные расчёты", desc: "Мгновенно считает площадь, объём, стоимость с коэффициентами и скидками", color: "from-purple-500 to-pink-400" },
+    { icon: Package, title: "Работа с каталогом", desc: "Знает все товары, цены, наличие, сроки доставки в реальном времени", color: "from-orange-500 to-amber-400" },
+    { icon: Truck, title: "Расчёт доставки", desc: "Определяет вес, габариты, подбирает транспорт, озвучивает стоимость", color: "from-green-500 to-emerald-400" },
+    { icon: FileText, title: "Выставление счётов", desc: "Формирует счёт, акт, накладную автоматически и отправляет на почту", color: "from-teal-500 to-cyan-400" },
+    { icon: PhoneForwarded, title: "Умная маршрутизация", desc: "Передаёт квалифицированных клиентов нужному менеджеру с контекстом", color: "from-red-500 to-rose-400" },
+    { icon: UserCheck, title: "Помнит клиента", desc: "Хранит историю звонков, предпочтения и прошлые покупки", color: "from-violet-500 to-purple-400" },
+    { icon: ShoppingCart, title: "Закрывает сделку", desc: "От первого звонка до получения оплаты — без участия человека", color: "from-sky-500 to-blue-400" },
+  ],
+
+  // Comparison
+  compareTitle: "AI-менеджер vs. Оператор",
+  compareDesc: "Прямое сравнение по ключевым метрикам",
+  compareRows: [
+    { metric: "Стоимость в месяц", ai: "от 45 000 ₽", human: "от 65 000 ₽ × N", winner: "ai" },
+    { metric: "Время ответа", ai: "3 секунды", human: "20–40 секунд", winner: "ai" },
+    { metric: "Параллельных звонков", ai: "Неограниченно", human: "1", winner: "ai" },
+    { metric: "Режим работы", ai: "24/7/365", human: "8–10 ч. + выходные", winner: "ai" },
+    { metric: "Ошибки в расчётах", ai: "Нет", human: "До 12%", winner: "ai" },
+    { metric: "Скорость до счёта", ai: "30 секунд", human: "10–30 минут", winner: "ai" },
+    { metric: "Обучение", ai: "1 раз настроить", human: "1–3 месяца", winner: "ai" },
+    { metric: "Качество нестандартного", ai: "Ограничено", human: "Высокое", winner: "human" },
+  ],
+
+  // Industries
+  industriesTitle: "Для каких отраслей подходит",
+  industriesDesc: "Готовые сценарии и отраслевая экспертиза",
+  industries: [
+    { icon: Building2, name: "B2B оптовая торговля", desc: "Обработка входящих заявок, расчёт партий, оформление счетов для оптовых клиентов", metrics: [{ v: "500+", l: "заказов/день" }, { v: "−70%", l: "операторов" }] },
+    { icon: Package, name: "Производство", desc: "Сложные конфигурации, расчёт по чертежам, согласование сроков и технических требований", metrics: [{ v: "1000+", l: "расчётов/день" }, { v: "+300%", l: "скорость" }] },
+    { icon: Truck, name: "Логистика", desc: "Расчёт стоимости доставки, выбор маршрута, отслеживание и уведомление клиентов", metrics: [{ v: "200+", l: "заявок/день" }, { v: "+45%", l: "конверсия" }] },
+    { icon: Globe, name: "E-commerce", desc: "Консультации, проверка наличия, апсейл и обработка возвратов по голосовому каналу", metrics: [{ v: "98%", l: "NPS" }, { v: "−60%", l: "CAC" }] },
+    { icon: BarChart3, name: "Финансы и страхование", desc: "Квалификация лидов, первичная консультация, запись на встречу к менеджеру", metrics: [{ v: "3x", l: "конверсия" }, { v: "−50%", l: "стоимость лида" }] },
+    { icon: Users, name: "Услуги и консалтинг", desc: "Запись на встречу, предварительная квалификация, отправка КП и расчётов", metrics: [{ v: "24/7", l: "доступность" }, { v: "+200%", l: "охват" }] },
+  ],
+
+  // Pricing
+  pricingTitle: "Стоимость внедрения",
+  pricingDesc: "Прозрачное ценообразование. Фиксированная ежемесячная плата, без скрытых комиссий",
+  plans: [
+    {
+      name: "Старт",
+      price: "от 45 000",
+      period: "₽/мес",
+      desc: "Для малого бизнеса и стартапов",
+      features: ["До 500 звонков/мес", "1 сценарий диалога", "Интеграция с 1 CRM", "Email-поддержка", "14 дней бесплатно"],
+      popular: false,
+      cta: "Начать",
+    },
+    {
+      name: "Бизнес",
+      price: "от 120 000",
+      period: "₽/мес",
+      desc: "Для среднего бизнеса с высокой нагрузкой",
+      features: ["До 3 000 звонков/мес", "3 сценария диалогов", "Все интеграции", "Выделенный менеджер", "Обучение команды", "SLA 99.5%"],
+      popular: true,
+      cta: "Выбрать",
+    },
+    {
+      name: "Enterprise",
+      price: "Индивидуально",
+      period: "",
+      desc: "Для крупного бизнеса и холдингов",
+      features: ["Неограниченные звонки", "Любые сценарии", "Кастомные интеграции", "24/7 поддержка", "SLA 99.9%", "On-premise опция"],
+      popular: false,
+      cta: "Связаться",
+    },
+  ],
+
+  // Timeline
+  timelineTitle: "Как проходит внедрение",
+  timelineDesc: "От первого созвона до живых звонков — за 20–30 рабочих дней",
+  phases: [
+    { num: "01", title: "Аудит и анализ", duration: "1–2 нед.", desc: "Изучаем ваши продажи, типичные запросы, каталог, прайс и исключения. Формируем ТЗ.", icon: MessageSquare },
+    { num: "02", title: "Проектирование", duration: "1–2 нед.", desc: "Строим сценарии диалогов, логику расчётов, интеграции с вашими системами.", icon: GitMerge },
+    { num: "03", title: "Разработка и обучение", duration: "2–4 нед.", desc: "Обучаем AI на ваших данных, настраиваем интеграции, тестируем на реальных кейсах.", icon: Cpu },
+    { num: "04", title: "Запуск и оптимизация", duration: "1 нед.", desc: "Пилотный запуск, контроль качества, обучение команды, перевод в продакшн.", icon: Zap },
+  ],
+
+  // Cases
+  casesTitle: "Реальные результаты",
+  casesDesc: "Что произошло у клиентов после внедрения",
+  cases: [
+    {
+      company: "Оптовая торговля стройматериалами",
+      industry: "B2B, Москва",
+      before: "12 операторов, 40% пропущенных звонков",
+      after: "2 операторы (для сложных), 0% пропущенных",
+      metrics: [{ v: "−780k ₽", l: "экономия/мес" }, { v: "+68%", l: "конверсия" }, { v: "3 нед.", l: "внедрение" }],
+      quote: "AI знает наш прайс лучше, чем половина менеджеров. Он не устаёт, не ошибается в расчётах и работает даже ночью.",
+    },
+    {
+      company: "Производитель металлоконструкций",
+      industry: "Производство, СПб",
+      before: "Расчёт заявки — до 2 часов, потеря клиентов",
+      after: "Расчёт за 40 секунд, счёт сразу на почте",
+      metrics: [{ v: "×4", l: "скорость обработки" }, { v: "+120%", l: "выручка" }, { v: "1 мес.", l: "окупаемость" }],
+      quote: "Конкуренты до сих пор звонят клиенту через час. Мы отправляем счёт пока они набирают номер.",
+    },
+    {
+      company: "Транспортная компания",
+      industry: "Логистика, Федеральная сеть",
+      before: "Колл-центр 20 человек, пиковые нагрузки",
+      after: "AI обрабатывает 85% запросов самостоятельно",
+      metrics: [{ v: "−65%", l: "затраты на ФОТ" }, { v: "200+", l: "заявок/час" }, { v: "98%", l: "NPS" }],
+      quote: "В пиковый сезон раньше нам не хватало людей. Теперь AI справляется с любым объёмом.",
+    },
+  ],
+
+  // Why us
+  whyTitle: "Почему M2 AI Solutions",
+  whyDesc: "Не интегратор, а разработчик собственной платформы",
+  why: [
+    { icon: Cpu, title: "Собственная платформа", desc: "Разрабатываем технологию сами. Полный контроль над AI-моделями, скоростью развития и данными клиентов." },
+    { icon: Globe, title: "Мультиязычность", desc: "6 языков из коробки. Автоопределение языка собеседника и переключение в реальном времени." },
+    { icon: Zap, title: "Запуск за 20–30 дней", desc: "Готовые коннекторы к Bitrix24, amoCRM, 1C, Salesforce и 50+ другим системам." },
+    { icon: Shield, title: "Безопасность данных", desc: "ISO 27001, GDPR, 152-ФЗ. Данные на защищённых серверах. Опция on-premise." },
+    { icon: Database, title: "Обучение на ваших данных", desc: "AI обучается на ваших звонках, прайсах и FAQ. Говорит как ваш лучший менеджер." },
+    { icon: TrendingUp, title: "Гарантия результата", desc: "ROI рассчитываем до старта. Средняя окупаемость — 1–2 месяца. Пилот с измеримыми KPI." },
+  ],
+
+  // FAQ
+  faqTitle: "Частые вопросы",
+  faq: [
+    { q: "Чем AI-менеджер отличается от обычного голосового бота?", a: "Обычные боты работают по жёстким скриптам и не способны адаптироваться. Наш AI-менеджер понимает суть разговора, ведёт динамический диалог, выполняет сложные математические расчёты, работает с базами данных в реальном времени и может полностью закрыть сделку — от первого вопроса до выставления счёта." },
+    { q: "Сколько времени занимает внедрение?", a: "Стандартный проект запускается за 20–30 рабочих дней. Это включает аудит процессов, разработку сценариев диалогов, обучение AI на ваших данных, настройку интеграций и тестирование. Сложные проекты с нестандартной логикой — 4–8 недель." },
+    { q: "Может ли система полностью заменить операторов?", a: "В большинстве случаев AI обрабатывает 85–95% типовых звонков самостоятельно. Нестандартные ситуации и важные клиенты переводятся к живому менеджеру с полным контекстом разговора. Это позволяет сократить штат операторов на 70–80%, сохранив качество обслуживания." },
+    { q: "Как система интегрируется с нашей CRM?", a: "Мы поддерживаем нативную интеграцию с Bitrix24, amoCRM, Salesforce, HubSpot, 1C и более 50 другими системами. Каждый звонок автоматически создаёт или обновляет карточку клиента, добавляет запись разговора и ставит задачи менеджерам." },
+    { q: "Что происходит, если клиент задаёт нестандартный вопрос?", a: "AI сначала пытается ответить, используя базу знаний и логику. Если вопрос выходит за рамки — система корректно сообщает об этом и предлагает соединить с живым специалистом. Все такие случаи логируются для дообучения." },
+    { q: "Сколько звонков может обрабатывать система одновременно?", a: "Система масштабируется горизонтально и технически не имеет ограничений на количество параллельных звонков. Пиковые нагрузки обрабатываются автоматически без потери качества." },
+    { q: "Как быстро окупается внедрение?", a: "Средняя окупаемость — 1–2 месяца. Экономия складывается из: сокращение ФОТ операторов, снижение % пропущенных звонков, ускорение обработки заявок и рост конверсии. Перед стартом мы рассчитываем ROI конкретно для вашего бизнеса." },
+  ],
+
+  // CTA
+  ctaTitle: "Готовы автоматизировать продажи?",
+  ctaDesc: "Запустим AI-менеджер для вашего бизнеса. Первая консультация и расчёт ROI — бесплатно.",
+  ctaBtn: "Получить демо",
+  ctaBtnSecondary: "Рассчитать экономию",
+
+  // Related links
+  relatedTitle: "Связанные решения",
+  related: [
+    { name: "AI для бизнеса", href: "/solutions/ai-dlya-biznesa" },
+    { name: "AI оператор", href: "/solutions/robot-operator" },
+    { name: "Автоматизация продаж", href: "/solutions/automation-sales" },
+    { name: "Обработка заявок", href: "/solutions/obrabotka-zayavok" },
+    { name: "Выставление счетов", href: "/solutions/vystavlenie-schetov" },
+    { name: "AI автоматизация", href: "/solutions/ai-avtomatizaciya-biznesa" },
+  ],
+}
+
+// ─── Main Component ───────────────────────────────────────────────────────────
+export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
+  const { openConsultation } = useCTA()
+  const [activeIndustry, setActiveIndustry] = useState(0)
+  const [activeCase, setActiveCase] = useState(0)
 
   return (
     <div className="bg-background overflow-x-hidden">
-      {/* HERO */}
-      <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden bg-[#060a16]">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(56,130,255,.07),transparent)]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#060a16]/30 via-[#060a16]/60 to-[#060a16]" />
-        </div>
-        <div className="pointer-events-none absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:72px_72px]" />
 
-        <div className="relative mx-auto w-full max-w-7xl px-6 pt-36 pb-20 lg:pt-44 lg:pb-24">
-          <div className="flex justify-center mb-10 animate-fade-in">
+      {/* ── HERO ── */}
+      <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden bg-[#060a16]">
+        {/* Grid bg */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.025] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:64px_64px]" />
+        {/* Glow */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[800px] rounded-full bg-blue-600/[0.06] blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 h-[300px] w-[400px] rounded-full bg-purple-600/[0.05] blur-[100px] pointer-events-none" />
+
+        <div className="relative mx-auto w-full max-w-7xl px-6 pt-36 pb-20 lg:pt-48 lg:pb-28">
+          {/* Badge */}
+          <div className="flex justify-center mb-10">
             <div className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-white/[0.03] px-5 py-2 backdrop-blur-md">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -540,68 +470,118 @@ export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
             </div>
           </div>
 
-          <h1 className="mx-auto max-w-[920px] text-center text-balance text-[2.5rem] font-extrabold leading-[1.08] tracking-[-0.025em] text-white sm:text-5xl md:text-6xl lg:text-[4.25rem] animate-fade-in-up">
-            {t.title}
+          {/* H1 */}
+          <h1 className="mx-auto max-w-[960px] text-center text-balance text-[2.6rem] font-extrabold leading-[1.07] tracking-[-0.03em] text-white sm:text-5xl md:text-6xl lg:text-[4.5rem]">
+            {t.heroTitle}
             <span className="bg-gradient-to-r from-sky-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
-              {t.titleHighlight}
+              {t.heroHighlight}
             </span>
           </h1>
 
-          <p className="mx-auto mt-7 max-w-2xl text-center text-pretty text-[1.125rem] leading-[1.7] text-white/50 animate-fade-in-up" style={{ animationDelay: "0.12s" }}>
-            {t.subtitle}
+          <p className="mx-auto mt-8 max-w-2xl text-center text-pretty text-lg leading-[1.75] text-white/50">
+            {t.heroSubtitle}
           </p>
 
-          <div className="mt-11 flex flex-col items-center gap-4 sm:flex-row sm:justify-center animate-fade-in-up" style={{ animationDelay: "0.22s" }}>
-            <Button size="lg" className="h-[52px] rounded-xl px-8 text-[15px] font-semibold shadow-[0_0_40px_rgba(56,130,255,.15)] hover:shadow-[0_0_60px_rgba(56,130,255,.25)] transition-all duration-300" onClick={openConsultation}>
-              {t.cta}
-              <ArrowRight className="ml-2 h-4 w-4" />
+          {/* CTAs */}
+          <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <Button
+              size="lg"
+              className="h-[54px] rounded-xl px-8 text-[15px] font-semibold shadow-[0_0_40px_rgba(56,130,255,.18)] hover:shadow-[0_0_70px_rgba(56,130,255,.28)] transition-all duration-300"
+              onClick={openConsultation}
+            >
+              {t.heroCta} <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-            <Button size="lg" variant="outline" className="h-[52px] rounded-xl px-8 text-[15px] font-semibold border-white/[0.1] bg-white/[0.04] text-white hover:bg-white/[0.08] hover:border-white/[0.16] backdrop-blur-sm transition-all duration-300">
-              <Play className="mr-2 h-4 w-4" />
-              {t.ctaSecondary}
+            <Button
+              size="lg"
+              variant="outline"
+              className="h-[54px] rounded-xl px-8 text-[15px] font-semibold border-white/[0.1] bg-white/[0.04] text-white hover:bg-white/[0.08] hover:border-white/[0.18] backdrop-blur-sm transition-all duration-300"
+              onClick={() => document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" })}
+            >
+              <Play className="mr-2 h-4 w-4" /> {t.heroCtaSecondary}
             </Button>
           </div>
 
-          <div className="mt-20 lg:mt-28 grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/[0.06] rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-            {[
-              { value: t.stat1Value, label: t.stat1Label },
-              { value: t.stat2Value, label: t.stat2Label },
-              { value: t.stat3Value, label: t.stat3Label },
-              { value: t.stat4Value, label: t.stat4Label },
-            ].map((s) => (
-              <div key={s.label} className="flex flex-col items-center gap-1.5 py-8 lg:py-10">
-                <span className="text-[2rem] font-extrabold tracking-tight text-white sm:text-4xl">{s.value}</span>
-                <span className="text-[13px] text-white/40">{s.label}</span>
+          {/* Stats bar */}
+          <div className="mt-20 lg:mt-28 grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/[0.06] rounded-2xl border border-white/[0.06] bg-white/[0.025] backdrop-blur-sm">
+            {t.stats.map((s) => (
+              <div key={s.label} className="flex flex-col items-center gap-1.5 py-8 lg:py-10 px-4">
+                <span className="text-[2.2rem] font-extrabold tracking-tight text-white sm:text-[2.5rem]">{s.value}</span>
+                <span className="text-[12px] text-center text-white/40">{s.label}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* BENEFITS */}
-      <section className="py-28 lg:py-36">
-        <div className="mx-auto max-w-7xl px-6">
-          <Reveal className="mx-auto mb-20 max-w-3xl text-center">
-            <Label>{t.benefitsTitle}</Label>
-            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
-              {t.benefitsTitle}
+      {/* ── HOW IT WORKS (Live Dialog) ── */}
+      <section id="how-it-works" className="py-28 lg:py-36 bg-[#0a0f1e]">
+        <div className="mx-auto max-w-6xl px-6">
+          <Reveal className="mx-auto mb-16 max-w-3xl text-center">
+            <SectionBadge light>Демо</SectionBadge>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
+              {t.howTitle}
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted-foreground">
-              {t.benefitsDesc}
+            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-white/50">
+              {t.howDesc}
             </p>
           </Reveal>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {t.benefits.map((benefit, idx) => {
-              const Icon = iconMap[benefit.icon] || Brain
-              return (
-                <Reveal key={idx} delay={idx * 80}>
-                  <div className="rounded-2xl border border-border/50 bg-card p-6 hover:border-primary/30 transition-all duration-300">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/[0.07] text-primary ring-1 ring-primary/[0.1] mb-4">
-                      <Icon className="h-6 w-6" />
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <Reveal>
+              <LiveDialog />
+            </Reveal>
+            <Reveal delay={150}>
+              <div className="space-y-5">
+                {[
+                  { icon: Mic, title: "Распознавание речи 98%", desc: "Понимает акценты, сленг, технические термины вашей отрасли" },
+                  { icon: Cpu, title: "Решения в реальном времени", desc: "Обращается к базам данных, каталогу и CRM прямо во время разговора" },
+                  { icon: FileText, title: "Документы за 3 секунды", desc: "Счёт, накладная или акт — формируются и отправляются на почту моментально" },
+                  { icon: PhoneCall, title: "Работает параллельно", desc: "Принимает тысячи звонков одновременно, без очереди и ожидания" },
+                ].map((item, idx) => {
+                  const Icon = item.icon
+                  return (
+                    <div key={idx} className="flex gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                      <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/20 flex items-center justify-center">
+                        <Icon className="h-5 w-5 text-blue-400" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-white text-sm">{item.title}</div>
+                        <div className="text-sm text-white/50 mt-0.5">{item.desc}</div>
+                      </div>
                     </div>
-                    <h3 className="font-bold mb-2">{benefit.title}</h3>
-                    <p className="text-sm text-muted-foreground">{benefit.desc}</p>
+                  )
+                })}
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FEATURES GRID ── */}
+      <section className="py-28 lg:py-36 bg-background">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal className="mx-auto mb-16 max-w-3xl text-center">
+            <SectionBadge>Возможности</SectionBadge>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+              {t.featuresTitle}
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted-foreground">
+              {t.featuresDesc}
+            </p>
+          </Reveal>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {t.features.map((f, idx) => {
+              const Icon = f.icon
+              return (
+                <Reveal key={idx} delay={idx * 60}>
+                  <div className="group relative rounded-2xl border border-border/50 bg-card p-6 hover:border-primary/30 hover:shadow-lg transition-all duration-300 overflow-hidden">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${f.color} opacity-0 group-hover:opacity-[0.03] transition-opacity`} />
+                    <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${f.color} mb-5 shadow-lg`}>
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="font-bold text-base mb-2">{f.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
                   </div>
                 </Reveal>
               )
@@ -610,109 +590,71 @@ export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* SEO: INTRO TEXT SECTION */}
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900/30 dark:to-slate-800/30">
-        <div className="mx-auto max-w-4xl px-6">
-          <Reveal>
-            <h2 className="text-2xl lg:text-3xl font-bold mb-6">
-              {locale === "ru" ? "Что такое голосовой AI-менеджер продаж" : locale === "en" ? "What is a Voice AI Sales Manager" : locale === "es" ? "¿Qué es un Gerente de Ventas AI por Voz" : locale === "de" ? "Was ist ein Sprach-KI-Vertriebsmanager" : locale === "nl" ? "Wat is een Stem AI Verkoopmanager" : "Qu'est-ce qu'un Gestionnaire des Ventes IA Vocal"}
-            </h2>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
-              <p>
-                {locale === "ru" ? "Голосовой AI-менеджер продаж — это интеллектуальная система автоматизации звонков, которая заменяет операторов колл-центра. Система работает круглосуточно и способна обрабатывать тысячи звонков одновременно. В отличие от обычных голосовых ботов, которые читают скрипты, наш AI-менеджер ведет динамический диалог, анализирует потребности клиента и принимает решения как опытный продавец." : locale === "en" ? "A voice AI sales manager is an intelligent call automation system that replaces call center operators. The system works around the clock and can handle thousands of calls simultaneously. Unlike regular voice bots that read scripts, our AI manager conducts dynamic dialogues, analyzes customer needs, and makes decisions like an experienced sales professional." : locale === "es" ? "Un gerente de ventas AI por voz es un sistema inteligente de automatización de llamadas que reemplaza a los operadores del centro de llamadas. El sistema funciona las 24 horas y puede manejar miles de llamadas simultáneamente. A diferencia de los bots de voz normales que leen guiones, nuestro gerente IA conduce diálogos dinámicos, analiza las necesidades del cliente y toma decisiones como un profesional experimentado." : locale === "de" ? "Ein Sprach-KI-Vertriebsmanager ist ein intelligentes Call-Automatisierungssystem, das Call-Center-Operatoren ersetzt. Das System arbeitet rund um die Uhr und kann Tausende von Anrufen gleichzeitig bearbeiten. Im Gegensatz zu normalen Sprachbots, die Skripte lesen, führt unser KI-Manager dynamische Dialoge, analysiert Kundenbedürfnisse und trifft Entscheidungen wie ein erfahrener Vertriebsprofi." : locale === "nl" ? "Een stem AI verkoopmanager is een intelligent callautomatiseringssysteem dat callcenter-operators vervangt. Het systeem werkt rond de klok en kan duizenden oproepen tegelijk verwerken. In tegenstelling tot normale stembots die scripts lezen, voert onze AI-manager dynamische dialogen, analyseert klantbehoeften en neemt beslissingen als een ervaren verkoopprof." : "Un gestionnaire des ventes IA vocal est un système intelligent d'automatisation des appels qui remplace les opérateurs des centres d'appels. Le système fonctionne 24h/24 et peut gérer des milliers d'appels simultanément. Contrairement aux bots vocaux ordinaires qui lisent des scripts, notre gestionnaire IA mène des dialogues dynamiques, analyse les besoins des clients et prend des décisions comme un professionnel des ventes expérimenté."}
+      {/* ── ROI CALCULATOR ── */}
+      <section className="py-28 lg:py-36 bg-muted/30">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="grid lg:grid-cols-2 gap-14 items-center">
+            <Reveal>
+              <SectionBadge>Экономика</SectionBadge>
+              <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl mb-6">
+                Сколько вы сэкономите с AI
+              </h2>
+              <p className="text-[1.0625rem] leading-relaxed text-muted-foreground mb-10">
+                Средний клиент сокращает затраты на колл-центр на 60–70% уже в первый месяц. Рассчитайте экономию для вашего бизнеса прямо сейчас.
               </p>
-              <p>
-                {locale === "ru" ? "Система может полностью закрыть сделку: от первого звонка до выставления счета и получения оплаты. AI выполняет сложные расчеты, работает с каталогами и ценами, интегрируется с CRM и другими системами, помнит историю клиента и переводит квалифицированные заявки нужному менеджеру." : locale === "en" ? "The system can completely close a deal: from the first call to invoice issuance and payment receipt. AI performs complex calculations, works with catalogs and pricing, integrates with CRM and other systems, remembers customer history, and routes qualified leads to the right manager." : locale === "es" ? "El sistema puede cerrar completamente una venta: desde la primera llamada hasta la emisión de factura y recepción de pago. La IA realiza cálculos complejos, trabaja con catálogos y precios, se integra con CRM y otros sistemas, recuerda el historial del cliente y dirige leads calificados al gerente correcto." : locale === "de" ? "Das System kann ein Geschäft vollständig abschließen: vom ersten Anruf bis zur Rechnungsstellung und Zahlungsempfang. KI führt komplexe Berechnungen durch, arbeitet mit Katalogen und Preisen, integriert sich mit CRM und anderen Systemen, merkt sich die Kundenhistorie und leitet qualifizierte Leads an den richtigen Manager weiter." : locale === "nl" ? "Het systeem kan een deal volledig afsluiten: van het eerste gesprek tot factuuruitgave en betalingsontvangst. AI voert complexe berekeningen uit, werkt met catalogi en prijzen, integreert zich met CRM en andere systemen, onthoudt klantgeschiedenis en stuurt gekwalificeerde leads naar de juiste manager." : "Le système peut conclure complètement une affaire : du premier appel à l'émission de facture et la réception du paiement. L'IA effectue des calculs complexes, travaille avec les catalogues et les prix, s'intègre avec le CRM et d'autres systèmes, mémorise l'historique des clients et dirige les prospects qualifiés vers le bon manager."}
-              </p>
-            </div>
-          </Reveal>
+              <div className="space-y-4">
+                {[
+                  { v: "−70%", l: "расходов на операторов" },
+                  { v: "0%", l: "пропущенных звонков" },
+                  { v: "+45%", l: "конверсия в сделку" },
+                  { v: "1–2 мес.", l: "средняя окупаемость" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4">
+                    <div className="text-2xl font-black text-primary w-24 flex-shrink-0">{item.v}</div>
+                    <div className="text-muted-foreground">{item.l}</div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+            <Reveal delay={150}>
+              <ROICalculator />
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* SEO: CAPABILITIES TABLE */}
-      <section className="py-16 lg:py-24">
+      {/* ── COMPARISON TABLE ── */}
+      <section className="py-28 lg:py-36 bg-background">
         <div className="mx-auto max-w-4xl px-6">
-          <Reveal>
-            <h2 className="text-2xl lg:text-3xl font-bold mb-10">
-              {locale === "ru" ? "Что умеет AI менеджер продаж" : locale === "en" ? "What a Sales AI Manager Can Do" : locale === "es" ? "¿Qué Puede Hacer un Gerente de Ventas IA" : locale === "de" ? "Was Ein KI-Vertriebsmanager Kann" : locale === "nl" ? "Wat Een AI Verkoopmanager Kan Doen" : "Ce que Peut Faire un Gestionnaire de Ventes IA"}
+          <Reveal className="mx-auto mb-14 max-w-3xl text-center">
+            <SectionBadge>Сравнение</SectionBadge>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+              {t.compareTitle}
             </h2>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm md:text-base">
-                <thead>
-                  <tr className="border-b-2 border-primary/20">
-                    <th className="text-left py-4 px-4 font-bold">{locale === "ru" ? "Функция" : locale === "en" ? "Feature" : locale === "es" ? "Función" : locale === "de" ? "Funktion" : locale === "nl" ? "Functie" : "Caractéristique"}</th>
-                    <th className="text-left py-4 px-4 font-bold">{locale === "ru" ? "Описание" : locale === "en" ? "Description" : locale === "es" ? "Descripción" : locale === "de" ? "Beschreibung" : locale === "nl" ? "Beschrijving" : "Description"}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    { feature: locale === "ru" ? "Прием входящих звонков" : "Incoming Calls", desc: locale === "ru" ? "AI отвечает за 3 секунды, автоматически определяет тему звонка" : "AI answers in 3 seconds, automatically identifies call topic" },
-                    { feature: locale === "ru" ? "Исходящие звонки" : "Outgoing Calls", desc: locale === "ru" ? "Напоминания, подтверждения, рассылка по базе клиентов" : "Reminders, confirmations, client base broadcast" },
-                    { feature: locale === "ru" ? "Квалификация лидов" : "Lead Qualification", desc: locale === "ru" ? "Задает уточняющие вопросы, оценивает интерес и готовность купить" : "Asks clarifying questions, evaluates interest and purchase intent" },
-                    { feature: locale === "ru" ? "Расчет стоимости" : "Cost Calculation", desc: locale === "ru" ? "Вычисляет площадь, объем, применяет коэффициенты и скидки" : "Calculates area, volume, applies coefficients and discounts" },
-                    { feature: locale === "ru" ? "Выставление счетов" : "Invoice Generation", desc: locale === "ru" ? "Автоматическое создание счетов, актов, накладных" : "Automatic creation of invoices, acts, bills of lading" },
-                    { feature: locale === "ru" ? "Интеграция с CRM" : "CRM Integration", desc: locale === "ru" ? "Синхронизация данных с Bitrix24, Salesforce, HubSpot и др." : "Data sync with Bitrix24, Salesforce, HubSpot, etc." },
-                    { feature: locale === "ru" ? "Работа с каталогом" : "Catalog Management", desc: locale === "ru" ? "Знает все товары, услуги, размеры, цены, сроки доставки" : "Knows all products, services, sizes, prices, delivery times" },
-                    { feature: locale === "ru" ? "История клиента" : "Customer History", desc: locale === "ru" ? "Помнит предыдущие звонки, покупки, предпочтения" : "Remembers previous calls, purchases, preferences" },
-                  ].map((item, idx) => (
-                    <tr key={idx} className="border-b border-border/30 hover:bg-muted/20 transition-colors">
-                      <td className="py-4 px-4 font-semibold text-primary">{item.feature}</td>
-                      <td className="py-4 px-4 text-muted-foreground">{item.desc}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <p className="mx-auto mt-5 text-[1.0625rem] leading-relaxed text-muted-foreground">
+              {t.compareDesc}
+            </p>
           </Reveal>
-        </div>
-      </section>
 
-      {/* SEO: INTERNAL LINKS BLOCK */}
-      <section className="py-16 lg:py-24 bg-muted/30">
-        <div className="mx-auto max-w-4xl px-6">
           <Reveal>
-            <h2 className="text-2xl lg:text-3xl font-bold mb-10">
-              {locale === "ru" ? "Связанные решения" : locale === "en" ? "Related Solutions" : locale === "es" ? "Soluciones Relacionadas" : locale === "de" ? "Verwandte Lösungen" : locale === "nl" ? "Verwante Oplossingen" : "Solutions Connexes"}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                { name: locale === "ru" ? "AI робот оператор" : "AI Robot Operator", href: "/solutions/robot-operator" },
-                { name: locale === "ru" ? "Автоматизация продаж" : "Sales Automation", href: "/solutions/automation-sales" },
-                { name: locale === "ru" ? "AI для бизнеса" : "AI for Business", href: "/solutions/ai-dlya-biznesa" },
-                { name: locale === "ru" ? "Обработка заявок" : "Request Processing", href: "/solutions/obrabotka-zayavok" },
-                { name: locale === "ru" ? "Обработка заказов" : "Order Processing", href: "/solutions/obrabotka-zakazov" },
-                { name: locale === "ru" ? "Выставление счетов" : "Invoice Issuance", href: "/solutions/vystavlenie-schetov" },
-              ].map((link, idx) => (
-                <Reveal key={idx} delay={idx * 50}>
-                  <Link href={`/${locale}${link.href}`} className="block p-4 rounded-lg border border-border/50 bg-background hover:border-primary/50 hover:bg-muted/50 transition-all group">
-                    <div className="flex items-center justify-between">
-                      <span className="font-semibold group-hover:text-primary transition-colors">{link.name}</span>
-                      <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                    </div>
-                  </Link>
-                </Reveal>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* HTML FAQ IN DOM FOR SEO */}
-      <section className="py-20 lg:py-28 bg-gradient-to-b from-background to-muted/20">
-        <div className="mx-auto max-w-4xl px-6">
-          <Reveal>
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-center">
-              {t.faqTitle}
-            </h2>
-            <div className="mt-12 space-y-8">
-              {t.faqItems.map((item, idx) => (
-                <div key={idx} className="group border-b border-border/30 pb-8 last:border-b-0">
-                  <h3 className="text-lg md:text-xl font-bold mb-4 group-hover:text-primary transition-colors">
-                    {item.q}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {item.a}
-                  </p>
+            <div className="rounded-2xl border border-border/50 overflow-hidden">
+              {/* Header */}
+              <div className="grid grid-cols-3 bg-muted/50 border-b border-border/50">
+                <div className="px-6 py-4 text-sm font-semibold text-muted-foreground">Параметр</div>
+                <div className="px-6 py-4 text-sm font-semibold text-center text-primary border-x border-border/50 bg-primary/5">AI-менеджер</div>
+                <div className="px-6 py-4 text-sm font-semibold text-center text-muted-foreground">Оператор</div>
+              </div>
+              {t.compareRows.map((row, idx) => (
+                <div key={idx} className={`grid grid-cols-3 border-b border-border/30 last:border-0 ${idx % 2 === 0 ? "bg-background" : "bg-muted/20"}`}>
+                  <div className="px-6 py-4 text-sm font-medium">{row.metric}</div>
+                  <div className={`px-6 py-4 text-sm text-center font-semibold border-x border-border/50 bg-primary/[0.02] ${row.winner === "ai" ? "text-primary" : "text-muted-foreground"}`}>
+                    {row.winner === "ai" && <CheckCircle2 className="h-3.5 w-3.5 text-primary inline mr-1.5" />}
+                    {row.ai}
+                  </div>
+                  <div className={`px-6 py-4 text-sm text-center ${row.winner === "human" ? "text-green-600 font-semibold" : "text-muted-foreground"}`}>
+                    {row.winner === "human" && <CheckCircle2 className="h-3.5 w-3.5 text-green-500 inline mr-1.5" />}
+                    {row.human}
+                  </div>
                 </div>
               ))}
             </div>
@@ -720,11 +662,154 @@ export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* TIMELINE */}
+      {/* ── INDUSTRIES ── */}
       <section className="py-28 lg:py-36 bg-muted/30">
         <div className="mx-auto max-w-7xl px-6">
+          <Reveal className="mx-auto mb-16 max-w-3xl text-center">
+            <SectionBadge>Отрасли</SectionBadge>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+              {t.industriesTitle}
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted-foreground">
+              {t.industriesDesc}
+            </p>
+          </Reveal>
+
+          <div className="grid lg:grid-cols-5 gap-6">
+            {/* Tabs */}
+            <div className="lg:col-span-2 space-y-2">
+              {t.industries.map((ind, idx) => {
+                const Icon = ind.icon
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveIndustry(idx)}
+                    className={`w-full text-left p-4 rounded-xl transition-all flex items-center gap-3 ${activeIndustry === idx ? "bg-primary text-primary-foreground shadow-lg" : "bg-card hover:bg-muted border border-border/50"}`}
+                  >
+                    <Icon className={`w-5 h-5 flex-shrink-0 ${activeIndustry === idx ? "" : "text-muted-foreground"}`} />
+                    <span className="font-medium text-sm">{ind.name}</span>
+                  </button>
+                )
+              })}
+            </div>
+
+            {/* Details */}
+            <div className="lg:col-span-3">
+              {(() => {
+                const ind = t.industries[activeIndustry]
+                const Icon = ind.icon
+                return (
+                  <Card className="h-full">
+                    <CardContent className="p-8">
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                          <Icon className="h-7 w-7 text-primary" />
+                        </div>
+                        <h3 className="text-2xl font-bold">{ind.name}</h3>
+                      </div>
+                      <p className="text-muted-foreground mb-8 leading-relaxed">{ind.desc}</p>
+                      <div className="grid grid-cols-2 gap-4 p-5 bg-muted/50 rounded-xl mb-8">
+                        {ind.metrics.map((m, i) => (
+                          <div key={i}>
+                            <div className="text-2xl font-black text-primary">{m.v}</div>
+                            <div className="text-sm text-muted-foreground">{m.l}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <Button onClick={openConsultation} className="w-full">
+                        Автоматизировать этот процесс <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+                )
+              })()}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CASES ── */}
+      <section className="py-28 lg:py-36 bg-[#0a0a0a] text-white overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal className="mx-auto mb-16 max-w-3xl text-center">
+            <SectionBadge light>Кейсы</SectionBadge>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
+              {t.casesTitle}
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-white/50">
+              {t.casesDesc}
+            </p>
+          </Reveal>
+
+          {/* Case selector */}
+          <div className="flex flex-wrap gap-3 justify-center mb-10">
+            {t.cases.map((c, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveCase(idx)}
+                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${activeCase === idx ? "bg-white text-black" : "bg-white/5 border border-white/10 text-white/60 hover:bg-white/10"}`}
+              >
+                {c.industry}
+              </button>
+            ))}
+          </div>
+
+          {/* Active case */}
+          <Reveal>
+            {(() => {
+              const c = t.cases[activeCase]
+              return (
+                <div className="rounded-2xl border border-white/[0.08] bg-white/[0.025] p-8 lg:p-12">
+                  <div className="grid lg:grid-cols-2 gap-10">
+                    <div>
+                      <div className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">{c.industry}</div>
+                      <h3 className="text-2xl font-bold text-white mb-8">{c.company}</h3>
+
+                      <div className="grid grid-cols-2 gap-4 mb-8">
+                        <div className="rounded-xl bg-red-500/10 border border-red-500/20 p-4">
+                          <div className="text-xs text-white/40 mb-2 flex items-center gap-1.5"><X className="h-3 w-3 text-red-400" /> Было</div>
+                          <p className="text-sm text-white/70">{c.before}</p>
+                        </div>
+                        <div className="rounded-xl bg-green-500/10 border border-green-500/20 p-4">
+                          <div className="text-xs text-white/40 mb-2 flex items-center gap-1.5"><Check className="h-3 w-3 text-green-400" /> Стало</div>
+                          <p className="text-sm text-white/70">{c.after}</p>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-4">
+                        {c.metrics.map((m, i) => (
+                          <div key={i} className="text-center p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                            <div className="text-xl font-black text-primary">{m.v}</div>
+                            <div className="text-[11px] text-white/40 mt-1">{m.l}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center">
+                      <div className="rounded-2xl bg-white/[0.03] border border-white/[0.08] p-8">
+                        <div className="flex gap-1 mb-5">
+                          {[1,2,3,4,5].map(i => <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />)}
+                        </div>
+                        <blockquote className="text-lg text-white/80 leading-relaxed italic mb-6">
+                          "{c.quote}"
+                        </blockquote>
+                        <div className="text-sm font-semibold text-white/50">{c.company}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+            })()}
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── TIMELINE ── */}
+      <section className="py-28 lg:py-36 bg-background">
+        <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mx-auto mb-20 max-w-3xl text-center">
-            <Label>{t.timelineTitle}</Label>
+            <SectionBadge>Внедрение</SectionBadge>
             <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
               {t.timelineTitle}
             </h2>
@@ -734,47 +819,25 @@ export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
           </Reveal>
 
           <div className="relative grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {t.phases.map((phase, idx) => (
-              <Reveal key={idx} delay={idx * 100}>
-                <div className="rounded-2xl border border-border/50 bg-background p-6">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/20 text-primary font-bold mb-4">
-                    {idx + 1}
-                  </div>
-                  <h3 className="font-bold mb-2">{phase.title}</h3>
-                  <p className="text-sm text-muted-foreground">{phase.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+            {/* Connecting line */}
+            <div className="absolute top-8 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-border to-transparent hidden lg:block" />
 
-      {/* INDUSTRIES */}
-      <section className="py-28 lg:py-36">
-        <div className="mx-auto max-w-7xl px-6">
-          <Reveal className="mx-auto mb-20 max-w-3xl text-center">
-            <Label>{t.industryTitle}</Label>
-            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
-              {t.industryTitle}
-            </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted-foreground">
-              {t.industryDesc}
-            </p>
-          </Reveal>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {t.industries.map((industry, idx) => {
-              const Icon = iconMap[industry.icon] || Building2
+            {t.phases.map((phase, idx) => {
+              const Icon = phase.icon
               return (
-                <Reveal key={idx} delay={idx * 80}>
-                  <div className="rounded-2xl border border-border/50 bg-card p-6 hover:border-primary/30 transition-all duration-300">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/[0.07] text-primary">
-                        <Icon className="h-5 w-5" />
+                <Reveal key={idx} delay={idx * 100}>
+                  <div className="relative rounded-2xl border border-border/50 bg-background p-6 hover:border-primary/30 hover:shadow-lg transition-all">
+                    <div className="flex items-center gap-3 mb-5">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20">
+                        <Icon className="h-6 w-6 text-primary" />
                       </div>
-                      <h3 className="font-bold">{industry.name}</h3>
+                      <div>
+                        <div className="text-xs font-bold text-primary">{phase.num}</div>
+                        <div className="text-xs text-muted-foreground">{phase.duration}</div>
+                      </div>
                     </div>
-                    <p className="text-sm text-muted-foreground">{industry.desc}</p>
+                    <h3 className="font-bold text-base mb-2">{phase.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{phase.desc}</p>
                   </div>
                 </Reveal>
               )
@@ -783,29 +846,52 @@ export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* CASES */}
+      {/* ── PRICING ── */}
       <section className="py-28 lg:py-36 bg-muted/30">
         <div className="mx-auto max-w-7xl px-6">
-          <Reveal className="mx-auto mb-20 max-w-3xl text-center">
-            <Label>{t.casesTitle}</Label>
+          <Reveal className="mx-auto mb-16 max-w-3xl text-center">
+            <SectionBadge>Стоимость</SectionBadge>
             <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
-              {t.casesTitle}
+              {t.pricingTitle}
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted-foreground">
-              {t.casesDesc}
+              {t.pricingDesc}
             </p>
           </Reveal>
 
-          <div className="grid gap-6 sm:grid-cols-3">
-            {t.cases.map((caseItem, idx) => (
+          <div className="grid md:grid-cols-3 gap-6">
+            {t.plans.map((plan, idx) => (
               <Reveal key={idx} delay={idx * 100}>
-                <div className="rounded-2xl border border-border/50 bg-background p-6">
-                  <h3 className="font-bold mb-1">{caseItem.title}</h3>
-                  <p className="text-sm text-muted-foreground/70 mb-4">{caseItem.subtitle}</p>
-                  <div className="py-4 border-t border-b border-border/30 mb-4">
-                    <p className="text-2xl font-bold text-primary">{caseItem.metrics}</p>
+                <div className={`relative rounded-2xl border p-8 h-full flex flex-col ${plan.popular ? "border-primary shadow-xl ring-2 ring-primary bg-card" : "border-border/50 bg-card"} ${idx === 2 ? "bg-[#0a0a0a] border-white/10 text-white" : ""}`}>
+                  {plan.popular && (
+                    <>
+                      <div className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full whitespace-nowrap">
+                        Популярный выбор
+                      </div>
+                    </>
+                  )}
+                  <div className={`text-sm mb-2 ${idx === 2 ? "text-white/50" : "text-muted-foreground"}`}>{plan.name}</div>
+                  <div className="flex items-baseline gap-1.5 mb-2">
+                    <span className={`text-3xl font-black ${idx === 2 ? "text-white" : ""}`}>{plan.price}</span>
+                    {plan.period && <span className={`text-sm ${idx === 2 ? "text-white/50" : "text-muted-foreground"}`}>{plan.period}</span>}
                   </div>
-                  <p className="text-sm text-emerald-400 font-semibold">✓ {caseItem.result}</p>
+                  <div className={`text-sm mb-7 ${idx === 2 ? "text-white/50" : "text-muted-foreground"}`}>{plan.desc}</div>
+                  <ul className="space-y-3 mb-8 flex-1">
+                    {plan.features.map((f, i) => (
+                      <li key={i} className="flex items-center gap-2.5 text-sm">
+                        <Check className={`h-4 w-4 flex-shrink-0 ${idx === 2 ? "text-green-400" : "text-green-500"}`} />
+                        <span className={idx === 2 ? "text-white/70" : ""}>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button
+                    onClick={openConsultation}
+                    className={`w-full ${idx === 2 ? "border-white/20 text-white hover:bg-white/10 bg-transparent" : ""} ${plan.popular ? "" : "variant-outline"}`}
+                    variant={idx === 2 ? "outline" : plan.popular ? "default" : "outline"}
+                  >
+                    {plan.cta}
+                  </Button>
                 </div>
               </Reveal>
             ))}
@@ -813,11 +899,43 @@ export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-28 lg:py-36">
+      {/* ── WHY US ── */}
+      <section className="py-28 lg:py-36 bg-background">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal className="mx-auto mb-16 max-w-3xl text-center">
+            <SectionBadge>Почему мы</SectionBadge>
+            <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
+              {t.whyTitle}
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-muted-foreground">
+              {t.whyDesc}
+            </p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {t.why.map((item, idx) => {
+              const Icon = item.icon
+              return (
+                <Reveal key={idx} delay={idx * 70}>
+                  <div className="group rounded-2xl border border-border/50 bg-card p-6 hover:border-primary/30 hover:shadow-lg transition-all">
+                    <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
+                      <Icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-bold text-base mb-2">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                  </div>
+                </Reveal>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="py-28 lg:py-36 bg-muted/30">
         <div className="mx-auto max-w-3xl px-6">
-          <Reveal className="mb-20 text-center">
-            <Label>{t.faqTitle}</Label>
+          <Reveal className="mb-16 text-center">
+            <SectionBadge>FAQ</SectionBadge>
             <h2 className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight sm:text-4xl lg:text-[2.75rem]">
               {t.faqTitle}
             </h2>
@@ -825,10 +943,18 @@ export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
 
           <Reveal>
             <Accordion type="single" collapsible className="space-y-3">
-              {t.faqItems.map((item, idx) => (
-                <AccordionItem key={idx} value={`item-${idx}`} className="rounded-xl border border-border/50 bg-card px-6 data-[state=open]:bg-muted/50">
-                  <AccordionTrigger className="py-4 hover:no-underline text-left">{item.q}</AccordionTrigger>
-                  <AccordionContent className="pb-4 text-muted-foreground">{item.a}</AccordionContent>
+              {t.faq.map((item, idx) => (
+                <AccordionItem
+                  key={idx}
+                  value={`faq-${idx}`}
+                  className="rounded-xl border border-border/50 bg-card px-6 data-[state=open]:bg-muted/30"
+                >
+                  <AccordionTrigger className="py-5 hover:no-underline text-left font-semibold text-[15px]">
+                    {item.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-5 text-muted-foreground leading-relaxed">
+                    {item.a}
+                  </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
@@ -836,16 +962,59 @@ export function VoiceSalesManagerClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative py-24 overflow-hidden bg-gradient-to-r from-primary/10 to-transparent border-t border-border/50">
-        <div className="mx-auto max-w-4xl px-6 text-center">
+      {/* ── INTERNAL LINKS (SEO) ── */}
+      <section className="py-16 bg-background border-t border-border/30">
+        <div className="mx-auto max-w-4xl px-6">
           <Reveal>
-            <h2 className="text-3xl font-bold sm:text-4xl mb-5">{t.ctaTitle}</h2>
-            <p className="text-lg text-muted-foreground mb-8">{t.ctaDesc}</p>
-            <Button size="lg" className="h-[52px] rounded-xl px-8 text-[15px] font-semibold" onClick={openConsultation}>
-              {t.cta}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            <h2 className="text-xl font-bold mb-8 text-center">{t.relatedTitle}</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              {t.related.map((link, idx) => (
+                <Link
+                  key={idx}
+                  href={`/${locale}${link.href}`}
+                  className="flex items-center justify-between gap-2 p-4 rounded-xl border border-border/50 bg-card hover:border-primary/40 hover:bg-muted/50 transition-all group text-sm font-medium"
+                >
+                  {link.name}
+                  <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0" />
+                </Link>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── FINAL CTA ── */}
+      <section className="relative py-28 overflow-hidden bg-[#060a16]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(56,130,255,0.12),transparent_70%)]" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 opacity-[0.02] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:64px_64px]" />
+
+        <div className="relative mx-auto max-w-4xl px-6 text-center">
+          <Reveal>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-[-0.025em] text-white mb-6">
+              {t.ctaTitle}
+            </h2>
+            <p className="text-lg text-white/50 mb-10 max-w-xl mx-auto leading-relaxed">
+              {t.ctaDesc}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                size="lg"
+                className="h-[54px] px-8 bg-white text-black hover:bg-white/90 rounded-full text-[15px] font-semibold"
+                onClick={openConsultation}
+              >
+                {t.ctaBtn} <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="h-[54px] px-8 border-white/15 text-white hover:bg-white/8 bg-transparent rounded-full text-[15px] font-semibold"
+                onClick={openConsultation}
+              >
+                {t.ctaBtnSecondary}
+              </Button>
+            </div>
+            <p className="mt-8 text-sm text-white/30">Без обязательств · Демо за 24 часа · NDA по запросу</p>
           </Reveal>
         </div>
       </section>
