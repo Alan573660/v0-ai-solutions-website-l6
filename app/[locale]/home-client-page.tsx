@@ -40,7 +40,10 @@ import {
   PieChart,
   Cpu,
   Workflow,
-  ArrowUpRight
+  ArrowUpRight,
+  Award,
+  Rocket,
+  Mail
 } from "lucide-react"
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -333,6 +336,355 @@ function AIVoiceDemo() {
         </div>
       </FloatingCard>
     </div>
+  )
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   TESTIMONIALS CAROUSEL
+═══════════════════════════════════════════════════════════════════════════════ */
+
+function TestimonialsCarousel() {
+  const [activeIndex, setActiveIndex] = useState(0)
+  
+  const testimonials = [
+    {
+      name: "Алексей Петров",
+      role: "CEO, СтройМаркет",
+      avatar: "АП",
+      text: "AI-менеджер полностью изменил наш подход к продажам. Раньше теряли 60% звонков, теперь обрабатываем 100%. Выручка выросла на 156% за 4 месяца.",
+      rating: 5,
+      metrics: { calls: "5000+", conversion: "+156%", time: "3 мес" },
+      gradient: "from-blue-500 to-cyan-500"
+    },
+    {
+      name: "Мария Соколова",
+      role: "Директор, МедЦентр Плюс",
+      avatar: "МС",
+      text: "Пациенты наконец-то могут записаться с первого раза. AI работает круглосуточно, отвечает мгновенно. Нагрузка на регистратуру снизилась на 40%.",
+      rating: 5,
+      metrics: { calls: "100%", conversion: "-40%", time: "2 мес" },
+      gradient: "from-emerald-500 to-teal-500"
+    },
+    {
+      name: "Дмитрий Волков",
+      role: "Коммерческий директор, ЛогистикПро",
+      avatar: "ДВ",
+      text: "Расчёт стоимости доставки теперь занимает 30 секунд вместо 30 минут. Клиент получает КП прямо во время звонка. Конверсия в заказ выросла на 89%.",
+      rating: 5,
+      metrics: { calls: "30 сек", conversion: "+89%", time: "1 мес" },
+      gradient: "from-violet-500 to-purple-500"
+    },
+    {
+      name: "Елена Кузнецова",
+      role: "Владелец, ЮрисКонсульт",
+      avatar: "ЕК",
+      text: "AI квалифицирует лиды не хуже опытного менеджера. Теперь юристы работают только с горячими клиентами. Эффективность команды выросла в 3 раза.",
+      rating: 5,
+      metrics: { calls: "3x", conversion: "+120%", time: "2 мес" },
+      gradient: "from-orange-500 to-amber-500"
+    },
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % testimonials.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [testimonials.length])
+
+  const active = testimonials[activeIndex]
+
+  return (
+    <section className="py-24 lg:py-32 relative overflow-hidden"
+      style={{ background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%)" }}>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(139,92,246,0.06),transparent)]" />
+      
+      <div className="container mx-auto px-4 max-w-6xl relative">
+        <Reveal className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-600 text-sm font-medium mb-6">
+            <Star className="w-4 h-4" />
+            Отзывы клиентов
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">Что говорят наши клиенты</h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Реальные истории успеха от компаний, которые уже автоматизировались
+          </p>
+        </Reveal>
+
+        <div className="relative max-w-4xl mx-auto">
+          {/* Main testimonial card */}
+          <div className="relative p-8 md:p-12 rounded-3xl bg-white shadow-2xl shadow-violet-500/10 border border-slate-100">
+            {/* Quote icon */}
+            <div className="absolute top-6 right-6 text-7xl text-violet-100 font-serif leading-none select-none">"</div>
+            
+            <div className="relative z-10">
+              {/* Stars */}
+              <div className="flex gap-1 mb-6">
+                {[...Array(active.rating)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                ))}
+              </div>
+
+              {/* Quote text */}
+              <blockquote className="text-xl md:text-2xl font-medium text-slate-800 leading-relaxed mb-8 min-h-[100px]">
+                "{active.text}"
+              </blockquote>
+
+              {/* Metrics */}
+              <div className="grid grid-cols-3 gap-4 mb-8">
+                <div className="text-center p-4 rounded-xl bg-slate-50">
+                  <div className={`text-2xl font-bold bg-gradient-to-r ${active.gradient} bg-clip-text text-transparent`}>
+                    {active.metrics.calls}
+                  </div>
+                  <div className="text-xs text-slate-500 mt-1">Результат</div>
+                </div>
+                <div className="text-center p-4 rounded-xl bg-slate-50">
+                  <div className={`text-2xl font-bold bg-gradient-to-r ${active.gradient} bg-clip-text text-transparent`}>
+                    {active.metrics.conversion}
+                  </div>
+                  <div className="text-xs text-slate-500 mt-1">Изменение</div>
+                </div>
+                <div className="text-center p-4 rounded-xl bg-slate-50">
+                  <div className={`text-2xl font-bold bg-gradient-to-r ${active.gradient} bg-clip-text text-transparent`}>
+                    {active.metrics.time}
+                  </div>
+                  <div className="text-xs text-slate-500 mt-1">Срок</div>
+                </div>
+              </div>
+
+              {/* Author */}
+              <div className="flex items-center gap-4">
+                <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${active.gradient} flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
+                  {active.avatar}
+                </div>
+                <div>
+                  <div className="font-semibold text-slate-800">{active.name}</div>
+                  <div className="text-sm text-slate-500">{active.role}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation dots */}
+          <div className="flex justify-center gap-2 mt-8">
+            {testimonials.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveIndex(idx)}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  idx === activeIndex 
+                    ? "w-8 bg-violet-500" 
+                    : "w-2.5 bg-slate-300 hover:bg-slate-400"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   HOW TO START - Progress Stepper
+═══════════════════════════════════════════════════════════════════════════════ */
+
+function HowToStartSection() {
+  const [activeStep, setActiveStep] = useState(0)
+
+  const steps = [
+    {
+      num: "01",
+      title: "Бесплатная консультация",
+      desc: "Обсуждаем ваши задачи, анализируем текущие процессы и определяем точки роста. Расчёт ROI за 15 минут.",
+      duration: "30 мин",
+      icon: Phone,
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      num: "02",
+      title: "Техническое задание",
+      desc: "Формируем детальный план внедрения: сценарии, интеграции, KPI. Согласуем сроки и бюджет.",
+      duration: "1-2 дня",
+      icon: FileText,
+      color: "from-violet-500 to-purple-500"
+    },
+    {
+      num: "03",
+      title: "Разработка и настройка",
+      desc: "Создаём AI-агента под ваши процессы, интегрируем с CRM и телефонией, обучаем на ваших данных.",
+      duration: "7-14 дней",
+      icon: Settings,
+      color: "from-emerald-500 to-teal-500"
+    },
+    {
+      num: "04",
+      title: "Тестирование",
+      desc: "7 дней бесплатного тестирования на реальных звонках. Анализируем результаты и дорабатываем.",
+      duration: "7 дней",
+      icon: Target,
+      color: "from-orange-500 to-amber-500"
+    },
+    {
+      num: "05",
+      title: "Запуск и поддержка",
+      desc: "Полноценный запуск в работу. Выделенный менеджер, техподдержка 24/7, регулярные обновления.",
+      duration: "Постоянно",
+      icon: Zap,
+      color: "from-pink-500 to-rose-500"
+    },
+  ]
+
+  return (
+    <section className="py-24 lg:py-32 relative overflow-hidden"
+      style={{ background: "linear-gradient(180deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%)" }}>
+      <div className="container mx-auto px-4 max-w-6xl">
+        <Reveal className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 text-green-600 text-sm font-medium mb-6">
+            <Workflow className="w-4 h-4" />
+            Процесс работы
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">Как начать работу</h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            От первого звонка до работающего AI за 2-3 недели
+          </p>
+        </Reveal>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Steps list */}
+          <div className="space-y-4">
+            {steps.map((step, idx) => {
+              const Icon = step.icon
+              const isActive = idx === activeStep
+              const isPast = idx < activeStep
+              
+              return (
+                <Reveal key={idx} delay={idx * 50}>
+                  <button
+                    onClick={() => setActiveStep(idx)}
+                    className={`w-full text-left p-5 rounded-2xl border-2 transition-all duration-300 ${
+                      isActive 
+                        ? "bg-white border-violet-500 shadow-xl shadow-violet-500/10" 
+                        : isPast
+                          ? "bg-white/50 border-emerald-200"
+                          : "bg-white/50 border-slate-200 hover:border-slate-300"
+                    }`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-all ${
+                        isActive 
+                          ? `bg-gradient-to-br ${step.color} shadow-lg` 
+                          : isPast
+                            ? "bg-emerald-100"
+                            : "bg-slate-100"
+                      }`}>
+                        {isPast && !isActive ? (
+                          <CheckCircle2 className="w-6 h-6 text-emerald-600" />
+                        ) : (
+                          <Icon className={`w-6 h-6 ${isActive ? "text-white" : "text-slate-400"}`} />
+                        )}
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                          <span className={`text-xs font-semibold uppercase tracking-wider ${
+                            isActive ? "text-violet-600" : "text-slate-400"
+                          }`}>
+                            Шаг {step.num}
+                          </span>
+                          <span className="text-xs text-slate-400">{step.duration}</span>
+                        </div>
+                        <h4 className={`text-lg font-semibold ${isActive ? "text-slate-800" : "text-slate-600"}`}>
+                          {step.title}
+                        </h4>
+                      </div>
+                    </div>
+                  </button>
+                </Reveal>
+              )
+            })}
+          </div>
+
+          {/* Active step details */}
+          <Reveal className="sticky top-8">
+            <div className="p-8 rounded-3xl bg-gradient-to-br from-violet-600 to-purple-700 text-white shadow-2xl shadow-violet-500/30">
+              <div className="text-[6rem] font-black opacity-10 absolute top-4 right-8">
+                {steps[activeStep].num}
+              </div>
+              <div className="relative z-10">
+                <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-sm font-semibold mb-6`}>
+                  {(() => { const Icon = steps[activeStep].icon; return <Icon className="w-4 h-4" /> })()}
+                  {steps[activeStep].duration}
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                  {steps[activeStep].title}
+                </h3>
+                <p className="text-lg text-white/80 leading-relaxed mb-8">
+                  {steps[activeStep].desc}
+                </p>
+                <Button 
+                  size="lg"
+                  className="bg-white text-violet-600 hover:bg-white/90 rounded-xl shadow-lg"
+                >
+                  Начать с этого шага
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   LIVE STATS TICKER
+═══════════════════════════════════════════════════════════════════════════════ */
+
+function LiveStatsTicker() {
+  const [calls, setCalls] = useState(1247853)
+  const [leads, setLeads] = useState(89234)
+  const [savings, setSavings] = useState(4567890)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCalls(prev => prev + Math.floor(Math.random() * 3) + 1)
+      setLeads(prev => prev + Math.floor(Math.random() * 2))
+      setSavings(prev => prev + Math.floor(Math.random() * 1000) + 500)
+    }, 2000)
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <section className="py-6 relative overflow-hidden bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600">
+      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
+      <div className="container mx-auto px-4">
+        <div className="flex flex-wrap justify-center gap-8 md:gap-16 text-white">
+          <div className="text-center">
+            <div className="text-2xl md:text-3xl font-bold tabular-nums">
+              {calls.toLocaleString()}
+            </div>
+            <div className="text-xs text-white/70 uppercase tracking-wider mt-1">Звонков обработано</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl md:text-3xl font-bold tabular-nums">
+              {leads.toLocaleString()}
+            </div>
+            <div className="text-xs text-white/70 uppercase tracking-wider mt-1">Лидов создано</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl md:text-3xl font-bold tabular-nums">
+              ${savings.toLocaleString()}
+            </div>
+            <div className="text-xs text-white/70 uppercase tracking-wider mt-1">Сэкономлено клиентами</div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-sm font-medium">Live</span>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -642,7 +994,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
   ]
 
   const solutions = [
-    { id: "robot-operator", title: "Робот оператор", desc: "Автоматический приём всех входящих звонков", href: "/solutions/robot-operator", icon: Phone, gradient: "from-blue-600 to-cyan-600" },
+    { id: "robot-operator", title: "Робот оператор", desc: "Автоматический приём вс��х входящих звонков", href: "/solutions/robot-operator", icon: Phone, gradient: "from-blue-600 to-cyan-600" },
     { id: "voice-sales", title: "Голосовой AI-менеджер", desc: "Автоматизация продаж от звонка до сделки", href: "/solutions/voice-sales-manager", icon: TrendingUp, gradient: "from-green-600 to-emerald-600", featured: true },
     { id: "virtual-operator", title: "Виртуальный оператор", desc: "Умная маршрутизация и распределение звонков", href: "/solutions/virtual-operator", icon: Headphones, gradient: "from-purple-600 to-pink-600" },
     { id: "automatic-operator", title: "Автоматический оператор", desc: "IVR нового поколения с AI-обработкой", href: "/solutions/automatic-operator", icon: Settings, gradient: "from-orange-600 to-red-600" },
@@ -852,7 +1204,12 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* ══════════════════���════════════════════════════════════════════════════
+      {/* ═══════════════════════════════════════════════════════════════════════
+          LIVE STATS TICKER
+      ════════════════════════════════════════════════════════════════════════ */}
+      <LiveStatsTicker />
+
+      {/* ═══════════════════════════════════════════════════════════════════════
           WHAT AI AUTOMATES
       ════════════════════════════════════════════════════════════════════════ */}
       <section className="py-24 lg:py-32 relative overflow-hidden">
@@ -1102,6 +1459,11 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
+          TESTIMONIALS CAROUSEL
+      ════════════════════════════════════════════════════════════════════════ */}
+      <TestimonialsCarousel />
+
+      {/* ═══════════════════════════════════════════════════════════════════════
           INDUSTRIES - Interactive Tabs
       ════════════════════════════════════════════════════════════════════════ */}
       <IndustriesSection locale={locale} />
@@ -1110,6 +1472,11 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
           WHY US - 3D Cards
       ════════════════════════════════════════════════════════════════════════ */}
       <WhyUsSection />
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          HOW TO START - Progress Stepper
+      ════════════════════════════════════════════════════════════════════════ */}
+      <HowToStartSection />
 
       {/* ═══════════════════════════════════════════════════════════════════════
           INTEGRATIONS - Animated Marquee
@@ -1189,50 +1556,140 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          FINAL CTA - Premium Design
+          FINAL CTA - Premium Design with WOW Effects
       ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 lg:py-32 relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)" }}>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_120%,rgba(139,92,246,0.2),transparent)]" />
-        <GlowOrb className="w-[600px] h-[400px] top-0 left-1/4" color="violet" />
-        <GlowOrb className="w-[500px] h-[300px] bottom-0 right-1/4" color="blue" />
+      <section className="py-24 lg:py-40 relative overflow-hidden"
+        style={{ background: "linear-gradient(135deg, #0f0c29 0%, #1a1050 30%, #302b63 60%, #24243e 100%)" }}>
+        {/* Animated grid background */}
+        <div className="absolute inset-0 opacity-[0.04] bg-[linear-gradient(to_right,#7c3aed_1px,transparent_1px),linear-gradient(to_bottom,#7c3aed_1px,transparent_1px)] bg-[size:60px_60px]" />
         
-        <div className="container mx-auto px-4 max-w-4xl text-center relative z-10">
-          <Reveal>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-400/30 bg-violet-500/10 text-violet-300 text-sm font-medium mb-8">
+        {/* Multiple glow orbs with animation */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_120%,rgba(139,92,246,0.25),transparent)]" />
+        <GlowOrb className="w-[700px] h-[500px] top-0 left-1/4 animate-pulse" color="violet" />
+        <GlowOrb className="w-[600px] h-[400px] bottom-0 right-1/4" color="blue" />
+        <GlowOrb className="w-[400px] h-[300px] top-1/3 right-1/3" color="purple" />
+        
+        {/* Floating particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(15)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute h-1.5 w-1.5 bg-violet-400/40 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
+                animationDelay: `${Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
+        
+        <div className="container mx-auto px-4 max-w-5xl relative z-10">
+          {/* Floating feature cards */}
+          <div className="hidden lg:block absolute -left-20 top-20">
+            <FloatingCard delay={0}>
+              <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 shadow-2xl">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                    <CheckCircle2 className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold text-sm">7 дней</div>
+                    <div className="text-slate-400 text-xs">Бесплатно</div>
+                  </div>
+                </div>
+              </div>
+            </FloatingCard>
+          </div>
+          
+          <div className="hidden lg:block absolute -right-16 top-32">
+            <FloatingCard delay={1}>
+              <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 shadow-2xl">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
+                    <Rocket className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold text-sm">Быстрый старт</div>
+                    <div className="text-slate-400 text-xs">за 3 дня</div>
+                  </div>
+                </div>
+              </div>
+            </FloatingCard>
+          </div>
+
+          <div className="hidden lg:block absolute -left-10 bottom-20">
+            <FloatingCard delay={2}>
+              <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 shadow-2xl">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center">
+                    <Award className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold text-sm">-30%</div>
+                    <div className="text-slate-400 text-xs">Первый месяц</div>
+                  </div>
+                </div>
+              </div>
+            </FloatingCard>
+          </div>
+
+          <Reveal className="text-center">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-violet-400/40 bg-violet-500/15 text-violet-200 text-sm font-semibold mb-8 animate-pulse-glow">
               <Sparkles className="w-4 h-4" />
               Начните сегодня
+              <span className="h-2 w-2 rounded-full bg-emerald-400" />
             </div>
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight">
+            
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-8 text-white leading-tight">
               Готовы автоматизировать
-              <span className="block bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="block mt-2 bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
                 ваш бизнес?
               </span>
             </h2>
-            <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+            
+            <p className="text-xl md:text-2xl text-slate-300/90 mb-12 max-w-3xl mx-auto leading-relaxed">
               Получите бесплатную консультацию и расчёт ROI для вашей компании. 
-              Начните с 7-дневного тестового периода.
+              <span className="text-white font-medium"> Начните с 7-дневного тестового периода.</span>
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            
+            <div className="flex flex-col sm:flex-row gap-5 justify-center mb-10">
               <Button 
                 size="lg" 
                 onClick={() => openCTA()}
-                className="group bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white px-10 py-7 text-lg rounded-2xl shadow-xl shadow-violet-500/30"
+                className="group relative overflow-hidden bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white px-12 py-8 text-xl rounded-2xl shadow-2xl shadow-violet-500/40 border-0"
               >
-                Получить бесплатный аудит
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <span className="relative z-10 flex items-center font-semibold">
+                  Получить бесплатный аудит
+                  <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity" />
               </Button>
               <Button 
                 size="lg" 
-                className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-10 py-7 text-lg rounded-2xl backdrop-blur-sm"
+                className="group bg-white/10 hover:bg-white/20 text-white border-2 border-white/20 hover:border-white/40 px-12 py-8 text-xl rounded-2xl backdrop-blur-sm transition-all"
               >
-                <Phone className="mr-2 w-5 h-5" />
+                <Phone className="mr-3 w-6 h-6 group-hover:scale-110 transition-transform" />
                 +7 (499) 123-45-67
               </Button>
             </div>
-            <p className="text-sm text-slate-500">
-              Первый месяц со скидкой 30% для новых клиентов
-            </p>
+            
+            {/* Trust badges */}
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400">
+              <span className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                Бесплатная консультация
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                Расчёт ROI за 15 минут
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                Без обязательств
+              </span>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -1275,6 +1732,29 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
         .animate-gradient {
           background-size: 200% 200%;
           animation: gradient-shift 3s ease infinite;
+        }
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+        .animate-shimmer {
+          animation: shimmer 3s linear infinite;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+          background-size: 200% 100%;
+        }
+        @keyframes scale-in {
+          0% { transform: scale(0.9); opacity: 0; }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-scale-in {
+          animation: scale-in 0.5s ease-out forwards;
+        }
+        @keyframes slide-up {
+          0% { transform: translateY(20px); opacity: 0; }
+          100% { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-up {
+          animation: slide-up 0.6s ease-out forwards;
         }
       `}</style>
     </main>
