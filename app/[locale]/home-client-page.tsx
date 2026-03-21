@@ -369,7 +369,7 @@ function TestimonialsCarousel() {
       name: "Дмитрий Волков",
       role: "Коммерческий директор, ЛогистикПро",
       avatar: "ДВ",
-      text: "Расчёт стоимости доставки теперь занимает 30 секунд вместо 30 минут. Клиент получает КП прямо во время ��вонка. Конверсия в заказ выросла на 89%.",
+      text: "Расчёт стоимости доставки теперь занимает 30 секунд вместо 30 минут. Клиент получает КП прямо во время ����вонка. Конверсия в заказ выросла на 89%.",
       rating: 5,
       metrics: { calls: "30 сек", conversion: "+89%", time: "1 мес" },
       gradient: "from-violet-500 to-purple-500"
@@ -690,7 +690,7 @@ function LiveStatsTicker() {
 
 /* ══════════════════════════════════════════════════════════════════════════════
    INDUSTRIES SECTION - Interactive Tabs
-═══════════════════════════════════════════════════════════════════════════════ */
+════���══════════════════════════════════════════════════════════════════════════ */
 
 function IndustriesSection({ locale }: { locale: Locale }) {
   const [activeIndustry, setActiveIndustry] = useState(0)
@@ -983,7 +983,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
   ]
 
   const capabilities = [
-    { icon: Bot, title: "Голосовой AI-агент", desc: "Ведёт диалог неотличимо о�� человека", gradient: "from-violet-500 to-purple-600" },
+    { icon: Bot, title: "Голосовой AI-агент", desc: "Ведёт диалог неотличимо о��� человека", gradient: "from-violet-500 to-purple-600" },
     { icon: Brain, title: "Понимание контекста", desc: "Помнит историю разговора и клиента", gradient: "from-blue-500 to-cyan-600" },
     { icon: Database, title: "CRM интеграция", desc: "amoCRM, Bitrix24, 1C, Leadvertex", gradient: "from-emerald-500 to-teal-600" },
     { icon: BarChart3, title: "Расчёт цен", desc: "Калькуляция по прайсу в реальном времени", gradient: "from-orange-500 to-amber-600" },
@@ -1070,7 +1070,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
   return (
     <main className="min-h-screen bg-background overflow-x-hidden">
       
-      {/* ═══════════════════════════════��═══════════════════════════════════════
+      {/* ══════════════════════════════����═══════════════════════════════════════
           HERO SECTION - Premium WOW Design
       ════════════════════════════════════════════════════════════════════════ */}
       <section className="relative min-h-screen flex items-center overflow-hidden"
@@ -1441,100 +1441,213 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          AI CAPABILITIES - Dark Premium Section
+          AI CAPABILITIES - Dark Premium Section with 3D Effects
       ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 lg:py-32 relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)" }}>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(139,92,246,0.15),transparent)]" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/50 to-transparent" />
+      <section className="py-28 lg:py-40 relative overflow-hidden"
+        style={{ background: "linear-gradient(135deg, #0f0c29 0%, #1a1050 30%, #302b63 60%, #24243e 100%)" }}>
+        {/* Animated grid */}
+        <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#7c3aed_1px,transparent_1px),linear-gradient(to_bottom,#7c3aed_1px,transparent_1px)] bg-[size:50px_50px]" />
         
-        <div className="container mx-auto px-4 max-w-6xl relative">
-          <Reveal className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-400/30 bg-violet-500/10 text-violet-300 text-sm font-medium mb-6">
+        {/* Multiple gradient overlays */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(139,92,246,0.2),transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_100%_100%,rgba(59,130,246,0.1),transparent)]" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/60 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/30 to-transparent" />
+        
+        {/* Floating orbs */}
+        <div className="absolute top-1/4 left-[10%] w-72 h-72 bg-violet-600/20 rounded-full blur-[100px] animate-pulse" />
+        <div className="absolute bottom-1/4 right-[10%] w-96 h-96 bg-blue-600/15 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: "1s" }} />
+        
+        <div className="container mx-auto px-4 max-w-7xl relative">
+          <Reveal className="text-center mb-20">
+            <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-violet-400/40 bg-violet-500/15 text-violet-200 text-sm font-semibold mb-8 shadow-lg shadow-violet-500/10">
               <Sparkles className="w-4 h-4" />
               Возможности платформы
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">Что умеет AI</h2>
-            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-              Передовые технологии для автоматизации вашего бизнеса
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+              Что умеет 
+              <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent"> AI</span>
+            </h2>
+            <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+              8 передовых технологий для полной автоматизации бизнеса
             </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {/* Bento Grid Layout */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
             {capabilities.map((cap, idx) => {
               const Icon = cap.icon
+              const isLarge = idx === 0 || idx === 3
               return (
-                <Reveal key={idx} delay={idx * 50}>
-                  <div className="group p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300 h-full"
-                    style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(10px)" }}>
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${cap.gradient} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
-                      <Icon className="w-6 h-6 text-white" />
+                <Reveal key={idx} delay={idx * 60}>
+                  <div className={`group relative ${isLarge ? "md:col-span-2 md:row-span-2" : ""}`}>
+                    {/* 3D tilt effect background */}
+                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-600/10 to-purple-600/10 transform group-hover:rotate-1 transition-transform duration-500" />
+                    
+                    <div className={`relative h-full rounded-3xl border border-white/10 group-hover:border-violet-400/30 transition-all duration-500 overflow-hidden ${isLarge ? "p-8 md:p-10" : "p-6"}`}
+                      style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(20px)" }}>
+                      
+                      {/* Hover glow effect */}
+                      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${cap.gradient}`} style={{ opacity: 0, mixBlendMode: "overlay" }} />
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 bg-gradient-to-br from-white to-transparent" />
+                      
+                      {/* Icon with animated ring */}
+                      <div className="relative mb-5">
+                        <div className={`${isLarge ? "w-20 h-20" : "w-14 h-14"} rounded-2xl bg-gradient-to-br ${cap.gradient} flex items-center justify-center shadow-2xl group-hover:shadow-violet-500/30 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+                          <Icon className={`${isLarge ? "w-10 h-10" : "w-7 h-7"} text-white`} />
+                        </div>
+                        {/* Animated ring on hover */}
+                        <div className={`absolute inset-0 ${isLarge ? "w-20 h-20" : "w-14 h-14"} rounded-2xl border-2 border-white/20 scale-100 opacity-0 group-hover:scale-125 group-hover:opacity-100 transition-all duration-500`} />
+                      </div>
+                      
+                      {/* Content */}
+                      <h3 className={`${isLarge ? "text-2xl md:text-3xl" : "text-lg"} font-bold mb-3 text-white group-hover:text-violet-200 transition-colors`}>
+                        {cap.title}
+                      </h3>
+                      <p className={`${isLarge ? "text-base md:text-lg" : "text-sm"} text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors`}>
+                        {cap.desc}
+                      </p>
+                      
+                      {/* Large card extra content */}
+                      {isLarge && (
+                        <div className="mt-6 pt-6 border-t border-white/10">
+                          <div className="flex items-center gap-3 text-sm text-slate-500">
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                            <span>Включено во все тарифы</span>
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Corner accent */}
+                      <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${cap.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-bl-full`} />
                     </div>
-                    <h3 className="text-lg font-semibold mb-2 text-white">{cap.title}</h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">{cap.desc}</p>
                   </div>
                 </Reveal>
               )
             })}
           </div>
+
+          {/* Bottom CTA */}
+          <Reveal className="mt-16 text-center">
+            <p className="text-slate-400 mb-6">
+              Хотите узнать больше о возможностях AI?
+            </p>
+            <Button 
+              size="lg"
+              onClick={() => openCTA()}
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 px-8 py-6 rounded-2xl backdrop-blur-sm transition-all group"
+            >
+              Получить демо платформы
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Reveal>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          SOLUTIONS GRID
+          SOLUTIONS GRID - Premium Cards
       ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 lg:py-32">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <Reveal className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-sm font-medium mb-6">
+      <section className="py-28 lg:py-40 relative overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 30%, #f0f4ff 60%, #ffffff 100%)" }} />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_100%,rgba(139,92,246,0.08),transparent)]" />
+        
+        <div className="container mx-auto px-4 max-w-7xl relative">
+          <Reveal className="text-center mb-20">
+            <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/25 text-emerald-600 text-sm font-semibold mb-8 shadow-lg shadow-emerald-500/5">
               <Target className="w-4 h-4" />
-              Решения
+              Готовые решения
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">Выберите решение для вашего бизнеса</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Готовые продукты для разных задач или персональная разработка
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-slate-800 via-violet-800 to-purple-800 bg-clip-text text-transparent">
+                Выберите решение
+              </span>
+            </h2>
+            <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto">
+              6 готовых продуктов для быстрого старта
             </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {solutions.map((solution, idx) => {
               const Icon = solution.icon
               return (
-                <Reveal key={solution.id} delay={idx * 50}>
-                  <Link href={`/${locale}${solution.href}`}>
-                    <Card className={`group relative overflow-hidden hover:shadow-2xl transition-all duration-500 border-0 h-full cursor-pointer ${
+                <Reveal key={solution.id} delay={idx * 80}>
+                  <Link href={`/${locale}${solution.href}`} className="block h-full">
+                    <div className={`group relative h-full rounded-3xl transition-all duration-500 hover:-translate-y-2 ${
                       solution.featured 
-                        ? "bg-gradient-to-br from-violet-500/10 to-purple-500/10 border-2 border-violet-500/30" 
-                        : "bg-white dark:bg-slate-800/50"
+                        ? "bg-gradient-to-br from-violet-600 to-purple-700 text-white shadow-2xl shadow-violet-500/30 hover:shadow-violet-500/50" 
+                        : "bg-white border border-slate-200 hover:border-violet-300 shadow-lg hover:shadow-2xl hover:shadow-violet-500/10"
                     }`}>
+                      
+                      {/* Featured badge */}
                       {solution.featured && (
-                        <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-violet-500 text-white text-xs font-semibold">
-                          Популярное
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-amber-400 text-amber-900 text-xs font-bold shadow-lg flex items-center gap-1.5">
+                          <Star className="w-3 h-3 fill-current" />
+                          Хит продаж
                         </div>
                       )}
-                      <CardContent className="p-6">
-                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${solution.gradient} flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg`}>
-                          <Icon className="w-7 h-7 text-white" />
+                      
+                      <div className="p-7 lg:p-8 h-full flex flex-col">
+                        {/* Icon */}
+                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl ${
+                          solution.featured 
+                            ? "bg-white/20 shadow-white/10" 
+                            : `bg-gradient-to-br ${solution.gradient} shadow-violet-500/20`
+                        }`}>
+                          <Icon className={`w-8 h-8 ${solution.featured ? "text-white" : "text-white"}`} />
                         </div>
-                        <h3 className="text-xl font-semibold mb-2 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">{solution.title}</h3>
-                        <p className="text-muted-foreground text-sm mb-4">{solution.desc}</p>
-                        <div className="flex items-center gap-2 text-violet-600 dark:text-violet-400 text-sm font-medium">
-                          Подробнее 
-                          <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        
+                        {/* Content */}
+                        <h3 className={`text-xl lg:text-2xl font-bold mb-3 ${
+                          solution.featured 
+                            ? "text-white" 
+                            : "text-slate-800 group-hover:text-violet-600"
+                        } transition-colors`}>
+                          {solution.title}
+                        </h3>
+                        <p className={`text-sm lg:text-base leading-relaxed mb-6 flex-1 ${
+                          solution.featured 
+                            ? "text-white/80" 
+                            : "text-slate-500"
+                        }`}>
+                          {solution.desc}
+                        </p>
+                        
+                        {/* CTA */}
+                        <div className={`flex items-center gap-2 text-sm font-semibold ${
+                          solution.featured 
+                            ? "text-white" 
+                            : "text-violet-600"
+                        }`}>
+                          <span>Подробнее о решении</span>
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center group-hover:translate-x-1 transition-transform ${
+                            solution.featured 
+                              ? "bg-white/20" 
+                              : "bg-violet-100 group-hover:bg-violet-200"
+                          }`}>
+                            <ArrowUpRight className="w-4 h-4" />
+                          </div>
                         </div>
-                      </CardContent>
-                    </Card>
+                      </div>
+                      
+                      {/* Decorative corner */}
+                      {!solution.featured && (
+                        <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${solution.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-bl-[50px] rounded-tr-3xl`} />
+                      )}
+                    </div>
                   </Link>
                 </Reveal>
               )
             })}
           </div>
 
-          <Reveal delay={300} className="text-center mt-10">
+          <Reveal delay={400} className="text-center mt-14">
             <Link href={`/${locale}/solutions`}>
-              <Button variant="outline" size="lg" className="rounded-xl">
+              <Button size="lg" className="bg-slate-900 hover:bg-slate-800 text-white px-8 py-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all group">
                 Смотреть все 12 решений
-                <ChevronRight className="ml-2 w-4 h-4" />
+                <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </Reveal>
@@ -1542,66 +1655,105 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          CASES
+          HOW AI WORKS - Interactive Timeline
       ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 lg:py-32 relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%)" }}>
-        <div className="container mx-auto px-4 max-w-6xl">
-          <Reveal className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-600 text-sm font-medium mb-6">
-              <PieChart className="w-4 h-4" />
-              Результаты
+      <section className="py-28 lg:py-40 relative overflow-hidden"
+        style={{ background: "linear-gradient(135deg, #f8fafc 0%, #f0f4ff 50%, #faf5ff 100%)" }}>
+        {/* Decorative elements */}
+        <div className="absolute top-20 right-[10%] w-64 h-64 bg-violet-300/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-[10%] w-80 h-80 bg-blue-300/20 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 max-w-7xl relative">
+          <Reveal className="text-center mb-20">
+            <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/25 text-blue-600 text-sm font-semibold mb-8 shadow-lg shadow-blue-500/5">
+              <Cpu className="w-4 h-4" />
+              Как это работает
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">Кейсы внедрения</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Реальные результаты наших клиентов
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-slate-800 via-blue-800 to-violet-800 bg-clip-text text-transparent">
+                6 шагов AI-продажи
+              </span>
+            </h2>
+            <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto">
+              От входящего звонка до закрытия сделки за минуты
             </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {cases.map((item, idx) => (
-              <Reveal key={idx} delay={idx * 100}>
-                <Card className="overflow-hidden h-full group hover:shadow-2xl transition-all duration-500">
-                  <div className={`p-5 bg-gradient-to-r ${item.gradient}`}>
-                    <p className="text-white/80 text-sm font-medium">{item.industry}</p>
-                    <h3 className="text-xl font-bold text-white">{item.company}</h3>
-                  </div>
-                  <CardContent className="p-6">
-                    <div className="mb-4">
-                      <p className="text-xs text-red-500 font-semibold uppercase mb-1 flex items-center gap-1">
-                        <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
-                        Было
-                      </p>
-                      <p className="text-sm text-muted-foreground">{item.task}</p>
-                    </div>
-                    <div className="mb-6">
-                      <p className="text-xs text-emerald-500 font-semibold uppercase mb-1 flex items-center gap-1">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                        Стало
-                      </p>
-                      <p className="text-sm font-medium">{item.result}</p>
-                    </div>
-                    <div className="grid grid-cols-3 gap-2">
-                      {item.metrics.map((m, i) => (
-                        <div key={i} className="text-center p-3 bg-slate-100 dark:bg-slate-800 rounded-xl group-hover:bg-violet-50 dark:group-hover:bg-violet-900/20 transition-colors">
-                          <div className="text-lg font-bold text-violet-600 dark:text-violet-400">{m.value}</div>
-                          <div className="text-xs text-muted-foreground">{m.label}</div>
+          {/* Timeline */}
+          <div className="relative">
+            {/* Connecting line */}
+            <div className="hidden lg:block absolute top-28 left-[8%] right-[8%] h-1 bg-gradient-to-r from-violet-200 via-purple-300 to-violet-200 rounded-full" />
+            <div className="hidden lg:block absolute top-28 left-[8%] h-1 w-0 bg-gradient-to-r from-violet-500 to-purple-500 rounded-full animate-pulse" style={{ width: "84%", animationDuration: "3s" }} />
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-4">
+              {processSteps.map((step, idx) => {
+                const Icon = step.icon
+                const colors = [
+                  "from-blue-500 to-cyan-500",
+                  "from-violet-500 to-purple-500",
+                  "from-emerald-500 to-teal-500",
+                  "from-orange-500 to-amber-500",
+                  "from-pink-500 to-rose-500",
+                  "from-indigo-500 to-violet-500"
+                ]
+                return (
+                  <Reveal key={idx} delay={idx * 100}>
+                    <div className="relative group text-center">
+                      {/* Step number circle on timeline */}
+                      <div className="hidden lg:flex w-14 h-14 mx-auto mb-6 rounded-full bg-white shadow-xl items-center justify-center relative z-10 group-hover:scale-110 transition-transform border-4 border-violet-100 group-hover:border-violet-300">
+                        <span className="text-lg font-black bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">{step.num}</span>
+                      </div>
+                      
+                      {/* Card */}
+                      <div className="relative p-6 bg-white rounded-3xl shadow-lg group-hover:shadow-2xl group-hover:-translate-y-2 transition-all duration-500 border border-slate-100 group-hover:border-violet-200 overflow-hidden h-full">
+                        {/* Large number background */}
+                        <div className="absolute -top-4 -right-2 text-[6rem] font-black text-violet-500/[0.06] select-none leading-none">
+                          {step.num}
                         </div>
-                      ))}
+                        
+                        {/* Mobile step number */}
+                        <div className="lg:hidden absolute top-4 left-4 w-8 h-8 rounded-full bg-violet-100 flex items-center justify-center text-sm font-bold text-violet-600">
+                          {step.num}
+                        </div>
+                        
+                        {/* Icon */}
+                        <div className={`w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br ${colors[idx]} flex items-center justify-center mb-4 shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+                          <Icon className="w-7 h-7 text-white" />
+                        </div>
+                        
+                        <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-violet-600 transition-colors">
+                          {step.title}
+                        </h3>
+                        <p className="text-sm text-slate-500 leading-relaxed">
+                          {step.desc}
+                        </p>
+                        
+                        {/* Hover gradient overlay */}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${colors[idx]} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
+                      </div>
                     </div>
-                  </CardContent>
-                </Card>
-              </Reveal>
-            ))}
+                  </Reveal>
+                )
+              })}
+            </div>
           </div>
 
-          <Reveal delay={300} className="text-center mt-10">
-            <Link href={`/${locale}/cases`}>
-              <Button variant="outline" size="lg" className="rounded-xl">
-                Смотреть все кейсы
-                <ChevronRight className="ml-2 w-4 h-4" />
-              </Button>
-            </Link>
+          {/* Bottom stats */}
+          <Reveal className="mt-16">
+            <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+              {[
+                { value: "30 сек", label: "Средний звонок" },
+                { value: "0", label: "Пропущенных" },
+                { value: "100%", label: "Автоматизация" },
+              ].map((stat, idx) => (
+                <div key={idx} className="text-center">
+                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-slate-500 font-medium mt-1">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </Reveal>
         </div>
       </section>
