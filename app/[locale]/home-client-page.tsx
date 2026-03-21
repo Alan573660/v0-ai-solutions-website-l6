@@ -369,7 +369,7 @@ function TestimonialsCarousel() {
       name: "Дмитрий Волков",
       role: "Коммерческий директор, ЛогистикПро",
       avatar: "ДВ",
-      text: "Расчёт стоимости доставки теперь занимает 30 секунд вместо 30 минут. Клиент получает КП прямо во время звонка. Конверсия в заказ выросла на 89%.",
+      text: "Расчёт стоимости доставки теперь занимает 30 секунд вместо 30 минут. Клиент получает КП прямо во время ��вонка. Конверсия в заказ выросла на 89%.",
       rating: 5,
       metrics: { calls: "30 сек", conversion: "+89%", time: "1 мес" },
       gradient: "from-violet-500 to-purple-500"
@@ -852,7 +852,7 @@ function IndustriesSection({ locale }: { locale: Locale }) {
   )
 }
 
-/* ══════════════════════════════════════════════════════════════════════════════
+/* ═══════��══════════════════════════════════════════════════════════════════════
    WHY US SECTION - 3D Cards
 ═══════════════════════════════════════════════════════════════════════════════ */
 
@@ -983,7 +983,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
   ]
 
   const capabilities = [
-    { icon: Bot, title: "Голосовой AI-агент", desc: "Ведёт диалог неотличимо от человека", gradient: "from-violet-500 to-purple-600" },
+    { icon: Bot, title: "Голосовой AI-агент", desc: "Ведёт диалог неотличимо о�� человека", gradient: "from-violet-500 to-purple-600" },
     { icon: Brain, title: "Понимание контекста", desc: "Помнит историю разговора и клиента", gradient: "from-blue-500 to-cyan-600" },
     { icon: Database, title: "CRM интеграция", desc: "amoCRM, Bitrix24, 1C, Leadvertex", gradient: "from-emerald-500 to-teal-600" },
     { icon: BarChart3, title: "Расчёт цен", desc: "Калькуляция по прайсу в реальном времени", gradient: "from-orange-500 to-amber-600" },
@@ -1070,7 +1070,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
   return (
     <main className="min-h-screen bg-background overflow-x-hidden">
       
-      {/* ═══════════════════════════════════════════════════════════════════════
+      {/* ═══════════════════════════════��═══════════════════════════════════════
           HERO SECTION - Premium WOW Design
       ════════════════════════════════════════════════════════════════════════ */}
       <section className="relative min-h-screen flex items-center overflow-hidden"
@@ -1210,48 +1210,196 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
       <LiveStatsTicker />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          WHAT AI AUTOMATES
+          WHAT AI AUTOMATES - Interactive Customer Journey
       ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 lg:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900/50 dark:to-slate-950" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
+      <section className="py-28 lg:py-40 relative overflow-hidden">
+        {/* Premium gradient background */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #fafbff 0%, #f0f4ff 30%, #faf5ff 60%, #fefefe 100%)" }} />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(139,92,246,0.08),transparent)]" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/30 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
         
-        <div className="container mx-auto px-4 max-w-6xl relative">
-          <Reveal className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-600 dark:text-violet-400 text-sm font-medium mb-6">
+        {/* Animated floating elements */}
+        <div className="absolute top-20 left-[10%] w-64 h-64 bg-violet-400/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-[10%] w-80 h-80 bg-blue-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+        
+        <div className="container mx-auto px-4 max-w-7xl relative">
+          <Reveal className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-500/10 to-purple-500/10 border border-violet-500/25 text-violet-600 text-sm font-semibold mb-6 shadow-lg shadow-violet-500/5">
               <Workflow className="w-4 h-4" />
-              Автоматизация процессов
+              Полный цикл автоматизации
+              <span className="ml-1 h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">Что автоматизирует AI</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Полный цикл работы с клиентами — от первого звонка до повторных продаж
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-slate-800 via-violet-800 to-purple-800 bg-clip-text text-transparent">
+                Что автоматизирует AI
+              </span>
+            </h2>
+            <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              От первого контакта до повторных продаж — <span className="text-violet-600 font-semibold">без участия человека</span>
             </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {automationTypes.map((item, idx) => {
-              const Icon = item.icon
-              return (
-                <Reveal key={idx} delay={idx * 50}>
-                  <Card className="group hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 border-0 bg-white dark:bg-slate-800/50 overflow-hidden h-full">
-                    <CardContent className="p-6 relative">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br opacity-5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"
-                        style={{ background: `linear-gradient(135deg, var(--tw-gradient-stops))` }} />
-                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg`}>
-                        <Icon className="w-7 h-7 text-white" />
+          {/* Interactive Customer Journey Flow */}
+          <div className="relative">
+            {/* Center AI Brain Hub */}
+            <Reveal className="flex justify-center mb-16">
+              <div className="relative">
+                {/* Pulsing rings */}
+                <div className="absolute inset-0 animate-ping">
+                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-violet-400/30" />
+                </div>
+                <div className="absolute inset-0 animate-pulse" style={{ animationDelay: "0.5s" }}>
+                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border border-violet-400/20 scale-125" />
+                </div>
+                
+                {/* Main brain hub */}
+                <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 flex items-center justify-center shadow-2xl shadow-violet-500/40">
+                  <div className="absolute inset-1 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 opacity-50" />
+                  <Brain className="w-14 h-14 md:w-16 md:h-16 text-white relative z-10" />
+                </div>
+                
+                {/* Label */}
+                <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                  <span className="px-4 py-2 rounded-full bg-white shadow-lg text-sm font-bold text-violet-600 border border-violet-100">
+                    AI-Центр управления
+                  </span>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Journey Steps - Circular Layout */}
+            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-4">
+              {[
+                { 
+                  icon: PhoneIncoming, 
+                  title: "Входящий звонок", 
+                  desc: "Мгновенный ответ 24/7, распознавание речи и намерений",
+                  color: "from-blue-500 to-cyan-500",
+                  shadow: "shadow-blue-500/30",
+                  num: "01",
+                  stat: "< 1 сек"
+                },
+                { 
+                  icon: Users, 
+                  title: "Квалификация", 
+                  desc: "Определение потребностей и оценка потенциала клиента",
+                  color: "from-violet-500 to-purple-500",
+                  shadow: "shadow-violet-500/30",
+                  num: "02",
+                  stat: "98%"
+                },
+                { 
+                  icon: MessageSquare, 
+                  title: "Консультация", 
+                  desc: "Ответы на вопросы, подбор товаров из каталога",
+                  color: "from-emerald-500 to-teal-500",
+                  shadow: "shadow-emerald-500/30",
+                  num: "03",
+                  stat: "500+ FAQ"
+                },
+                { 
+                  icon: FileText, 
+                  title: "Оформление", 
+                  desc: "Создание заявки, расчёт стоимости, выставление счёта",
+                  color: "from-orange-500 to-amber-500",
+                  shadow: "shadow-orange-500/30",
+                  num: "04",
+                  stat: "3 сек"
+                },
+                { 
+                  icon: Receipt, 
+                  title: "Документы", 
+                  desc: "Генерация КП, договоров, актов и отправка на почту",
+                  color: "from-pink-500 to-rose-500",
+                  shadow: "shadow-pink-500/30",
+                  num: "05",
+                  stat: "Auto"
+                },
+                { 
+                  icon: TrendingUp, 
+                  title: "Повторные продажи", 
+                  desc: "Напоминания, допродажи и возврат ушедших клиентов",
+                  color: "from-indigo-500 to-violet-500",
+                  shadow: "shadow-indigo-500/30",
+                  num: "06",
+                  stat: "+47%"
+                },
+              ].map((step, idx) => {
+                const Icon = step.icon
+                return (
+                  <Reveal key={idx} delay={idx * 100}>
+                    <div className="group relative">
+                      {/* Connecting line to next (hidden on mobile) */}
+                      {idx < 5 && (
+                        <div className="hidden lg:block absolute top-12 -right-4 w-8 h-0.5">
+                          <div className="h-full bg-gradient-to-r from-slate-300 to-slate-200" />
+                          <div className="absolute top-0 left-0 h-full w-1/2 bg-gradient-to-r from-violet-400 to-transparent animate-pulse" style={{ animationDelay: `${idx * 0.3}s` }} />
+                        </div>
+                      )}
+                      
+                      <div className="relative p-6 rounded-3xl bg-white border border-slate-100 hover:border-violet-200 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full">
+                        {/* Step number */}
+                        <div className="absolute -top-3 -left-2 w-8 h-8 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-xs font-bold text-slate-500 shadow-md">
+                          {step.num}
+                        </div>
+                        
+                        {/* Stat badge */}
+                        <div className="absolute -top-3 right-4 px-3 py-1 rounded-full bg-gradient-to-r from-slate-800 to-slate-700 text-[10px] font-bold text-white shadow-lg">
+                          {step.stat}
+                        </div>
+                        
+                        {/* Icon */}
+                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-4 shadow-xl ${step.shadow} group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
+                          <Icon className="w-7 h-7 text-white" />
+                        </div>
+                        
+                        {/* Content */}
+                        <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-violet-600 transition-colors">
+                          {step.title}
+                        </h3>
+                        <p className="text-sm text-slate-500 leading-relaxed">
+                          {step.desc}
+                        </p>
+                        
+                        {/* Hover glow effect */}
+                        <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
                       </div>
-                      <h3 className="text-xl font-semibold mb-2 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">{item.title}</h3>
-                      <p className="text-muted-foreground">{item.desc}</p>
-                    </CardContent>
-                  </Card>
-                </Reveal>
-              )
-            })}
+                    </div>
+                  </Reveal>
+                )
+              })}
+            </div>
+
+            {/* Bottom stats bar */}
+            <Reveal className="mt-16">
+              <div className="p-6 md:p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-700/50 shadow-2xl">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                  {[
+                    { value: "100%", label: "Звонков обработано", icon: PhoneIncoming },
+                    { value: "< 1 сек", label: "Время ответа", icon: Zap },
+                    { value: "24/7", label: "Работа без выходных", icon: Clock },
+                    { value: "+156%", label: "Рост конверсии", icon: TrendingUp },
+                  ].map((stat, idx) => {
+                    const Icon = stat.icon
+                    return (
+                      <div key={idx} className="text-center">
+                        <div className="flex items-center justify-center gap-2 mb-2">
+                          <Icon className="w-5 h-5 text-violet-400" />
+                          <span className="text-2xl md:text-3xl font-black text-white">{stat.value}</span>
+                        </div>
+                        <span className="text-xs md:text-sm text-slate-400 font-medium">{stat.label}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════════
+      {/* ══════════���════════════════════════════════════════════════════════════
           HOW AI WORKS - Timeline Style
       ════════════════════════════════════════════════════════════════════════ */}
       <section className="py-24 lg:py-32 relative"
@@ -1458,7 +1606,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════════
+      {/* ═════════════════════════════════════════════════════════��═════════════
           TESTIMONIALS CAROUSEL
       ════════════════════════════════════════════════════════════════════════ */}
       <TestimonialsCarousel />
