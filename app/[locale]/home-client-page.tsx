@@ -369,7 +369,7 @@ function TestimonialsCarousel() {
       name: "Дмитрий Волков",
       role: "Коммерческий директор, ЛогистикПро",
       avatar: "ДВ",
-      text: "Расчёт стоимости доставки теперь занимает 30 секунд вместо 30 минут. Клиент получает КП прямо во время ����вонка. Конверсия в заказ выросла на 89%.",
+      text: "Расчёт стоимости доставки теперь занимает 30 секунд вместо 30 минут. Клиент получает КП прямо во время ������вонка. Конверсия в заказ выросла на 89%.",
       rating: 5,
       metrics: { calls: "30 сек", conversion: "+89%", time: "1 мес" },
       gradient: "from-violet-500 to-purple-500"
@@ -395,86 +395,86 @@ function TestimonialsCarousel() {
   const active = testimonials[activeIndex]
 
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden"
+    <section className="py-16 sm:py-20 lg:py-32 relative overflow-hidden"
       style={{ background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%)" }}>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(139,92,246,0.06),transparent)]" />
       
       <div className="container mx-auto px-4 max-w-6xl relative">
-        <Reveal className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-600 text-sm font-medium mb-6">
-            <Star className="w-4 h-4" />
+        <Reveal className="text-center mb-8 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-600 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+            <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             Отзывы клиентов
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Что говорят наши клиенты</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Реальные истории успеха от компаний, которые уже автоматизировались
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 px-2">Что говорят клиенты</h2>
+          <p className="text-sm sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
+            Реальные истории успеха
           </p>
         </Reveal>
 
         <div className="relative max-w-4xl mx-auto">
           {/* Main testimonial card */}
-          <div className="relative p-8 md:p-12 rounded-3xl bg-white shadow-2xl shadow-violet-500/10 border border-slate-100">
+          <div className="relative p-5 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-white shadow-xl sm:shadow-2xl shadow-violet-500/10 border border-slate-100">
             {/* Quote icon */}
-            <div className="absolute top-6 right-6 text-7xl text-violet-100 font-serif leading-none select-none">"</div>
+            <div className="absolute top-3 right-3 sm:top-6 sm:right-6 text-4xl sm:text-7xl text-violet-100 font-serif leading-none select-none">"</div>
             
             <div className="relative z-10">
               {/* Stars */}
-              <div className="flex gap-1 mb-6">
+              <div className="flex gap-0.5 sm:gap-1 mb-4 sm:mb-6">
                 {[...Array(active.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                  <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-amber-400 text-amber-400" />
                 ))}
               </div>
 
               {/* Quote text */}
-              <blockquote className="text-xl md:text-2xl font-medium text-slate-800 leading-relaxed mb-8 min-h-[100px]">
+              <blockquote className="text-base sm:text-xl md:text-2xl font-medium text-slate-800 leading-relaxed mb-5 sm:mb-8 min-h-[60px] sm:min-h-[100px]">
                 "{active.text}"
               </blockquote>
 
               {/* Metrics */}
-              <div className="grid grid-cols-3 gap-4 mb-8">
-                <div className="text-center p-4 rounded-xl bg-slate-50">
-                  <div className={`text-2xl font-bold bg-gradient-to-r ${active.gradient} bg-clip-text text-transparent`}>
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-5 sm:mb-8">
+                <div className="text-center p-2 sm:p-4 rounded-lg sm:rounded-xl bg-slate-50">
+                  <div className={`text-lg sm:text-2xl font-bold bg-gradient-to-r ${active.gradient} bg-clip-text text-transparent`}>
                     {active.metrics.calls}
                   </div>
-                  <div className="text-xs text-slate-500 mt-1">Результат</div>
+                  <div className="text-[10px] sm:text-xs text-slate-500 mt-0.5 sm:mt-1">Результат</div>
                 </div>
-                <div className="text-center p-4 rounded-xl bg-slate-50">
-                  <div className={`text-2xl font-bold bg-gradient-to-r ${active.gradient} bg-clip-text text-transparent`}>
+                <div className="text-center p-2 sm:p-4 rounded-lg sm:rounded-xl bg-slate-50">
+                  <div className={`text-lg sm:text-2xl font-bold bg-gradient-to-r ${active.gradient} bg-clip-text text-transparent`}>
                     {active.metrics.conversion}
                   </div>
-                  <div className="text-xs text-slate-500 mt-1">Изменение</div>
+                  <div className="text-[10px] sm:text-xs text-slate-500 mt-0.5 sm:mt-1">Изменение</div>
                 </div>
-                <div className="text-center p-4 rounded-xl bg-slate-50">
-                  <div className={`text-2xl font-bold bg-gradient-to-r ${active.gradient} bg-clip-text text-transparent`}>
+                <div className="text-center p-2 sm:p-4 rounded-lg sm:rounded-xl bg-slate-50">
+                  <div className={`text-lg sm:text-2xl font-bold bg-gradient-to-r ${active.gradient} bg-clip-text text-transparent`}>
                     {active.metrics.time}
                   </div>
-                  <div className="text-xs text-slate-500 mt-1">Срок</div>
+                  <div className="text-[10px] sm:text-xs text-slate-500 mt-0.5 sm:mt-1">Срок</div>
                 </div>
               </div>
 
               {/* Author */}
-              <div className="flex items-center gap-4">
-                <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${active.gradient} flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className={`w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br ${active.gradient} flex items-center justify-center text-white font-bold text-sm sm:text-lg shadow-lg`}>
                   {active.avatar}
                 </div>
                 <div>
-                  <div className="font-semibold text-slate-800">{active.name}</div>
-                  <div className="text-sm text-slate-500">{active.role}</div>
+                  <div className="font-semibold text-sm sm:text-base text-slate-800">{active.name}</div>
+                  <div className="text-xs sm:text-sm text-slate-500">{active.role}</div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Navigation dots */}
-          <div className="flex justify-center gap-2 mt-8">
+          <div className="flex justify-center gap-1.5 sm:gap-2 mt-5 sm:mt-8">
             {testimonials.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveIndex(idx)}
-                className={`h-2.5 rounded-full transition-all duration-300 ${
+                className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 ${
                   idx === activeIndex 
-                    ? "w-8 bg-violet-500" 
-                    : "w-2.5 bg-slate-300 hover:bg-slate-400"
+                    ? "w-6 sm:w-8 bg-violet-500" 
+                    : "w-2 sm:w-2.5 bg-slate-300 hover:bg-slate-400"
                 }`}
               />
             ))}
@@ -536,23 +536,23 @@ function HowToStartSection() {
   ]
 
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden"
+    <section className="py-16 sm:py-20 lg:py-32 relative overflow-hidden"
       style={{ background: "linear-gradient(180deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%)" }}>
       <div className="container mx-auto px-4 max-w-6xl">
-        <Reveal className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 text-green-600 text-sm font-medium mb-6">
-            <Workflow className="w-4 h-4" />
+        <Reveal className="text-center mb-8 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-green-500/10 border border-green-500/20 text-green-600 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+            <Workflow className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             Процесс работы
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Как начать работу</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4">Как начать работу</h2>
+          <p className="text-sm sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
             От первого звонка до работающего AI за 2-3 недели
           </p>
         </Reveal>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-12 items-start">
           {/* Steps list */}
-          <div className="space-y-4">
+          <div className="space-y-2 sm:space-y-4">
             {steps.map((step, idx) => {
               const Icon = step.icon
               const isActive = idx === activeStep
@@ -562,16 +562,16 @@ function HowToStartSection() {
                 <Reveal key={idx} delay={idx * 50}>
                   <button
                     onClick={() => setActiveStep(idx)}
-                    className={`w-full text-left p-5 rounded-2xl border-2 transition-all duration-300 ${
+                    className={`w-full text-left p-3 sm:p-5 rounded-xl sm:rounded-2xl border-2 transition-all duration-300 ${
                       isActive 
-                        ? "bg-white border-violet-500 shadow-xl shadow-violet-500/10" 
+                        ? "bg-white border-violet-500 shadow-lg sm:shadow-xl shadow-violet-500/10" 
                         : isPast
                           ? "bg-white/50 border-emerald-200"
                           : "bg-white/50 border-slate-200 hover:border-slate-300"
                     }`}
                   >
-                    <div className="flex items-center gap-4">
-                      <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-all ${
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center transition-all ${
                         isActive 
                           ? `bg-gradient-to-br ${step.color} shadow-lg` 
                           : isPast
@@ -579,21 +579,21 @@ function HowToStartSection() {
                             : "bg-slate-100"
                       }`}>
                         {isPast && !isActive ? (
-                          <CheckCircle2 className="w-6 h-6 text-emerald-600" />
+                          <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600" />
                         ) : (
-                          <Icon className={`w-6 h-6 ${isActive ? "text-white" : "text-slate-400"}`} />
+                          <Icon className={`w-5 h-5 sm:w-6 sm:h-6 ${isActive ? "text-white" : "text-slate-400"}`} />
                         )}
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between">
-                          <span className={`text-xs font-semibold uppercase tracking-wider ${
+                          <span className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wider ${
                             isActive ? "text-violet-600" : "text-slate-400"
                           }`}>
                             Шаг {step.num}
                           </span>
-                          <span className="text-xs text-slate-400">{step.duration}</span>
+                          <span className="text-[10px] sm:text-xs text-slate-400">{step.duration}</span>
                         </div>
-                        <h4 className={`text-lg font-semibold ${isActive ? "text-slate-800" : "text-slate-600"}`}>
+                        <h4 className={`text-sm sm:text-lg font-semibold truncate ${isActive ? "text-slate-800" : "text-slate-600"}`}>
                           {step.title}
                         </h4>
                       </div>
@@ -605,25 +605,25 @@ function HowToStartSection() {
           </div>
 
           {/* Active step details */}
-          <Reveal className="sticky top-8">
-            <div className="p-8 rounded-3xl bg-gradient-to-br from-violet-600 to-purple-700 text-white shadow-2xl shadow-violet-500/30">
-              <div className="text-[6rem] font-black opacity-10 absolute top-4 right-8">
+          <Reveal className="lg:sticky lg:top-8">
+            <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-violet-600 to-purple-700 text-white shadow-xl sm:shadow-2xl shadow-violet-500/30 relative overflow-hidden">
+              <div className="text-[4rem] sm:text-[6rem] font-black opacity-10 absolute top-2 right-4 sm:top-4 sm:right-8">
                 {steps[activeStep].num}
               </div>
               <div className="relative z-10">
-                <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-sm font-semibold mb-6`}>
-                  {(() => { const Icon = steps[activeStep].icon; return <Icon className="w-4 h-4" /> })()}
+                <div className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/20 text-xs sm:text-sm font-semibold mb-4 sm:mb-6`}>
+                  {(() => { const Icon = steps[activeStep].icon; return <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> })()}
                   {steps[activeStep].duration}
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4">
                   {steps[activeStep].title}
                 </h3>
-                <p className="text-lg text-white/80 leading-relaxed mb-8">
+                <p className="text-sm sm:text-lg text-white/80 leading-relaxed mb-5 sm:mb-8">
                   {steps[activeStep].desc}
                 </p>
                 <Button 
                   size="lg"
-                  className="bg-white text-violet-600 hover:bg-white/90 rounded-xl shadow-lg"
+                  className="bg-white text-violet-600 hover:bg-white/90 rounded-xl shadow-lg w-full sm:w-auto text-sm sm:text-base"
                 >
                   Начать с этого шага
                   <ArrowRight className="ml-2 w-4 h-4" />
@@ -767,64 +767,66 @@ function IndustriesSection({ locale }: { locale: Locale }) {
   const Icon = active.icon
 
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden"
+    <section className="py-16 sm:py-20 lg:py-32 relative overflow-hidden"
       style={{ background: "linear-gradient(180deg, #fafafa 0%, #ffffff 50%, #f5f5f5 100%)" }}>
       <div className="container mx-auto px-4 max-w-6xl">
-        <Reveal className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 text-sm font-medium mb-6">
-            <Building2 className="w-4 h-4" />
+        <Reveal className="text-center mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+            <Building2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             Отрасли
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">AI для вашей отрасли</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4">AI для вашей отрасли</h2>
+          <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
             Готовые решения для разных сфер бизнеса
           </p>
         </Reveal>
 
-        {/* Industry tabs */}
-        <Reveal className="flex flex-wrap justify-center gap-2 mb-12">
-          {industries.map((ind, idx) => {
-            const TabIcon = ind.icon
-            return (
-              <button
-                key={ind.id}
-                onClick={() => setActiveIndustry(idx)}
-                className={`flex items-center gap-2 px-5 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
-                  activeIndustry === idx
-                    ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg shadow-violet-500/30 scale-105"
-                    : "bg-white border border-slate-200 text-slate-600 hover:border-violet-500/50 hover:text-violet-600"
-                }`}
-              >
-                <TabIcon className="w-4 h-4" />
-                {ind.name}
-              </button>
-            )
-          })}
+        {/* Industry tabs - horizontal scroll on mobile */}
+        <Reveal className="mb-8 sm:mb-12 -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="flex sm:flex-wrap sm:justify-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-hide">
+            {industries.map((ind, idx) => {
+              const TabIcon = ind.icon
+              return (
+                <button
+                  key={ind.id}
+                  onClick={() => setActiveIndustry(idx)}
+                  className={`flex-shrink-0 flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 ${
+                    activeIndustry === idx
+                      ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg shadow-violet-500/30"
+                      : "bg-white border border-slate-200 text-slate-600 hover:border-violet-500/50 hover:text-violet-600"
+                  }`}
+                >
+                  <TabIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  {ind.name}
+                </button>
+              )
+            })}
+          </div>
         </Reveal>
 
         {/* Active industry content */}
         <Reveal key={activeIndustry}>
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-10 items-center">
             {/* Left - Info */}
-            <div className="order-2 lg:order-1">
-              <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${active.color} text-white text-sm font-semibold mb-4`}>
-                <Icon className="w-4 h-4" />
+            <div className="order-2 lg:order-1 text-center lg:text-left">
+              <div className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r ${active.color} text-white text-xs sm:text-sm font-semibold mb-3 sm:mb-4`}>
+                <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 {active.name}
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">{active.description}</h3>
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 px-2 sm:px-0">{active.description}</h3>
               
               {/* Features list */}
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8 px-4 sm:px-0">
                 {active.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center gap-3 text-muted-foreground">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0" />
+                  <li key={idx} className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base text-muted-foreground justify-center lg:justify-start">
+                    <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 flex-shrink-0" />
                     {feature}
                   </li>
                 ))}
               </ul>
 
               <Button 
-                className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white rounded-xl shadow-lg shadow-violet-500/25"
+                className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white rounded-xl shadow-lg shadow-violet-500/25 w-full sm:w-auto"
               >
                 Узнать подробнее
                 <ArrowRight className="ml-2 w-4 h-4" />
@@ -832,16 +834,16 @@ function IndustriesSection({ locale }: { locale: Locale }) {
             </div>
 
             {/* Right - Metrics cards */}
-            <div className="order-1 lg:order-2 grid grid-cols-3 gap-4">
+            <div className="order-1 lg:order-2 grid grid-cols-3 gap-2 sm:gap-4">
               {active.metrics.map((metric, idx) => (
                 <div 
                   key={idx}
-                  className="group p-6 rounded-2xl bg-white shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-100 hover:border-violet-200 hover:-translate-y-1 text-center"
+                  className="group p-3 sm:p-6 rounded-xl sm:rounded-2xl bg-white shadow-lg sm:shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-100 hover:border-violet-200 hover:-translate-y-1 text-center"
                 >
-                  <div className={`text-3xl md:text-4xl font-black bg-gradient-to-r ${active.color} bg-clip-text text-transparent mb-2`}>
+                  <div className={`text-lg sm:text-3xl md:text-4xl font-black bg-gradient-to-r ${active.color} bg-clip-text text-transparent mb-1 sm:mb-2`}>
                     {metric.value}
                   </div>
-                  <div className="text-sm text-muted-foreground">{metric.label}</div>
+                  <div className="text-[10px] sm:text-sm text-muted-foreground leading-tight">{metric.label}</div>
                 </div>
               ))}
             </div>
@@ -852,7 +854,7 @@ function IndustriesSection({ locale }: { locale: Locale }) {
   )
 }
 
-/* ═══════��══════════════════════════════════════════════════════════════════════
+/* ══���════��══════════════════════════════════════════════════════════════════════
    WHY US SECTION - 3D Cards
 ═══════════════════════════════════════════════════════════════════════════════ */
 
@@ -903,47 +905,47 @@ function WhyUsSection() {
   ]
 
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden"
+    <section className="py-16 sm:py-20 lg:py-32 relative overflow-hidden"
       style={{ background: "linear-gradient(135deg, #0f0c29 0%, #1a1040 30%, #302b63 60%, #24243e 100%)" }}>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(139,92,246,0.2),transparent)]" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/50 to-transparent" />
       
       <div className="container mx-auto px-4 max-w-6xl relative">
-        <Reveal className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-400/30 bg-violet-500/10 text-violet-300 text-sm font-medium mb-6">
-            <Star className="w-4 h-4" />
+        <Reveal className="text-center mb-10 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-violet-400/30 bg-violet-500/10 text-violet-300 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+            <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             Почему мы
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">Почему выбирают M2 AI Solutions</h2>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4 text-white px-2">Почему выбирают M2 AI</h2>
+          <p className="text-base sm:text-xl text-slate-400 max-w-2xl mx-auto px-4">
             6 причин доверить автоматизацию профессионалам
           </p>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {reasons.map((reason, idx) => {
             const Icon = reason.icon
             return (
-              <Reveal key={idx} delay={idx * 80}>
+              <Reveal key={idx} delay={idx * 60}>
                 <div className="group relative h-full">
-                  {/* 3D card effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 to-purple-600/20 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform" />
-                  <div className="relative p-6 rounded-2xl border border-white/10 h-full"
+                  {/* 3D card effect - hidden on mobile */}
+                  <div className="hidden sm:block absolute inset-0 bg-gradient-to-br from-violet-600/20 to-purple-600/20 rounded-2xl transform rotate-1 group-hover:rotate-2 transition-transform" />
+                  <div className="relative p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-white/10 h-full"
                     style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(10px)" }}>
                     
                     {/* Stat badge */}
-                    <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/10 text-white text-sm font-bold">
+                    <div className="absolute top-2 right-2 sm:top-4 sm:right-4 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-white/10 text-white text-[10px] sm:text-sm font-bold">
                       {reason.stat}
                     </div>
 
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${reason.gradient} flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                      <Icon className="w-7 h-7 text-white" />
+                    <div className={`w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br ${reason.gradient} flex items-center justify-center mb-3 sm:mb-5 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                      <Icon className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
                     </div>
                     
-                    <h3 className="text-xl font-bold mb-3 text-white group-hover:text-violet-300 transition-colors">
+                    <h3 className="text-sm sm:text-xl font-bold mb-1.5 sm:mb-3 text-white group-hover:text-violet-300 transition-colors">
                       {reason.title}
                     </h3>
-                    <p className="text-slate-400 leading-relaxed">
+                    <p className="text-xs sm:text-base text-slate-400 leading-relaxed line-clamp-3 sm:line-clamp-none">
                       {reason.desc}
                     </p>
                   </div>
@@ -983,7 +985,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
   ]
 
   const capabilities = [
-    { icon: Bot, title: "Голосовой AI-агент", desc: "Ведёт диалог неотличимо о��� человека", gradient: "from-violet-500 to-purple-600" },
+    { icon: Bot, title: "Голосовой AI-агент", desc: "Ведёт диалог не��тличимо о��� человека", gradient: "from-violet-500 to-purple-600" },
     { icon: Brain, title: "Понимание контекста", desc: "Помнит историю разговора и клиента", gradient: "from-blue-500 to-cyan-600" },
     { icon: Database, title: "CRM интеграция", desc: "amoCRM, Bitrix24, 1C, Leadvertex", gradient: "from-emerald-500 to-teal-600" },
     { icon: BarChart3, title: "Расчёт цен", desc: "Калькуляция по прайсу в реальном времени", gradient: "from-orange-500 to-amber-600" },
@@ -1101,67 +1103,67 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
           ))}
         </div>
 
-        <div className="container mx-auto px-4 relative z-10 py-20 lg:py-0">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="container mx-auto px-4 relative z-10 pt-24 pb-32 md:pt-28 md:pb-36 lg:py-0">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
             
             {/* Left side - Text */}
             <div className="text-center lg:text-left">
               <Reveal>
-                <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-violet-500/30 text-sm font-semibold mb-8"
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-500/30 text-xs sm:text-sm font-semibold mb-6 md:mb-8"
                   style={{ background: "linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(99,102,241,0.1) 100%)" }}>
-                  <Sparkles className="w-4 h-4 text-violet-400" />
-                  <span className="text-violet-300">AI-платформа нового поколения</span>
-                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-violet-400" />
+                  <span className="text-violet-300">AI-платформа</span>
+                  <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-emerald-400 animate-pulse" />
                 </div>
               </Reveal>
 
               <Reveal delay={100}>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-6xl font-bold tracking-tight mb-6 text-white leading-[1.1]">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl font-bold tracking-tight mb-4 md:mb-6 text-white leading-[1.15]">
                   Автоматизируем
-                  <span className="block mt-2 bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                  <span className="block mt-1 sm:mt-2 bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
                     <TypeWriter texts={typewriterTexts} />
                   </span>
                 </h1>
               </Reveal>
 
               <Reveal delay={200}>
-                <p className="text-lg sm:text-xl text-slate-300/90 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                  AI-ассистенты принимают звонки, ведут переговоры, создают заявки в CRM и выставляют счета. 
-                  <span className="text-white font-medium"> Работают 24/7 без выходных.</span>
+                <p className="text-base sm:text-lg md:text-xl text-slate-300/90 mb-6 md:mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed px-2 sm:px-0">
+                  AI-ассистенты принимают звонки, ведут переговоры и создают заявки в CRM.
+                  <span className="text-white font-medium"> Работают 24/7.</span>
                 </p>
               </Reveal>
 
               <Reveal delay={300}>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-6 md:mb-8 px-2 sm:px-0">
                   <Button 
                     size="lg" 
                     onClick={() => openCTA()}
-                    className="group relative overflow-hidden bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white px-8 py-6 text-lg rounded-2xl shadow-xl shadow-violet-500/25 border-0"
+                    className="group relative overflow-hidden bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg rounded-xl sm:rounded-2xl shadow-xl shadow-violet-500/25 border-0 w-full sm:w-auto"
                   >
-                    <span className="relative z-10 flex items-center">
-                      Получить бесплатный аудит
-                      <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <span className="relative z-10 flex items-center justify-center">
+                      Бесплатный аудит
+                      <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </Button>
                   <Button 
                     size="lg" 
-                    className="bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 px-8 py-6 text-lg rounded-2xl backdrop-blur-sm"
+                    className="bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg rounded-xl sm:rounded-2xl backdrop-blur-sm w-full sm:w-auto"
                   >
-                    <Play className="mr-2 w-5 h-5" />
-                    Послушать AI в деле
+                    <Play className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
+                    Послушать AI
                   </Button>
                 </div>
               </Reveal>
 
               <Reveal delay={400}>
-                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 text-sm text-slate-400">
+                <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 text-xs sm:text-sm text-slate-400">
                   <span className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                     Бесплатная консультация
                   </span>
                   <span className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                    Расчёт ROI за 15 минут
+                    ROI за 15 минут
                   </span>
                   <span className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400" />
@@ -1182,20 +1184,20 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
 
         {/* Stats bar at bottom */}
         <div className="absolute bottom-0 left-0 right-0 border-t border-white/10"
-          style={{ background: "rgba(15,23,42,0.8)", backdropFilter: "blur(20px)" }}>
+          style={{ background: "rgba(15,23,42,0.85)", backdropFilter: "blur(20px)" }}>
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 py-5 sm:py-8">
               {stats.map((stat, idx) => {
                 const Icon = stat.icon
                 return (
                   <div key={idx} className="text-center group">
-                    <div className="flex items-center justify-center gap-2 mb-2">
-                      <Icon className="w-5 h-5 text-violet-400 group-hover:scale-110 transition-transform" />
-                      <div className="text-3xl md:text-4xl font-bold text-white">
+                    <div className="flex items-center justify-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
+                      <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-violet-400 group-hover:scale-110 transition-transform" />
+                      <div className="text-xl sm:text-3xl md:text-4xl font-bold text-white">
                         <AnimatedCounter value={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
                       </div>
                     </div>
-                    <div className="text-sm text-slate-400">{stat.label}</div>
+                    <div className="text-[10px] sm:text-sm text-slate-400 leading-tight">{stat.label}</div>
                   </div>
                 )
               })}
@@ -1212,30 +1214,30 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
       {/* ═══════════════════════════════════════════════════════════════════════
           WHAT AI AUTOMATES - Interactive Customer Journey
       ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-28 lg:py-40 relative overflow-hidden">
+      <section className="py-16 sm:py-20 lg:py-40 relative overflow-hidden">
         {/* Premium gradient background */}
         <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #fafbff 0%, #f0f4ff 30%, #faf5ff 60%, #fefefe 100%)" }} />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(139,92,246,0.08),transparent)]" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/30 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
         
-        {/* Animated floating elements */}
-        <div className="absolute top-20 left-[10%] w-64 h-64 bg-violet-400/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-[10%] w-80 h-80 bg-blue-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+        {/* Animated floating elements - hidden on mobile for performance */}
+        <div className="hidden sm:block absolute top-20 left-[10%] w-64 h-64 bg-violet-400/10 rounded-full blur-3xl animate-pulse" />
+        <div className="hidden sm:block absolute bottom-20 right-[10%] w-80 h-80 bg-blue-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
         
         <div className="container mx-auto px-4 max-w-7xl relative">
-          <Reveal className="text-center mb-20">
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-500/10 to-purple-500/10 border border-violet-500/25 text-violet-600 text-sm font-semibold mb-6 shadow-lg shadow-violet-500/5">
-              <Workflow className="w-4 h-4" />
-              Полный цикл автоматизации
-              <span className="ml-1 h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+          <Reveal className="text-center mb-10 sm:mb-16 lg:mb-20">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full bg-gradient-to-r from-violet-500/10 to-purple-500/10 border border-violet-500/25 text-violet-600 text-xs sm:text-sm font-semibold mb-4 sm:mb-6 shadow-lg shadow-violet-500/5">
+              <Workflow className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">Полный цикл автоматизации</span>
+              <span className="sm:hidden">Автоматизация</span>
+              <span className="ml-1 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-emerald-400 animate-pulse" />
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 px-2">
               <span className="bg-gradient-to-r from-slate-800 via-violet-800 to-purple-800 bg-clip-text text-transparent">
                 Что автоматизирует AI
               </span>
             </h2>
-            <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed px-4">
               От первого контакта до повторных продаж — <span className="text-violet-600 font-semibold">без участия человека</span>
             </p>
           </Reveal>
@@ -1243,38 +1245,35 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
           {/* Interactive Customer Journey Flow */}
           <div className="relative">
             {/* Center AI Brain Hub */}
-            <Reveal className="flex justify-center mb-16">
+            <Reveal className="flex justify-center mb-10 sm:mb-16">
               <div className="relative">
-                {/* Pulsing rings */}
-                <div className="absolute inset-0 animate-ping">
-                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-violet-400/30" />
-                </div>
-                <div className="absolute inset-0 animate-pulse" style={{ animationDelay: "0.5s" }}>
-                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border border-violet-400/20 scale-125" />
+                {/* Pulsing rings - simplified on mobile */}
+                <div className="hidden sm:block absolute inset-0 animate-ping">
+                  <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-2 border-violet-400/30" />
                 </div>
                 
                 {/* Main brain hub */}
-                <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 flex items-center justify-center shadow-2xl shadow-violet-500/40">
+                <div className="relative w-20 h-20 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 flex items-center justify-center shadow-2xl shadow-violet-500/40">
                   <div className="absolute inset-1 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 opacity-50" />
-                  <Brain className="w-14 h-14 md:w-16 md:h-16 text-white relative z-10" />
+                  <Brain className="w-10 h-10 sm:w-14 sm:h-14 md:w-16 md:h-16 text-white relative z-10" />
                 </div>
                 
                 {/* Label */}
-                <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                  <span className="px-4 py-2 rounded-full bg-white shadow-lg text-sm font-bold text-violet-600 border border-violet-100">
-                    AI-Центр управления
+                <div className="absolute -bottom-8 sm:-bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                  <span className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white shadow-lg text-xs sm:text-sm font-bold text-violet-600 border border-violet-100">
+                    AI-Центр
                   </span>
                 </div>
               </div>
             </Reveal>
 
-            {/* Journey Steps - Circular Layout */}
-            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-4">
+            {/* Journey Steps - Grid Layout */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-4">
               {[
                 { 
                   icon: PhoneIncoming, 
                   title: "Входящий звонок", 
-                  desc: "Мгновенный ответ 24/7, распознавание речи и намерений",
+                  desc: "Мгновенный ответ 24/7",
                   color: "from-blue-500 to-cyan-500",
                   shadow: "shadow-blue-500/30",
                   num: "01",
@@ -1283,7 +1282,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
                 { 
                   icon: Users, 
                   title: "Квалификация", 
-                  desc: "Определение потребностей и оценка потенциала клиента",
+                  desc: "Оценка потенциала клиента",
                   color: "from-violet-500 to-purple-500",
                   shadow: "shadow-violet-500/30",
                   num: "02",
@@ -1292,16 +1291,16 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
                 { 
                   icon: MessageSquare, 
                   title: "Консультация", 
-                  desc: "Ответы на вопросы, подбор товаров из каталога",
+                  desc: "Ответы на вопросы",
                   color: "from-emerald-500 to-teal-500",
                   shadow: "shadow-emerald-500/30",
                   num: "03",
-                  stat: "500+ FAQ"
+                  stat: "500+"
                 },
                 { 
                   icon: FileText, 
                   title: "Оформление", 
-                  desc: "Создание заявки, расчёт стоимости, выставление счёта",
+                  desc: "Создание заявки и счёта",
                   color: "from-orange-500 to-amber-500",
                   shadow: "shadow-orange-500/30",
                   num: "04",
@@ -1310,7 +1309,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
                 { 
                   icon: Receipt, 
                   title: "Документы", 
-                  desc: "Генерация КП, договоров, актов и отправка на почту",
+                  desc: "Генерация КП и договоров",
                   color: "from-pink-500 to-rose-500",
                   shadow: "shadow-pink-500/30",
                   num: "05",
@@ -1319,7 +1318,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
                 { 
                   icon: TrendingUp, 
                   title: "Повторные продажи", 
-                  desc: "Напоминания, допродажи и возврат ушедших клиентов",
+                  desc: "Допродажи клиентам",
                   color: "from-indigo-500 to-violet-500",
                   shadow: "shadow-indigo-500/30",
                   num: "06",
@@ -1328,42 +1327,38 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
               ].map((step, idx) => {
                 const Icon = step.icon
                 return (
-                  <Reveal key={idx} delay={idx * 100}>
-                    <div className="group relative">
+                  <Reveal key={idx} delay={idx * 60}>
+                    <div className="group relative h-full">
                       {/* Connecting line to next (hidden on mobile) */}
                       {idx < 5 && (
-                        <div className="hidden lg:block absolute top-12 -right-4 w-8 h-0.5">
+                        <div className="hidden lg:block absolute top-10 -right-4 w-8 h-0.5">
                           <div className="h-full bg-gradient-to-r from-slate-300 to-slate-200" />
-                          <div className="absolute top-0 left-0 h-full w-1/2 bg-gradient-to-r from-violet-400 to-transparent animate-pulse" style={{ animationDelay: `${idx * 0.3}s` }} />
                         </div>
                       )}
                       
-                      <div className="relative p-6 rounded-3xl bg-white border border-slate-100 hover:border-violet-200 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full">
+                      <div className="relative p-3 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl lg:rounded-3xl bg-white border border-slate-100 hover:border-violet-200 shadow-md sm:shadow-lg hover:shadow-xl sm:hover:shadow-2xl hover:-translate-y-1 sm:hover:-translate-y-2 transition-all duration-500 h-full">
                         {/* Step number */}
-                        <div className="absolute -top-3 -left-2 w-8 h-8 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-xs font-bold text-slate-500 shadow-md">
+                        <div className="absolute -top-2 -left-1 sm:-top-3 sm:-left-2 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-[10px] sm:text-xs font-bold text-slate-500 shadow-md">
                           {step.num}
                         </div>
                         
                         {/* Stat badge */}
-                        <div className="absolute -top-3 right-4 px-3 py-1 rounded-full bg-gradient-to-r from-slate-800 to-slate-700 text-[10px] font-bold text-white shadow-lg">
+                        <div className="absolute -top-2 right-2 sm:-top-3 sm:right-4 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-gradient-to-r from-slate-800 to-slate-700 text-[8px] sm:text-[10px] font-bold text-white shadow-lg">
                           {step.stat}
                         </div>
                         
                         {/* Icon */}
-                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-4 shadow-xl ${step.shadow} group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
-                          <Icon className="w-7 h-7 text-white" />
+                        <div className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-2 sm:mb-4 shadow-lg sm:shadow-xl ${step.shadow} group-hover:scale-110 transition-all duration-300`}>
+                          <Icon className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-white" />
                         </div>
                         
                         {/* Content */}
-                        <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-violet-600 transition-colors">
+                        <h3 className="text-xs sm:text-base lg:text-lg font-bold text-slate-800 mb-1 sm:mb-2 group-hover:text-violet-600 transition-colors leading-tight">
                           {step.title}
                         </h3>
-                        <p className="text-sm text-slate-500 leading-relaxed">
+                        <p className="text-[10px] sm:text-sm text-slate-500 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none">
                           {step.desc}
                         </p>
-                        
-                        {/* Hover glow effect */}
-                        <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
                       </div>
                     </div>
                   </Reveal>
@@ -1372,23 +1367,23 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
             </div>
 
             {/* Bottom stats bar */}
-            <Reveal className="mt-16">
-              <div className="p-6 md:p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-700/50 shadow-2xl">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            <Reveal className="mt-8 sm:mt-12 lg:mt-16">
+              <div className="p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-700/50 shadow-xl sm:shadow-2xl">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
                   {[
-                    { value: "100%", label: "Звонков обработано", icon: PhoneIncoming },
-                    { value: "< 1 сек", label: "Время ответа", icon: Zap },
-                    { value: "24/7", label: "Работа без выходных", icon: Clock },
-                    { value: "+156%", label: "Рост конверсии", icon: TrendingUp },
+                    { value: "100%", label: "Звонков", icon: PhoneIncoming },
+                    { value: "< 1с", label: "Ответ", icon: Zap },
+                    { value: "24/7", label: "Работа", icon: Clock },
+                    { value: "+156%", label: "Конверсия", icon: TrendingUp },
                   ].map((stat, idx) => {
                     const Icon = stat.icon
                     return (
                       <div key={idx} className="text-center">
-                        <div className="flex items-center justify-center gap-2 mb-2">
-                          <Icon className="w-5 h-5 text-violet-400" />
-                          <span className="text-2xl md:text-3xl font-black text-white">{stat.value}</span>
+                        <div className="flex items-center justify-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
+                          <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-violet-400" />
+                          <span className="text-lg sm:text-2xl md:text-3xl font-black text-white">{stat.value}</span>
                         </div>
-                        <span className="text-xs md:text-sm text-slate-400 font-medium">{stat.label}</span>
+                        <span className="text-[10px] sm:text-xs md:text-sm text-slate-400 font-medium">{stat.label}</span>
                       </div>
                     )
                   })}
@@ -1548,66 +1543,66 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
       {/* ═══════════════════════════════════════════════════════════════════════
           SOLUTIONS GRID - Premium Cards
       ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-28 lg:py-40 relative overflow-hidden">
+      <section className="py-16 sm:py-20 lg:py-40 relative overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 30%, #f0f4ff 60%, #ffffff 100%)" }} />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_100%,rgba(139,92,246,0.08),transparent)]" />
         
         <div className="container mx-auto px-4 max-w-7xl relative">
-          <Reveal className="text-center mb-20">
-            <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/25 text-emerald-600 text-sm font-semibold mb-8 shadow-lg shadow-emerald-500/5">
-              <Target className="w-4 h-4" />
+          <Reveal className="text-center mb-10 sm:mb-16 lg:mb-20">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/25 text-emerald-600 text-xs sm:text-sm font-semibold mb-4 sm:mb-8 shadow-lg shadow-emerald-500/5">
+              <Target className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Готовые решения
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 px-2">
               <span className="bg-gradient-to-r from-slate-800 via-violet-800 to-purple-800 bg-clip-text text-transparent">
                 Выберите решение
               </span>
             </h2>
-            <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto px-4">
               6 готовых продуктов для быстрого старта
             </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {solutions.map((solution, idx) => {
               const Icon = solution.icon
               return (
-                <Reveal key={solution.id} delay={idx * 80}>
+                <Reveal key={solution.id} delay={idx * 60}>
                   <Link href={`/${locale}${solution.href}`} className="block h-full">
-                    <div className={`group relative h-full rounded-3xl transition-all duration-500 hover:-translate-y-2 ${
+                    <div className={`group relative h-full rounded-2xl sm:rounded-3xl transition-all duration-500 hover:-translate-y-1 sm:hover:-translate-y-2 ${
                       solution.featured 
-                        ? "bg-gradient-to-br from-violet-600 to-purple-700 text-white shadow-2xl shadow-violet-500/30 hover:shadow-violet-500/50" 
-                        : "bg-white border border-slate-200 hover:border-violet-300 shadow-lg hover:shadow-2xl hover:shadow-violet-500/10"
+                        ? "bg-gradient-to-br from-violet-600 to-purple-700 text-white shadow-xl sm:shadow-2xl shadow-violet-500/30 hover:shadow-violet-500/50" 
+                        : "bg-white border border-slate-200 hover:border-violet-300 shadow-md sm:shadow-lg hover:shadow-xl sm:hover:shadow-2xl hover:shadow-violet-500/10"
                     }`}>
                       
                       {/* Featured badge */}
                       {solution.featured && (
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-amber-400 text-amber-900 text-xs font-bold shadow-lg flex items-center gap-1.5">
-                          <Star className="w-3 h-3 fill-current" />
-                          Хит продаж
+                        <div className="absolute -top-2 sm:-top-3 left-1/2 -translate-x-1/2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-amber-400 text-amber-900 text-[10px] sm:text-xs font-bold shadow-lg flex items-center gap-1 sm:gap-1.5">
+                          <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />
+                          Хит
                         </div>
                       )}
                       
-                      <div className="p-7 lg:p-8 h-full flex flex-col">
+                      <div className="p-4 sm:p-7 lg:p-8 h-full flex flex-col">
                         {/* Icon */}
-                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl ${
+                        <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-5 group-hover:scale-110 transition-all duration-500 shadow-lg sm:shadow-xl ${
                           solution.featured 
                             ? "bg-white/20 shadow-white/10" 
                             : `bg-gradient-to-br ${solution.gradient} shadow-violet-500/20`
                         }`}>
-                          <Icon className={`w-8 h-8 ${solution.featured ? "text-white" : "text-white"}`} />
+                          <Icon className={`w-6 h-6 sm:w-8 sm:h-8 ${solution.featured ? "text-white" : "text-white"}`} />
                         </div>
                         
                         {/* Content */}
-                        <h3 className={`text-xl lg:text-2xl font-bold mb-3 ${
+                        <h3 className={`text-base sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 ${
                           solution.featured 
                             ? "text-white" 
                             : "text-slate-800 group-hover:text-violet-600"
                         } transition-colors`}>
                           {solution.title}
                         </h3>
-                        <p className={`text-sm lg:text-base leading-relaxed mb-6 flex-1 ${
+                        <p className={`text-xs sm:text-sm lg:text-base leading-relaxed mb-4 sm:mb-6 flex-1 line-clamp-3 sm:line-clamp-none ${
                           solution.featured 
                             ? "text-white/80" 
                             : "text-slate-500"
@@ -1616,26 +1611,21 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
                         </p>
                         
                         {/* CTA */}
-                        <div className={`flex items-center gap-2 text-sm font-semibold ${
+                        <div className={`flex items-center gap-2 text-xs sm:text-sm font-semibold ${
                           solution.featured 
                             ? "text-white" 
                             : "text-violet-600"
                         }`}>
-                          <span>Подробнее о решении</span>
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center group-hover:translate-x-1 transition-transform ${
+                          <span>Подробнее</span>
+                          <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center group-hover:translate-x-1 transition-transform ${
                             solution.featured 
                               ? "bg-white/20" 
                               : "bg-violet-100 group-hover:bg-violet-200"
                           }`}>
-                            <ArrowUpRight className="w-4 h-4" />
+                            <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4" />
                           </div>
                         </div>
                       </div>
-                      
-                      {/* Decorative corner */}
-                      {!solution.featured && (
-                        <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${solution.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-bl-[50px] rounded-tr-3xl`} />
-                      )}
                     </div>
                   </Link>
                 </Reveal>
@@ -1643,11 +1633,11 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
             })}
           </div>
 
-          <Reveal delay={400} className="text-center mt-14">
+          <Reveal delay={400} className="text-center mt-8 sm:mt-14">
             <Link href={`/${locale}/solutions`}>
-              <Button size="lg" className="bg-slate-900 hover:bg-slate-800 text-white px-8 py-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all group">
-                Смотреть все 12 решений
-                <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <Button size="lg" className="bg-slate-900 hover:bg-slate-800 text-white px-6 sm:px-8 py-4 sm:py-6 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl hover:shadow-2xl transition-all group w-full sm:w-auto text-sm sm:text-base">
+                Смотреть все решения
+                <ChevronRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </Reveal>
@@ -1765,7 +1755,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
 
       {/* ═══════════════════════════════════════════════════════════════════════
           INDUSTRIES - Interactive Tabs
-      ════════════════════════════════════════════════════════════════════════ */}
+      ══��═════════════════════════════════════════════════════════════════════ */}
       <IndustriesSection locale={locale} />
 
       {/* ═══════════════════════════════════════════════════════════════════════
