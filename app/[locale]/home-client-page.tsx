@@ -369,7 +369,7 @@ function TestimonialsCarousel() {
       name: "Дмитрий Волков",
       role: "Коммерческий директор, ЛогистикПро",
       avatar: "ДВ",
-      text: "Расчёт стоимости доставки теперь занимает 30 секунд вместо 30 минут. Клиент получает КП прямо во время ������вонка. Конверсия в заказ выросла на 89%.",
+      text: "Расчёт стоимости доставки теперь занимает 30 секунд вместо 30 минут. Клиент получает КП прямо во время ��������вонка. Конверсия в заказ выросла на 89%.",
       rating: 5,
       metrics: { calls: "30 сек", conversion: "+89%", time: "1 мес" },
       gradient: "from-violet-500 to-purple-500"
@@ -1438,84 +1438,69 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
       {/* ═══════════════════════════════════════════════════════════════════════
           AI CAPABILITIES - Dark Premium Section with 3D Effects
       ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-28 lg:py-40 relative overflow-hidden"
+      <section className="py-16 sm:py-20 lg:py-40 relative overflow-hidden"
         style={{ background: "linear-gradient(135deg, #0f0c29 0%, #1a1050 30%, #302b63 60%, #24243e 100%)" }}>
-        {/* Animated grid */}
-        <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#7c3aed_1px,transparent_1px),linear-gradient(to_bottom,#7c3aed_1px,transparent_1px)] bg-[size:50px_50px]" />
+        {/* Animated grid - hidden on mobile */}
+        <div className="hidden sm:block absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#7c3aed_1px,transparent_1px),linear-gradient(to_bottom,#7c3aed_1px,transparent_1px)] bg-[size:50px_50px]" />
         
         {/* Multiple gradient overlays */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(139,92,246,0.2),transparent)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_100%_100%,rgba(59,130,246,0.1),transparent)]" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/60 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/30 to-transparent" />
         
-        {/* Floating orbs */}
-        <div className="absolute top-1/4 left-[10%] w-72 h-72 bg-violet-600/20 rounded-full blur-[100px] animate-pulse" />
-        <div className="absolute bottom-1/4 right-[10%] w-96 h-96 bg-blue-600/15 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: "1s" }} />
+        {/* Floating orbs - hidden on mobile */}
+        <div className="hidden sm:block absolute top-1/4 left-[10%] w-72 h-72 bg-violet-600/20 rounded-full blur-[100px] animate-pulse" />
         
         <div className="container mx-auto px-4 max-w-7xl relative">
-          <Reveal className="text-center mb-20">
-            <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-violet-400/40 bg-violet-500/15 text-violet-200 text-sm font-semibold mb-8 shadow-lg shadow-violet-500/10">
-              <Sparkles className="w-4 h-4" />
-              Возможности платформы
+          <Reveal className="text-center mb-10 sm:mb-16 lg:mb-20">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full border border-violet-400/40 bg-violet-500/15 text-violet-200 text-xs sm:text-sm font-semibold mb-4 sm:mb-8 shadow-lg shadow-violet-500/10">
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              Возможности
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-white px-2">
               Что умеет 
               <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent"> AI</span>
             </h2>
-            <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              8 передовых технологий для полной автоматизации бизнеса
+            <p className="text-base sm:text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed px-4">
+              8 технологий для автоматизации бизнеса
             </p>
           </Reveal>
 
           {/* Bento Grid Layout */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 md:gap-5">
             {capabilities.map((cap, idx) => {
               const Icon = cap.icon
               const isLarge = idx === 0 || idx === 3
               return (
-                <Reveal key={idx} delay={idx * 60}>
-                  <div className={`group relative ${isLarge ? "md:col-span-2 md:row-span-2" : ""}`}>
-                    {/* 3D tilt effect background */}
-                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-600/10 to-purple-600/10 transform group-hover:rotate-1 transition-transform duration-500" />
-                    
-                    <div className={`relative h-full rounded-3xl border border-white/10 group-hover:border-violet-400/30 transition-all duration-500 overflow-hidden ${isLarge ? "p-8 md:p-10" : "p-6"}`}
+                <Reveal key={idx} delay={idx * 40}>
+                  <div className={`group relative h-full ${isLarge ? "md:col-span-2 md:row-span-2" : ""}`}>
+                    <div className={`relative h-full rounded-xl sm:rounded-2xl lg:rounded-3xl border border-white/10 group-hover:border-violet-400/30 transition-all duration-500 overflow-hidden ${isLarge ? "p-4 sm:p-6 md:p-10" : "p-3 sm:p-4 md:p-6"}`}
                       style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(20px)" }}>
                       
-                      {/* Hover glow effect */}
-                      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${cap.gradient}`} style={{ opacity: 0, mixBlendMode: "overlay" }} />
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 bg-gradient-to-br from-white to-transparent" />
-                      
-                      {/* Icon with animated ring */}
-                      <div className="relative mb-5">
-                        <div className={`${isLarge ? "w-20 h-20" : "w-14 h-14"} rounded-2xl bg-gradient-to-br ${cap.gradient} flex items-center justify-center shadow-2xl group-hover:shadow-violet-500/30 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
-                          <Icon className={`${isLarge ? "w-10 h-10" : "w-7 h-7"} text-white`} />
+                      {/* Icon */}
+                      <div className="relative mb-2 sm:mb-4 md:mb-5">
+                        <div className={`${isLarge ? "w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20" : "w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14"} rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-br ${cap.gradient} flex items-center justify-center shadow-lg sm:shadow-2xl group-hover:scale-110 transition-all duration-500`}>
+                          <Icon className={`${isLarge ? "w-5 h-5 sm:w-7 sm:h-7 md:w-10 md:h-10" : "w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7"} text-white`} />
                         </div>
-                        {/* Animated ring on hover */}
-                        <div className={`absolute inset-0 ${isLarge ? "w-20 h-20" : "w-14 h-14"} rounded-2xl border-2 border-white/20 scale-100 opacity-0 group-hover:scale-125 group-hover:opacity-100 transition-all duration-500`} />
                       </div>
                       
                       {/* Content */}
-                      <h3 className={`${isLarge ? "text-2xl md:text-3xl" : "text-lg"} font-bold mb-3 text-white group-hover:text-violet-200 transition-colors`}>
+                      <h3 className={`${isLarge ? "text-sm sm:text-xl md:text-2xl lg:text-3xl" : "text-xs sm:text-sm md:text-lg"} font-bold mb-1 sm:mb-2 md:mb-3 text-white group-hover:text-violet-200 transition-colors leading-tight`}>
                         {cap.title}
                       </h3>
-                      <p className={`${isLarge ? "text-base md:text-lg" : "text-sm"} text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors`}>
+                      <p className={`${isLarge ? "text-xs sm:text-sm md:text-base lg:text-lg" : "text-[10px] sm:text-xs md:text-sm"} text-slate-400 leading-snug sm:leading-relaxed group-hover:text-slate-300 transition-colors line-clamp-2 sm:line-clamp-none`}>
                         {cap.desc}
                       </p>
                       
-                      {/* Large card extra content */}
+                      {/* Large card extra content - hidden on mobile */}
                       {isLarge && (
-                        <div className="mt-6 pt-6 border-t border-white/10">
-                          <div className="flex items-center gap-3 text-sm text-slate-500">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                        <div className="hidden md:block mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-white/10">
+                          <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-500">
+                            <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
                             <span>Включено во все тарифы</span>
                           </div>
                         </div>
                       )}
-                      
-                      {/* Corner accent */}
-                      <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${cap.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-bl-full`} />
                     </div>
                   </div>
                 </Reveal>
@@ -1524,17 +1509,17 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
           </div>
 
           {/* Bottom CTA */}
-          <Reveal className="mt-16 text-center">
-            <p className="text-slate-400 mb-6">
+          <Reveal className="mt-8 sm:mt-12 lg:mt-16 text-center">
+            <p className="text-sm sm:text-base text-slate-400 mb-4 sm:mb-6 px-4">
               Хотите узнать больше о возможностях AI?
             </p>
             <Button 
               size="lg"
               onClick={() => openCTA()}
-              className="bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 px-8 py-6 rounded-2xl backdrop-blur-sm transition-all group"
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/40 px-6 sm:px-8 py-4 sm:py-6 rounded-xl sm:rounded-2xl backdrop-blur-sm transition-all group w-full sm:w-auto text-sm sm:text-base"
             >
-              Получить демо платформы
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              Получить демо
+              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Reveal>
         </div>
@@ -1647,35 +1632,34 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
       {/* ═══════════════════════════════════════════════════════════════════════
           HOW AI WORKS - Interactive Timeline
       ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-28 lg:py-40 relative overflow-hidden"
+      <section className="py-16 sm:py-20 lg:py-40 relative overflow-hidden"
         style={{ background: "linear-gradient(135deg, #f8fafc 0%, #f0f4ff 50%, #faf5ff 100%)" }}>
-        {/* Decorative elements */}
-        <div className="absolute top-20 right-[10%] w-64 h-64 bg-violet-300/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-[10%] w-80 h-80 bg-blue-300/20 rounded-full blur-3xl" />
+        {/* Decorative elements - hidden on mobile */}
+        <div className="hidden sm:block absolute top-20 right-[10%] w-64 h-64 bg-violet-300/20 rounded-full blur-3xl" />
+        <div className="hidden sm:block absolute bottom-20 left-[10%] w-80 h-80 bg-blue-300/20 rounded-full blur-3xl" />
         
         <div className="container mx-auto px-4 max-w-7xl relative">
-          <Reveal className="text-center mb-20">
-            <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/25 text-blue-600 text-sm font-semibold mb-8 shadow-lg shadow-blue-500/5">
-              <Cpu className="w-4 h-4" />
+          <Reveal className="text-center mb-10 sm:mb-16 lg:mb-20">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/25 text-blue-600 text-xs sm:text-sm font-semibold mb-4 sm:mb-8 shadow-lg shadow-blue-500/5">
+              <Cpu className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Как это работает
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 px-2">
               <span className="bg-gradient-to-r from-slate-800 via-blue-800 to-violet-800 bg-clip-text text-transparent">
                 6 шагов AI-продажи
               </span>
             </h2>
-            <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto">
-              От входящего звонка до закрытия сделки за минуты
+            <p className="text-base sm:text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto px-4">
+              От звонка до сделки за минуты
             </p>
           </Reveal>
 
           {/* Timeline */}
           <div className="relative">
-            {/* Connecting line */}
-            <div className="hidden lg:block absolute top-28 left-[8%] right-[8%] h-1 bg-gradient-to-r from-violet-200 via-purple-300 to-violet-200 rounded-full" />
-            <div className="hidden lg:block absolute top-28 left-[8%] h-1 w-0 bg-gradient-to-r from-violet-500 to-purple-500 rounded-full animate-pulse" style={{ width: "84%", animationDuration: "3s" }} />
+            {/* Connecting line - desktop only */}
+            <div className="hidden lg:block absolute top-24 left-[8%] right-[8%] h-1 bg-gradient-to-r from-violet-200 via-purple-300 to-violet-200 rounded-full" />
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 lg:gap-4">
               {processSteps.map((step, idx) => {
                 const Icon = step.icon
                 const colors = [
@@ -1687,39 +1671,36 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
                   "from-indigo-500 to-violet-500"
                 ]
                 return (
-                  <Reveal key={idx} delay={idx * 100}>
-                    <div className="relative group text-center">
-                      {/* Step number circle on timeline */}
-                      <div className="hidden lg:flex w-14 h-14 mx-auto mb-6 rounded-full bg-white shadow-xl items-center justify-center relative z-10 group-hover:scale-110 transition-transform border-4 border-violet-100 group-hover:border-violet-300">
-                        <span className="text-lg font-black bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">{step.num}</span>
+                  <Reveal key={idx} delay={idx * 60}>
+                    <div className="relative group text-center h-full">
+                      {/* Step number circle on timeline - desktop only */}
+                      <div className="hidden lg:flex w-12 h-12 mx-auto mb-4 rounded-full bg-white shadow-xl items-center justify-center relative z-10 group-hover:scale-110 transition-transform border-4 border-violet-100 group-hover:border-violet-300">
+                        <span className="text-base font-black bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">{step.num}</span>
                       </div>
                       
                       {/* Card */}
-                      <div className="relative p-6 bg-white rounded-3xl shadow-lg group-hover:shadow-2xl group-hover:-translate-y-2 transition-all duration-500 border border-slate-100 group-hover:border-violet-200 overflow-hidden h-full">
-                        {/* Large number background */}
-                        <div className="absolute -top-4 -right-2 text-[6rem] font-black text-violet-500/[0.06] select-none leading-none">
+                      <div className="relative p-3 sm:p-4 lg:p-6 bg-white rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-md sm:shadow-lg group-hover:shadow-xl sm:group-hover:shadow-2xl group-hover:-translate-y-1 sm:group-hover:-translate-y-2 transition-all duration-500 border border-slate-100 group-hover:border-violet-200 overflow-hidden h-full">
+                        {/* Large number background - hidden on mobile */}
+                        <div className="hidden sm:block absolute -top-4 -right-2 text-[4rem] lg:text-[6rem] font-black text-violet-500/[0.06] select-none leading-none">
                           {step.num}
                         </div>
                         
                         {/* Mobile step number */}
-                        <div className="lg:hidden absolute top-4 left-4 w-8 h-8 rounded-full bg-violet-100 flex items-center justify-center text-sm font-bold text-violet-600">
+                        <div className="lg:hidden absolute top-2 left-2 sm:top-3 sm:left-3 w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-violet-100 flex items-center justify-center text-[10px] sm:text-xs font-bold text-violet-600">
                           {step.num}
                         </div>
                         
                         {/* Icon */}
-                        <div className={`w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br ${colors[idx]} flex items-center justify-center mb-4 shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
-                          <Icon className="w-7 h-7 text-white" />
+                        <div className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 mx-auto rounded-lg sm:rounded-xl lg:rounded-2xl bg-gradient-to-br ${colors[idx]} flex items-center justify-center mb-2 sm:mb-3 lg:mb-4 shadow-lg sm:shadow-xl group-hover:scale-110 transition-all duration-500`}>
+                          <Icon className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-white" />
                         </div>
                         
-                        <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-violet-600 transition-colors">
+                        <h3 className="text-xs sm:text-sm lg:text-lg font-bold text-slate-800 mb-1 sm:mb-2 group-hover:text-violet-600 transition-colors leading-tight">
                           {step.title}
                         </h3>
-                        <p className="text-sm text-slate-500 leading-relaxed">
+                        <p className="text-[10px] sm:text-xs lg:text-sm text-slate-500 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none">
                           {step.desc}
                         </p>
-                        
-                        {/* Hover gradient overlay */}
-                        <div className={`absolute inset-0 bg-gradient-to-br ${colors[idx]} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`} />
                       </div>
                     </div>
                   </Reveal>
@@ -1729,18 +1710,18 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
           </div>
 
           {/* Bottom stats */}
-          <Reveal className="mt-16">
-            <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+          <Reveal className="mt-8 sm:mt-12 lg:mt-16">
+            <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-16">
               {[
-                { value: "30 сек", label: "Средний звонок" },
+                { value: "30 сек", label: "Звонок" },
                 { value: "0", label: "Пропущенных" },
                 { value: "100%", label: "Автоматизация" },
               ].map((stat, idx) => (
                 <div key={idx} className="text-center">
-                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
+                  <div className="text-xl sm:text-3xl md:text-4xl font-black bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
                     {stat.value}
                   </div>
-                  <div className="text-sm text-slate-500 font-medium mt-1">{stat.label}</div>
+                  <div className="text-[10px] sm:text-sm text-slate-500 font-medium mt-0.5 sm:mt-1">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -1771,44 +1752,44 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
       {/* ═══════════════════════════════════════════════════════════════════════
           INTEGRATIONS - Animated Marquee
       ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 lg:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950" />
+      <section className="py-16 sm:py-20 lg:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50 to-white" />
         
         <div className="container mx-auto px-4 max-w-6xl relative">
-          <Reveal className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400 text-sm font-medium mb-6">
-              <Database className="w-4 h-4" />
+          <Reveal className="text-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+              <Database className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Экосистема
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">50+ интеграций</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              CRM, телефония, мессенджеры, ERP — всё работает вместе
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4">50+ интеграций</h2>
+            <p className="text-sm sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
+              CRM, телефония, мессенджеры — всё работает вместе
             </p>
           </Reveal>
 
           {/* Animated marquee rows */}
-          <div className="space-y-4 overflow-hidden">
+          <div className="space-y-2 sm:space-y-4 overflow-hidden">
             <div className="flex animate-marquee">
               {[...integrations, ...integrations].map((item, idx) => (
-                <div key={idx} className="flex-shrink-0 mx-2 px-6 py-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-lg hover:shadow-xl hover:border-violet-500/50 hover:scale-105 transition-all duration-300 cursor-default">
-                  <span className="font-semibold text-foreground">{item.name}</span>
-                  <span className="ml-2 text-xs text-violet-500 font-medium">{item.category}</span>
+                <div key={idx} className="flex-shrink-0 mx-1 sm:mx-2 px-3 sm:px-6 py-2 sm:py-4 rounded-lg sm:rounded-2xl bg-white border border-slate-200 shadow-md sm:shadow-lg hover:shadow-xl hover:border-violet-500/50 transition-all duration-300 cursor-default">
+                  <span className="font-semibold text-foreground text-xs sm:text-base">{item.name}</span>
+                  <span className="ml-1 sm:ml-2 text-[10px] sm:text-xs text-violet-500 font-medium">{item.category}</span>
                 </div>
               ))}
             </div>
             <div className="flex animate-marquee-reverse">
               {[...integrations.slice().reverse(), ...integrations.slice().reverse()].map((item, idx) => (
-                <div key={idx} className="flex-shrink-0 mx-2 px-6 py-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-lg hover:shadow-xl hover:border-violet-500/50 hover:scale-105 transition-all duration-300 cursor-default">
-                  <span className="font-semibold text-foreground">{item.name}</span>
-                  <span className="ml-2 text-xs text-violet-500 font-medium">{item.category}</span>
+                <div key={idx} className="flex-shrink-0 mx-1 sm:mx-2 px-3 sm:px-6 py-2 sm:py-4 rounded-lg sm:rounded-2xl bg-white border border-slate-200 shadow-md sm:shadow-lg hover:shadow-xl hover:border-violet-500/50 transition-all duration-300 cursor-default">
+                  <span className="font-semibold text-foreground text-xs sm:text-base">{item.name}</span>
+                  <span className="ml-1 sm:ml-2 text-[10px] sm:text-xs text-violet-500 font-medium">{item.category}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <Reveal className="text-center mt-10">
-            <p className="text-muted-foreground">
-              Нужна интеграция с вашей системой? <span className="text-violet-600 dark:text-violet-400 font-semibold cursor-pointer hover:underline" onClick={() => openCTA()}>Свяжитесь с нами</span>
+          <Reveal className="text-center mt-6 sm:mt-10">
+            <p className="text-xs sm:text-base text-muted-foreground px-4">
+              Нужна интеграция? <span className="text-violet-600 font-semibold cursor-pointer hover:underline" onClick={() => openCTA()}>Свяжитесь с нами</span>
             </p>
           </Reveal>
         </div>
@@ -1817,25 +1798,25 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
       {/* ═══════════════════════════════════════════════════════════════════════
           FAQ
       ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 lg:py-32"
+      <section className="py-16 sm:py-20 lg:py-32"
         style={{ background: "linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%)" }}>
         <div className="container mx-auto px-4 max-w-3xl">
-          <Reveal className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-600 text-sm font-medium mb-6">
-              <MessageSquare className="w-4 h-4" />
+          <Reveal className="text-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-600 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+              <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               FAQ
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">Частые вопросы</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4">Частые вопросы</h2>
           </Reveal>
 
           <Reveal>
-            <Accordion type="single" collapsible className="space-y-4">
+            <Accordion type="single" collapsible className="space-y-2 sm:space-y-4">
               {faqItems.map((item, idx) => (
-                <AccordionItem key={idx} value={`faq-${idx}`} className="bg-white rounded-2xl px-6 border-0 shadow-sm data-[state=open]:shadow-md transition-shadow">
-                  <AccordionTrigger className="text-left font-semibold hover:no-underline py-5 hover:text-violet-600 transition-colors">
+                <AccordionItem key={idx} value={`faq-${idx}`} className="bg-white rounded-xl sm:rounded-2xl px-4 sm:px-6 border-0 shadow-sm data-[state=open]:shadow-md transition-shadow">
+                  <AccordionTrigger className="text-left font-semibold hover:no-underline py-3 sm:py-5 hover:text-violet-600 transition-colors text-sm sm:text-base">
                     {item.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
+                  <AccordionContent className="text-muted-foreground pb-3 sm:pb-5 leading-relaxed text-xs sm:text-base">
                     {item.a}
                   </AccordionContent>
                 </AccordionItem>
@@ -1848,20 +1829,18 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
       {/* ═══════════════════════════════════════════════════════════════════════
           FINAL CTA - Premium Design with WOW Effects
       ════════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 lg:py-40 relative overflow-hidden"
+      <section className="py-16 sm:py-20 lg:py-40 relative overflow-hidden"
         style={{ background: "linear-gradient(135deg, #0f0c29 0%, #1a1050 30%, #302b63 60%, #24243e 100%)" }}>
-        {/* Animated grid background */}
-        <div className="absolute inset-0 opacity-[0.04] bg-[linear-gradient(to_right,#7c3aed_1px,transparent_1px),linear-gradient(to_bottom,#7c3aed_1px,transparent_1px)] bg-[size:60px_60px]" />
+        {/* Animated grid background - hidden on mobile */}
+        <div className="hidden sm:block absolute inset-0 opacity-[0.04] bg-[linear-gradient(to_right,#7c3aed_1px,transparent_1px),linear-gradient(to_bottom,#7c3aed_1px,transparent_1px)] bg-[size:60px_60px]" />
         
-        {/* Multiple glow orbs with animation */}
+        {/* Glow orbs */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_120%,rgba(139,92,246,0.25),transparent)]" />
-        <GlowOrb className="w-[700px] h-[500px] top-0 left-1/4 animate-pulse" color="violet" />
-        <GlowOrb className="w-[600px] h-[400px] bottom-0 right-1/4" color="blue" />
-        <GlowOrb className="w-[400px] h-[300px] top-1/3 right-1/3" color="purple" />
+        <GlowOrb className="hidden sm:block w-[500px] lg:w-[700px] h-[350px] lg:h-[500px] top-0 left-1/4 animate-pulse" color="violet" />
         
-        {/* Floating particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(15)].map((_, i) => (
+        {/* Floating particles - fewer on mobile */}
+        <div className="hidden sm:block absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(10)].map((_, i) => (
             <div
               key={i}
               className="absolute h-1.5 w-1.5 bg-violet-400/40 rounded-full"
@@ -1876,7 +1855,7 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
         </div>
         
         <div className="container mx-auto px-4 max-w-5xl relative z-10">
-          {/* Floating feature cards */}
+          {/* Floating feature cards - desktop only */}
           <div className="hidden lg:block absolute -left-20 top-20">
             <FloatingCard delay={0}>
               <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-4 shadow-2xl">
@@ -1926,57 +1905,57 @@ export default function HomeClientPage({ locale }: { locale: Locale }) {
           </div>
 
           <Reveal className="text-center">
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-violet-400/40 bg-violet-500/15 text-violet-200 text-sm font-semibold mb-8 animate-pulse-glow">
-              <Sparkles className="w-4 h-4" />
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full border border-violet-400/40 bg-violet-500/15 text-violet-200 text-xs sm:text-sm font-semibold mb-4 sm:mb-8 animate-pulse-glow">
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Начните сегодня
-              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+              <span className="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-emerald-400" />
             </div>
             
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-8 text-white leading-tight">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-8 text-white leading-tight px-2">
               Готовы автоматизировать
-              <span className="block mt-2 bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
+              <span className="block mt-1 sm:mt-2 bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
                 ваш бизнес?
               </span>
             </h2>
             
-            <p className="text-xl md:text-2xl text-slate-300/90 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Получите бесплатную консультацию и расчёт ROI для вашей компании. 
-              <span className="text-white font-medium"> Начните с 7-дневного тестового периода.</span>
+            <p className="text-sm sm:text-xl md:text-2xl text-slate-300/90 mb-6 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4">
+              Бесплатная консультация и расчёт ROI.
+              <span className="text-white font-medium"> 7 дней тестового периода.</span>
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-5 justify-center mb-10">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 justify-center mb-6 sm:mb-10 px-4 sm:px-0">
               <Button 
                 size="lg" 
                 onClick={() => openCTA()}
-                className="group relative overflow-hidden bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white px-12 py-8 text-xl rounded-2xl shadow-2xl shadow-violet-500/40 border-0"
+                className="group relative overflow-hidden bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white px-6 sm:px-12 py-5 sm:py-8 text-base sm:text-xl rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl shadow-violet-500/40 border-0 w-full sm:w-auto"
               >
-                <span className="relative z-10 flex items-center font-semibold">
-                  Получить бесплатный аудит
-                  <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                <span className="relative z-10 flex items-center justify-center font-semibold">
+                  Бесплатный аудит
+                  <ArrowRight className="ml-2 sm:ml-3 w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-2 transition-transform" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity" />
               </Button>
               <Button 
                 size="lg" 
-                className="group bg-white/10 hover:bg-white/20 text-white border-2 border-white/20 hover:border-white/40 px-12 py-8 text-xl rounded-2xl backdrop-blur-sm transition-all"
+                className="group bg-white/10 hover:bg-white/20 text-white border-2 border-white/20 hover:border-white/40 px-6 sm:px-12 py-5 sm:py-8 text-base sm:text-xl rounded-xl sm:rounded-2xl backdrop-blur-sm transition-all w-full sm:w-auto"
               >
-                <Phone className="mr-3 w-6 h-6 group-hover:scale-110 transition-transform" />
-                +7 (499) 123-45-67
+                <Phone className="mr-2 sm:mr-3 w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
+                Позвонить
               </Button>
             </div>
             
             {/* Trust badges */}
-            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400">
-              <span className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-2 sm:gap-6 text-xs sm:text-sm text-slate-400 px-4">
+              <span className="flex items-center gap-1.5 sm:gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
                 Бесплатная консультация
               </span>
-              <span className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                Расчёт ROI за 15 минут
+              <span className="flex items-center gap-1.5 sm:gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
+                ROI за 15 минут
               </span>
-              <span className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <span className="flex items-center gap-1.5 sm:gap-2">
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
                 Без обязательств
               </span>
             </div>
