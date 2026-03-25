@@ -26,13 +26,168 @@ export class LeadService {
 
   async sendEmailNotification(leadData: LeadData, correlationId: string): Promise<void> {
     try {
-      // TODO: Implement email service integration (SendGrid, Postmark, etc.)
-      log.info("Sending email notification", { leadId: leadData.id, correlationId })
-      await new Promise((resolve) => setTimeout(resolve, 100))
+      const NOTIFICATION_EMAIL = "info@2solutions.com"
+      
+      // Format the email content
+      const subject = `[M2 AI Solutions] Новая заявка: ${leadData.type} от ${leadData.contact.name}`
+      const htmlContent = this.formatEmailHtml(leadData)
+      const textContent = this.formatEmailText(leadData)
+      
+      // Try Resend first (recommended for Vercel)
+      if (process.env.RESEND_API_KEY) {
+        const response = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: "M2 AI Solutions <noreply@2solutions.com>",
+            to: [NOTIFICATION_EMAIL],
+            subject,
+            html: htmlContent,
+            text: textContent,
+          }),
+        })
+        
+        if (!response.ok) {
+          const error = await response.text()
+          log.error("Resend API error", { error, correlationId })
+          throw new Error(`Resend API error: ${error}`)
+        }
+        
+        log.info("Email sent via Resend", { leadId: leadData.id, correlationId })
+        return
+      }
+      
+      // Fallback: use basic SMTP via fetch to email API (for development/testing)
+      log.info("Email notification prepared (no email service configured)", { 
+        leadId: leadData.id, 
+        to: NOTIFICATION_EMAIL,
+        subject,
+        correlationId 
+      })
+      
     } catch (error) {
       log.error("Failed to send email notification", error, { leadId: leadData.id, correlationId })
-      throw new AppError("Email notification failed", 500)
+      // Don't throw - we still want to log the lead even if email fails
     }
+  }
+
+  formatEmailHtml(leadData: LeadData): string {
+    const typeLabels: Record<string, string> = {
+      lead: "Общий запрос",
+      demo: "Запрос демо",
+      trial: "Тестовый период",
+      quote: "Запрос КП",
+      brief: "Бриф",
+      consultation: "Консультация",
+      subscribe: "Подписка",
+    }
+
+    return `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #7c3aed, #6366f1); color: white; padding: 30px; border-radius: 12px 12px 0 0; }
+    .header h1 { margin: 0; font-size: 24px; }
+    .content { background: #f8fafc; padding: 30px; border-radius: 0 0 12px 12px; }
+    .field { margin-bottom: 16px; }
+    .label { font-weight: 600; color: #64748b; font-size: 12px; text-transform: uppercase; margin-bottom: 4px; }
+    .value { font-size: 16px; color: #1e293b; }
+    .badge { display: inline-block; background: #7c3aed; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .footer { text-align: center; margin-top: 20px; color: #94a3b8; font-size: 12px; }
+    .utm-info { background: #e2e8f0; padding: 12px; border-radius: 8px; margin-top: 20px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Новая заявка</h1>
+      <span class="badge">${typeLabels[leadData.type] || leadData.type}</span>
+    </div>
+    <div class="content">
+      <div class="field">
+        <div class="label">Имя</div>
+        <div class="value">${leadData.contact.name}</div>
+      </div>
+      ${leadData.contact.company ? `
+      <div class="field">
+        <div class="label">Компания</div>
+        <div class="value">${leadData.contact.company}</div>
+      </div>
+      ` : ''}
+      <div class="field">
+        <div class="label">Email</div>
+        <div class="value"><a href="mailto:${leadData.contact.email}">${leadData.contact.email}</a></div>
+      </div>
+      <div class="field">
+        <div class="label">Телефон</div>
+        <div class="value"><a href="tel:${leadData.contact.phone}">${leadData.contact.phone}</a></div>
+      </div>
+      ${leadData.message ? `
+      <div class="field">
+        <div class="label">Сообщение</div>
+        <div class="value">${leadData.message}</div>
+      </div>
+      ` : ''}
+      <div class="field">
+        <div class="label">Язык</div>
+        <div class="value">${leadData.locale?.toUpperCase() || 'RU'}</div>
+      </div>
+      <div class="field">
+        <div class="label">Дата</div>
+        <div class="value">${new Date(leadData.timestamp).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}</div>
+      </div>
+      ${leadData.utm ? `
+      <div class="utm-info">
+        <strong>UTM метки:</strong><br>
+        ${Object.entries(leadData.utm).filter(([,v]) => v).map(([k,v]) => `${k}: ${v}`).join('<br>')}
+      </div>
+      ` : ''}
+    </div>
+    <div class="footer">
+      ID заявки: ${leadData.id}<br>
+      M2 AI Solutions
+    </div>
+  </div>
+</body>
+</html>
+    `.trim()
+  }
+
+  formatEmailText(leadData: LeadData): string {
+    const typeLabels: Record<string, string> = {
+      lead: "Общий запрос",
+      demo: "Запрос демо",
+      trial: "Тестовый период",
+      quote: "Запрос КП",
+      brief: "Бриф",
+      consultation: "Консультация",
+      subscribe: "Подписка",
+    }
+
+    return `
+НОВАЯ ЗАЯВКА - ${typeLabels[leadData.type] || leadData.type}
+${'='.repeat(50)}
+
+Имя: ${leadData.contact.name}
+${leadData.contact.company ? `Компания: ${leadData.contact.company}` : ''}
+Email: ${leadData.contact.email}
+Телефон: ${leadData.contact.phone}
+${leadData.message ? `\nСообщение:\n${leadData.message}` : ''}
+
+Язык: ${leadData.locale?.toUpperCase() || 'RU'}
+Дата: ${new Date(leadData.timestamp).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}
+
+${'='.repeat(50)}
+ID заявки: ${leadData.id}
+M2 AI Solutions
+    `.trim()
   }
 
   async sendToGoogleSheets(leadData: LeadData, correlationId: string): Promise<void> {

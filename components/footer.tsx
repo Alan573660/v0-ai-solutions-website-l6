@@ -649,50 +649,63 @@ export function Footer({ locale }: FooterProps) {
         <div className="py-8 border-t border-border/50">
           <div className="grid lg:grid-cols-2 gap-8">
             
-            {/* Реквизиты компании */}
-            <div className="space-y-4">
-              <h3 className="font-semibold text-sm flex items-center gap-2">
-                <Building2 className="h-4 w-4 text-primary" />
-                {t.companyDetails}
-              </h3>
-              <div className="bg-muted/50 rounded-lg p-4 space-y-2 text-sm">
-                <p className="font-medium">{t.companyRequisites.name}</p>
-                <p className="text-muted-foreground">
-                  {t.companyRequisites.address}
-                </p>
-                <div className="flex flex-wrap gap-x-6 gap-y-1 text-muted-foreground">
-                  <span>ИНН: {t.companyRequisites.inn}</span>
-                  <span>КПП: {t.companyRequisites.kpp}</span>
+            {/* Реквизиты компании - только для русской локали */}
+            {locale === "ru" && (
+              <div className="space-y-4">
+                <h3 className="font-semibold text-sm flex items-center gap-2">
+                  <Building2 className="h-4 w-4 text-primary" />
+                  {t.companyDetails}
+                </h3>
+                <div className="bg-muted/50 rounded-lg p-4 space-y-2 text-sm">
+                  <p className="font-medium">{t.companyRequisites.name}</p>
+                  <p className="text-muted-foreground">
+                    {t.companyRequisites.address}
+                  </p>
+                  <div className="flex flex-wrap gap-x-6 gap-y-1 text-muted-foreground">
+                    <span>ИНН: {t.companyRequisites.inn}</span>
+                    <span>КПП: {t.companyRequisites.kpp}</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
             {/* Офисы */}
-            <div className="space-y-4">
+            <div className={cn("space-y-4", locale !== "ru" && "lg:col-span-2")}>
               <h3 className="font-semibold text-sm flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-primary" />
                 {t.offices}
               </h3>
-              <div className="grid sm:grid-cols-3 gap-4">
-                <div className="text-sm">
-                  <p className="font-medium">{t.officesList.moscow.city}</p>
-                  <p className="text-muted-foreground text-xs">{t.officesList.moscow.country}</p>
-                  <div className="mt-2">
-                    <MessengerLinks phone="+79957967506" country="russia" />
-                  </div>
-                </div>
+              <div className={cn(
+                "grid gap-4",
+                locale === "ru" ? "sm:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-2 max-w-xl"
+              )}>
+                {/* Барселона - головной офис для нерусских локалей */}
                 <div className="text-sm">
                   <p className="font-medium">{t.officesList.barcelona.city}</p>
-                  <p className="text-muted-foreground text-xs">{t.officesList.barcelona.country}</p>
+                  <p className="text-muted-foreground text-xs">
+                    {t.officesList.barcelona.country}
+                    {locale !== "ru" && " · HQ"}
+                  </p>
                   <div className="mt-2">
-                    <MessengerLinks phone="+34631026692" country="spain" />
+                    <MessengerLinks phone="+34631026692" country="spain" locale={locale} variant="compact" />
                   </div>
                 </div>
+                {/* Москва - только для русской локали */}
+                {locale === "ru" && (
+                  <div className="text-sm">
+                    <p className="font-medium">{t.officesList.moscow.city}</p>
+                    <p className="text-muted-foreground text-xs">{t.officesList.moscow.country}</p>
+                    <div className="mt-2">
+                      <MessengerLinks phone="+79957967506" country="russia" locale={locale} variant="compact" />
+                    </div>
+                  </div>
+                )}
+                {/* Астана */}
                 <div className="text-sm">
                   <p className="font-medium">{t.officesList.astana.city}</p>
                   <p className="text-muted-foreground text-xs">{t.officesList.astana.country}</p>
                   <div className="mt-2">
-                    <MessengerLinks phone="+77715242088" country="kazakhstan" />
+                    <MessengerLinks phone="+77715242088" country="kazakhstan" locale={locale} variant="compact" />
                   </div>
                 </div>
               </div>

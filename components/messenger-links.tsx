@@ -1,54 +1,150 @@
 "use client"
 
-import { MessageCircle, Send } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+
+// Custom WhatsApp Icon - official style
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg 
+      viewBox="0 0 24 24" 
+      className={className}
+      fill="currentColor"
+    >
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  )
+}
+
+// Custom Telegram Icon - official style
+function TelegramIcon({ className }: { className?: string }) {
+  return (
+    <svg 
+      viewBox="0 0 24 24" 
+      className={className}
+      fill="currentColor"
+    >
+      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+    </svg>
+  )
+}
 
 interface MessengerLinksProps {
   phone: string
-  country: "spain" | "kazakhstan" | "russia"
+  country?: "spain" | "kazakhstan" | "russia" | "germany" | "netherlands" | "france"
   className?: string
+  locale?: string
+  variant?: "default" | "compact" | "floating"
+  showLabels?: boolean
 }
 
-export function MessengerLinks({ phone, country, className = "" }: MessengerLinksProps) {
+export function MessengerLinks({ 
+  phone, 
+  country, 
+  className = "", 
+  locale = "ru",
+  variant = "default",
+  showLabels = true
+}: MessengerLinksProps) {
   // Remove all non-digit characters from phone
   const cleanPhone = phone.replace(/\D/g, "")
 
   const whatsappUrl = `https://wa.me/${cleanPhone}`
-  const telegramUrl = `https://t.me/${cleanPhone}`
+  const telegramUrl = `https://t.me/+${cleanPhone}`
 
-  const countryNames = {
-    spain: "Испания",
-    kazakhstan: "Казахстан",
-    russia: "Россия",
+  const countryNames: Record<string, Record<string, string>> = {
+    ru: { spain: "Испания", kazakhstan: "Казахстан", russia: "Россия", germany: "Германия", netherlands: "Нидерланды", france: "Франция" },
+    en: { spain: "Spain", kazakhstan: "Kazakhstan", russia: "Russia", germany: "Germany", netherlands: "Netherlands", france: "France" },
+    es: { spain: "España", kazakhstan: "Kazajistán", russia: "Rusia", germany: "Alemania", netherlands: "Países Bajos", france: "Francia" },
+    de: { spain: "Spanien", kazakhstan: "Kasachstan", russia: "Russland", germany: "Deutschland", netherlands: "Niederlande", france: "Frankreich" },
+    nl: { spain: "Spanje", kazakhstan: "Kazachstan", russia: "Rusland", germany: "Duitsland", netherlands: "Nederland", france: "Frankrijk" },
+    fr: { spain: "Espagne", kazakhstan: "Kazakhstan", russia: "Russie", germany: "Allemagne", netherlands: "Pays-Bas", france: "France" },
   }
 
+  // Floating variant - fixed position buttons
+  if (variant === "floating") {
+    return (
+      <div className={cn("fixed bottom-6 right-6 z-50 flex flex-col gap-3", className)}>
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+          className="group flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-lg shadow-green-500/30 hover:scale-110 hover:shadow-xl hover:shadow-green-500/40 transition-all duration-300"
+        >
+          <WhatsAppIcon className="w-7 h-7 group-hover:scale-110 transition-transform" />
+        </a>
+        <a
+          href={telegramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Telegram"
+          className="group flex items-center justify-center w-14 h-14 rounded-full bg-[#0088cc] text-white shadow-lg shadow-blue-500/30 hover:scale-110 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300"
+        >
+          <TelegramIcon className="w-7 h-7 group-hover:scale-110 transition-transform" />
+        </a>
+      </div>
+    )
+  }
+
+  // Compact variant - just icons
+  if (variant === "compact") {
+    return (
+      <div className={cn("flex items-center gap-2", className)}>
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+          className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all duration-300"
+        >
+          <WhatsAppIcon className="w-5 h-5" />
+        </a>
+        <a
+          href={telegramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Telegram"
+          className="flex items-center justify-center w-10 h-10 rounded-xl bg-[#0088cc]/10 text-[#0088cc] hover:bg-[#0088cc] hover:text-white transition-all duration-300"
+        >
+          <TelegramIcon className="w-5 h-5" />
+        </a>
+      </div>
+    )
+  }
+
+  // Default variant - buttons with labels
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
-      <div className="text-sm font-medium text-muted-foreground">{countryNames[country]}:</div>
+    <div className={cn("flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3", className)}>
+      {country && (
+        <div className="text-xs sm:text-sm font-medium text-muted-foreground whitespace-nowrap">
+          {countryNames[locale]?.[country] || countryNames.en[country]}:
+        </div>
+      )}
       <div className="flex items-center gap-2">
-        <Button
-          size="sm"
-          variant="outline"
-          className="h-9 px-3 hover:bg-green-50 hover:border-green-500 hover:text-green-700 transition-colors bg-transparent"
-          asChild
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`WhatsApp ${phone}`}
+          className="group inline-flex items-center gap-2 h-9 sm:h-10 px-3 sm:px-4 rounded-xl bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white border border-[#25D366]/20 hover:border-[#25D366] transition-all duration-300"
         >
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label={`WhatsApp ${phone}`}>
-            <MessageCircle className="h-4 w-4 mr-1.5" />
-            WhatsApp
-          </a>
-        </Button>
-        <Button
-          size="sm"
-          variant="outline"
-          className="h-9 px-3 hover:bg-blue-50 hover:border-blue-500 hover:text-blue-700 transition-colors bg-transparent"
-          asChild
+          <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+          {showLabels && <span className="text-xs sm:text-sm font-medium">WhatsApp</span>}
+        </a>
+        <a
+          href={telegramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Telegram ${phone}`}
+          className="group inline-flex items-center gap-2 h-9 sm:h-10 px-3 sm:px-4 rounded-xl bg-[#0088cc]/10 text-[#0088cc] hover:bg-[#0088cc] hover:text-white border border-[#0088cc]/20 hover:border-[#0088cc] transition-all duration-300"
         >
-          <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label={`Telegram ${phone}`}>
-            <Send className="h-4 w-4 mr-1.5" />
-            Telegram
-          </a>
-        </Button>
+          <TelegramIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+          {showLabels && <span className="text-xs sm:text-sm font-medium">Telegram</span>}
+        </a>
       </div>
     </div>
   )
 }
+
+// Export individual icons for use elsewhere
+export { WhatsAppIcon, TelegramIcon }
