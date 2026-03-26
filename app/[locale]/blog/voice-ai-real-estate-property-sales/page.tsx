@@ -20,16 +20,86 @@ import {
 import Link from "next/link"
 import ArticleSchema from "@/components/article-schema"
 import type { Locale } from "@/lib/i18n/config"
+import { locales } from "@/lib/i18n/config"
 
-export const metadata: Metadata = {
-  title: "Голосовой AI в недвижимости: Автоматизация продаж объектов | AI Solutions",
-  description:
-    "Как голосовые AI-ассистенты трансформируют рынок недвижимости: автоматизация показов, квалификация лидов 24/7 и увеличение конверсии на 45%.",
-  keywords:
-    "голосовой AI, недвижимость, автоматизация продаж, voice AI real estate, AI ассистент, продажа недвижимости",
+const BASE_URL = "https://m2solutions.ai"
+const SLUG = "voice-ai-real-estate-property-sales"
+
+const seoData = {
+  ru: {
+    title: "Голосовой AI в недвижимости: Автоматизация продаж объектов | AI Solutions",
+    description: "Как голосовые AI-ассистенты трансформируют рынок недвижимости: автоматизация показов, квалификация лидов 24/7 и увеличение конверсии на 45%.",
+    keywords: "голосовой AI, недвижимость, автоматизация продаж, voice AI real estate, AI ассистент, продажа недвижимости",
+  },
+  en: {
+    title: "Voice AI in Real Estate: Property Sales Automation | AI Solutions",
+    description: "How voice AI assistants are transforming real estate: property viewing automation, 24/7 lead qualification and 45% conversion increase.",
+    keywords: "voice AI, real estate, sales automation, AI assistant, property sales, real estate technology",
+  },
+  es: {
+    title: "IA de Voz en Inmobiliaria: Automatización de Ventas | AI Solutions",
+    description: "Cómo los asistentes de IA de voz transforman el mercado inmobiliario: automatización de visitas, calificación de leads 24/7.",
+    keywords: "IA de voz, inmobiliaria, automatización ventas, asistente IA, venta propiedades",
+  },
+  de: {
+    title: "Sprach-KI in Immobilien: Verkaufsautomatisierung | AI Solutions",
+    description: "Wie Sprach-KI-Assistenten den Immobilienmarkt transformieren: Besichtigungsautomatisierung, Lead-Qualifizierung 24/7.",
+    keywords: "Sprach-KI, Immobilien, Verkaufsautomatisierung, KI-Assistent, Immobilienverkauf",
+  },
+  nl: {
+    title: "Spraak-AI in Vastgoed: Verkoopautomatisering | AI Solutions",
+    description: "Hoe spraak-AI-assistenten de vastgoedmarkt transformeren: automatisering van bezichtigingen, 24/7 lead-kwalificatie.",
+    keywords: "spraak-AI, vastgoed, verkoopautomatisering, AI-assistent, vastgoedverkoop",
+  },
+  fr: {
+    title: "IA Vocale en Immobilier: Automatisation des Ventes | AI Solutions",
+    description: "Comment les assistants IA vocaux transforment l'immobilier: automatisation des visites, qualification des leads 24/7.",
+    keywords: "IA vocale, immobilier, automatisation ventes, assistant IA, vente immobilière",
+  },
+  it: {
+    title: "IA Vocale nel Settore Immobiliare: Automazione Vendite | AI Solutions",
+    description: "Come gli assistenti IA vocali stanno trasformando il mercato immobiliare: automazione visite, qualificazione lead 24/7.",
+    keywords: "IA vocale, immobiliare, automazione vendite, assistente IA, vendita immobili",
+  },
 }
 
-export default function VoiceAIRealEstatePage({ params }: { params: { locale: Locale } }) {
+interface PageProps {
+  params: Promise<{ locale: Locale }>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params
+  const t = seoData[locale] || seoData.en
+
+  const alternateLanguages: Record<string, string> = {}
+  for (const loc of locales) {
+    alternateLanguages[loc] = `${BASE_URL}/${loc}/blog/${SLUG}`
+  }
+
+  return {
+    title: t.title,
+    description: t.description,
+    keywords: t.keywords,
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/blog/${SLUG}`,
+      languages: alternateLanguages,
+    },
+    openGraph: {
+      title: t.title,
+      description: t.description,
+      url: `${BASE_URL}/${locale}/blog/${SLUG}`,
+      siteName: "M2 AI Solutions",
+      locale: locale === "ru" ? "ru_RU" : locale === "es" ? "es_ES" : locale === "de" ? "de_DE" : locale === "fr" ? "fr_FR" : locale === "it" ? "it_IT" : locale === "nl" ? "nl_NL" : "en_US",
+      type: "article",
+      images: [{ url: `${BASE_URL}/voice-ai-real-estate-property-sales.jpg`, width: 1200, height: 630 }],
+    },
+    twitter: { card: "summary_large_image", title: t.title, description: t.description },
+    robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 } },
+  }
+}
+
+export default async function VoiceAIRealEstatePage({ params }: PageProps) {
+  const { locale } = await params
   const translations = {
     ru: {
       backToBlog: "Вернуться к блогу",
@@ -87,7 +157,7 @@ export default function VoiceAIRealEstatePage({ params }: { params: { locale: Lo
 
       section5Title: "Технологический стек голосового AI",
       tech1: "Speech-to-Text: Распознавание речи с точностью 95%+",
-      tech2: "NLP: Понимание намерений и контекста разговора",
+      tech2: "NLP: Понимание намерений и контекс��а разговора",
       tech3: "Text-to-Speech: Естественный синтез речи",
       tech4: "CRM Integration: Синхронизация с базами клиентов и объектов",
       tech5: "Calendar API: Автоматическое управление расписанием",

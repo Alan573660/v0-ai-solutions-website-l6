@@ -21,16 +21,94 @@ import {
 import Link from "next/link"
 import ArticleSchema from "@/components/article-schema"
 import type { Locale } from "@/lib/i18n/config"
+import { locales } from "@/lib/i18n/config"
 
-export const metadata: Metadata = {
-  title: "AI-чатботы для клиентского сервиса 2025: Полное руководство | AI Solutions",
-  description:
-    "Узнайте, как AI-чатботы революционизируют клиентский сервис в 2025 году. Автоматизация поддержки, снижение затрат на 60% и повышение удовлетворенности клиентов.",
-  keywords:
-    "AI чатботы, клиентский сервис, автоматизация поддержки, AI customer service, chatbot 2025, искусственный интеллект, автоматизация бизнеса",
+const BASE_URL = "https://m2solutions.ai"
+const SLUG = "ai-chatbots-customer-service-2025"
+
+const seoData = {
+  ru: {
+    title: "AI-чатботы для клиентского сервиса 2025: Полное руководство | AI Solutions",
+    description: "Узнайте, как AI-чатботы революционизируют клиентский сервис в 2025 году. Автоматизация поддержки, снижение затрат на 60% и повышение удовлетворенности клиентов.",
+    keywords: "AI чатботы, клиентский сервис, автоматизация поддержки, AI customer service, chatbot 2025, искусственный интеллект, автоматизация бизнеса",
+  },
+  en: {
+    title: "AI Chatbots for Customer Service 2025: Complete Guide | AI Solutions",
+    description: "Learn how AI chatbots are revolutionizing customer service in 2025. Support automation, 60% cost reduction and improved customer satisfaction.",
+    keywords: "AI chatbots, customer service, support automation, AI customer service, chatbot 2025, artificial intelligence, business automation",
+  },
+  es: {
+    title: "Chatbots IA para Servicio al Cliente 2025: Guía Completa | AI Solutions",
+    description: "Descubra cómo los chatbots IA están revolucionando el servicio al cliente en 2025. Automatización del soporte, reducción de costos del 60%.",
+    keywords: "chatbots IA, servicio al cliente, automatización soporte, inteligencia artificial, automatización empresarial",
+  },
+  de: {
+    title: "KI-Chatbots für Kundenservice 2025: Vollständiger Leitfaden | AI Solutions",
+    description: "Erfahren Sie, wie KI-Chatbots den Kundenservice 2025 revolutionieren. Support-Automatisierung, 60% Kostenreduzierung.",
+    keywords: "KI Chatbots, Kundenservice, Support Automatisierung, künstliche Intelligenz, Geschäftsautomatisierung",
+  },
+  nl: {
+    title: "AI Chatbots voor Klantenservice 2025: Complete Gids | AI Solutions",
+    description: "Ontdek hoe AI-chatbots de klantenservice in 2025 revolutioneren. Support automatisering, 60% kostenbesparing.",
+    keywords: "AI chatbots, klantenservice, support automatisering, kunstmatige intelligentie, bedrijfsautomatisering",
+  },
+  fr: {
+    title: "Chatbots IA pour le Service Client 2025: Guide Complet | AI Solutions",
+    description: "Découvrez comment les chatbots IA révolutionnent le service client en 2025. Automatisation du support, réduction des coûts de 60%.",
+    keywords: "chatbots IA, service client, automatisation support, intelligence artificielle, automatisation entreprise",
+  },
+  it: {
+    title: "Chatbot IA per il Servizio Clienti 2025: Guida Completa | AI Solutions",
+    description: "Scopri come i chatbot IA stanno rivoluzionando il servizio clienti nel 2025. Automazione del supporto, riduzione dei costi del 60%.",
+    keywords: "chatbot IA, servizio clienti, automazione supporto, intelligenza artificiale, automazione aziendale",
+  },
 }
 
-export default function AIСhatbotsCustomerService2025Page({ params }: { params: { locale: Locale } }) {
+interface PageProps {
+  params: Promise<{ locale: Locale }>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params
+  const t = seoData[locale] || seoData.en
+
+  const alternateLanguages: Record<string, string> = {}
+  for (const loc of locales) {
+    alternateLanguages[loc] = `${BASE_URL}/${loc}/blog/${SLUG}`
+  }
+
+  return {
+    title: t.title,
+    description: t.description,
+    keywords: t.keywords,
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/blog/${SLUG}`,
+      languages: alternateLanguages,
+    },
+    openGraph: {
+      title: t.title,
+      description: t.description,
+      url: `${BASE_URL}/${locale}/blog/${SLUG}`,
+      siteName: "M2 AI Solutions",
+      locale: locale === "ru" ? "ru_RU" : locale === "es" ? "es_ES" : locale === "de" ? "de_DE" : locale === "fr" ? "fr_FR" : locale === "it" ? "it_IT" : locale === "nl" ? "nl_NL" : "en_US",
+      type: "article",
+      images: [{ url: `${BASE_URL}/ai-chatbot-customer-service-automation.jpg`, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t.title,
+      description: t.description,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 },
+    },
+  }
+}
+
+export default async function AIСhatbotsCustomerService2025Page({ params }: PageProps) {
+  const { locale } = await params
   const translations = {
     ru: {
       backToBlog: "Вернуться к блогу",
@@ -334,7 +412,7 @@ export default function AIСhatbotsCustomerService2025Page({ params }: { params:
         "Les bots FAQ répondent aux questions fréquemment posées et résolvent les problèmes typiques. Les bots transactionnels aident à passer des commandes, réserver des services ou effectuer des paiements. Les bots consultatifs aident à choisir des produits, comparent les caractéristiques et donnent des recommandations. Les bots de support résolvent les problèmes techniques, aident à la configuration et au dépannage. Les bots proactifs initient le dialogue en premier, offrant de l'aide basée sur le comportement de l'utilisateur. Les bots omnicanaux travaillent simultanément dans le chat web, les messageries, les réseaux sociaux et les applications mobiles, maintenant un contexte unifié.",
       section7Title: "Implémentation de Chatbot IA: Plan Étape par Étape",
       section7Content:
-        "Étape 1: Audit des processus actuels (1-2 semaines). Analyse des types de demandes, fréquence des requêtes, temps de traitement, points de douleur des clients. Étape 2: Définition des objectifs et KPI (1 semaine). Quelles métriques comptent: temps de réponse, pourcentage d'automatisation, satisfaction, conversion. Étape 3: Sélection de plateforme et technologies (2 semaines). Évaluation des solutions prêtes vs développement from scratch, sélection du modèle de langage, détermination des intégrations. Étape 4: Préparation de la base de connaissances (2-3 semaines). Collecte de FAQ, instructions, scénarios de dialogue, données d'entraînement. Étape 5: Développement et formation (4-6 semaines). Création de scénarios de dialogue, formation du modèle, configuration des intégrations. Étape 6: Tests (2 semaines). Tests internes, tests bêta avec de vrais clients, collecte de retours. Étape 7: Lancement et optimisation (continu). Lancement progressif, surveillance des métriques, formation continue du modèle.",
+        "Étape 1: Audit des processus actuels (1-2 semaines). Analyse des types de demandes, fr��quence des requêtes, temps de traitement, points de douleur des clients. Étape 2: Définition des objectifs et KPI (1 semaine). Quelles métriques comptent: temps de réponse, pourcentage d'automatisation, satisfaction, conversion. Étape 3: Sélection de plateforme et technologies (2 semaines). Évaluation des solutions prêtes vs développement from scratch, sélection du modèle de langage, détermination des intégrations. Étape 4: Préparation de la base de connaissances (2-3 semaines). Collecte de FAQ, instructions, scénarios de dialogue, données d'entraînement. Étape 5: Développement et formation (4-6 semaines). Création de scénarios de dialogue, formation du modèle, configuration des intégrations. Étape 6: Tests (2 semaines). Tests internes, tests bêta avec de vrais clients, collecte de retours. Étape 7: Lancement et optimisation (continu). Lancement progressif, surveillance des métriques, formation continue du modèle.",
       section8Title: "Meilleures Pratiques pour Utiliser les Chatbots IA",
       section8Content:
         "Transparence: informez immédiatement que le client communique avec un bot, pas un humain. Transition facile vers l'opérateur: offrez toujours la possibilité de contacter un spécialiste en direct. Personnalisation: utilisez le nom du client, l'historique d'achat et les préférences. Empathie: programmez le bot pour reconnaître les émotions négatives et répondre avec compréhension. Concision: donnez des réponses claires et structurées sans informations inutiles. Proactivité: offrez de l'aide avant que le client ne demande. Multimodalité: supportez texte, voix, images, vidéo. Apprentissage continu: analysez régulièrement les dialogues et réentraînez le modèle. Tests A/B: expérimentez avec différentes formulations et scénarios.",
