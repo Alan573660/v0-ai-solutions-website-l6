@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -5,10 +6,95 @@ import { Input } from "@/components/ui/input"
 import { ArrowRight, Calendar, Clock, Search, User } from "lucide-react"
 import Link from "next/link"
 import type { Locale } from "@/lib/i18n/config"
+import { locales } from "@/lib/i18n/config"
 import { BlogNewsletterSection } from "@/components/blog/blog-newsletter-section"
 
 interface BlogPageProps {
   params: Promise<{ locale: Locale }>
+}
+
+const BASE_URL = "https://m2solutions.ai"
+
+const seoTranslations = {
+  ru: {
+    title: "Блог AI Solutions | Статьи про ИИ, автоматизацию и голосовых ассистентов",
+    description: "Экспертные статьи о голосовых AI-ассистентах, автоматизации бизнеса, чат-ботах и внедрении искусственного интеллекта. Кейсы, гайды, тренды 2025.",
+    keywords: "блог AI, статьи искусственный интеллект, голосовые ассистенты, автоматизация бизнеса, чат-боты, AI тренды 2025",
+  },
+  en: {
+    title: "AI Solutions Blog | Articles on AI, Automation & Voice Assistants",
+    description: "Expert articles on voice AI assistants, business automation, chatbots and AI implementation. Case studies, guides, trends 2025.",
+    keywords: "AI blog, artificial intelligence articles, voice assistants, business automation, chatbots, AI trends 2025",
+  },
+  es: {
+    title: "Blog de AI Solutions | Artículos sobre IA, Automatización y Asistentes de Voz",
+    description: "Artículos expertos sobre asistentes de voz IA, automatización empresarial, chatbots e implementación de IA. Casos de estudio, guías, tendencias 2025.",
+    keywords: "blog IA, artículos inteligencia artificial, asistentes de voz, automatización empresarial, chatbots, tendencias IA 2025",
+  },
+  de: {
+    title: "AI Solutions Blog | Artikel über KI, Automatisierung & Sprachassistenten",
+    description: "Expertenartikel über Sprach-KI-Assistenten, Geschäftsautomatisierung, Chatbots und KI-Implementierung. Fallstudien, Leitfäden, Trends 2025.",
+    keywords: "KI Blog, Künstliche Intelligenz Artikel, Sprachassistenten, Geschäftsautomatisierung, Chatbots, KI Trends 2025",
+  },
+  nl: {
+    title: "AI Solutions Blog | Artikelen over AI, Automatisering & Stemassistenten",
+    description: "Expertartikelen over spraak-AI-assistenten, bedrijfsautomatisering, chatbots en AI-implementatie. Casestudies, handleidingen, trends 2025.",
+    keywords: "AI blog, kunstmatige intelligentie artikelen, stemassistenten, bedrijfsautomatisering, chatbots, AI trends 2025",
+  },
+  fr: {
+    title: "Blog AI Solutions | Articles sur l'IA, l'Automatisation et les Assistants Vocaux",
+    description: "Articles experts sur les assistants vocaux IA, l'automatisation des entreprises, les chatbots et l'implémentation de l'IA. Études de cas, guides, tendances 2025.",
+    keywords: "blog IA, articles intelligence artificielle, assistants vocaux, automatisation entreprise, chatbots, tendances IA 2025",
+  },
+  it: {
+    title: "Blog AI Solutions | Articoli su IA, Automazione e Assistenti Vocali",
+    description: "Articoli esperti su assistenti vocali IA, automazione aziendale, chatbot e implementazione dell'IA. Case study, guide, tendenze 2025.",
+    keywords: "blog IA, articoli intelligenza artificiale, assistenti vocali, automazione aziendale, chatbot, tendenze IA 2025",
+  },
+}
+
+export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
+  const { locale } = await params
+  const t = seoTranslations[locale] || seoTranslations.en
+
+  const alternateLanguages: Record<string, string> = {}
+  for (const loc of locales) {
+    alternateLanguages[loc] = `${BASE_URL}/${loc}/blog`
+  }
+
+  return {
+    title: t.title,
+    description: t.description,
+    keywords: t.keywords,
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/blog`,
+      languages: alternateLanguages,
+    },
+    openGraph: {
+      title: t.title,
+      description: t.description,
+      url: `${BASE_URL}/${locale}/blog`,
+      siteName: "M2 AI Solutions",
+      locale: locale === "ru" ? "ru_RU" : locale === "es" ? "es_ES" : locale === "de" ? "de_DE" : locale === "fr" ? "fr_FR" : locale === "it" ? "it_IT" : locale === "nl" ? "nl_NL" : "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t.title,
+      description: t.description,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+  }
 }
 
 const translations = {
@@ -222,7 +308,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
       id: "small-business-ai-sales",
       title: "Почему малому бизнесу пора доверить продажи искусственному интеллекту",
       excerpt:
-        "Голосовой менеджер для SMB: доступное решение на базе искусственного интеллекта, которое помогает увеличивать продажи и экономить время. Руководство по внедрению для малого бизнеса.",
+        "��олосовой менеджер для SMB: доступное решение на базе искусственного интеллекта, которое помогает увеличивать продажи и экономить время. Руководство по внедрению для малого бизнеса.",
       author: "Дмитрий Назарбаев",
       date: "2024-01-10",
       readTime: "6 мин чтения",
