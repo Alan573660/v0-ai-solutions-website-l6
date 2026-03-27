@@ -69,7 +69,8 @@ export function Header({ locale }: HeaderProps) {
 
   // SEO-страницы AI автоматизации
   const aiAutomation = [
-    { name: locale === "ru" ? "AI автоматизация бизнеса" : "AI Business Automation", href: `/${locale}/automation-business`, highlight: true },
+    { name: locale === "ru" ? "Автоматизация бизнеса ИИ" : "AI Business Automation", href: `/${locale}/solutions/business-automation`, highlight: true },
+    { name: locale === "ru" ? "AI автоматизация" : "AI Automation", href: `/${locale}/automation-business` },
     { name: locale === "ru" ? "Робот оператор" : "Robot Operator", href: `/${locale}/solutions/robot-operator` },
     { name: locale === "ru" ? "Автоматический оператор" : "Automatic Operator", href: `/${locale}/solutions/automatic-operator` },
     { name: locale === "ru" ? "Виртуальный оператор" : "Virtual Operator", href: `/${locale}/solutions/virtual-operator` },

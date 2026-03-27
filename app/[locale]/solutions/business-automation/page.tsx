@@ -1,4 +1,4 @@
-import { BusinessAutomationClientPage } from "./BusinessAutomationClientPage"
+import BusinessAutomationClientPage from "./BusinessAutomationClientPage"
 import type { Locale } from "@/lib/i18n/config"
 import { locales } from "@/lib/i18n/config"
 import type { Metadata } from "next"
@@ -97,5 +97,80 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function BusinessAutomationPage({ params }: PageProps) {
   const { locale } = await params
   const t = seoData[locale] || seoData.ru
-  return <BusinessAutomationClientPage locale={locale} h1={t.h1} />
+
+  // JSON-LD Service structured data
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: t.title,
+    description: t.description,
+    provider: {
+      "@type": "Organization",
+      name: "M2 Solutions",
+      url: BASE_URL,
+      logo: `${BASE_URL}/logo.png`,
+      address: locale === "ru" 
+        ? { "@type": "PostalAddress", addressLocality: "Москва", addressCountry: "RU" }
+        : { "@type": "PostalAddress", addressLocality: "Barcelona", addressCountry: "ES" },
+    },
+    serviceType: "Business Automation",
+    areaServed: ["RU", "ES", "DE", "FR", "IT", "NL", "US", "GB"],
+    offers: {
+      "@type": "Offer",
+      price: locale === "ru" ? "30000" : "500",
+      priceCurrency: locale === "ru" ? "RUB" : "EUR",
+    },
+  }
+
+  // JSON-LD FAQ structured data
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: locale === "ru" ? "Сколько стоит автоматизация бизнеса ИИ?" : "How much does AI business automation cost?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: locale === "ru" 
+            ? "Базовые решения для автоматизации бизнеса от 30 000 ₽/мес. Полная автоматизация организации бизнеса — от 100 000 ₽/мес."
+            : "Basic business automation solutions from €500/mo. Full business organization automation — from €1,500/mo.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: locale === "ru" ? "Как быстро внедряется программа автоматизации?" : "How quickly is automation implemented?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: locale === "ru"
+            ? "Технологии автоматизации бизнеса внедряются за 2-4 недели."
+            : "Business automation technologies are implemented in 2-4 weeks.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: locale === "ru" ? "Какие процессы можно автоматизировать?" : "What processes can be automated?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: locale === "ru"
+            ? "AI автоматизация бизнеса охватывает продажи, поддержку, маркетинг, HR, документооборот."
+            : "AI business automation covers sales, support, marketing, HR, document management.",
+        },
+      },
+    ],
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <BusinessAutomationClientPage locale={locale} />
+    </>
+  )
 }
