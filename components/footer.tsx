@@ -488,10 +488,10 @@ export function Footer({ locale }: FooterProps) {
     { name: t.solutionsList.deliveryCalculation, href: `/${locale}/solutions/raschet-dostavki` },
   ]
 
-  // 3. AI автоматизация
+// 3. AI автоматизация
   const aiAutomation = [
-    { name: t.aiAutomationList.businessAutomation, href: `/${locale}/automation-business` },
-    { name: t.aiAutomationList.salesAutomation, href: `/${locale}/solutions/sales-automation-system` },
+  { name: t.aiAutomationList.businessAutomation, href: `/${locale}/solutions/business-automation` },
+  { name: t.aiAutomationList.salesAutomation, href: `/${locale}/solutions/sales-automation-system` },
     { name: t.aiAutomationList.requestAutomation, href: `/${locale}/solutions/obrabotka-zayavok` },
     { name: t.aiAutomationList.orderAutomation, href: `/${locale}/solutions/obrabotka-zakazov` },
     { name: t.aiAutomationList.logisticsAutomation, href: `/${locale}/solutions/raschet-dostavki` },
