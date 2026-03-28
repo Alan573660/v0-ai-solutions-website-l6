@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -36,7 +36,7 @@ import {
   Award,
 } from "lucide-react"
 import Link from "next/link"
-import { useCTAModal } from "@/components/modals/cta-modal"
+import { useCTA } from "@/components/modals/cta-provider"
 import type { Locale } from "@/lib/i18n/config"
 import { cn } from "@/lib/utils"
 
@@ -802,7 +802,7 @@ const iconMap = {
 
 // ═══════════════════════════════════════════════════════════════════════
 // AI AUTOMATION DEMO COMPONENT - Visual representation of AI at work
-// ═══════════════════════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════���══════════════════
 function AIAutomationDemo({ locale }: { locale: Locale }) {
   const [activeStep, setActiveStep] = useState(0)
   const [isRunning, setIsRunning] = useState(false)
@@ -982,7 +982,7 @@ function AIAutomationDemo({ locale }: { locale: Locale }) {
 // ═══════════════════════════════════════════════════════════════════════
 export default function BusinessAutomationClientPage({ locale }: { locale: Locale }) {
   const t = translations[locale] || translations.en
-  const { openCTA } = useCTAModal()
+  const { openCTA } = useCTA()
 
   return (
     <main className="min-h-screen bg-background">
@@ -1074,7 +1074,7 @@ export default function BusinessAutomationClientPage({ locale }: { locale: Local
 
       {/* ═══════════════════════════════════════════════════════════════════════
           BENEFITS SECTION
-      ════════════════════════════════════════════════════════════════════════ */}
+      ════════════════════���═══════════════════════════════════════════════════ */}
       <section className="py-16 sm:py-20 lg:py-32">
         <div className="container mx-auto px-4 max-w-6xl">
           <Reveal className="text-center mb-10 sm:mb-16">
