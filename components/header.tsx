@@ -4,12 +4,13 @@ import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Menu, X, ChevronDown } from "lucide-react"
+import { Menu, X, ChevronDown, ChevronRight, Mic, Bot, Building2, Cpu, Phone, ShoppingCart, FileText, Layers, Briefcase, Home, BookOpen, Users, Mail, Sparkles } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { useTranslations } from "@/lib/i18n/translations"
 import type { Locale } from "@/lib/i18n/config"
 import { useCTA } from "@/components/modals/cta-provider"
+import { cn } from "@/lib/utils"
 
 interface HeaderProps {
   locale: Locale
@@ -17,10 +18,15 @@ interface HeaderProps {
 
 export function Header({ locale }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [expandedSection, setExpandedSection] = useState<string | null>(null)
   const { t } = useTranslations(locale)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const { openModal } = useCTA()
+
+  const toggleSection = (section: string) => {
+    setExpandedSection(expandedSection === section ? null : section)
+  }
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -58,32 +64,44 @@ export function Header({ locale }: HeaderProps) {
   }, [isMenuOpen])
 
   const solutions = [
-    { name: t("solutions.voiceSalesManager"), href: `/${locale}/solutions/voice-sales-manager` },
-    { name: t("solutions.m2Agents"), href: `/${locale}/solutions/m2-agents` },
-    { name: t("solutions.hotelConcierge"), href: `/${locale}/solutions/hotel-concierge` },
-    { name: t("solutions.smb"), href: `/${locale}/solutions/smb` },
-    { name: t("solutions.enterprise"), href: `/${locale}/solutions/enterprise` },
-    { name: t("solutions.custom"), href: `/${locale}/solutions/custom` },
-    { name: t("solutions.smartHome"), href: `/${locale}/solutions/smart-home` },
+    { name: t("solutions.voiceSalesManager"), href: `/${locale}/solutions/voice-sales-manager`, icon: Mic, highlight: true },
+    { name: t("solutions.m2Agents"), href: `/${locale}/solutions/m2-agents`, icon: Bot },
+    { name: t("solutions.hotelConcierge"), href: `/${locale}/solutions/hotel-concierge`, icon: Building2 },
+    { name: t("solutions.smb"), href: `/${locale}/solutions/smb`, icon: Briefcase },
+    { name: t("solutions.enterprise"), href: `/${locale}/solutions/enterprise`, icon: Layers },
+    { name: t("solutions.custom"), href: `/${locale}/solutions/custom`, icon: Cpu },
+    { name: t("solutions.smartHome"), href: `/${locale}/solutions/smart-home`, icon: Home },
   ]
 
-  // SEO-страницы AI автоматизации
-  const aiAutomation = [
-    { name: locale === "ru" ? "Автоматизация бизнеса ИИ" : "AI Business Automation", href: `/${locale}/solutions/business-automation`, highlight: true },
-    { name: locale === "ru" ? "AI автоматизация" : "AI Automation", href: `/${locale}/automation-business` },
+  // SEO-страницы AI автоматизации - сгруппированы для мобильного меню
+  const aiAutomationMain = [
+    { name: locale === "ru" ? "Автоматизация бизнеса ИИ" : "AI Business Automation", href: `/${locale}/solutions/business-automation`, icon: Sparkles, highlight: true },
+    { name: locale === "ru" ? "AI автоматизация" : "AI Automation", href: `/${locale}/automation-business`, icon: Cpu },
+    { name: locale === "ru" ? "AI для бизнеса" : "AI for Business", href: `/${locale}/solutions/ai-dlya-biznesa`, icon: Briefcase },
+  ]
+
+  const aiAutomationOperators = [
     { name: locale === "ru" ? "Робот оператор" : "Robot Operator", href: `/${locale}/solutions/robot-operator` },
     { name: locale === "ru" ? "Автоматический оператор" : "Automatic Operator", href: `/${locale}/solutions/automatic-operator` },
     { name: locale === "ru" ? "Виртуальный оператор" : "Virtual Operator", href: `/${locale}/solutions/virtual-operator` },
     { name: locale === "ru" ? "Робот для звонков" : "Robot for Calls", href: `/${locale}/solutions/robot-dlya-zvonkov` },
+  ]
+
+  const aiAutomationSales = [
     { name: locale === "ru" ? "Робот для продаж" : "Sales Robot", href: `/${locale}/solutions/robot-dlya-prodazh` },
+    { name: locale === "ru" ? "Автоматизация продаж" : "Sales Automation", href: `/${locale}/solutions/automation-sales` },
+    { name: locale === "ru" ? "Система автоматизации продаж" : "Sales Automation System", href: `/${locale}/solutions/sales-automation-system` },
+  ]
+
+  const aiAutomationProcesses = [
     { name: locale === "ru" ? "Обработка заявок" : "Request Processing", href: `/${locale}/solutions/obrabotka-zayavok` },
     { name: locale === "ru" ? "Обработка заказов" : "Order Processing", href: `/${locale}/solutions/obrabotka-zakazov` },
     { name: locale === "ru" ? "Выставление счётов" : "Invoice Generation", href: `/${locale}/solutions/vystavlenie-schetov` },
     { name: locale === "ru" ? "Расчёт доставки" : "Delivery Calculation", href: `/${locale}/solutions/raschet-dostavki` },
-    { name: locale === "ru" ? "AI для бизнеса" : "AI for Business", href: `/${locale}/solutions/ai-dlya-biznesa` },
-    { name: locale === "ru" ? "Система автоматизации продаж" : "Sales Automation System", href: `/${locale}/solutions/sales-automation-system` },
-    { name: locale === "ru" ? "Автоматизация продаж" : "Sales Automation", href: `/${locale}/solutions/automation-sales` },
   ]
+
+  // Объединённый список для десктопа
+  const aiAutomation = [...aiAutomationMain, ...aiAutomationOperators.slice(0, 3)]
 
   const platform = [
     { name: t("platform.architecture"), href: `/${locale}/platform/architecture` },
@@ -247,124 +265,251 @@ export function Header({ locale }: HeaderProps) {
           <div
             ref={mobileMenuRef}
             id="mobile-menu"
-            className="md:hidden py-3 border-t max-h-[calc(100vh-3.5rem)] overflow-y-auto"
+            className="md:hidden absolute inset-x-0 top-full bg-background border-t shadow-lg max-h-[calc(100dvh-3.5rem)] overflow-hidden"
             role="navigation"
             aria-label={t("nav.mobile")}
           >
-            <nav className="flex flex-col space-y-2">
-              <div>
-                <h3
-                  className="font-semibold text-xs uppercase tracking-wider text-muted-foreground mb-1.5 px-2"
-                  id="solutions-heading"
-                >
-                  {t("nav.solutions")}
-                </h3>
-                <div className="space-y-0.5" role="group" aria-labelledby="solutions-heading">
-                  {solutions.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="block text-sm hover:text-primary hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-3 py-2"
-                      onClick={() => setIsMenuOpen(false)}
+            <div className="h-full flex flex-col">
+              {/* Scrollable content */}
+              <div className="flex-1 overflow-y-auto overscroll-contain px-4 py-4">
+                <nav className="space-y-2">
+                  
+                  {/* Solutions Accordion */}
+                  <div className="rounded-xl bg-muted/30 overflow-hidden">
+                    <button
+                      onClick={() => toggleSection("solutions")}
+                      className="w-full flex items-center justify-between p-3.5 text-left"
+                      aria-expanded={expandedSection === "solutions"}
                     >
-                      {item.name}
+                      <div className="flex items-center gap-3">
+                        <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                          <Mic className="h-4.5 w-4.5 text-primary" />
+                        </div>
+                        <span className="font-semibold text-[15px]">{t("nav.solutions")}</span>
+                      </div>
+                      <ChevronDown className={cn(
+                        "h-5 w-5 text-muted-foreground transition-transform duration-200",
+                        expandedSection === "solutions" && "rotate-180"
+                      )} />
+                    </button>
+                    {expandedSection === "solutions" && (
+                      <div className="px-3 pb-3 grid grid-cols-2 gap-1.5">
+                        {solutions.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => setIsMenuOpen(false)}
+                            className={cn(
+                              "flex items-center gap-2 p-2.5 rounded-lg text-[13px] transition-colors",
+                              item.highlight 
+                                ? "bg-primary/10 text-primary font-medium" 
+                                : "hover:bg-muted/50 text-foreground/80"
+                            )}
+                          >
+                            <item.icon className="h-4 w-4 shrink-0" />
+                            <span className="line-clamp-2 leading-tight">{item.name}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* AI Automation Accordion */}
+                  <div className="rounded-xl bg-muted/30 overflow-hidden">
+                    <button
+                      onClick={() => toggleSection("ai")}
+                      className="w-full flex items-center justify-between p-3.5 text-left"
+                      aria-expanded={expandedSection === "ai"}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="h-9 w-9 rounded-lg bg-violet-500/10 flex items-center justify-center">
+                          <Sparkles className="h-4.5 w-4.5 text-violet-500" />
+                        </div>
+                        <span className="font-semibold text-[15px]">{locale === "ru" ? "AI автоматизация" : "AI Automation"}</span>
+                      </div>
+                      <ChevronDown className={cn(
+                        "h-5 w-5 text-muted-foreground transition-transform duration-200",
+                        expandedSection === "ai" && "rotate-180"
+                      )} />
+                    </button>
+                    {expandedSection === "ai" && (
+                      <div className="px-3 pb-3 space-y-3">
+                        {/* Main AI items */}
+                        <div className="grid grid-cols-1 gap-1">
+                          {aiAutomationMain.map((item) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              onClick={() => setIsMenuOpen(false)}
+                              className={cn(
+                                "flex items-center gap-2.5 p-2.5 rounded-lg text-[13px] transition-colors",
+                                item.highlight 
+                                  ? "bg-violet-500/10 text-violet-600 dark:text-violet-400 font-medium" 
+                                  : "hover:bg-muted/50 text-foreground/80"
+                              )}
+                            >
+                              <item.icon className="h-4 w-4 shrink-0" />
+                              <span>{item.name}</span>
+                            </Link>
+                          ))}
+                        </div>
+                        
+                        {/* Operators */}
+                        <div>
+                          <p className="text-[11px] uppercase tracking-wider text-muted-foreground font-medium mb-1.5 px-1">
+                            {locale === "ru" ? "Операторы" : "Operators"}
+                          </p>
+                          <div className="grid grid-cols-2 gap-1">
+                            {aiAutomationOperators.map((item) => (
+                              <Link
+                                key={item.href}
+                                href={item.href}
+                                onClick={() => setIsMenuOpen(false)}
+                                className="p-2 rounded-lg text-[12px] hover:bg-muted/50 text-foreground/70 transition-colors"
+                              >
+                                {item.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Sales */}
+                        <div>
+                          <p className="text-[11px] uppercase tracking-wider text-muted-foreground font-medium mb-1.5 px-1">
+                            {locale === "ru" ? "Продажи" : "Sales"}
+                          </p>
+                          <div className="grid grid-cols-2 gap-1">
+                            {aiAutomationSales.map((item) => (
+                              <Link
+                                key={item.href}
+                                href={item.href}
+                                onClick={() => setIsMenuOpen(false)}
+                                className="p-2 rounded-lg text-[12px] hover:bg-muted/50 text-foreground/70 transition-colors"
+                              >
+                                {item.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Processes */}
+                        <div>
+                          <p className="text-[11px] uppercase tracking-wider text-muted-foreground font-medium mb-1.5 px-1">
+                            {locale === "ru" ? "Процессы" : "Processes"}
+                          </p>
+                          <div className="grid grid-cols-2 gap-1">
+                            {aiAutomationProcesses.map((item) => (
+                              <Link
+                                key={item.href}
+                                href={item.href}
+                                onClick={() => setIsMenuOpen(false)}
+                                className="p-2 rounded-lg text-[12px] hover:bg-muted/50 text-foreground/70 transition-colors"
+                              >
+                                {item.name}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Platform Accordion */}
+                  <div className="rounded-xl bg-muted/30 overflow-hidden">
+                    <button
+                      onClick={() => toggleSection("platform")}
+                      className="w-full flex items-center justify-between p-3.5 text-left"
+                      aria-expanded={expandedSection === "platform"}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="h-9 w-9 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                          <Layers className="h-4.5 w-4.5 text-blue-500" />
+                        </div>
+                        <span className="font-semibold text-[15px]">{t("nav.platform")}</span>
+                      </div>
+                      <ChevronDown className={cn(
+                        "h-5 w-5 text-muted-foreground transition-transform duration-200",
+                        expandedSection === "platform" && "rotate-180"
+                      )} />
+                    </button>
+                    {expandedSection === "platform" && (
+                      <div className="px-3 pb-3 space-y-1">
+                        {platform.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => setIsMenuOpen(false)}
+                            className="flex items-center gap-2.5 p-2.5 rounded-lg text-[13px] hover:bg-muted/50 text-foreground/80 transition-colors"
+                          >
+                            <ChevronRight className="h-3.5 w-3.5 text-muted-foreground" />
+                            <span>{item.name}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Quick Links */}
+                  <div className="grid grid-cols-4 gap-2 pt-2">
+                    <Link
+                      href={`/${locale}/cases`}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors"
+                    >
+                      <Briefcase className="h-5 w-5 text-muted-foreground" />
+                      <span className="text-[11px] font-medium text-center">{t("nav.cases")}</span>
                     </Link>
-                  ))}
+                    <Link
+                      href={`/${locale}/blog`}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors"
+                    >
+                      <BookOpen className="h-5 w-5 text-muted-foreground" />
+                      <span className="text-[11px] font-medium text-center">{t("nav.blog")}</span>
+                    </Link>
+                    <Link
+                      href={`/${locale}/about`}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors"
+                    >
+                      <Users className="h-5 w-5 text-muted-foreground" />
+                      <span className="text-[11px] font-medium text-center">{t("nav.about")}</span>
+                    </Link>
+                    <Link
+                      href={`/${locale}/contacts`}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors"
+                    >
+                      <Mail className="h-5 w-5 text-muted-foreground" />
+                      <span className="text-[11px] font-medium text-center">{t("nav.contacts")}</span>
+                    </Link>
+                  </div>
+
+                </nav>
+              </div>
+
+              {/* Fixed bottom buttons */}
+              <div className="shrink-0 border-t bg-background p-4 space-y-2.5">
+                <div className="grid grid-cols-2 gap-2.5">
+                  <Button variant="outline" size="sm" className="h-11 text-sm bg-transparent" asChild>
+                    <Link href={`/${locale}/login`} onClick={() => setIsMenuOpen(false)}>
+                      {t("nav.login")}
+                    </Link>
+                  </Button>
+                  <Button
+                    size="sm"
+                    className="h-11 text-sm font-medium"
+                    onClick={() => {
+                      openModal("trial")
+                      setIsMenuOpen(false)
+                    }}
+                    data-cta="cta-try-free"
+                  >
+                    {t("cta.tryFree")}
+                  </Button>
                 </div>
               </div>
-
-              <div>
-                <h3
-                  className="font-semibold text-xs uppercase tracking-wider text-muted-foreground mb-1.5 px-2"
-                  id="ai-automation-heading"
-                >
-                  {locale === "ru" ? "AI автоматизация" : "AI Automation"}
-                </h3>
-                <div className="space-y-0.5" role="group" aria-labelledby="ai-automation-heading">
-                  {aiAutomation.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="block text-sm hover:text-primary hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-3 py-2"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h3
-                  className="font-semibold text-xs uppercase tracking-wider text-muted-foreground mb-1.5 px-2"
-                  id="platform-heading"
-                >
-                  {t("nav.platform")}
-                </h3>
-                <div className="space-y-0.5" role="group" aria-labelledby="platform-heading">
-                  {platform.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="block text-sm hover:text-primary hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-3 py-2"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div className="space-y-0.5 pt-1.5 border-t">
-                <Link
-                  href={`/${locale}/cases`}
-                  className="block text-sm font-medium hover:text-primary hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-3 py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {t("nav.cases")}
-                </Link>
-                <Link
-                  href={`/${locale}/blog`}
-                  className="block text-sm font-medium hover:text-primary hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-3 py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {t("nav.blog")}
-                </Link>
-                <Link
-                  href={`/${locale}/about`}
-                  className="block text-sm font-medium hover:text-primary hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-3 py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {t("nav.about")}
-                </Link>
-                <Link
-                  href={`/${locale}/contacts`}
-                  className="block text-sm font-medium hover:text-primary hover:bg-primary/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-3 py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {t("nav.contacts")}
-                </Link>
-              </div>
-
-              <div className="pt-2.5 border-t space-y-2">
-                <Button variant="outline" size="sm" className="w-full h-10 text-sm bg-transparent" asChild>
-                  <Link href={`/${locale}/login`} onClick={() => setIsMenuOpen(false)}>
-                    {t("nav.login")}
-                  </Link>
-                </Button>
-                <Button
-                  size="sm"
-                  className="w-full h-10 text-sm font-medium"
-                  onClick={() => {
-                    openModal("trial")
-                    setIsMenuOpen(false)
-                  }}
-                  data-cta="cta-try-free"
-                >
-                  {t("cta.tryFree")}
-                </Button>
-              </div>
-            </nav>
+            </div>
           </div>
         )}
       </div>
