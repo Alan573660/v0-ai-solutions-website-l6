@@ -172,7 +172,7 @@ const translations = {
       title: "Как гости общаются с AI-консьержем",
       subtitle: "Мультиканальность для максимального удобства гостей",
       items: [
-        { name: "Умная колонка", desc: "Голосовое управление в номере", icon: "Speaker" },
+        { name: "Умна�� колонка", desc: "Голосовое управление в номере", icon: "Speaker" },
         { name: "Телефон", desc: "Привычный способ связи", icon: "Phone" },
         { name: "Мобильное приложение", desc: "Приложение отеля", icon: "Smartphone" },
         { name: "WhatsApp / Telegram", desc: "Мессенджеры", icon: "MessageSquare" },
@@ -288,13 +288,13 @@ const translations = {
         },
         {
           q: "Что если AI не может ответить на вопрос гостя?",
-          a: "Система автоматически переводит сложные запросы на живого сотрудника с полным контекстом разговора. Сотрудник видит историю диалога и может мгновенно помочь гостю.",
+          a: "Система автоматически переводит сложные ��апросы на живого сотрудника с полным контекстом разговора. Сотрудник видит историю диалога и может мгновенно помочь гостю.",
         },
       ],
     },
     cta: {
       badge: "Начните сейчас",
-      title: "Готовы автоматизировать сервис в вашем отеле?",
+      title: "Готовы автоматизировать сервис в ваш��м отеле?",
       subtitle: "Получите бесплатную демонстрацию AI-консьержа и расчет стоимости для вашего отеля",
       button: "Запросить демо",
       buttonSecondary: "Узнать стоимость",
@@ -1244,7 +1244,7 @@ const dialogueData = {
       { role: "guest", text: "Что посмотреть в городе?" },
       { role: "ai", text: "Барселона великолепна! Топ-5 мест: Саграда Фамилия (20 мин), Парк Гуэль (30 мин), Готический квартал (15 мин), Ла Рамбла (10 мин), пляж Барселонета (25 мин). Что интересует больше?" },
       { role: "guest", text: "Саграда Фамилия" },
-      { role: "ai", text: "Шедевр Гауди! Рекомендую утренние часы для меньших очередей. Билеты лучше купить онлайн — €26. Могу помочь с покупкой или заказать такси?" },
+      { role: "ai", text: "Шедевр Г��уди! Рекомендую утренние часы для меньших очередей. Билеты лучше купить онлайн — €26. Могу помочь с покупкой или заказать такси?" },
       { role: "guest", text: "Да, закажи такси на 10 утра" },
       { role: "ai", text: "Такси заказано на 10:00. Поездка до Саграда Фамилия ~15 минут, €12-15. Водитель будет ждать у входа. Enjoy Barcelona!" },
     ],
@@ -1609,14 +1609,16 @@ function AIConciergeDemo({ locale, t }: { locale: Locale; t: typeof translations
   const [currentStep, setCurrentStep] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [messages, setMessages] = useState<Array<{ role: string; text: string }>>([])
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const dialogues = dialogueData[locale] || dialogueData.en
   const currentDialogue = dialogues[activeScenario as keyof typeof dialogues] || dialogues.food
 
-  // Auto-scroll to bottom
+  // Auto-scroll only within chat container (not the whole page)
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight
+    }
   }, [messages])
 
   // Reset when scenario changes
@@ -1723,7 +1725,7 @@ function AIConciergeDemo({ locale, t }: { locale: Locale; t: typeof translations
         </div>
 
         {/* Messages */}
-        <div className="h-[320px] overflow-y-auto p-4 space-y-4">
+        <div ref={scrollContainerRef} className="h-[320px] overflow-y-auto p-4 space-y-4">
           {messages.length === 0 ? (
             <div className="h-full flex items-center justify-center text-slate-400 text-center">
               <div>
@@ -1778,7 +1780,7 @@ function AIConciergeDemo({ locale, t }: { locale: Locale; t: typeof translations
                   </div>
                 </div>
               )}
-              <div ref={messagesEndRef} />
+
             </>
           )}
         </div>
