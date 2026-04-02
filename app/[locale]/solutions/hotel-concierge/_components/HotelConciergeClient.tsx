@@ -46,6 +46,7 @@ import {
   Heart,
 } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { useCTA } from "@/components/modals/cta-provider"
 import type { Locale } from "@/lib/i18n/config"
 import { cn } from "@/lib/utils"
@@ -252,7 +253,7 @@ const translations = {
           stars: 4,
           rooms: 45,
           result: "+40% удовлетворенность",
-          quote: "AI-консьерж обрабатывает 80% запросов гостей автоматически. Персонал наконец может сфокусироваться на создании уникального опыта.",
+          quote: "AI-консьерж обрабатывает 80% запросов гостей автоматически. Персонал наконец может сфокусироваться на создании уникального ��пыта.",
           author: "Maria Santos, GM",
         },
         {
