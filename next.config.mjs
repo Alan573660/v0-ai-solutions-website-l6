@@ -110,102 +110,102 @@ const nextConfig = {
       // Redirect root to default locale
       {
         source: '/',
-        destination: '/ru',
+        destination: '/es',
         permanent: true, // 301 redirect
       },
       // Redirect /blog/* to /ru/blog/* (default locale)
       {
         source: '/blog',
-        destination: '/ru/blog',
+        destination: '/es/blog',
         permanent: true,
       },
       {
         source: '/blog/:slug*',
-        destination: '/ru/blog/:slug*',
+        destination: '/es/blog/:slug*',
         permanent: true,
       },
       // Redirect /solutions/* to /ru/solutions/*
       {
         source: '/solutions',
-        destination: '/ru/solutions',
+        destination: '/es/solutions',
         permanent: true,
       },
       {
         source: '/solutions/:slug*',
-        destination: '/ru/solutions/:slug*',
+        destination: '/es/solutions/:slug*',
         permanent: true,
       },
       // Redirect /cases/* to /ru/cases/*
       {
         source: '/cases',
-        destination: '/ru/cases',
+        destination: '/es/cases',
         permanent: true,
       },
       {
         source: '/cases/:slug*',
-        destination: '/ru/cases/:slug*',
+        destination: '/es/cases/:slug*',
         permanent: true,
       },
       // Redirect /platform/* to /ru/platform/*
       {
         source: '/platform',
-        destination: '/ru/platform',
+        destination: '/es/platform',
         permanent: true,
       },
       {
         source: '/platform/:slug*',
-        destination: '/ru/platform/:slug*',
+        destination: '/es/platform/:slug*',
         permanent: true,
       },
       // Other main pages
       {
         source: '/about',
-        destination: '/ru/about',
+        destination: '/es/about',
         permanent: true,
       },
       {
         source: '/contacts',
-        destination: '/ru/contacts',
+        destination: '/es/contacts',
         permanent: true,
       },
       {
         source: '/faq',
-        destination: '/ru/faq',
+        destination: '/es/faq',
         permanent: true,
       },
       {
         source: '/partners',
-        destination: '/ru/partners',
+        destination: '/es/partners',
         permanent: true,
       },
       {
         source: '/careers',
-        destination: '/ru/careers',
+        destination: '/es/careers',
         permanent: true,
       },
       {
         source: '/docs',
-        destination: '/ru/docs',
+        destination: '/es/docs',
         permanent: true,
       },
       {
         source: '/support',
-        destination: '/ru/support',
+        destination: '/es/support',
         permanent: true,
       },
       {
         source: '/login',
-        destination: '/ru/login',
+        destination: '/es/login',
         permanent: true,
       },
       {
         source: '/privacy',
-        destination: '/ru/privacy',
+        destination: '/es/privacy',
         permanent: true,
       },
       {
         source: '/terms',
-        destination: '/ru/terms',
+        destination: '/es/terms',
         permanent: true,
       },
     ];

@@ -30,7 +30,7 @@ export async function generateMetadata({
       "nl": `${BASE_URL}/nl`,
       "fr": `${BASE_URL}/fr`,
       "it": `${BASE_URL}/it`,
-      "x-default": `${BASE_URL}/ru`,
+      "x-default": `${BASE_URL}/es`,
     },
   }
 

@@ -726,7 +726,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "about.values.quality": "Качество",
     "about.values.qualityDesc": "Высочайшие стандарты разработки и тестирования",
     "about.values.transparency": "Прозрачность",
-    "about.values.transparencyDesc": "Открытое общение и честные отношения с клиентами",
+    "about.values.transparencyDesc": "Открытое общение и честные отн��шения с клиентами",
     "about.values.partnership": "Партнёрство",
     "about.values.partnershipDesc": "Долгосрочные отношения, основанные на взаимном успехе",
     "about.team.title": "Международная команда",
@@ -785,7 +785,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
     "common.search": "Поиск",
 
     "benefits.title": "Преимущества перед обычными менеджерами",
-    "benefits.description": "AI-ассистент работает эффективнее целого отдела продаж при значительно меньших затратах",
+    "benefits.description": "AI-ассистент работает эффективнее целого отдела продаж пр�� значительно меньших затратах",
     "benefits.availability.title": "24/7 доступность",
     "benefits.availability.description":
       "Никаких выходных, отпусков или больничных. Ваши клиенты получают помощь в любое время.",
@@ -1052,7 +1052,7 @@ const translations: Readonly<Record<Locale, Record<TranslationKey, string>>> = {
       "Да, мы интегрируемся с любыми CRM системами через API: Salesforce, HubSpot, amoCRM, Битрикс24, Pipedrive и другие. Также поддерживаем интеграцию с биллинговыми системами, складом и базами знаний.",
     "voiceSales.faq4.question": "Как AI-менеджер обрабатывает сложные вопросы?",
     "voiceSales.faq4.answer":
-      "AI-менеджер использует вашу базу знаний и может обращаться к внешним источникам данных через RAG. Если вопрос слишком сложный, AI корректно переводит звонок на живого менеджера с полным контекстом разговора.",
+      "AI-менеджер использует вашу базу знаний и может обращ��ться к внешним источникам данных через RAG. Если вопрос слишком сложный, AI корректно переводит звонок на живого менеджера с полным контекстом разговора.",
 
     "voiceSales.startToday": "Начните увеличивать продажи уже сегодня",
     "voiceSales.startTodayDescription":
@@ -4429,8 +4429,8 @@ export function getTranslation(locale: Locale, key: TranslationKey): string {
       return localeTranslations[key]
     }
 
-    // Fallback to Russian if the key doesn't exist in the requested locale
-    const fallbackTranslations = translations.ru
+    // Fallback to Spanish if the key doesn't exist in the requested locale
+    const fallbackTranslations = translations.es
     if (fallbackTranslations && fallbackTranslations[key]) {
       return fallbackTranslations[key]
     }
@@ -4447,7 +4447,7 @@ export function useTranslations(locale: Locale) {
   // Validate locale parameter
   if (!locale || typeof locale !== "string") {
     console.warn("Invalid locale provided to useTranslations:", locale)
-    locale = "ru" // fallback to Russian
+    locale = "es" // fallback to Spanish
   }
 
   return {

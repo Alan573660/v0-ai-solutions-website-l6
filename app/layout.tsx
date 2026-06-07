@@ -22,22 +22,22 @@ const BASE_URL = "https://m2solutions.ai"
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "M2 AI Solutions | Голосовые AI-ассистенты для бизнеса",
+    default: "M2 AI Solutions | Asistentes de voz con IA para empresas",
     template: "%s | M2 AI Solutions",
   },
   description:
-    "Голосовые AI-ассистенты, которые продают и обслуживают клиентов 24/7. Автоматизация звонков, продаж и поддержки. 500+ проектов, 87% рост конверсии.",
+    "Asistentes de voz con IA que venden y atienden a tus clientes 24/7. Automatización de llamadas, ventas y soporte. Más de 500 proyectos, 87% de aumento en conversión.",
   keywords: [
-    "AI ассистент",
-    "голосовой бот",
-    "автоматизация продаж",
-    "AI консьерж",
-    "бизнес автоматизация",
-    "голосовой ИИ",
-    "автоматизация звонков",
-    "ИИ для бизнеса",
+    "asistente IA",
+    "bot de voz",
+    "automatización de ventas",
+    "conserje IA",
+    "automatización empresarial",
+    "IA de voz",
+    "automatización de llamadas",
+    "IA para empresas",
     "M2 Solutions",
-    "виртуальный ассистент",
+    "asistente virtual",
   ],
   generator: "v0.app",
   applicationName: "M2 AI Solutions",
@@ -57,18 +57,18 @@ export const metadata: Metadata = {
       "nl": `${BASE_URL}/nl`,
       "fr": `${BASE_URL}/fr`,
       "it": `${BASE_URL}/it`,
-      "x-default": `${BASE_URL}/ru`,
+      "x-default": `${BASE_URL}/es`,
     },
   },
   openGraph: {
     type: "website",
-    locale: "ru_RU",
-    alternateLocale: ["en_US", "es_ES", "de_DE", "nl_NL", "fr_FR", "it_IT"],
+    locale: "es_ES",
+    alternateLocale: ["en_US", "ru_RU", "de_DE", "nl_NL", "fr_FR", "it_IT"],
     url: BASE_URL,
     siteName: "M2 AI Solutions",
-    title: "M2 AI Solutions | Голосовые AI-ассистенты для бизнеса",
+    title: "M2 AI Solutions | Asistentes de voz con IA para empresas",
     description:
-      "Голосовые AI-ассистенты, которые продают и обслуживают клиентов 24/7. 500+ проектов, 87% рост конверсии.",
+      "Asistentes de voz con IA que venden y atienden a tus clientes 24/7. Más de 500 proyectos, 87% de aumento en conversión.",
     images: [
       {
         url: `${BASE_URL}/og-image.png`,
@@ -80,9 +80,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "M2 AI Solutions | Голосовые AI-ассистенты для бизнеса",
+    title: "M2 AI Solutions | Asistentes de voz con IA para empresas",
     description:
-      "Голосовые AI-ассистенты, которые продают и обслуживают клиентов 24/7. 500+ проектов, 87% рост конверсии.",
+      "Asistentes de voz con IA que venden y atienden a tus clientes 24/7. Más de 500 proyectos, 87% de aumento en conversión.",
     images: [`${BASE_URL}/og-image.png`],
   },
   robots: {
@@ -122,7 +122,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ru" className={`${inter.variable} ${robotoMono.variable}`}>
+    <html lang="es" className={`${inter.variable} ${robotoMono.variable}`}>
       <head>
         {/* Preconnect to critical domains */}
         <link rel="preconnect" href="https://mc.yandex.ru" />
